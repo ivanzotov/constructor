@@ -16,6 +16,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'insert' },
 		{ name: 'tools' },
 		{ name: 'others' },
+        { name: 'iframe'},
 		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align' ] },
@@ -25,12 +26,13 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
-	config.removeButtons = 'Smiley,PageBreak,Iframe,Flash';
+	config.removeButtons = 'Smiley,PageBreak,Flash';
 
 	// Se the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
-	
+
+    config.allowedContent = true;
 };

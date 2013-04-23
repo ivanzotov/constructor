@@ -3,23 +3,10 @@
 .sitemap
   %p
     %ul
-      - @roots.each do |root|
-        - level = root.level
-        - last_page = nil
-
-        - root.self_and_descendants.each do |page|
-          - if page.in_map
-            - if page.level > level
-              <ul>
-            - elsif page.level < level
-              </li>
-              = raw "</ul></li>" * (level-page.level)
-            - elsif !page.root?
-              </li>
-
-            <li>
-            = link_to page.title, page.full_url
-            - level = page.level
-          - last_page = page
-        </li>
-        = raw "</ul></li>" * last_page.level
+      - @pages.each do |page|
+        - if page.active and page.in_map
+          %li{:class => "level#{page.level}"}
+            - if page.link.empty?
+              = link_to page.title, page.full_url
+            - else
+              = link_to page.title, page.link

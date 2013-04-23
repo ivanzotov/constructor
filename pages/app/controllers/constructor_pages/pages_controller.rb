@@ -17,21 +17,7 @@ module ConstructorPages
     def index
       @user_signed_in = user_signed_in?
     end
-    
-=begin
-    def regenerate_urls
-      Page.roots.each do |page|
-        page.self_and_descendants.each do |child|
-          child.url = ""
-          child.save
-        end
-      end
-      
-      redirect_to :pages
-    end
-=end
-    
-    
+
     def sitemap
       @pages = Page.all
       @title = "Карта сайта"
@@ -56,7 +42,8 @@ module ConstructorPages
         render :action => "error_404", :layout => false
         return
       end
-      
+
+      @seo_title = @page.seo_title.empty? ? @page.title : @page.seo_title
       @title = @page.title
       @description = @page.description
       @keywords = @page.keywords      
@@ -139,6 +126,10 @@ module ConstructorPages
         
     def cache
       expire_page :action => :show
+      cache_dir = ActionController::Base.page_cache_directory
+      unless cache_dir == Rails.root.to_s+"/public"
+        FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
+      end
     end
   end  
 end

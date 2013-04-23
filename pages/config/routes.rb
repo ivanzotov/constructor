@@ -1,6 +1,7 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
     resources :pages, :except => [:show]
+
     scope '/pages' do
       post 'move/up/:id' => "pages#move_up", :as => :move_up
       post 'move/down/:id' => "pages#move_down", :as => :move_down
@@ -15,12 +16,7 @@ ConstructorPages::Engine.routes.draw do
   end
   
   get '/sitemap' => "pages#sitemap", :as => :sitemap
-  
-  #get '/pages/regenerate_urls' => "pages#regenerate_urls", :as => :regenerate_urls
-  
-  
 
-  
   root :to => "pages#show"
   get '*all' => "pages#show", :format => false
 end

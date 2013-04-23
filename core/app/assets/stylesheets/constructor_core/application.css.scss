@@ -25,3 +25,33 @@ body {
 .sizes .controls {
   margin-bottom: 30px;
 }
+
+.url {
+  font-size: 12px;
+
+  .full_url {
+    margin-top: 6px;
+    float: left;
+  }
+
+  .icon-pencil {
+    margin-top: 5px;
+    margin-left: 3px;
+  }
+
+  .address {
+    font-weight: bold;
+
+    &:hover {
+      background-color: #ffa;
+    }
+  }
+}
+
+.url .icon-pencil {
+    display: none;
+}
+
+.url:hover .icon-pencil {
+  display: inline-block;
+}
