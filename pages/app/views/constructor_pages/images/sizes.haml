@@ -1,0 +1,46 @@
+- content_for :page_title do
+  Ссылки на размеры
+
+%section.span12
+  .form-actions
+    .btn-group
+      = link_to "Назад", edit_page_path(@image.page), :class => "btn"
+  .controls.sizes
+    - if @image.image.width < 80
+      .controls    
+        = image_tag @image.image.thumb('80x80>').url 
+        .well 
+          = @image.image.thumb('80x80>').url          
+    - if @image.image.width > 80
+      .controls    
+        = image_tag @image.image.thumb('150x150>').url
+        .well
+          = @image.image.thumb('150x150>').url                  
+    - if @image.image.width > 150
+      .controls
+        = image_tag @image.image.thumb('250x250>').url
+        .well
+          = @image.image.thumb('250x250>').url        
+    - if @image.image.width > 250
+      .controls
+        = image_tag @image.image.thumb('350x350>').url
+        .well
+          = @image.image.thumb('350x350>').url        
+    - if @image.image.width > 350
+      .controls
+        = image_tag @image.image.thumb('450x450>').url
+        .well
+          = @image.image.thumb('450x450>').url
+    - if @image.image.width > 450
+      .controls
+        = image_tag @image.image.thumb('600x600>').url
+        .well 
+          = @image.image.thumb('600x600>').url                                    
+    - if @image.image.width > 550
+      .controls
+        = image_tag @image.image.thumb('700x700>').url
+        .well
+          = @image.image.thumb('700x700>').url
+    .form-actions
+      .btn-group
+        = link_to "Назад", edit_page_path(@image.page), :class => "btn"            

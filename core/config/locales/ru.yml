@@ -1,0 +1,12 @@
+ru:  
+  activerecord:
+    attributes:
+      constructor_core/user:
+        email: "Эл. почта"
+        password: "Пароль"
+        password_confirmation: "Пароль, еще раз"
+        remember_me: "Запомнить меня"  
+  helpers:
+    submit:
+      create: "Добавить"
+      update: "Сохранить"

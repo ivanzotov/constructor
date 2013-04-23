@@ -1,0 +1,11 @@
+- unless @page.ancestors.empty?
+  %ul.breadcrumb
+    %li.you_are_here Вы здесь: 
+    - @page.self_and_ancestors.each do |i|
+      - if i.in_nav
+        - if i == @page
+          %li{:class => "active"}= i.title
+        - else
+          %li
+            = link_to i.title, i.full_url
+            %span{:class => "divider"} /

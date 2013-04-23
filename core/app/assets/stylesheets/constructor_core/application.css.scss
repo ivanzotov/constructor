@@ -1,0 +1,27 @@
+//= require_self
+//= require ckeditor/contents
+//= require ckeditor/skins/moono/editor.css
+//= require constructor_core/bootstrap
+//= require constructor_core/bootstrap-responsive
+//= require constructor_core/jquery.treeview 
+
+body {
+  padding-top: 40px;
+}
+
+.images_controls {
+  float: left;
+  overflow: hidden;
+  display: inline-block;
+  width: 180px;
+  margin-bottom: 20px;
+  
+  .actions {
+    margin-top: 5px;
+    margin-left: 28px;
+  }
+}
+
+.sizes .controls {
+  margin-bottom: 30px;
+}

@@ -1,0 +1,98 @@
+= form_for @page do |f|
+  - if @page.errors.any?
+    .alert.alert-error.fade.in.span12
+      = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
+      - @page.errors.full_messages.each do |m|
+        = m
+          
+  .form-horizontal
+    .control-group
+      = f.label :active, :class => 'control-label'
+      .controls= f.check_box :active, :class => "span6"
+      
+    .control-group
+      = f.label :title, :class => 'control-label'
+      .controls= f.text_field :title, :class => "span9"
+
+    .control-group
+      = f.label :url, :class => 'control-label'
+      .controls
+        = f.text_field :url, :class => "span9"
+        %i.icon-exclamation-sign{:id => "url-if-empty", :title => "Авто-ссылка", 'data-content' => "Если оставить поле пустым, то ссылка сгенерируется автоматически из заголовока."}
+    
+    .control-group
+      = f.label :parent, :class => 'control-label'
+      .controls
+        = f.select :parent_id, options_for_select( for_select(@roots), @page.parent_id), :include_blank => 'Нет'
+      
+    .control-group
+      = f.label :content, :class => 'control-label'
+      .controls
+        = f.text_area :content, :class => "span9 ckeditor", :id => "content", :rows => 20
+    
+    - unless @page.new_record?
+      .control-group
+        .controls
+          = link_to "<i class='icon-plus icon-white'></i> Добавить изображение".html_safe, "/admin/images/#{@page.id}/new", :class => "btn btn-mini btn-success"                    
+        
+    - unless @page.images.empty?
+      .row-fluid               
+        .control-group
+          = f.label "Изображения", :class => 'control-label'        
+          .controls
+            - @page.images.each do |image|
+              .images_controls
+                = link_to image_tag(image.image.thumb('150x150#').url, :class => "thumbnail"),                  image.image.url                 
+                .actions
+                  = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_image_path(image, @page), :class => "btn btn-primary btn-mini"
+                  = link_to "<i class='icon-th icon-white'></i>".html_safe, sizes_image_path(image), :class => "btn btn-inverse"                                
+                  = link_to "<i class='icon-remove icon-white'></i>".html_safe, image_path(image), :class => "btn btn-mini btn-danger", :method => :delete, :confirm => "Вы уверены?"                          
+
+    .accordion
+      .accordion-group
+        .accordion-heading.text-center
+          = link_to 'Дополнительные опции', '#collapse', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
+        .accordion-body.in.collapse#collapse
+          .accordion-inner
+            .control-group
+              = f.label :link, :class => 'control-label'
+              .controls
+                = f.text_field :link, :class => "span9"          
+            .control-group
+              %label.control-label Отображать в
+              .controls
+                %label.checkbox.inline.span2{:for => 'in_menu'}
+                  = f.check_box :in_menu
+                  Меню
+
+                %label.checkbox.inline.span2{:for => 'in_map'}
+                  = f.check_box :in_map
+                  Карта сайта
+
+                %label.checkbox.inline.span2{:for => 'in_nav'}
+                  = f.check_box :in_nav
+                  Хлебные крошки        
+
+    .accordion
+      .accordion-group
+        .accordion-heading.text-center
+          = link_to 'Поисковая оптимизация', '#collapse-three', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
+        .accordion-body.in.collapse#collapse-three
+          .accordion-inner
+            .control-group
+              = f.label :keywords, :class => 'control-label'
+              .controls
+                = f.text_field :keywords, :class => "span9"          
+            .control-group            
+              = f.label :description, :class => 'control-label'
+              .controls
+                = f.text_area :description, :class => "span9", :rows => 8
+
+    .row-fluid        
+      .span12
+        .form-actions
+          .btn-group
+            = f.submit :class => "btn btn-primary"
+            = link_to "Отмена", pages_url, :class => "btn"   
+          = link_to "Удалить страницу", @page, :confirm => 'Вы уверены?', :method => :delete, :class => "btn btn-danger pull-right" unless @page.new_record?
+

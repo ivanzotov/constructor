@@ -1,0 +1,23 @@
+ru:
+  activerecord:
+    attributes:
+      constructor_cap/page:
+        title: "Заголовок"
+        url: "Адрес"
+        in_menu: "Меню"
+        in_nav: "Хлебные крошки"
+        in_map: "Карта сайта"
+        parent: "Родитель"
+        parent_id: "Родительская страница"
+        link: "Ссылка"
+        content: "Содержание"
+        description: "Описание"
+        keywords: "Ключевые слова"        
+    errors:
+      models:
+        page:
+          attributes:
+            title:
+              blank: "не может быть пустым"
+            url:
+              blank: "не может быть пустой"

@@ -1,0 +1,8 @@
+- @roots.each do |page|
+  - if page.in_menu
+    - if @request == page.url || page.descendants.map{|child| child.url}.include?(@request)
+      %li.active= link_to page.title, page.full_url
+    - else
+      %li= link_to page.title, page.full_url
+
+    

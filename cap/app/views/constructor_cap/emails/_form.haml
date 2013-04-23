@@ -1,0 +1,17 @@
+= form_for @email do |f|
+  - if @email.errors.any?
+    .alert.alert-error.fade.in.span9
+      = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
+      - @email.errors.full_messages.each do |m|
+        = m
+          
+  .form-horizontal
+    .control-group
+      = f.label :email, :class => 'control-label'
+      .controls= f.text_field :email, :class => "span6"
+
+    .form-actions
+      = f.submit :class => "btn btn-primary"
+      
+      = link_to "Отмена", emails_url, :class => "btn" 
+

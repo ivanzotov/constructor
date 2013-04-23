@@ -1,0 +1,25 @@
+= form_for @image do |f|
+  .alert.alert-info
+    Максимальный размер изображения — <strong>5MB</strong>
+  .form-horizontal
+    - if @image.errors.any?
+      .alert.alert-error.fade.in.span12
+        = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
+        - @image.errors.full_messages.each do |m|
+          = m
+
+    - unless @image.new_record?
+      .control-group
+        .controls
+          = image_tag @image.image.thumb('150x150#').url
+          
+    .control-group
+      = f.label :image, :class => 'control-label'
+      .controls
+        = f.file_field :image, :class => "span6"
+    %input{:type => "hidden", :name => "image[page_id]", :value => @image.page_id}
+
+    .form-actions
+      .btn-group
+        = f.submit :class => "btn btn-primary"
+        = link_to "Отмена", edit_page_path(@image.page), :class => "btn" 

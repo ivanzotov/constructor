@@ -1,0 +1,34 @@
+ru:
+  activerecord:
+    attributes:
+      constructor_pages/image:
+        image: "Изображение"                  
+      constructor_pages/field:
+        name: "Наименование"        
+        type: "Тип"       
+        child: "Дочернее"                        
+      constructor_pages/page:
+        active: "Опубликовано"        
+        image: "Изображение"                
+        title: "Заголовок"
+        url: "Адрес"
+        in_menu: "Меню"
+        in_nav: "Хлебные крошки"
+        in_map: "Карта сайта"
+        parent: "Родитель"
+        parent_id: "Родительская страница"
+        link: "Ссылка"
+        content: "Содержание"
+        description: "Описание"
+        keywords: "Ключевые слова"        
+    errors:
+      models:
+        constructor_pages/image:
+          incorrect_size: "не может превышать 5MB"
+          incorrect_format: "должно быть в формате jpg, png или gif"              
+        constructor_pages/page:
+          attributes:
+            title:
+              blank: "не может быть пустым"
+            url:
+              blank: "не может быть пустой"
