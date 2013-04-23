@@ -2,11 +2,14 @@
 
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
-  s.name              = %q{constructor}
+  s.name              = %q{constructorcms}
   s.version           = '0.1'
   s.summary           = %q{Constructor}
   s.authors           = ['Ivan Zotov']
   s.require_paths     = %w(lib)
+  s.email             = "ivanzotov@gmail.com"
+  s.homepage          = "http://ivanzotov.github.com/constructor"
+  s.description       = "Constructor – content management system"  
   
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")

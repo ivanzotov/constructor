@@ -6,7 +6,10 @@ Gem::Specification.new do |s|
   s.version           = '0.1'
   s.summary           = %q{Cap for Constructor}
   s.authors           = ['Ivan Zotov']
+  s.email             = "ivanzotov@gmail.com"
+  s.homepage          = "http://ivanzotov.github.com/constructor"
   s.require_paths     = %w(lib)
+  s.description       = "Constructor – content management system"
   
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
