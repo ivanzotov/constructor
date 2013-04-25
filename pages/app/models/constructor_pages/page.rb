@@ -2,7 +2,7 @@
 
 module ConstructorPages
   class Page < ActiveRecord::Base
-    attr_accessible :active, :title, :url, 
+    attr_accessible :active, :title, :url, :seo_title,
                     :parent_id, :content, :link, 
                     :in_menu, :in_map, 
                     :in_nav, :keywords, :description

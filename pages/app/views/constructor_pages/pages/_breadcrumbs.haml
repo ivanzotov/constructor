@@ -7,5 +7,5 @@
           %li{:class => "active"}= i.title
         - else
           %li
-            = link_to i.title, i.full_url
+            = link_to i.title, i.full_url, :title => i.title
             %span{:class => "divider"} /

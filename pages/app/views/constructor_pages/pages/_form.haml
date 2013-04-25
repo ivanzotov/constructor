@@ -80,6 +80,10 @@
         .accordion-body.in.collapse#collapse-three
           .accordion-inner
             .control-group
+              = f.label :seo_title, :class => 'control-label'
+              .controls
+                = f.text_field :seo_title, :class => "span9"
+            .control-group
               = f.label :keywords, :class => 'control-label'
               .controls
                 = f.text_field :keywords, :class => "span9"          
