@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" name="Default" comment="Fix full_url generating.">
+    <list default="true" id="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" afterPath="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/config/locales/ru.yml" afterPath="$PROJECT_DIR$/pages/config/locales/ru.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="constructor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366899588562" ignored="false" />
+    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366899604049" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724221116" ignored="false" />
     <file path="db-console:/2fc0424b/746b86c5-8fec-4345-af71-8d14e60090bc/" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724292840" ignored="false" />
     <file path="/Rails sushiclick: development" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724290070" ignored="false" />
@@ -16,8 +17,8 @@
     <file path="/a.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366790857539" ignored="false" />
     <file path="/20110510182403_create_pages.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366894898842" ignored="false" />
     <file path="/20120330180247_add_default_user.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366895589454" ignored="false" />
-    <file path="/_form.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366898032229" ignored="false" />
-    <file path="/ru.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366898153020" ignored="false" />
+    <file path="/_form.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366900069360" ignored="false" />
+    <file path="/ru.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366900649552" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.html.erb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366896231243" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897342324" ignored="false" />
     <file path="/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897334546" ignored="false" />
@@ -47,7 +48,35 @@
     <favorites_list name="constructor" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="_form.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="31" selection-start="524" selection-end="524" vertical-scroll-proportion="-12.307693">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_breadcrumbs.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="30" selection-start="79" selection-end="79" vertical-scroll-proportion="-1.5384616">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ru.yml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/config/locales/ru.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="30" selection-start="461" selection-end="461" vertical-scroll-proportion="1.4070352">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -58,6 +87,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
     <option name="myDateState">
       <MyDateState />
     </option>
@@ -72,9 +102,9 @@
         <option value="$PROJECT_DIR$/pages/app/controllers/constructor_pages/pages_controller.rb" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/show.haml" />
+        <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
         <option value="$PROJECT_DIR$/pages/config/locales/ru.yml" />
-        <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
       </list>
     </option>
   </component>
@@ -126,78 +156,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="locales" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -328,7 +286,11 @@
       <created>1366899341885</created>
       <updated>1366899341885</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adding default_scope order lft.">
+      <created>1366899605899</created>
+      <updated>1366899605899</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -356,11 +318,11 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32957748" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6802817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27116212" sideWeight="0.67042255" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27116212" sideWeight="0.3197183" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -417,7 +379,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix full_url generating." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding default_scope order lft." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -435,6 +397,7 @@
     <MESSAGE value="Adding migration for default user." />
     <MESSAGE value="Breadcrumbs with titles." />
     <MESSAGE value="Fix full_url generating." />
+    <MESSAGE value="Adding default_scope order lft." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -487,42 +450,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/show.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="28" selection-start="49" selection-end="49" vertical-scroll-proportion="0.030487806">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="4" selection-start="36" selection-end="36" vertical-scroll-proportion="0.047393367">
+        <state line="2" column="27" selection-start="74" selection-end="74" vertical-scroll-proportion="0.06097561">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="16" selection-start="354" selection-end="354" vertical-scroll-proportion="0.29325512">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/config/locales/ru.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="23" selection-start="454" selection-end="454" vertical-scroll-proportion="0.41055718">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="48" selection-start="593" selection-end="593" vertical-scroll-proportion="0.5598756">
+        <state line="2" column="30" selection-start="42" selection-end="42" vertical-scroll-proportion="0.058651026">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/controllers/constructor_pages/pages_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="26" selection-start="907" selection-end="907" vertical-scroll-proportion="0.26686218">
+        <state line="16" column="41" selection-start="544" selection-end="544" vertical-scroll-proportion="-2.548387">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="524" selection-end="524" vertical-scroll-proportion="-12.307693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="30" selection-start="79" selection-end="79" vertical-scroll-proportion="-1.5384616">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/config/locales/ru.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="30" selection-start="461" selection-end="461" vertical-scroll-proportion="1.4070352">
           <folding />
         </state>
       </provider>

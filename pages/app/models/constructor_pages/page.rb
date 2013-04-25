@@ -22,7 +22,7 @@ module ConstructorPages
     acts_as_nested_set
     
     def self.children_of(page)
-      Page.where(:parent_id => page).order(:lft)
+      Page.where(:parent_id => page)
     end
     
     private
