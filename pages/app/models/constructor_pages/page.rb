@@ -8,6 +8,8 @@ module ConstructorPages
                     :in_nav, :keywords, :description
                       
     has_many :images, :dependent => :destroy
+
+    default_scope order(:lft)
     
     validates_presence_of :title
     
