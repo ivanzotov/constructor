@@ -2,7 +2,7 @@
 
 module ConstructorPages
   class Page < ActiveRecord::Base
-    attr_accessible :active, :title, :url, :seo_title,
+    attr_accessible :active, :title, :url, :seo_title, :auto_url,
                     :parent_id, :content, :link, 
                     :in_menu, :in_map, 
                     :in_nav, :keywords, :description
@@ -26,7 +26,11 @@ module ConstructorPages
     private
     
     def full_url_change
-      self.full_url = '/' + self.ancestors.map {|c| c.url}.append(self.url).join('/')        
+      if parent_id
+        self.full_url = '/' + Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(self.url).join('/')
+      else
+        self.full_url = '/' + self.url
+      end
     end
     
     def full_url_create
@@ -46,7 +50,7 @@ module ConstructorPages
     end
     
     def url_prepare
-      if self.url.empty?
+      if self.auto_url or self.url.empty?
         self.url = self.title.parameterize
       else
         self.url = self.url.parameterize

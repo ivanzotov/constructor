@@ -15,6 +15,11 @@
       .controls= f.text_field :title, :class => "span9"
 
     .control-group
+      = f.label :auto_url, :class => 'control-label'
+      .controls
+        = f.check_box :auto_url, :class => "span9"
+
+    .control-group
       = f.label :url, :class => 'control-label'
       .controls
         = f.text_field :url, :class => "span9"
