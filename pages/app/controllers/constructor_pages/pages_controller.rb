@@ -30,8 +30,7 @@ module ConstructorPages
       redirect_to :pages
     end
 =end
-    
-    
+
     def sitemap
       @pages = Page.all
       @title = "Карта сайта"
