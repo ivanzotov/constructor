@@ -26,6 +26,12 @@ $(document).ready ->
     auto_url_true()
 
   $('#page_title').keyup -> $('.address').html(parameterize())
+  $('#page_parent_id').change ->
+    parent_full_url = $('#page_parent_id option:selected').data('full_url')
+    if parent_full_url
+      $('.path').html(parent_full_url)
+    else
+      $('.path').html('')
 
   $('.address, .address_icon').click ->
     if $('#page_auto_url').is(':checked') == true
