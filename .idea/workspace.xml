@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" afterPath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss" afterPath="$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" afterPath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="constructor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367310334112" ignored="false" />
+    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367314767723" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724221116" ignored="false" />
     <file path="db-console:/2fc0424b/746b86c5-8fec-4345-af71-8d14e60090bc/" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724292840" ignored="false" />
     <file path="/Rails sushiclick: development" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724290070" ignored="false" />
@@ -27,7 +25,7 @@
     <file path="/_breadcrumbs.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897285003" ignored="false" />
     <file path="/show.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897435392" ignored="false" />
     <file path="/application.js" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367179474526" ignored="false" />
-    <file path="/application.js.coffee" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367314413436" ignored="false" />
+    <file path="/application.js.coffee" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367317529404" ignored="false" />
     <file path="/application.css.scss" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367313134646" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +50,26 @@
     <favorites_list name="constructor" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="_form.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="5" selection-start="654" selection-end="654" vertical-scroll-proportion="-10.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.js.coffee" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="4" selection-start="464" selection-end="464" vertical-scroll-proportion="1.1155779">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -82,8 +99,8 @@
         <option value="$PROJECT_DIR$/pages/config/locales/ru.yml" />
         <option value="$PROJECT_DIR$/pages/app/assets/javascripts/constructor_pages/application.js" />
         <option value="$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss" />
-        <option value="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
+        <option value="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
       </list>
     </option>
   </component>
@@ -168,6 +185,44 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor_pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor_pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -205,7 +260,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -246,14 +341,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stylesheets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor_core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -284,28 +371,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="constructor_core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -465,7 +530,11 @@
       <created>1366901357250</created>
       <updated>1366901357251</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add javascripts for auto_url">
+      <created>1367314770238</created>
+      <updated>1367314770238</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -492,6 +561,7 @@
     <frame x="1" y="22" width="1440" height="805" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6802817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -506,7 +576,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -554,7 +623,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add javascripts for auto_url" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -574,6 +643,7 @@
     <MESSAGE value="Fix full_url generating." />
     <MESSAGE value="Adding default_scope order lft." />
     <MESSAGE value="Refactoring" />
+    <MESSAGE value="Add javascripts for auto_url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -640,20 +710,6 @@
         <state line="11" column="16" selection-start="349" selection-end="349" vertical-scroll-proportion="0.32258064" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/directory.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="2" selection-start="219" selection-end="219" vertical-scroll-proportion="0.1866252">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="16" selection-start="727" selection-end="727" vertical-scroll-proportion="0.58651024">
@@ -661,16 +717,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
+    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="706" selection-end="706" vertical-scroll-proportion="0.5014663">
+        <state line="12" column="5" selection-start="389" selection-end="389" vertical-scroll-proportion="0.35190615">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="5" selection-start="389" selection-end="389" vertical-scroll-proportion="0.35190615">
+        <state line="20" column="5" selection-start="654" selection-end="654" vertical-scroll-proportion="-10.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="4" selection-start="464" selection-end="464" vertical-scroll-proportion="1.1155779">
           <folding />
         </state>
       </provider>

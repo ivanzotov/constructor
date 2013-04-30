@@ -19,32 +19,25 @@ $(document).ready ->
   $('.auto_url').hide()
   $('.page_url').hide()
 
-  auto_url = $('.auto_url input').is(':checked')
+  auto_url = $('#page_auto_url').is(':checked')
 
-  auto_url_true()
-
-  if auto_url == false
-    url_true()
-    auto_url_false()
-
-auto_url_true = ->
-  $('.address, .url .icon-pencil').click ->
-    url_true()
-    auto_url_false()
-
-auto_url_false = ->
-  $('.address, .url .icon-remove').click ->
-    url_false()
+  unless auto_url
     auto_url_true()
 
-url_true = ->
+  $('.address, .address_icon').click ->
+    if $('#page_auto_url').is(':checked') == true
+      auto_url_true()
+    else
+      auto_url_false()
+
+auto_url_true = ->
   $('.page_url').show()
-  $('.auto_url input').attr('checked', false)
+  $('#page_auto_url').prop('checked', false)
   $('.address_icon').addClass('icon-remove').removeClass('icon-pencil')
   $('.address').hide()
 
-url_false = ->
+auto_url_false = ->
   $('.page_url').hide()
-  $('.auto_url input').attr('checked', true)
+  $('#page_auto_url').prop('checked', true)
   $('.address_icon').addClass('icon-pencil').removeClass('icon-remove')
   $('.address').show()
