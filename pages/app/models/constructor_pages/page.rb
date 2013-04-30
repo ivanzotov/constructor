@@ -12,7 +12,7 @@ module ConstructorPages
     default_scope order(:lft)
     
     validates_presence_of :title
-    
+
     before_save :url_prepare, :content_filter
     after_update :full_url_descendants_change
     

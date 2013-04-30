@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" afterPath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" afterPath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml" afterPath="$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" afterPath="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="constructor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367314767723" ignored="false" />
+    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367317602639" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724221116" ignored="false" />
     <file path="db-console:/2fc0424b/746b86c5-8fec-4345-af71-8d14e60090bc/" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724292840" ignored="false" />
     <file path="/Rails sushiclick: development" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724290070" ignored="false" />
@@ -21,12 +25,13 @@
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.html.erb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366896231243" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897342324" ignored="false" />
     <file path="/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897334546" ignored="false" />
-    <file path="/page.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366899466910" ignored="false" />
+    <file path="/page.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367322114729" ignored="false" />
     <file path="/_breadcrumbs.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897285003" ignored="false" />
     <file path="/show.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897435392" ignored="false" />
     <file path="/application.js" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367179474526" ignored="false" />
-    <file path="/application.js.coffee" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367317529404" ignored="false" />
+    <file path="/application.js.coffee" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367321290257" ignored="false" />
     <file path="/application.css.scss" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367313134646" ignored="false" />
+    <file path="/application_admin.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367319273489" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +59,7 @@
       <file leaf-file-name="_form.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="5" selection-start="654" selection-end="654" vertical-scroll-proportion="-10.0">
+            <state line="28" column="45" selection-start="924" selection-end="924" vertical-scroll-proportion="-13.846154">
               <folding />
             </state>
           </provider>
@@ -63,7 +68,34 @@
       <file leaf-file-name="application.js.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="4" selection-start="464" selection-end="464" vertical-scroll-proportion="1.1155779">
+            <state line="23" column="3" selection-start="460" selection-end="460" vertical-scroll-proportion="0.91457283">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="26" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urlify.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="20" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application_admin.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="59" selection-start="560" selection-end="560" vertical-scroll-proportion="-12.307693">
               <folding />
             </state>
           </provider>
@@ -95,12 +127,14 @@
         <option value="$PROJECT_DIR$/pages/app/controllers/constructor_pages/pages_controller.rb" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/show.haml" />
-        <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
         <option value="$PROJECT_DIR$/pages/config/locales/ru.yml" />
         <option value="$PROJECT_DIR$/pages/app/assets/javascripts/constructor_pages/application.js" />
         <option value="$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss" />
+        <option value="$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml" />
+        <option value="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
         <option value="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
+        <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
       </list>
     </option>
   </component>
@@ -279,6 +313,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor_core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -534,7 +598,11 @@
       <created>1367314770238</created>
       <updated>1367314770238</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix auto_url javascript">
+      <created>1367317605992</created>
+      <updated>1367317605992</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -623,7 +691,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add javascripts for auto_url" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix auto_url javascript" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -644,6 +712,7 @@
     <MESSAGE value="Adding default_scope order lft." />
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Add javascripts for auto_url" />
+    <MESSAGE value="Fix auto_url javascript" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -651,11 +720,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cap/app/controllers/constructor_cap/emails_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="24" selection-start="161" selection-end="161" vertical-scroll-proportion="0.21428572" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/db/migrate/20120330180247_add_default_user.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="19" selection-start="219" selection-end="219" vertical-scroll-proportion="0.20527859" />
@@ -717,23 +781,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
+    <entry file="file://$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="5" selection-start="389" selection-end="389" vertical-scroll-proportion="0.35190615">
+        <state line="16" column="59" selection-start="560" selection-end="560" vertical-scroll-proportion="-12.307693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="20" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="5" selection-start="654" selection-end="654" vertical-scroll-proportion="-10.0">
+        <state line="28" column="45" selection-start="924" selection-end="924" vertical-scroll-proportion="-13.846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="26" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="4" selection-start="464" selection-end="464" vertical-scroll-proportion="1.1155779">
+        <state line="23" column="3" selection-start="460" selection-end="460" vertical-scroll-proportion="0.91457283">
           <folding />
         </state>
       </provider>

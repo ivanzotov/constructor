@@ -1,6 +1,7 @@
 #= require constructor_core/jquery_bundle
 #= require constructor_core/bootstrap
 #= require ckeditor/ckeditor
+#= require constructor_core/urlify
 #= require_self
 
 $(document).ready ->
@@ -17,27 +18,34 @@ $(document).ready ->
   })
 
   $('.auto_url').hide()
-  $('.page_url').hide()
+  $('#page_url').hide()
 
   auto_url = $('#page_auto_url').is(':checked')
 
   unless auto_url
     auto_url_true()
 
+  $('#page_title').keyup -> $('.address').html(parameterize())
+
   $('.address, .address_icon').click ->
     if $('#page_auto_url').is(':checked') == true
+      $('#page_url').prop('value', parameterize())
       auto_url_true()
     else
+      $('.address').html(parameterize())
       auto_url_false()
 
 auto_url_true = ->
-  $('.page_url').show()
+  $('#page_url').show()
   $('#page_auto_url').prop('checked', false)
   $('.address_icon').addClass('icon-remove').removeClass('icon-pencil')
   $('.address').hide()
 
 auto_url_false = ->
-  $('.page_url').hide()
+  $('#page_url').hide()
   $('#page_auto_url').prop('checked', true)
   $('.address_icon').addClass('icon-pencil').removeClass('icon-remove')
   $('.address').show()
+
+parameterize = ->
+  URLify($('#page_title').prop('value'))
