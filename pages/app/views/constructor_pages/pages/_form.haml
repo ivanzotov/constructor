@@ -12,19 +12,23 @@
       
     .control-group
       = f.label :title, :class => 'control-label'
-      .controls= f.text_field :title, :class => "span9"
+      .controls= f.text_field :title, :class => "span4"
 
-    .control-group
+    .control-group.auto_url
       = f.label :auto_url, :class => 'control-label'
       .controls
         = f.check_box :auto_url, :class => "span9"
 
-    .control-group
+    .control-group.url
       = f.label :url, :class => 'control-label'
       .controls
-        = f.text_field :url, :class => "span9"
-        %i.icon-exclamation-sign{:id => "url-if-empty", :title => "Авто-ссылка", 'data-content' => "Если оставить поле пустым, то ссылка сгенерируется автоматически из заголовока."}
-    
+        .full_url
+          %span.path>= @page.parent.full_url unless @page.parent.nil?
+          \/
+          %span.address>= @page.url
+        = f.text_field :url, :class => "span3 page_url"
+        %i.address_icon.icon-pencil
+
     .control-group
       = f.label :parent, :class => 'control-label'
       .controls
@@ -104,4 +108,3 @@
             = f.submit :class => "btn btn-primary"
             = link_to "Отмена", pages_url, :class => "btn"   
           = link_to "Удалить страницу", @page, :confirm => 'Вы уверены?', :method => :delete, :class => "btn btn-danger pull-right" unless @page.new_record?
-
