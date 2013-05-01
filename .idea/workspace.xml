@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" afterPath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" afterPath="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/helpers/constructor_pages/pages_helper.rb" afterPath="$PROJECT_DIR$/pages/app/helpers/constructor_pages/pages_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/constructor.iml" afterPath="$PROJECT_DIR$/.idea/constructor.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/error_404.haml" afterPath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/error_404.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="constructor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367322373902" ignored="false" />
+    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367435547020" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724221116" ignored="false" />
     <file path="db-console:/2fc0424b/746b86c5-8fec-4345-af71-8d14e60090bc/" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724292840" ignored="false" />
     <file path="/Rails sushiclick: development" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724290070" ignored="false" />
@@ -22,8 +21,8 @@
     <file path="/ru.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366900649552" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.html.erb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366896231243" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897342324" ignored="false" />
-    <file path="/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897334546" ignored="false" />
-    <file path="/page.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367322114729" ignored="false" />
+    <file path="/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407081236" ignored="false" />
+    <file path="/page.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367326846929" ignored="false" />
     <file path="/_breadcrumbs.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897285003" ignored="false" />
     <file path="/show.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897435392" ignored="false" />
     <file path="/application.js" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367179474526" ignored="false" />
@@ -31,6 +30,19 @@
     <file path="/application.css.scss" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367313134646" ignored="false" />
     <file path="/application_admin.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367319273489" ignored="false" />
     <file path="/pages_helper.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367322818938" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407654119" ignored="false" />
+    <file path="/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407140434" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/.gitignore" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367352630911" ignored="false" />
+    <file path="/.gitignore" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367352630911" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/.idea/workspace.xml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367435560058" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/config/database.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367355493260" ignored="false" />
+    <file path="/database.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367355493260" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/application.less" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406920913" ignored="false" />
+    <file path="/application.less" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406920913" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/main.less" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406519384" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/application.css" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406809561" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407081236" ignored="false" />
+    <file path="/error_404.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367435558711" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,37 +67,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_form.haml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
+      <file leaf-file-name="error_404.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/error_404.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="1049" selection-end="1049" vertical-scroll-proportion="2.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pages_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/app/helpers/constructor_pages/pages_helper.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.js.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="3" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="page.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="26" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+            <state line="7" column="33" selection-start="235" selection-end="235" vertical-scroll-proportion="0.546875">
               <folding />
             </state>
           </provider>
@@ -110,7 +95,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/constructor.gemspec" />
         <option value="$PROJECT_DIR$/pages/config/routes.rb" />
         <option value="$PROJECT_DIR$/pages/db/migrate/20110510182403_create_pages.rb" />
         <option value="$PROJECT_DIR$/core/db/migrate/20120330180247_add_default_user.rb" />
@@ -122,15 +106,15 @@
         <option value="$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss" />
         <option value="$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml" />
         <option value="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js" />
-        <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
         <option value="$PROJECT_DIR$/pages/app/helpers/constructor_pages/pages_helper.rb" />
         <option value="$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml" />
+        <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
+        <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/error_404.haml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
     <option name="y" value="22" />
     <option name="width" value="1440" />
     <option name="height" value="805" />
@@ -161,6 +145,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -266,8 +251,26 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -293,11 +296,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="helpers" />
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="constructor_pages" />
+              <option name="myItemId" value="stylesheets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -316,6 +319,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -424,6 +431,14 @@
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constructor_core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -446,18 +461,9 @@
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="constructor_core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -474,15 +480,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sushiclick" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="149" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="939" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="937" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="939" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="145" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="141" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="RSpecRunConfigurationType" factoryName="RSpec">
@@ -623,7 +629,11 @@
       <created>1367322377404</created>
       <updated>1367322377405</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Parent url javascripted">
+      <created>1367324283328</created>
+      <updated>1367324283328</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -647,15 +657,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="22" width="1440" height="805" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="805" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6802817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5633803" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24892396" sideWeight="0.3197183" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25968435" sideWeight="0.43661973" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -665,6 +674,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -712,7 +722,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add urlify" />
+    <option name="LAST_COMMIT_MESSAGE" value="Parent url javascripted" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -735,6 +745,7 @@
     <MESSAGE value="Add javascripts for auto_url" />
     <MESSAGE value="Fix auto_url javascript" />
     <MESSAGE value="Add urlify" />
+    <MESSAGE value="Parent url javascripted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -742,28 +753,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/db/migrate/20110510182403_create_pages.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="29" selection-start="0" selection-end="854" vertical-scroll-proportion="0.29325512">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/db/migrate/20120330180246_devise_users.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="50" selection-start="304" selection-end="304" vertical-scroll-proportion="0.20527859" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/show.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="27" selection-start="74" selection-end="74" vertical-scroll-proportion="0.06097561" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/controllers/constructor_pages/pages_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="41" selection-start="544" selection-end="544" vertical-scroll-proportion="-2.548387">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/config/locales/ru.yml">
@@ -786,58 +778,63 @@
         <state line="11" column="16" selection-start="349" selection-end="349" vertical-scroll-proportion="0.32258064" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="16" selection-start="727" selection-end="727" vertical-scroll-proportion="0.58651024">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="20" selection-start="668" selection-end="668" vertical-scroll-proportion="0.32258064">
+        <state line="11" column="20" selection-start="668" selection-end="668" vertical-scroll-proportion="0.32258064" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="30" selection-start="79" selection-end="79" vertical-scroll-proportion="0.06097561" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="35" selection-start="112" selection-end="112" vertical-scroll-proportion="0.12195122" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="32" selection-start="310" selection-end="310" vertical-scroll-proportion="0.029325513" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/helpers/constructor_pages/pages_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.17937219" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="5" selection-start="505" selection-end="505" vertical-scroll-proportion="0.0311042" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/db/migrate/20120330180246_devise_users.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="50" selection-start="304" selection-end="304" vertical-scroll-proportion="0.20527859" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/app/assets/stylesheets/constructor_core/application.css.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="22" selection-start="566" selection-end="566" vertical-scroll-proportion="0.9677419" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/controllers/constructor_pages/pages_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="15" selection-start="609" selection-end="609" vertical-scroll-proportion="0.58651024">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/app/views/layouts/constructor_core/application_admin.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="59" selection-start="560" selection-end="560" vertical-scroll-proportion="0.4878049">
+        <state line="14" column="25" selection-start="443" selection-end="443" vertical-scroll-proportion="0.42682928">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/error_404.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="26" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="30" selection-start="79" selection-end="79" vertical-scroll-proportion="0.06097561">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/application.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="3" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/helpers/constructor_pages/pages_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_form.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1049" selection-end="1049" vertical-scroll-proportion="2.0">
+        <state line="7" column="33" selection-start="235" selection-end="235" vertical-scroll-proportion="0.546875">
           <folding />
         </state>
       </provider>
