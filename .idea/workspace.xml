@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/sitemap.haml" afterPath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/sitemap.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml" afterPath="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="constructor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367436611797" ignored="false" />
+    <file path="/Dummy.txt" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439422687" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724221116" ignored="false" />
     <file path="db-console:/2fc0424b/746b86c5-8fec-4345-af71-8d14e60090bc/" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724292840" ignored="false" />
     <file path="/Rails sushiclick: development" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366724290070" ignored="false" />
@@ -20,32 +20,35 @@
     <file path="/ru.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366900649552" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.html.erb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366896231243" ignored="false" />
     <file path="$PROJECT_DIR$/../sushiclick/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897342324" ignored="false" />
-    <file path="/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407081236" ignored="false" />
+    <file path="/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367438613883" ignored="false" />
     <file path="/page.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367326846929" ignored="false" />
-    <file path="/_breadcrumbs.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897285003" ignored="false" />
+    <file path="/_breadcrumbs.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439222921" ignored="false" />
     <file path="/show.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1366897435392" ignored="false" />
     <file path="/application.js" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367179474526" ignored="false" />
     <file path="/application.js.coffee" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367323759396" ignored="false" />
     <file path="/application.css.scss" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367313134646" ignored="false" />
     <file path="/application_admin.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367319273489" ignored="false" />
     <file path="/pages_helper.rb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367322818938" ignored="false" />
-    <file path="$PROJECT_DIR$/../nprvrn/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407654119" ignored="false" />
-    <file path="/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407140434" ignored="false" />
-    <file path="$PROJECT_DIR$/../nprvrn/.gitignore" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367352630911" ignored="false" />
-    <file path="/.gitignore" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367352630911" ignored="false" />
-    <file path="$PROJECT_DIR$/../nprvrn/.idea/workspace.xml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367437776792" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439361348" ignored="false" />
+    <file path="/Gemfile" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439321053" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/.gitignore" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439402620" ignored="false" />
+    <file path="/.gitignore" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439402620" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/.idea/workspace.xml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367439511345" ignored="false" />
     <file path="$PROJECT_DIR$/../nprvrn/config/database.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367355493260" ignored="false" />
     <file path="/database.yml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367355493260" ignored="false" />
     <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/application.less" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406920913" ignored="false" />
     <file path="/application.less" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406920913" ignored="false" />
     <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/main.less" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406519384" ignored="false" />
     <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/application.css" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367406809561" ignored="false" />
-    <file path="$PROJECT_DIR$/../nprvrn/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367407081236" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/views/layouts/application.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367438617926" ignored="false" />
     <file path="/error_404.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367435558711" ignored="false" />
     <file path="$PROJECT_DIR$/../nprvrn/app/views/constructor_pages/pages/show.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367437465289" ignored="false" />
     <file path="$PROJECT_DIR$/../nprvrn/app/views/constructor_pages/pages/_menu.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367437626284" ignored="false" />
     <file path="/_menu.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367437623394" ignored="false" />
     <file path="/sitemap.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367437707874" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/views/home/index.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367438315400" ignored="false" />
+    <file path="/index.haml" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367438315400" ignored="false" />
+    <file path="$PROJECT_DIR$/../nprvrn/app/assets/stylesheets/styles.less.erb" changelist="d14cb4a5-681d-40b9-8773-9b9d7e4c5fd0" time="1367438570198" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,10 +73,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sitemap.haml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sitemap.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/sitemap.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="69" selection-start="530" selection-end="530" vertical-scroll-proportion="0.6097561">
+            <state line="20" column="69" selection-start="530" selection-end="530" vertical-scroll-proportion="-15.384615">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_breadcrumbs.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="25" selection-start="102" selection-end="102" vertical-scroll-proportion="0.234375">
               <folding />
             </state>
           </provider>
@@ -101,7 +113,6 @@
         <option value="$PROJECT_DIR$/pages/db/migrate/20110510182403_create_pages.rb" />
         <option value="$PROJECT_DIR$/core/db/migrate/20120330180247_add_default_user.rb" />
         <option value="$PROJECT_DIR$/pages/app/controllers/constructor_pages/pages_controller.rb" />
-        <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/show.haml" />
         <option value="$PROJECT_DIR$/pages/config/locales/ru.yml" />
         <option value="$PROJECT_DIR$/pages/app/assets/javascripts/constructor_pages/application.js" />
@@ -114,6 +125,7 @@
         <option value="$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/error_404.haml" />
         <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/sitemap.haml" />
+        <option value="$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml" />
       </list>
     </option>
   </component>
@@ -640,7 +652,11 @@
       <created>1367435582357</created>
       <updated>1367435582357</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add title for sitemap links">
+      <created>1367437814920</created>
+      <updated>1367437814920</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -667,7 +683,8 @@
     <frame x="0" y="22" width="1440" height="805" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5633803" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5633803" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32957748" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -681,7 +698,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -729,7 +745,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix error_404.haml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add title for sitemap links" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -754,6 +770,7 @@
     <MESSAGE value="Add urlify" />
     <MESSAGE value="Parent url javascripted" />
     <MESSAGE value="Fix error_404.haml" />
+    <MESSAGE value="Add title for sitemap links" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -784,11 +801,6 @@
     <entry file="file://$PROJECT_DIR$/core/app/assets/javascripts/constructor_core/urlify.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="20" selection-start="668" selection-end="668" vertical-scroll-proportion="0.32258064" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="30" selection-start="79" selection-end="79" vertical-scroll-proportion="0.06097561" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/models/constructor_pages/page.rb">
@@ -844,7 +856,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/sitemap.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="69" selection-start="530" selection-end="530" vertical-scroll-proportion="0.6097561">
+        <state line="20" column="69" selection-start="530" selection-end="530" vertical-scroll-proportion="-15.384615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/app/views/constructor_pages/pages/_breadcrumbs.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="25" selection-start="102" selection-end="102" vertical-scroll-proportion="0.234375">
           <folding />
         </state>
       </provider>
