@@ -10,8 +10,6 @@ $(document).ready ->
     persist: 'cookie'
   })
 
-  config.allowedContent = ;
-  
   $(".alert").alert()
   $(".collapse").collapse()
   
