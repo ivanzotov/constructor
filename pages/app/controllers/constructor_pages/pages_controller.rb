@@ -5,13 +5,13 @@ module ConstructorPages
     # TODO
     include ConstructorCore::DeviseHelper 
     
-    #caches_page :show
+    caches_page :show
     
     before_filter :authenticate_user!, :except => [:show, :sitemap]
     before_filter :template_vars, :only => [:show]
     before_filter {@roots = Page.roots}
     layout 'constructor_core/application_admin', :except => [:show, :sitemap]
-    #before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
+    before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
         
     # TODO
     def index
