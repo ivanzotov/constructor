@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.executables       = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
     
   s.add_dependency 'dragonfly'
+  s.add_dependency 'rack-cache'
   s.add_dependency 'awesome_nested_set', '~> 2.0'
   s.add_dependency 'haml-rails'
   s.add_dependency 'russian', '~> 0.6.0'
