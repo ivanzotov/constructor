@@ -127,7 +127,7 @@ module ConstructorPages
     def cache
       expire_page :action => :show
       cache_dir = ActionController::Base.page_cache_directory
-      unless cache_dir == Rails.root+"/public"
+      unless cache_dir == Rails.root.to_s+"/public"
         FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
       end
     end
