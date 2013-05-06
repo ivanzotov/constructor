@@ -5,9 +5,11 @@ module ConstructorPages
     attr_accessible :active, :title, :url, :seo_title, :auto_url,
                     :parent_id, :content, :link, 
                     :in_menu, :in_map, 
-                    :in_nav, :keywords, :description
+                    :in_nav, :keywords, :description, :template_id
                       
     has_many :images, :dependent => :destroy
+
+    belongs_to :template
 
     default_scope order(:lft)
     

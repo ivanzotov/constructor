@@ -7,5 +7,9 @@ module ConstructorPages
       end
       result
     end
+
+    def templates
+      Template.all.map{|t| [t.name, t.id]}
+    end
   end
 end

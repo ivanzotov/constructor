@@ -25,9 +25,15 @@ module ConstructorPages
 
     def new
       @page = Page.new
+      @template = Template.first
+
       if params[:page]
         @parent = Page.find(params[:page])        
         @page.parent_id = @parent.id
+
+        unless @parent.template.child_id.nil?
+          @template = @parent.template.child_id
+        end
       end
     end
     
@@ -46,15 +52,18 @@ module ConstructorPages
       @seo_title = @page.seo_title.empty? ? @page.title : @page.seo_title
       @title = @page.title
       @description = @page.description
-      @keywords = @page.keywords      
+      @keywords = @page.keywords
 
       if @page.url != @page.link and !@page.link.empty?
         redirect_to @page.link
       end
+
+      render :template => "templates/#{@page.template.code_name || 'default'}"
     end
     
     def edit
       @page = Page.find(params[:id])
+      @page.template ||= Template.where(:code_name => "default").first
     end
 
     def create              
@@ -68,16 +77,8 @@ module ConstructorPages
     end
 
     def update   
-      if params[:field]
-        params[:field].each_pair do |id, hash|
-          field = ("constructor_pages/#{hash[:type]}").classify.constantize.find id
-          field.value = hash[:value]
-          field.save
-        end
-      end
-      
-      @page = Page.find params[:id]     
-      
+      @page = Page.find params[:id]
+
       if @page.update_attributes params[:page]        
         redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно обновлена."
       else

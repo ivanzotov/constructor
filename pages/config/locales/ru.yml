@@ -2,15 +2,12 @@ ru:
   activerecord:
     attributes:
       constructor_pages/image:
-        image: "Изображение"                  
-      constructor_pages/field:
-        name: "Наименование"        
-        type: "Тип"       
-        child: "Дочернее"                        
+        image: "Изображение"
       constructor_pages/page:
         active: "Опубликовано"        
         image: "Изображение"                
         title: "Заголовок"
+        template: "Шаблон"
         seo_title: "Заголовок"
         auto_url: "Авто-ссылка"
         url: "Адрес"
