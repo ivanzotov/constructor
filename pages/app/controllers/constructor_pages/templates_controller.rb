@@ -17,13 +17,12 @@ module ConstructorPages
       end
     end
 
-
     def edit
       @template = Template.find(params[:id])
     end
 
     def create
-      @template = Page.new params[:template]
+      @template = Template.new params[:template]
 
       if @template.save
         redirect_to templates_url, :notice => "Шаблог «#{@template.name}» успешно добавлен."

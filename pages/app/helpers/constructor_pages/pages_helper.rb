@@ -9,7 +9,7 @@ module ConstructorPages
     end
 
     def templates
-      Template.all.map{|t| [t.name, t.id]}
+      Template.all.map{|t| ["#{'--'*t.level} #{t.name}", t.id]}
     end
   end
 end

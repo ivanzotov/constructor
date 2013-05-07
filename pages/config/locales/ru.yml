@@ -1,6 +1,11 @@
 ru:
   activerecord:
     attributes:
+      constructor_pages/template:
+        name: "Название"
+        code_name: "Кодовое имя"
+        parent: "Родительский"
+        child: "Дочерний"
       constructor_pages/image:
         image: "Изображение"
       constructor_pages/page:

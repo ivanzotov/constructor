@@ -25,13 +25,15 @@ module ConstructorPages
 
     def new
       @page = Page.new
-      @template = Template.first
+      @template = Template.first.id
 
       if params[:page]
         @parent = Page.find(params[:page])        
         @page.parent_id = @parent.id
 
-        unless @parent.template.child_id.nil?
+        if @parent.template.child_id.nil? and !@parent.template.leaf?
+          @template = @parent.template.descendants.first.id
+        else
           @template = @parent.template.child_id
         end
       end
@@ -63,7 +65,8 @@ module ConstructorPages
     
     def edit
       @page = Page.find(params[:id])
-      @page.template ||= Template.where(:code_name => "default").first
+      @page.template ||= Template.first
+      @template = @page.template.id
     end
 
     def create              

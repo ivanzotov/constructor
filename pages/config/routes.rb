@@ -1,12 +1,18 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
     resources :pages, :except => [:show]
+    resources :templates, :except => [:show]
 
     scope '/pages' do
-      post 'move/up/:id' => "pages#move_up", :as => :move_up
-      post 'move/down/:id' => "pages#move_down", :as => :move_down
+      post 'move/up/:id' => "pages#move_up", :as => :page_move_up
+      post 'move/down/:id' => "pages#move_down", :as => :page_move_down
       
       get ':page/new' => "pages#new", :as => :new_child_page
+    end
+
+    scope '/templates' do
+      post 'move/up/:id' => "templates#move_up", :as => :template_move_up
+      post 'move/down/:id' => "templates#move_down", :as => :template_move_down
     end
     
     resources :images, :except => [:show, :new, :edit]         

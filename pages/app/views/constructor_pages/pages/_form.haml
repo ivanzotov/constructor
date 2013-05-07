@@ -39,11 +39,6 @@
       .controls
         = f.text_area :content, :class => "span9 ckeditor", :id => "content", :rows => 20
 
-    .control-group
-      = f.label :template, :class => 'control-label'
-      .controls
-        = f.select :template_id, options_for_select(templates, :selected => @template)
-
     - unless @page.new_record?
       .control-group
         .controls
@@ -68,6 +63,10 @@
           = link_to 'Дополнительные опции', '#collapse', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
         .accordion-body.in.collapse#collapse
           .accordion-inner
+            .control-group
+              = f.label :template, :class => 'control-label'
+              .controls
+                = f.select :template_id, options_for_select(templates, :selected => @template)
             .control-group
               = f.label :link, :class => 'control-label'
               .controls

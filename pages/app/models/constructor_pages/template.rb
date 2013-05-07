@@ -2,7 +2,7 @@
 
 module ConstructorPages
   class Template < ActiveRecord::Base
-    attr_accessible :name, :code_name, :child_id
+    attr_accessible :name, :code_name, :child_id, :parent_id
     validates_presence_of :name
 
     default_scope order(:lft)

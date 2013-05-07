@@ -4,6 +4,7 @@ class CreateTemplates < ActiveRecord::Migration
       t.string :name
       t.string :code_name
       t.integer :parent_id
+      t.integer :child_id
       t.integer :lft
       t.integer :rgt
 

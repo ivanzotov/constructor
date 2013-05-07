@@ -28,13 +28,20 @@
 
         .btn-group          
           - if not page.right_sibling.nil? and page.move_possible?(page.right_sibling)
-            = link_to "<i class='icon-arrow-down'></i>".html_safe, move_down_path(page), :method => :post, :class => "btn btn-mini"
+            = link_to "<i class='icon-arrow-down'></i>".html_safe, page_move_down_path(page), :method => :post, :class => "btn btn-mini"
           - if not page.left_sibling.nil? and page.move_possible?(page.left_sibling)
-            = link_to "<i class='icon-arrow-up'></i>".html_safe, move_up_path(page), :method => :post, :class => "btn btn-mini"
+            = link_to "<i class='icon-arrow-up'></i>".html_safe, page_move_up_path(page), :method => :post, :class => "btn btn-mini"
       
         = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_page_path(page), :class => "btn btn-primary btn-mini"
-        
-        = link_to "<i class='icon-plus icon-white'></i>".html_safe, new_child_page_path(page), :class => "btn btn-success btn-mini"        
+
+        - unless page.template.nil?
+          - if page.template.child_id.nil?
+            - if !page.template.leaf?
+              = link_to "<i class='icon-plus icon-white'></i> #{page.template.descendants.first.name}".html_safe, new_child_page_path(page), :class => "btn btn-success btn-mini"
+          - else
+            = link_to "<i class='icon-plus icon-white'></i> #{ConstructorPages::Template.find(page.template.child_id).name}".html_safe, new_child_page_path(page), :class => "btn btn-success btn-mini"
+
+
         
 
         - level = page.level

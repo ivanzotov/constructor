@@ -1,0 +1,34 @@
+= form_for @template do |f|
+  - if @template.errors.any?
+    .alert.alert-error.fade.in.span12
+      = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
+      - @template.errors.full_messages.each do |m|
+        = m
+
+  .form-horizontal
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls= f.text_field :name, :class => "span4"
+
+    .control-group
+      = f.label :code_name, :class => 'control-label'
+      .controls= f.text_field :code_name, :class => "span4"
+
+    .control-group
+      = f.label :parent, :class => 'control-label'
+      .controls
+        = f.select :parent_id, options_for_select(for_select(@roots), :selected => @template.parent_id), :include_blank => 'Нет'
+
+    .control-group
+      = f.label :child, :class => 'control-label'
+      .controls
+        = f.select :child_id, options_for_select(for_select(@roots), :selected => @template.child_id), :include_blank => 'Нет'
+
+
+    .row-fluid
+      .span12
+        .form-actions
+          .btn-group
+            = f.submit :class => "btn btn-primary"
+            = link_to "Отмена", pages_url, :class => "btn"
+          = link_to "Удалить шаблон", @template, :confirm => 'Вы уверены?', :method => :delete, :class => "btn btn-danger pull-right" unless @template.new_record?
