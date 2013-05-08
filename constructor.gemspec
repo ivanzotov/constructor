@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'constructor-core'
   s.add_dependency 'constructor-pages'
+  s.add_dependency 'acts_as_list'
 end

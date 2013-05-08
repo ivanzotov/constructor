@@ -18,7 +18,7 @@
     .control-group
       = f.label :type_value, :class => 'control-label'
       .controls
-        = f.select :type_value, options_for_select([["Строка", "string"],["Число с плавающей точкой", "float"],["Булево", "boolean"]], :selected => @field.type_value), :class => "span4"
+        = f.select :type_value, options_for_select(types_value, :selected => @field.type_value), :class => "span4"
 
     .row-fluid
       .span12

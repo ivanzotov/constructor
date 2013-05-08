@@ -1,6 +1,6 @@
 class CreateStringTypes < ActiveRecord::Migration
   def self.up
-    create_table ConstructorPages::StringType.table_name do |t|
+    create_table ConstructorPages::Types::StringType.table_name do |t|
       t.string :value, :default => ""
       t.references :field
       t.references :page
@@ -10,6 +10,6 @@ class CreateStringTypes < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table ConstructorPages::StringType.table_name
+    drop_table ConstructorPages::Types::StringType.table_name
   end
 end

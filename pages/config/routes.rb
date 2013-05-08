@@ -4,8 +4,13 @@ ConstructorPages::Engine.routes.draw do
     resources :templates, :except => [:show]
     resources :fields, :except => [:show, :new, :edit]
 
-    get '/fields/:template_id/new/' => 'fields#new', :as => :new_field
-    get '/fields/:id/:template_id/edit/' => 'fields#edit', :as => :edit_field
+    scope '/fields' do
+      get ':template_id/new/' => 'fields#new', :as => :new_field
+      get ':id/:template_id/edit/' => 'fields#edit', :as => :edit_field
+
+      get 'move/up/:id' => "fields#move_up", :as => :field_move_up
+      get 'move/down/:id' => "fields#move_down", :as => :field_move_down
+    end
 
     scope '/pages' do
       post 'move/up/:id' => "pages#move_up", :as => :page_move_up
@@ -19,7 +24,8 @@ ConstructorPages::Engine.routes.draw do
       post 'move/down/:id' => "templates#move_down", :as => :template_move_down
     end
     
-    resources :images, :except => [:show, :new, :edit]         
+    resources :images, :except => [:show, :new, :edit]
+
     get 'images/:page/new' => "images#new"
     get 'images/:id/:page/edit' => "images#edit", :as => :edit_image   
     get 'images/:id/sizes' => "images#sizes", :as => :sizes_image    

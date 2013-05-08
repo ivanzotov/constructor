@@ -44,5 +44,17 @@ module ConstructorPages
       @field.destroy
       redirect_to edit_template_url(template), :notice => "Поле «#{name}» успешно удалено."
     end
+
+    def move_up
+      @field = Field.find(params[:id])
+      @field.move_higher
+      redirect_to :back, :notice => 'Поле успешно перемещено.'
+    end
+
+    def move_down
+      @field = Field.find(params[:id])
+      @field.move_lower
+      redirect_to :back, :notice => 'Поле успешно перемещено.'
+    end
   end
 end

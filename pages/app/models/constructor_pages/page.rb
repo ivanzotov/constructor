@@ -3,15 +3,19 @@
 module ConstructorPages
   class Page < ActiveRecord::Base
     attr_accessible :active, :title, :url, :seo_title, :auto_url,
-                    :parent_id, :content, :link, 
-                    :in_menu, :in_map, 
+                    :parent_id, :link, :in_menu, :in_map,
                     :in_nav, :keywords, :description, :template_id
                       
     has_many :images, :dependent => :destroy
 
-    has_many :string_types,:dependent => :destroy
-    has_many :float_types, :dependent => :destroy
-    has_many :boolean_types, :dependent => :destroy
+    has_many :string_types,:dependent => :destroy, :class_name => "Types::StringType"
+    has_many :float_types, :dependent => :destroy, :class_name => "Types::FloatType"
+    has_many :boolean_types, :dependent => :destroy, :class_name => "Types::BooleanType"
+    has_many :integer_types, :dependent => :destroy, :class_name => "Types::IntegerType"
+    has_many :text_types, :dependent => :destroy, :class_name => "Types::TextType"
+    has_many :date_types, :dependent => :destroy, :class_name => "Types::DateType"
+    has_many :html_types, :dependent => :destroy, :class_name => "Types::HtmlType"
+    has_many :image_types, :dependent => :destroy, :class_name => "Types::ImageType"
 
     belongs_to :template
 
@@ -19,7 +23,7 @@ module ConstructorPages
     
     validates_presence_of :title
 
-    before_save :url_prepare, :content_filter
+    before_save :url_prepare
     after_update :full_url_descendants_change
     
     before_update :full_url_change
@@ -55,10 +59,6 @@ module ConstructorPages
       self.descendants.each { |c| c.save }
     end
     
-    def content_filter
-      self.content = self.content.force_encoding('utf-8')
-    end
-    
     def url_prepare
       if self.auto_url or self.url.empty?
         self.url = self.title.parameterize
@@ -69,7 +69,7 @@ module ConstructorPages
 
     def create_fields
       template.fields.each do |field|
-        "constructor_pages/#{field.type_value}_type".classify.constantize.create(
+        "constructor_pages/types/#{field.type_value}_type".classify.constantize.create(
             :page_id => id,
             :field_id => field.id)
       end
