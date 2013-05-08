@@ -25,7 +25,7 @@ module ConstructorPages
       @template = Template.new params[:template]
 
       if @template.save
-        redirect_to templates_url, :notice => "Шаблог «#{@template.name}» успешно добавлен."
+        redirect_to templates_url, :notice => "Шаблон «#{@template.name}» успешно добавлен."
       else
         render :action => "new"
       end
@@ -35,7 +35,7 @@ module ConstructorPages
       @template = Template.find params[:id]
 
       if @template.update_attributes params[:template]
-        redirect_to templates_url, :notice => "Шаблог «#{@template.name}» успешно обновлен."
+        redirect_to templates_url, :notice => "Шаблон «#{@template.name}» успешно обновлен."
       else
         render :action => "edit"
       end
@@ -45,7 +45,7 @@ module ConstructorPages
       @template = Template.find(params[:id])
       name = @template.name
       @template.destroy
-      redirect_to templates_url, :notice => "Шаблог «#{name}» успешно удален."
+      redirect_to templates_url, :notice => "Шаблон «#{name}» успешно удален."
     end
 
     def move_up

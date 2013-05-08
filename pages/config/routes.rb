@@ -2,6 +2,10 @@ ConstructorPages::Engine.routes.draw do
   scope '/admin' do
     resources :pages, :except => [:show]
     resources :templates, :except => [:show]
+    resources :fields, :except => [:show, :new, :edit]
+
+    get '/fields/:template_id/new/' => 'fields#new', :as => :new_field
+    get '/fields/:id/:template_id/edit/' => 'fields#edit', :as => :edit_field
 
     scope '/pages' do
       post 'move/up/:id' => "pages#move_up", :as => :page_move_up

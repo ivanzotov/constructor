@@ -1,7 +1,7 @@
 class CreateStringTypes < ActiveRecord::Migration
   def self.up
     create_table ConstructorPages::StringType.table_name do |t|
-      t.string :value
+      t.string :value, :default => ""
       t.references :field
       t.references :page
 

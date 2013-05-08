@@ -1,0 +1,28 @@
+= form_for @field do |f|
+  - if @field.errors.any?
+    .alert.alert-error.fade.in.span12
+      = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
+      - @field.errors.full_messages.each do |m|
+        = m
+
+  .form-horizontal
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls= f.text_field :name, :class => "span4"
+
+    .control-group
+      = f.label :code_name, :class => 'control-label'
+      .controls= f.text_field :code_name, :class => "span4"
+      = f.hidden_field :template_id, :value => params[:template_id], :class => "span4"
+
+    .control-group
+      = f.label :type_value, :class => 'control-label'
+      .controls
+        = f.select :type_value, options_for_select([["Строка", "string"],["Число с плавающей точкой", "float"],["Булево", "boolean"]], :selected => @field.type_value), :class => "span4"
+
+    .row-fluid
+      .span12
+        .form-actions
+          .btn-group
+            = f.submit :class => "btn btn-primary"
+            = link_to "Отмена", template_url(@field.template), :class => "btn"

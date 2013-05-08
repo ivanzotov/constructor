@@ -1,6 +1,10 @@
 ru:
   activerecord:
     attributes:
+      constructor_pages/field:
+        name: "Название"
+        code_name: "Кодовое имя"
+        type_value: "Тип"
       constructor_pages/template:
         name: "Название"
         code_name: "Кодовое имя"

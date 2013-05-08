@@ -51,11 +51,20 @@
           .controls
             - @page.images.each do |image|
               .images_controls
-                = link_to image_tag(image.image.thumb('150x150#').url, :class => "thumbnail"),                  image.image.url                 
+                = link_to image_tag(image.image.thumb('150x150#').url, :class => "thumbnail"), image.image.url
                 .actions
                   = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_image_path(image, @page), :class => "btn btn-primary btn-mini"
                   = link_to "<i class='icon-th icon-white'></i>".html_safe, sizes_image_path(image), :class => "btn btn-inverse"                                
                   = link_to "<i class='icon-remove icon-white'></i>".html_safe, image_path(image), :class => "btn btn-mini btn-danger", :method => :delete, :confirm => "Вы уверены?"                          
+
+    - unless @page.new_record?
+      - @page.template.fields.each do |field|
+        .control-group
+          = f.label field.name, :class => 'control-label'
+          .controls
+            = render :partial => "constructor_pages/fields/types/#{field.type_value}", :locals => {:field => field, :page => @page}
+
+
 
     .accordion
       .accordion-group

@@ -60,7 +60,7 @@ module ConstructorPages
         redirect_to @page.link
       end
 
-      render :template => "templates/#{@page.template.code_name || 'default'}"
+      render :template => "templates/#{@page.template.code_name.empty? ? 'default' : @page.template.code_name}"
     end
     
     def edit
@@ -70,8 +70,8 @@ module ConstructorPages
     end
 
     def create              
-      @page = Page.new params[:page] 
-       
+      @page = Page.new params[:page]
+
       if @page.save
         redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно добавлена."
       else
@@ -81,6 +81,20 @@ module ConstructorPages
 
     def update   
       @page = Page.find params[:id]
+
+      @page.template.fields.each do |field|
+        f = "constructor_pages/#{field.type_value}_type".classify.constantize.where(
+            :field_id => field.id,
+            :page_id => @page.id).first_or_create
+
+        if params[:fields][field.type_value]
+          f.value = params[:fields][field.type_value][field.id.to_s]
+        else
+          f.value = false
+        end
+
+        f.save
+      end
 
       if @page.update_attributes params[:page]        
         redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно обновлена."

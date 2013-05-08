@@ -9,6 +9,10 @@ module ConstructorPages
                       
     has_many :images, :dependent => :destroy
 
+    has_many :string_types,:dependent => :destroy
+    has_many :float_types, :dependent => :destroy
+    has_many :boolean_types, :dependent => :destroy
+
     belongs_to :template
 
     default_scope order(:lft)
@@ -20,6 +24,8 @@ module ConstructorPages
     
     before_update :full_url_change
     before_create :full_url_create
+
+    after_create :create_fields
     
     acts_as_nested_set
     
@@ -58,6 +64,14 @@ module ConstructorPages
         self.url = self.title.parameterize
       else
         self.url = self.url.parameterize
+      end
+    end
+
+    def create_fields
+      template.fields.each do |field|
+        "constructor_pages/#{field.type_value}_type".classify.constantize.create(
+            :page_id => id,
+            :field_id => field.id)
       end
     end
   end

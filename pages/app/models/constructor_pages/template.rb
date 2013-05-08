@@ -8,6 +8,7 @@ module ConstructorPages
     default_scope order(:lft)
 
     has_many :pages
+    has_many :fields
 
     acts_as_nested_set
   end
