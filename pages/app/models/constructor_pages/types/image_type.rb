@@ -12,7 +12,7 @@ module ConstructorPages
 
       validates :value, :presence  => true
       validates_size_of :value, :maximum => 5.megabytes, :message => :incorrect_size
-      validates_property :mime_type, :of => :image, :in => %w(image/jpeg image/png image/gif), :message => :incorrect_format
+      validates_property :mime_type, :of => :value, :in => %w(image/jpeg image/png image/gif), :message => :incorrect_format
     end
   end
 end

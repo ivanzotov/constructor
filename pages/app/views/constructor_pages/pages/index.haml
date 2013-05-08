@@ -3,7 +3,7 @@
 
 - content_for :actions do
   .span4.clearfix.text-right
-    = link_to 'Создать страницу', pages.new_page_path, :class => "btn btn-success btn-large" 
+    = link_to "<i class='icon-plus icon-white'></i>".html_safe, pages.new_page_path, :class => "btn btn-success"
 
 %section.span8
   %ul#tree.treeview-gray
@@ -21,10 +21,10 @@
           </li>
 
         <li>
-        - if page.active
-          = link_to page.title, page.full_url, :class => "btn"
+        - if page.address and page.enable.nil? or page.enable == true
+          = link_to page.name, page.address, :class => "btn"
         - else
-          %button.btn.disabled= page.title
+          %button.btn.disabled= page.name
 
         .btn-group          
           - if not page.right_sibling.nil? and page.move_possible?(page.right_sibling)

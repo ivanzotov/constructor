@@ -1,1 +1,4 @@
+- page.image_types.where(:field_id => field.id).each do |image|
+  = image_tag image.value.thumb("200x200").url
+  %br/
 = file_field_tag "fields[#{field.type_value}][#{field.id}]", :class => "span6"

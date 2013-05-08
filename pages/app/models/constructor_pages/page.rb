@@ -2,11 +2,8 @@
 
 module ConstructorPages
   class Page < ActiveRecord::Base
-    attr_accessible :active, :title, :url, :seo_title, :auto_url,
-                    :parent_id, :link, :in_menu, :in_map,
-                    :in_nav, :keywords, :description, :template_id
-                      
-    has_many :images, :dependent => :destroy
+    attr_accessible :parent_id, :link, :in_menu, :in_map,
+                    :in_nav, :template_id
 
     has_many :string_types,:dependent => :destroy, :class_name => "Types::StringType"
     has_many :float_types, :dependent => :destroy, :class_name => "Types::FloatType"
@@ -16,18 +13,11 @@ module ConstructorPages
     has_many :date_types, :dependent => :destroy, :class_name => "Types::DateType"
     has_many :html_types, :dependent => :destroy, :class_name => "Types::HtmlType"
     has_many :image_types, :dependent => :destroy, :class_name => "Types::ImageType"
+    has_many :address_types, :dependent => :destroy, :class_name => "Types::AddressType"
 
     belongs_to :template
 
     default_scope order(:lft)
-    
-    validates_presence_of :title
-
-    before_save :url_prepare
-    after_update :full_url_descendants_change
-    
-    before_update :full_url_change
-    before_create :full_url_create
 
     after_create :create_fields
     
@@ -36,36 +26,21 @@ module ConstructorPages
     def self.children_of(page)
       Page.where(:parent_id => page)
     end
-    
+
+    def field(code_name)
+      field = ConstructorPages::Field.where(:code_name => code_name, :template_id => self.template_id).first
+
+      if field
+        f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(:field_id => field.id, :page_id => self.id).first
+        f ? f.value : ""
+      end
+    end
+
+    def method_missing(name, *args, &block)
+      field(name)
+    end
+
     private
-    
-    def full_url_change
-      if parent_id
-        self.full_url = '/' + Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(self.url).join('/')
-      else
-        self.full_url = '/' + self.url
-      end
-    end
-    
-    def full_url_create
-      if self.parent.nil?
-        self.full_url = '/' + self.url
-      else
-        self.full_url = self.parent.full_url + '/' + self.url         
-      end
-    end
-    
-    def full_url_descendants_change
-      self.descendants.each { |c| c.save }
-    end
-    
-    def url_prepare
-      if self.auto_url or self.url.empty?
-        self.url = self.title.parameterize
-      else
-        self.url = self.url.parameterize
-      end
-    end
 
     def create_fields
       template.fields.each do |field|

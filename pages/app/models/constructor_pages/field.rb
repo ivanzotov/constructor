@@ -18,6 +18,7 @@ module ConstructorPages
     has_one :date_type, :class_name => "Types::DateType"
     has_one :html_type, :class_name => "Types::HtmlType"
     has_one :image_type, :class_name => "Types::ImageType"
+    has_one :address_type, :class_name => "Types::AddressType"
 
     acts_as_list :scope => :template_id
     default_scope :order => :position

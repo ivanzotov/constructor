@@ -26,6 +26,7 @@ module ConstructorPages
     def new
       @page = Page.new
       @template = Template.first.id
+      @multipart = false
 
       if params[:page]
         @parent = Page.find(params[:page])        
@@ -46,13 +47,13 @@ module ConstructorPages
         @page = Page.where(:full_url => '/' + (params[:all])).first
       end
       
-      if @page.nil? or !@page.active
+      if @page.nil? or !@page.field('enable')
         render :action => "error_404", :layout => false
         return
       end
 
-      @seo_title = @page.seo_title.empty? ? @page.title : @page.seo_title
-      @title = @page.title
+      @seo_title = @page.field('seo_title').empty? ? @page.field('name') : @page.field('seo_title')
+      @title = @page.field('name')
       @description = @page.description
       @keywords = @page.keywords
 
@@ -67,6 +68,8 @@ module ConstructorPages
       @page = Page.find(params[:id])
       @page.template ||= Template.first
       @template = @page.template.id
+
+      @multipart = @page.template.fields.map{|f| f.type_value == "image"}.include?(true) ? true : false
     end
 
     def create              
@@ -82,12 +85,23 @@ module ConstructorPages
     def update   
       @page = Page.find params[:id]
 
+      unless @page.template_id == params[:page][:template_id]
+        @page.template.fields.each do |field|
+          "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
+              :field_id => field.id,
+              :page_id => @page.id
+          )
+        end
+
+        @page.template = Template.find(params[:page][:template_id])
+      end
+
       @page.template.fields.each do |field|
         f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
             :field_id => field.id,
             :page_id => @page.id).first_or_create
 
-        if params[:fields][field.type_value]
+        if params[:fields] and params[:fields][field.type_value]
           if field.type_value == "date"
             value = params[:fields][field.type_value][field.id.to_s]
             f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
@@ -101,8 +115,8 @@ module ConstructorPages
         f.save
       end
 
-      if @page.update_attributes params[:page]        
-        redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно обновлена."
+      if @page.update_attributes params[:page]
+        redirect_to pages_url, :notice => "Страница#{" «#{@page.field('name')}»" if @page.field('name')} успешно обновлена."
       else
         render :action => "edit"
       end
