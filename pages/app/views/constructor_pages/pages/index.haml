@@ -21,8 +21,8 @@
           </li>
 
         <li>
-        - if page.address and page.enable.nil? or page.enable == true
-          = link_to page.name, page.address, :class => "btn"
+        - if page.active == true
+          = link_to page.name, page.full_url, :class => "btn"
         - else
           %button.btn.disabled= page.name
 

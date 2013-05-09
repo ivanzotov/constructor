@@ -1,6 +1,0 @@
-/.full_url
-/  %span.path>= @page.parent.address_types.where(:field_id => field.id).first.value unless @page.parent.nil?
-/  \/
-/  %span.address>= page.address_types.where(:field_id => field.id).first.value
-= text_field_tag "fields[#{field.type_value}][#{field.id}]", page.address_types.where(:field_id => field.id).first.value, :class => "span3"
-%i.address_icon.icon-pencil

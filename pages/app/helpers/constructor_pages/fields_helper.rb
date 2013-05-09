@@ -11,8 +11,7 @@ module ConstructorPages
           ["Дата", "date"],
           ["Текст", "text"],
           ["HTML", "html"],
-          ["Изображение", "image"],
-          ["Адрес", "address"]
+          ["Изображение", "image"]
       ]
     end
   end

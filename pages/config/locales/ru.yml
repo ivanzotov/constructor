@@ -10,14 +10,11 @@ ru:
         code_name: "Кодовое имя"
         parent: "Родительский"
         child: "Дочерний"
-      constructor_pages/image:
-        image: "Изображение"
       constructor_pages/page:
         active: "Вкл./Выкл."
         image: "Изображение"                
         name: "Название"
         template: "Шаблон"
-        title: "Заголовок"
         auto_url: "Авто-ссылка"
         url: "Адрес"
         in_menu: "Меню"
@@ -26,8 +23,9 @@ ru:
         parent: "Родитель"
         parent_id: "Родительская страница"
         link: "Ссылка"
+        title: "Заголовок"
+        keywords: "Ключевые слова"
         description: "Описание"
-        keywords: "Ключевые слова"        
     errors:
       models:
         constructor_pages/image:
