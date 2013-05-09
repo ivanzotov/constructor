@@ -2,7 +2,9 @@
 
 module ConstructorPages
   class Page < ActiveRecord::Base
-    attr_accessible :parent_id, :link, :in_menu, :in_map,
+    attr_accessible :name, :title, :keywords, :description,
+                    :url, :full_url, :active, :auto_url,
+                    :parent_id, :link, :in_menu, :in_map,
                     :in_nav, :template_id
 
     has_many :string_types,:dependent => :destroy, :class_name => "Types::StringType"
@@ -27,12 +29,12 @@ module ConstructorPages
       Page.where(:parent_id => page)
     end
 
-    def field(code_name)
+    def field(code_name, meth = "value")
       field = ConstructorPages::Field.where(:code_name => code_name, :template_id => self.template_id).first
 
       if field
         f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(:field_id => field.id, :page_id => self.id).first
-        f ? f.value : ""
+        f ? f.send(meth) : ""
       end
     end
 

@@ -6,6 +6,29 @@
         = m
           
   .form-horizontal
+    .control-group
+      = f.label :active, :class => 'control-label'
+      .controls= f.check_box :active, :class => "span6"
+
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls= f.text_field :name, :class => "span4"
+
+    .control-group.auto_url
+      = f.label :auto_url, :class => 'control-label'
+      .controls
+        = f.check_box :auto_url, :class => "span9"
+
+    .control-group.url
+      = f.label :url, :class => 'control-label'
+      .controls
+        .full_url
+          %span.path>= @page.parent.full_url unless @page.parent.nil?
+          \/
+          %span.address>= @page.url
+        = f.text_field :url, :class => "span3"
+        %i.address_icon.icon-pencil
+
     - unless @page.new_record?
       - @page.template.fields.each do |field|
         .control-group
@@ -45,7 +68,26 @@
 
                 %label.checkbox.inline.span2{:for => 'in_nav'}
                   = f.check_box :in_nav
-                  Хлебные крошки        
+                  Хлебные крошки
+
+    .accordion
+      .accordion-group
+        .accordion-heading.text-center
+          = link_to 'Поисковая оптимизация', '#collapse-three', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
+        .accordion-body.in.collapse#collapse-three
+          .accordion-inner
+            .control-group
+              = f.label :title, :class => 'control-label'
+              .controls
+                = f.text_field :title, :class => "span9"
+            .control-group
+              = f.label :keywords, :class => 'control-label'
+              .controls
+                = f.text_field :keywords, :class => "span9"
+            .control-group
+              = f.label :description, :class => 'control-label'
+              .controls
+                = f.text_area :description, :class => "span9", :rows => 8
 
     .row-fluid        
       .span12

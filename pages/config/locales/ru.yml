@@ -13,11 +13,11 @@ ru:
       constructor_pages/image:
         image: "Изображение"
       constructor_pages/page:
-        active: "Опубликовано"        
+        active: "Вкл./Выкл."
         image: "Изображение"                
-        title: "Заголовок"
+        name: "Название"
         template: "Шаблон"
-        seo_title: "Заголовок"
+        title: "Заголовок"
         auto_url: "Авто-ссылка"
         url: "Адрес"
         in_menu: "Меню"
@@ -26,7 +26,6 @@ ru:
         parent: "Родитель"
         parent_id: "Родительская страница"
         link: "Ссылка"
-        content: "Содержание"
         description: "Описание"
         keywords: "Ключевые слова"        
     errors:

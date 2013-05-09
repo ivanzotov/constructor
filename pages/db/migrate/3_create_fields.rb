@@ -4,6 +4,7 @@ class CreateFields < ActiveRecord::Migration
       t.string :name
       t.string :code_name
       t.string :type_value
+      t.integer :position
       t.references :template
 
       t.timestamps

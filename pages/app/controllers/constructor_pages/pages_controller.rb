@@ -47,13 +47,12 @@ module ConstructorPages
         @page = Page.where(:full_url => '/' + (params[:all])).first
       end
       
-      if @page.nil? or !@page.field('enable')
+      if @page.nil? or !@page.enable
         render :action => "error_404", :layout => false
         return
       end
 
-      @seo_title = @page.field('seo_title').empty? ? @page.field('name') : @page.field('seo_title')
-      @title = @page.field('name')
+      @title = @page.title.empty? ? @page.name : @page.title
       @description = @page.description
       @keywords = @page.keywords
 
@@ -116,7 +115,7 @@ module ConstructorPages
       end
 
       if @page.update_attributes params[:page]
-        redirect_to pages_url, :notice => "Страница#{" «#{@page.field('name')}»" if @page.field('name')} успешно обновлена."
+        redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно обновлена."
       else
         render :action => "edit"
       end
