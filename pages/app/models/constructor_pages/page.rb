@@ -39,9 +39,7 @@ module ConstructorPages
 
       if field
         f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(:field_id => field.id, :page_id => self.id).first
-        f ? f.send(meth) : ""
-      else
-        ""
+        f.send(meth) if f
       end
     end
 
