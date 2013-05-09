@@ -47,7 +47,7 @@ module ConstructorPages
         @page = Page.where(:full_url => '/' + (params[:all])).first
       end
       
-      if @page.nil? or !@page.enable
+      if @page.nil? or !@page.active
         render :action => "error_404", :layout => false
         return
       end

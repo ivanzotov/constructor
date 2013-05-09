@@ -20,8 +20,6 @@ module ConstructorPages
 
     default_scope order(:lft)
 
-    validates_presence_of :name
-
     before_save :url_prepare, :content_filter
     after_update :full_url_descendants_change
 
@@ -42,6 +40,8 @@ module ConstructorPages
       if field
         f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(:field_id => field.id, :page_id => self.id).first
         f ? f.send(meth) : ""
+      else
+        ""
       end
     end
 

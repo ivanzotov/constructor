@@ -23,12 +23,6 @@ ConstructorPages::Engine.routes.draw do
       post 'move/up/:id' => "templates#move_up", :as => :template_move_up
       post 'move/down/:id' => "templates#move_down", :as => :template_move_down
     end
-    
-    resources :images, :except => [:show, :new, :edit]
-
-    get 'images/:page/new' => "images#new"
-    get 'images/:id/:page/edit' => "images#edit", :as => :edit_image   
-    get 'images/:id/sizes' => "images#sizes", :as => :sizes_image    
   end
   
   get '/sitemap' => "pages#sitemap", :as => :sitemap

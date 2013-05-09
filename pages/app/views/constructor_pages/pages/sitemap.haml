@@ -7,6 +7,6 @@
         - if page.active and page.in_map
           %li{:class => "level#{page.level}"}
             - if page.link.empty?
-              = link_to page.title, page.full_url
+              = link_to page.name, page.full_url
             - else
-              = link_to page.title, page.link
+              = link_to page.name, page.link

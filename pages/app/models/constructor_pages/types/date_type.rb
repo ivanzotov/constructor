@@ -7,6 +7,10 @@ module ConstructorPages
 
       belongs_to :field
       belongs_to :page
+
+      def russian
+        Russian::strftime(self.value, "%d %B %Y").gsub(/0(\d\D)/, '\1')
+      end
     end
   end
 end
