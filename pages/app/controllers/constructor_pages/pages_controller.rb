@@ -84,15 +84,17 @@ module ConstructorPages
     def update   
       @page = Page.find params[:id]
 
-      unless @page.template_id == params[:page][:template_id]
-        @page.template.fields.each do |field|
-          "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
-              :field_id => field.id,
-              :page_id => @page.id
-          )
-        end
+      if params[:page][:template_id]
+        unless @page.template_id == params[:page][:template_id]
+          @page.template.fields.each do |field|
+            "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
+                :field_id => field.id,
+                :page_id => @page.id
+            )
+          end
 
-        @page.template = Template.find(params[:page][:template_id])
+          @page.template = Template.find(params[:page][:template_id])
+        end
       end
 
       @page.template.fields.each do |field|
@@ -107,11 +109,9 @@ module ConstructorPages
           else
             f.value = params[:fields][field.type_value][field.id.to_s]
           end
-        else
-          f.value = false
-        end
 
-        f.save
+          f.save
+        end
       end
 
       if @page.update_attributes params[:page]
