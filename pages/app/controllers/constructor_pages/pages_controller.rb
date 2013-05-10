@@ -84,19 +84,6 @@ module ConstructorPages
     def update   
       @page = Page.find params[:id]
 
-      if params[:page][:template_id]
-        unless @page.template_id == params[:page][:template_id]
-          @page.template.fields.each do |field|
-            "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
-                :field_id => field.id,
-                :page_id => @page.id
-            )
-          end
-
-          @page.template = Template.find(params[:page][:template_id])
-        end
-      end
-
       @page.template.fields.each do |field|
         f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
             :field_id => field.id,

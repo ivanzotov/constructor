@@ -23,7 +23,7 @@ module ConstructorPages
       if @field.save
         redirect_to edit_template_path(@field.template_id), :notice => "Поле «#{@field.name}» успешно добавлено."
       else
-        render :action => "new"
+        render :action => 'new', :template_id => @field.template_id
       end
     end
 

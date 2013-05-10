@@ -13,7 +13,7 @@
     .control-group
       = f.label :code_name, :class => 'control-label'
       .controls= f.text_field :code_name, :class => "span4"
-      = f.hidden_field :template_id, :value => params[:template_id], :class => "span4"
+      = f.hidden_field :template_id, :value => @field.template.id, :class => "span4"
 
     .control-group
       = f.label :type_value, :class => 'control-label'
