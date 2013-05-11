@@ -44,7 +44,20 @@ module ConstructorPages
     end
 
     def method_missing(name, *args, &block)
-      field(name)
+      name = name.to_s
+
+      if field(name).nil?
+        template_id = Template.find_by_code_name(name.singularize).id
+
+        if name == name.pluralize
+          result = descendants.where(:template_id => template_id)
+          return result if result
+        end
+
+        ancestors.where(:template_id => template_id).first
+      else
+        field(name)
+      end
     end
 
     private

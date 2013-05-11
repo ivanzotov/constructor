@@ -46,15 +46,13 @@ module ConstructorPages
       else
         @page = Page.where(:full_url => '/' + (params[:all])).first
       end
+
+      instance_variable_set('@'+@page.template.code_name.to_s, @page)
       
       if @page.nil? or !@page.active
         render :action => "error_404", :layout => false
         return
       end
-
-      @title = @page.title.empty? ? @page.name : @page.title
-      @description = @page.description
-      @keywords = @page.keywords
 
       if @page.url != @page.link and !@page.link.empty?
         redirect_to @page.link
