@@ -49,12 +49,12 @@ module ConstructorPages
       if field(name).nil?
         template_id = Template.find_by_code_name(name.singularize).id
 
-        if name == name.pluralize
-          result = descendants.where(:template_id => template_id)
-          return result if result
+        if template_id
+          result = []
+          result = descendants.where(:template_id => template_id) if name == name.pluralize
+          result = ancestors.where(:template_id => template_id).first if result.empty?
+          result || []
         end
-
-        ancestors.where(:template_id => template_id).first
       else
         field(name)
       end
