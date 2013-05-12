@@ -7,10 +7,9 @@ module ConstructorPages
     
     caches_page :show
     
-    before_filter :authenticate_user!, :except => [:show, :sitemap]
-    before_filter :template_vars, :only => [:show]
+    before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
     before_filter {@roots = Page.roots}
-    layout 'constructor_core/application_admin', :except => [:show, :sitemap]
+    layout 'constructor_core/application_admin', :except => [:show, :search, :sitemap]
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
         
     # TODO
@@ -47,8 +46,6 @@ module ConstructorPages
         @page = Page.where(:full_url => '/' + (params[:all])).first
       end
 
-      instance_variable_set('@'+@page.template.code_name.to_s, @page)
-      
       if @page.nil? or !@page.active
         render :action => "error_404", :layout => false
         return
@@ -58,7 +55,54 @@ module ConstructorPages
         redirect_to @page.link
       end
 
+      instance_variable_set('@'+@page.template.code_name.to_s, @page)
+
+      @children_of_current_root = Page.children_of(@page.root)
+      @children_of_current_page = Page.children_of(@page)
+      @request = '/' + params[:all]
       render :template => "templates/#{@page.template.code_name.empty? ? 'default' : @page.template.code_name}"
+    end
+
+    def search
+      if params[:all].nil?
+        @page = Page.first
+      else
+        @page = Page.where(:full_url => '/' + (params[:all])).first
+      end
+
+      instance_variable_set('@'+@page.template.code_name.to_s, @page)
+
+      what_search = params[:what_search]
+      params_selection = request.query_parameters
+
+      template = Template.find_by_code_name(what_search.singularize)
+
+      if template.nil?
+        render :action => "error_404", :layout => false
+        return
+      end
+
+      @pages = @page.descendants.where(:template_id => template.id)
+
+      params_selection.each_pair do |code_name, value|
+        if value.numeric?
+          value = value.to_f
+        elsif value.boolean?
+          value = value.to_bool
+        end
+
+        @pages = @pages.select do |page|
+          page.field(code_name) == value
+        end
+      end
+
+      instance_variable_set('@'+template.code_name.pluralize, @pages)
+
+      @children_of_current_root = Page.children_of(@page.root)
+      @children_of_current_page = Page.children_of(@page)
+      @request = '/' + params[:all]
+
+      render :template => "templates/#{template.code_name}_search"
     end
     
     def edit
@@ -73,7 +117,7 @@ module ConstructorPages
       @page = Page.new params[:page]
 
       if @page.save
-        redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно добавлена."
+        redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно добавлена."
       else
         render :action => "new"
       end
@@ -108,7 +152,7 @@ module ConstructorPages
 
     def destroy
       @page = Page.find(params[:id])
-      title = @page.title           
+      title = @page.name
       @page.destroy
       redirect_to pages_url, :notice => "Страница «#{title}» успешно удалена."
     end
@@ -134,16 +178,6 @@ module ConstructorPages
     end
     
     private
-    
-    def template_vars
-      @request = request.path.sub('//', '/')
-      @current_page = Page.where(:full_url => @request).first
-      
-      unless @current_page.nil?
-        @children_of_current_root = Page.children_of(@current_page.root)           
-        @children_of_current_page = Page.children_of(@current_page)  
-      end
-    end
         
     def cache
       expire_page :action => :show

@@ -47,7 +47,8 @@ module ConstructorPages
       name = name.to_s
 
       if field(name).nil?
-        template_id = Template.find_by_code_name(name.singularize).id
+        _template = Template.find_by_code_name(name.singularize)
+        template_id = _template.id if _template
 
         if template_id
           result = []

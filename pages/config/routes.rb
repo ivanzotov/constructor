@@ -28,5 +28,6 @@ ConstructorPages::Engine.routes.draw do
   get '/sitemap' => "pages#sitemap", :as => :sitemap
 
   root :to => "pages#show"
+  get '*all/search/:what_search' => "pages#search", :format => false
   get '*all' => "pages#show", :format => false
 end
