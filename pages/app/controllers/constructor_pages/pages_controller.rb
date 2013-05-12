@@ -92,7 +92,11 @@ module ConstructorPages
         end
 
         @pages = @pages.select do |page|
-          page.field(code_name) == value
+          if code_name == "name"
+            page.name == value
+          else
+            page.field(code_name) == value
+          end
         end
       end
 
