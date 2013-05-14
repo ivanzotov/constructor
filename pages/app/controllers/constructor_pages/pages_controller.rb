@@ -44,6 +44,7 @@ module ConstructorPages
         @page = Page.first
       else
         @page = Page.where(:full_url => '/' + (params[:all])).first
+        @request = '/' + params[:all]
       end
 
       if @page.nil? or !@page.active
@@ -59,7 +60,7 @@ module ConstructorPages
 
       @children_of_current_root = Page.children_of(@page.root)
       @children_of_current_page = Page.children_of(@page)
-      @request = '/' + params[:all]
+
       render :template => "templates/#{@page.template.code_name.empty? ? 'default' : @page.template.code_name}"
     end
 
