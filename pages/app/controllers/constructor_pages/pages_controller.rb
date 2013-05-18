@@ -3,9 +3,7 @@
 module ConstructorPages
   class PagesController < ConstructorCore::AdminController
     # TODO
-    include ConstructorCore::DeviseHelper 
-
-    stream
+    include ConstructorCore::DeviseHelper
 
     caches_page :show
     
