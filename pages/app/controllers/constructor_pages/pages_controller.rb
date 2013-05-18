@@ -4,7 +4,9 @@ module ConstructorPages
   class PagesController < ConstructorCore::AdminController
     # TODO
     include ConstructorCore::DeviseHelper 
-    
+
+    stream
+
     caches_page :show
     
     before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
@@ -43,8 +45,8 @@ module ConstructorPages
       if params[:all].nil?
         @page = Page.first
       else
-        @page = Page.where(:full_url => '/' + (params[:all])).first
         @request = '/' + params[:all]
+        @page = Page.where(:full_url => @request).first
       end
 
       if @page.nil? or !@page.active
@@ -68,7 +70,8 @@ module ConstructorPages
       if params[:all].nil?
         @page = Page.first
       else
-        @page = Page.where(:full_url => '/' + (params[:all])).first
+        @request = '/' + params[:all]
+        @page = Page.where(:full_url => @request).first
       end
 
       instance_variable_set('@'+@page.template.code_name.to_s, @page)
@@ -93,7 +96,7 @@ module ConstructorPages
         end
 
         @pages = @pages.select do |page|
-          if code_name == "name"
+          if code_name == 'name'
             page.name == value
           else
             page.field(code_name) == value
@@ -105,7 +108,6 @@ module ConstructorPages
 
       @children_of_current_root = Page.children_of(@page.root)
       @children_of_current_page = Page.children_of(@page)
-      @request = '/' + params[:all]
 
       render :template => "templates/#{template.code_name}_search"
     end
