@@ -61,6 +61,19 @@ module ConstructorPages
       end
     end
 
+    def as_json(options = {})
+      options =  {
+        :name => self.name,
+        :title => self.title
+      }.merge options
+
+      self.template.fields.each do |field|
+        options.merge!(field.code_name => self.send(field.code_name))
+      end
+
+      options
+    end
+
     private
 
     def full_url_change

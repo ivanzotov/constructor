@@ -61,7 +61,15 @@ module ConstructorPages
       @children_of_current_root = Page.children_of(@page.root)
       @children_of_current_page = Page.children_of(@page)
 
-      render :template => "templates/#{@page.template.code_name.empty? ? 'default' : @page.template.code_name}"
+      respond_to do |format|
+        format.html { render :template => "html_templates/#{@page.template.code_name}" }
+        format.json {
+          _tempalate = render_to_string "json_templates/_#{@page.template.code_name}.json.erb", :locals => {@page.template.code_name.to_sym => @page}
+          _js = render_to_string :partial => "js_partials/#{@page.template.code_name}.js"
+
+          render :json => @page, :html => _template, :js => _js
+        }
+      end
     end
 
     def search
