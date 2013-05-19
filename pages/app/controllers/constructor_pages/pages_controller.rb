@@ -64,10 +64,10 @@ module ConstructorPages
       respond_to do |format|
         format.html { render :template => "html_templates/#{@page.template.code_name}" }
         format.json {
-          _tempalate = render_to_string "json_templates/_#{@page.template.code_name}.json.erb", :locals => {@page.template.code_name.to_sym => @page}
+          _template = render_to_string :partial => "json_templates/#{@page.template.code_name}.json.erb", :layout => false, :locals => {@page.template.code_name.to_sym => @page, :page => @page}
           _js = render_to_string :partial => "js_partials/#{@page.template.code_name}.js"
 
-          render :json => @page, :html => _template, :js => _js
+          render :json => @page, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
         }
       end
     end
