@@ -68,7 +68,9 @@ module ConstructorPages
       }.merge options
 
       self.template.fields.each do |field|
-        options.merge!(field.code_name => self.send(field.code_name))
+        unless self.send(field.code_name)
+          options = {field.code_name => self.send(field.code_name)}.merge options
+        end
       end
 
       options
