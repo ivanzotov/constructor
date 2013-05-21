@@ -144,12 +144,16 @@ module ConstructorPages
             :field_id => field.id,
             :page_id => @page.id).first_or_create
 
-        if params[:fields] and params[:fields][field.type_value]
-          if field.type_value == "date"
-            value = params[:fields][field.type_value][field.id.to_s]
-            f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
-          else
-            f.value = params[:fields][field.type_value][field.id.to_s]
+        if params[:fields]
+          f.value = 0 if field.type_value == 'boolean'
+
+          if params[:fields][field.type_value]
+            if field.type_value == "date"
+              value = params[:fields][field.type_value][field.id.to_s]
+              f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
+            else
+              f.value = params[:fields][field.type_value][field.id.to_s]
+            end
           end
 
           f.save
