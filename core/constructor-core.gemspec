@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = %q{constructor-core}
-  s.version           = '0.1'
+  s.version           = '0.2'
   s.summary           = %q{Default for Constructor}
   s.authors           = ['Ivan Zotov']
   s.require_paths     = %w(lib)
