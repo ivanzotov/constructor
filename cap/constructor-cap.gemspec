@@ -3,8 +3,8 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = %q{constructor-cap}
-  s.version           = '0.2'
-  s.summary           = %q{Cap for Constructor}
+  s.version           = '0.2.1'
+  s.summary           = %q{Cap for ConstructorCms}
   s.authors           = ['Ivan Zotov']
   s.email             = "ivanzotov@gmail.com"
   s.homepage          = "http://ivanzotov.github.com/constructor"
