@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
-  s.name = %q{constructor}
+  s.name = %q{constructor-cms}
   s.version = '0.1'
   s.summary = %q{Constructor}
   s.authors = ['Ivan Zotov']
