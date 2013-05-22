@@ -6,12 +6,12 @@ module ConstructorPages
     include ConstructorCore::DeviseHelper
 
     caches_page :show
-    
+
     before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
     before_filter {@roots = Page.roots}
     layout 'constructor_core/application_admin', :except => [:show, :search, :sitemap]
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
-        
+
     # TODO
     def index
       @user_signed_in = user_signed_in?
@@ -28,7 +28,7 @@ module ConstructorPages
       @multipart = false
 
       if params[:page]
-        @parent = Page.find(params[:page])        
+        @parent = Page.find(params[:page])
         @page.parent_id = @parent.id
 
         if @parent.template.child_id.nil? and !@parent.template.leaf?
@@ -38,7 +38,7 @@ module ConstructorPages
         end
       end
     end
-    
+
     def show
       if params[:all].nil?
         @page = Page.first
@@ -67,7 +67,7 @@ module ConstructorPages
           _template = render_to_string :partial => "json_templates/#{@page.template.code_name}.json.erb", :layout => false, :locals => {@page.template.code_name.to_sym => @page, :page => @page}
           _js = render_to_string :partial => "js_partials/#{@page.template.code_name}.js"
 
-          render :json => @page, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
+          render :json => @page, :ancestors => @page.ancestors.map{|a| a.id}, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
         }
       end
     end
@@ -117,7 +117,7 @@ module ConstructorPages
 
       render :template => "templates/#{template.code_name}_search"
     end
-    
+
     def edit
       @page = Page.find(params[:id])
       @page.template ||= Template.first
@@ -126,7 +126,7 @@ module ConstructorPages
       @multipart = @page.template.fields.map{|f| f.type_value == "image"}.include?(true) ? true : false
     end
 
-    def create              
+    def create
       @page = Page.new params[:page]
 
       if @page.save
@@ -136,7 +136,7 @@ module ConstructorPages
       end
     end
 
-    def update   
+    def update
       @page = Page.find params[:id]
 
       @page.template.fields.each do |field|
@@ -193,9 +193,9 @@ module ConstructorPages
 
       redirect_to :back
     end
-    
+
     private
-        
+
     def cache
       expire_page :action => :show
       cache_dir = ActionController::Base.page_cache_directory
@@ -203,5 +203,5 @@ module ConstructorPages
         FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
       end
     end
-  end  
+  end
 end
