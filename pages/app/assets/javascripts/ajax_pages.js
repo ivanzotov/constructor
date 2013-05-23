@@ -17,14 +17,12 @@ function update_pages(){
                 update_page(window.location.href.toString().split(window.location.host)[1]);
             };
 
-            update_page(_href);
+            update_page(_href, el);
         });
     });
 }
 
-function update_page(href) {
-    var _b_page_json = $('.b-page-json');
-
+function update_page(href, el) {
     close_blocks();
 
     $.get(href+'.json', function(page){
@@ -41,19 +39,14 @@ function update_page(href) {
             $('.b-page-part__'+name).html(partials[name]);
         }
 
-        _b_page_json.parent().removeClass('active');
+        $("[class*='b-page-json__id-']").removeClass('active');
 
-        for (var i in $page.ancestors) {
-            var ancestor = $page.ancestors[i];
-            $('.b-page-json__id-'+ancestor).addClass('active');
+        for (var i in $page.self_and_ancestors) {
+            $('.b-page-json__id-'+$page.self_and_ancestors[i]).addClass('active');
         }
-
-        el.parent().addClass('active');
 
         update_pages();
 
         eval(page.js);
     });
-
-    var el = $('a[href="'+ href +'"]');
 }

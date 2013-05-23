@@ -67,7 +67,7 @@ module ConstructorPages
           _template = render_to_string :partial => "json_templates/#{@page.template.code_name}.json.erb", :layout => false, :locals => {@page.template.code_name.to_sym => @page, :page => @page}
           _js = render_to_string :partial => "js_partials/#{@page.template.code_name}.js"
 
-          render :json => @page, :ancestors => @page.ancestors.map{|a| a.id}, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
+          render :json => @page, :self_and_ancestors => @page.self_and_ancestors.map{|a| a.id}, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
         }
       end
     end
