@@ -17,11 +17,6 @@ module ConstructorPages
       @user_signed_in = user_signed_in?
     end
 
-    def sitemap
-      @pages = Page.all
-      @title = "Карта сайта"
-    end
-
     def new
       @page = Page.new
       @template = Template.first.id

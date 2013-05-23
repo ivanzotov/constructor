@@ -24,8 +24,6 @@ ConstructorPages::Engine.routes.draw do
       post 'move/down/:id' => "templates#move_down", :as => :template_move_down
     end
   end
-  
-  get '/sitemap' => "pages#sitemap", :as => :sitemap
 
   root :to => "pages#show"
   get '*all/search/:what_search' => "pages#search", :format => false
