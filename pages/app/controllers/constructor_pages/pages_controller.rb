@@ -134,28 +134,37 @@ module ConstructorPages
     def update
       @page = Page.find params[:id]
 
-      @page.template.fields.each do |field|
-        f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
-            :field_id => field.id,
-            :page_id => @page.id).first_or_create
-
-        if params[:fields]
-          f.value = 0 if field.type_value == 'boolean'
-
-          if params[:fields][field.type_value]
-            if field.type_value == "date"
-              value = params[:fields][field.type_value][field.id.to_s]
-              f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
-            else
-              f.value = params[:fields][field.type_value][field.id.to_s]
-            end
-          end
-
-          f.save
+      if @page.template.id != params[:page][:template_id].to_i
+        @page.template.fields.each do |field|
+          "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
+              :field_id => field.id,
+              :page_id => @page.id).destroy_all
         end
       end
 
       if @page.update_attributes params[:page]
+
+        @page.template.fields.each do |field|
+          f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
+              :field_id => field.id,
+              :page_id => @page.id).first_or_create
+
+          if params[:fields]
+            f.value = 0 if field.type_value == 'boolean'
+
+            if params[:fields][field.type_value]
+              if field.type_value == "date"
+                value = params[:fields][field.type_value][field.id.to_s]
+                f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
+              else
+                f.value = params[:fields][field.type_value][field.id.to_s]
+              end
+            end
+
+            f.save
+          end
+        end
+
         redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно обновлена."
       else
         render :action => "edit"
