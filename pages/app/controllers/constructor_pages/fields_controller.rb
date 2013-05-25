@@ -5,6 +5,7 @@ module ConstructorPages
     # TODO
     include ConstructorCore::DeviseHelper
 
+    before_filter :authenticate_user!
     layout 'constructor_core/application_admin'
 
     def new
