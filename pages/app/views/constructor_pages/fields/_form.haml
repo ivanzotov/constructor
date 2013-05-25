@@ -15,10 +15,11 @@
       .controls= f.text_field :code_name, :class => "span4"
       = f.hidden_field :template_id, :value => @field.template.id, :class => "span4"
 
-    .control-group
-      = f.label :type_value, :class => 'control-label'
-      .controls
-        = f.select :type_value, options_for_select(types_value, :selected => @field.type_value), :class => "span4"
+    - unless @field.type_value == 'image'
+      .control-group
+        = f.label :type_value, :class => 'control-label'
+        .controls
+          = f.select :type_value, options_for_select(types_value, :selected => @field.type_value), :class => "span4"
 
     .row-fluid
       .span12

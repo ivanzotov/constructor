@@ -136,9 +136,9 @@ module ConstructorPages
 
       if @page.template.id != params[:page][:template_id].to_i
         @page.template.fields.each do |field|
-          "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
+          "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
               :field_id => field.id,
-              :page_id => @page.id).destroy_all
+              :page_id => @page.id)
         end
       end
 
