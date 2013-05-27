@@ -23,8 +23,6 @@ function update_pages(){
 }
 
 function update_page(href, el) {
-    close_blocks();
-
     $.get(href+'.json', function(page){
         $page = page;
 
