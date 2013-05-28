@@ -1,5 +1,17 @@
+//= require constructor_pages/jquery.history.js
+
 $(document).ready(function() {
     $page = {};
+
+    var History = window.History;
+
+    if ( !History.enabled ) { return false }
+
+    History.Adapter.bind(window,'statechange',function(){
+        update_page(History.getState().url);
+    });
+
+
     update_pages();
 });
 
@@ -11,18 +23,12 @@ function update_pages(){
 
         $(el).click(function(event){
             event.preventDefault();
-            history.pushState(null, null, _href);
-
-            window.onpopstate = function(){
-                update_page(window.location.href.toString().split(window.location.host)[1]);
-            };
-
-            update_page(_href, el);
+            History.pushState(null, null, _href);
         });
     });
 }
 
-function update_page(href, el) {
+function update_page(href) {
     $.get(href+'.json', function(page){
         $page = page;
 
