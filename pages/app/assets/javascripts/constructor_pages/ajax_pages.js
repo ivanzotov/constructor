@@ -29,6 +29,7 @@ function update_pages(){
 }
 
 function update_page(href) {
+
     $.get(href+'.json', function(page){
         $page = page;
 
