@@ -31,6 +31,23 @@ module ConstructorPages
     def update
       @field = Field.find params[:id]
 
+        if @field.type_value != params[:field][:type_value]
+          "constructor_pages/types/#{@field.type_value}_type".classify.constantize.where(:field_id => @field.id).each do |field|
+            new_field = "constructor_pages/types/#{params[:field][:type_value]}_type".classify.constantize.new(
+                :field_id => @field.id,
+                :page_id => field.page_id)
+
+            if @field.type_value != 'image' \
+            and params[:field][:type_value] != 'image' \
+            and not (@field.type_value == 'string' and field.value.strip == '')
+                new_field.value = field.value
+            end
+
+            new_field.save
+
+            field.destroy
+          end
+        end
       if @field.update_attributes params[:field]
         redirect_to edit_template_url(@field.template.id), :notice => "Поле «#{@field.name}» успешно обновлено."
       else
