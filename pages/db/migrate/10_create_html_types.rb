@@ -1,7 +1,7 @@
 class CreateHtmlTypes < ActiveRecord::Migration
   def self.up
     create_table ConstructorPages::Types::HtmlType.table_name do |t|
-      t.text :value, :default => ""
+      t.text :value, :default => "", :limit => 4294967295
       t.references :field
       t.references :page
 
