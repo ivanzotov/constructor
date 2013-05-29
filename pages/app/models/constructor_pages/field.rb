@@ -29,12 +29,13 @@ module ConstructorPages
     private
 
     def method_uniqueness
-      if Page.first.respond_to?(code_name.pluralize) \
+      if Page.first.respond_to?(code_name)
+      or Page.first.respond_to?(code_name.pluralize) \
       or Page.first.respond_to?(code_name.singularize) \
-      or template.self_and_ancestors.map{|t| t.code_name}.include?(code_name.pluralize) \
-      or template.self_and_ancestors.map{|t| t.code_name}.include?(code_name.singularize) \
-      or template.descendants.map{|t| t.code_name}.include?(code_name.pluralize) \
-      or template.descendants.map{|t| t.code_name}.include?(code_name.singularize)
+      or template.self_and_ancestors.map{|t| t.code_name unless t.code_name == code_name}.include?(code_name.pluralize) \
+      or template.self_and_ancestors.map{|t| t.code_name t.code_name == code_name}.include?(code_name.singularize) \
+      or template.descendants.map{|t| t.code_name t.code_name == code_name}.include?(code_name.pluralize) \
+      or template.descendants.map{|t| t.code_name t.code_name == code_name}.include?(code_name.singularize)
         errors.add(:base, "Такой метод уже используется")
       end
     end
