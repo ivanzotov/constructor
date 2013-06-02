@@ -18,7 +18,7 @@ module ConstructorPages
     private
 
     def method_uniqueness
-      if Page.first.respond_to?(code_name)
+      if Page.first.respond_to?(code_name) \
       or Page.first.respond_to?(code_name.pluralize) \
       or Page.first.respond_to?(code_name.singularize) \
       or root.descendants.map{|t| t.code_name unless t.code_name == code_name}.include?(code_name.pluralize) \

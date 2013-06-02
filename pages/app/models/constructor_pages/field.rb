@@ -9,8 +9,8 @@ module ConstructorPages
 
     validates_uniqueness_of :code_name, :scope => :template_id
 
-    after_create :create_page_field
-    after_destroy :destroy_page_field
+    after_create :create_page_fields
+    after_destroy :destroy_page_fields
 
     belongs_to :template
 
@@ -29,7 +29,7 @@ module ConstructorPages
     private
 
     def method_uniqueness
-      if Page.first.respond_to?(code_name)
+      if Page.first.respond_to?(code_name) \
       or Page.first.respond_to?(code_name.pluralize) \
       or Page.first.respond_to?(code_name.singularize) \
       or template.self_and_ancestors.map{|t| t.code_name unless t.code_name == code_name}.include?(code_name.pluralize) \
@@ -40,7 +40,7 @@ module ConstructorPages
       end
     end
 
-    def create_page_field
+    def create_page_fields
       self.template.pages.each do |page|
         "constructor_pages/types/#{type_value}_type".classify.constantize.create(
           :page_id => page.id,
@@ -49,7 +49,7 @@ module ConstructorPages
       end
     end
 
-    def destroy_page_field
+    def destroy_page_fields
       self.template.pages.each do |page|
         "constructor_pages/types/#{type_value}_type".classify.constantize.destroy_all(
             :page_id => page.id,

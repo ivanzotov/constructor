@@ -52,6 +52,10 @@ function update_page(href) {
 
         update_pages();
 
+        if (typeof Retina != 'undefined') {
+            Retina.update();
+        }
+
         eval(page.js);
     });
 }
