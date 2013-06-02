@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.name = %q{constructor-cms}
-  s.version = '0.3.0'
+  s.version = '0.3.1'
   s.summary = %q{ConstructorCms}
   s.authors = ['Ivan Zotov']
   s.require_paths = %w(lib)
