@@ -1,0 +1,38 @@
+- content_for :page_title do
+  Шаблоны
+
+- content_for :actions do
+  .span4.clearfix.text-right
+    = link_to 'Создать шаблон', new_template_path, :class => "btn btn-success btn-large"
+
+%section.span8
+  %ul#tree.treeview-gray
+    - @roots.each do |root|
+      - level = root.level
+      - last_template = nil
+
+      - root.self_and_descendants.each do |template|
+        - if template.level > level
+          <ul>
+        - elsif template.level < level
+          </li>
+          = raw "</ul></li>" * (level-template.level)
+        - elsif !template.root?
+          </li>
+
+        <li>
+        %button.btn.disabled= template.name
+
+        .btn-group
+          - if not template.right_sibling.nil? and template.move_possible?(template.right_sibling)
+            = link_to "<i class='icon-arrow-down'></i>".html_safe, template_move_down_path(template), :method => :post, :class => "btn btn-mini"
+          - if not template.left_sibling.nil? and template.move_possible?(template.left_sibling)
+            = link_to "<i class='icon-arrow-up'></i>".html_safe, template_move_up_path(template), :method => :post, :class => "btn btn-mini"
+
+        = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_template_path(template), :class => "btn btn-primary btn-mini"
+
+
+        - level = template.level
+        - last_template = template
+      </li>
+      = raw "</ul></li>" * last_template.level

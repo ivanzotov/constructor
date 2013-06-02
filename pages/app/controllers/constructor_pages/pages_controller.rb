@@ -3,83 +3,185 @@
 module ConstructorPages
   class PagesController < ConstructorCore::AdminController
     # TODO
-    include ConstructorCore::DeviseHelper 
-    
+    include ConstructorCore::DeviseHelper
+
     caches_page :show
-    
-    before_filter :authenticate_user!, :except => [:show, :sitemap]
-    before_filter :template_vars, :only => [:show]
+
+    before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
     before_filter {@roots = Page.roots}
-    layout 'constructor_core/application_admin', :except => [:show, :sitemap]
+    layout 'constructor_core/application_admin', :except => [:show, :search, :sitemap]
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
-        
+
     # TODO
     def index
       @user_signed_in = user_signed_in?
     end
+<<<<<<< HEAD
 
     def sitemap
       @pages = Page.all
       @title = "Карта сайта"
     end
+=======
+>>>>>>> develop
 
     def new
       @page = Page.new
+      @template = Template.first.id
+      @multipart = false
+
       if params[:page]
-        @parent = Page.find(params[:page])        
+        @parent = Page.find(params[:page])
         @page.parent_id = @parent.id
+
+        if @parent.template.child_id.nil? and !@parent.template.leaf?
+          @template = @parent.template.descendants.first.id
+        else
+          @template = @parent.template.child_id
+        end
       end
     end
-    
+
     def show
       if params[:all].nil?
         @page = Page.first
       else
-        @page = Page.where(:full_url => '/' + (params[:all])).first
+        @request = '/' + params[:all]
+        @page = Page.where(:full_url => @request).first
       end
-      
+
       if @page.nil? or !@page.active
         render :action => "error_404", :layout => false
         return
       end
+<<<<<<< HEAD
 
       @seo_title = @page.seo_title.empty? ? @page.title : @page.seo_title
       @title = @page.title
       @description = @page.description
       @keywords = @page.keywords      
+=======
+>>>>>>> develop
 
       if @page.url != @page.link and !@page.link.empty?
         redirect_to @page.link
       end
-    end
-    
-    def edit
-      @page = Page.find(params[:id])
+
+      instance_variable_set('@'+@page.template.code_name.to_s, @page)
+
+      @children_of_current_root = Page.children_of(@page.root)
+      @children_of_current_page = Page.children_of(@page)
+
+      respond_to do |format|
+        format.html { render :template => "html_templates/#{@page.template.code_name}" }
+        format.json {
+          _template = render_to_string :partial => "json_templates/#{@page.template.code_name}.json.erb", :layout => false, :locals => {@page.template.code_name.to_sym => @page, :page => @page}
+          _js = render_to_string :partial => "js_partials/#{@page.template.code_name}.js"
+
+          render :json => @page, :self_and_ancestors => @page.self_and_ancestors.map{|a| a.id}, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
+        }
+      end
     end
 
-    def create              
-      @page = Page.new params[:page] 
-       
+    def search
+      if params[:all].nil?
+        @page = Page.first
+      else
+        @request = '/' + params[:all]
+        @page = Page.where(:full_url => @request).first
+      end
+
+      instance_variable_set('@'+@page.template.code_name.to_s, @page)
+
+      what_search = params[:what_search]
+      params_selection = request.query_parameters
+
+      template = Template.find_by_code_name(what_search.singularize)
+
+      if template.nil?
+        render :action => "error_404", :layout => false
+        return
+      end
+
+      @pages = @page.descendants.where(:template_id => template.id)
+
+      params_selection.each_pair do |code_name, value|
+        if value.numeric?
+          value = value.to_f
+        elsif value.boolean?
+          value = value.to_bool
+        end
+
+        @pages = @pages.select do |page|
+          if code_name == 'name'
+            page.name == value
+          else
+            page.field(code_name) == value
+          end
+        end
+      end
+
+      instance_variable_set('@'+template.code_name.pluralize, @pages)
+
+      @children_of_current_root = Page.children_of(@page.root)
+      @children_of_current_page = Page.children_of(@page)
+
+      render :template => "templates/#{template.code_name}_search"
+    end
+
+    def edit
+      @page = Page.find(params[:id])
+      @page.template ||= Template.first
+      @template = @page.template.id
+
+      @multipart = @page.template.fields.map{|f| f.type_value == "image"}.include?(true) ? true : false
+    end
+
+    def create
+      @page = Page.new params[:page]
+
       if @page.save
-        redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно добавлена."
+        redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно добавлена."
       else
         render :action => "new"
       end
     end
 
-    def update   
-      if params[:field]
-        params[:field].each_pair do |id, hash|
-          field = ("constructor_pages/#{hash[:type]}").classify.constantize.find id
-          field.value = hash[:value]
-          field.save
+    def update
+      @page = Page.find params[:id]
+
+      if @page.template.id != params[:page][:template_id].to_i
+        @page.template.fields.each do |field|
+          "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
+              :field_id => field.id,
+              :page_id => @page.id)
         end
       end
-      
-      @page = Page.find params[:id]     
-      
-      if @page.update_attributes params[:page]        
-        redirect_to pages_url, :notice => "Страница «#{@page.title}» успешно обновлена."
+
+      if @page.update_attributes params[:page]
+
+        @page.template.fields.each do |field|
+          f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
+              :field_id => field.id,
+              :page_id => @page.id).first_or_create
+
+          if params[:fields]
+            f.value = 0 if field.type_value == 'boolean'
+
+            if params[:fields][field.type_value]
+              if field.type_value == "date"
+                value = params[:fields][field.type_value][field.id.to_s]
+                f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
+              else
+                f.value = params[:fields][field.type_value][field.id.to_s]
+              end
+            end
+
+            f.save
+          end
+        end
+
+        redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно обновлена."
       else
         render :action => "edit"
       end
@@ -87,7 +189,7 @@ module ConstructorPages
 
     def destroy
       @page = Page.find(params[:id])
-      title = @page.title           
+      title = @page.name
       @page.destroy
       redirect_to pages_url, :notice => "Страница «#{title}» успешно удалена."
     end
@@ -111,19 +213,9 @@ module ConstructorPages
 
       redirect_to :back
     end
-    
+
     private
-    
-    def template_vars
-      @request = request.path.sub('//', '/')
-      @current_page = Page.where(:full_url => @request).first
-      
-      unless @current_page.nil?
-        @children_of_current_root = Page.children_of(@current_page.root)           
-        @children_of_current_page = Page.children_of(@current_page)  
-      end
-    end
-        
+
     def cache
       expire_page :action => :show
       cache_dir = ActionController::Base.page_cache_directory
@@ -131,5 +223,5 @@ module ConstructorPages
         FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
       end
     end
-  end  
+  end
 end

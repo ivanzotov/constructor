@@ -25,7 +25,11 @@ $(document).ready ->
   unless auto_url
     auto_url_true()
 
+<<<<<<< HEAD
   $('#page_title').keyup -> $('.address').html(parameterize())
+=======
+  $('#page_name').keyup -> $('.address').html(parameterize())
+>>>>>>> develop
   $('#page_parent_id').change ->
     parent_full_url = $('#page_parent_id option:selected').data('full_url')
     if parent_full_url
@@ -54,4 +58,8 @@ auto_url_false = ->
   $('.address').show()
 
 parameterize = ->
+<<<<<<< HEAD
   URLify($('#page_title').prop('value'))
+=======
+  URLify($('#page_name').prop('value'))
+>>>>>>> develop

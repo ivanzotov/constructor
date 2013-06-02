@@ -1,4 +1,4 @@
-= form_for @page do |f|
+= form_for @page, :html => {:multipart => @multipart} do |f|
   - if @page.errors.any?
     .alert.alert-error.fade.in.span12
       = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
@@ -9,6 +9,7 @@
     .control-group
       = f.label :active, :class => 'control-label'
       .controls= f.check_box :active, :class => "span6"
+<<<<<<< HEAD
       
     .control-group
       = f.label :title, :class => 'control-label'
@@ -36,33 +37,50 @@
       
     .control-group
       = f.label :content, :class => 'control-label'
+=======
+
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls= f.text_field :name, :class => "span4"
+
+    .control-group.auto_url
+      = f.label :auto_url, :class => 'control-label'
       .controls
-        = f.text_area :content, :class => "span9 ckeditor", :id => "content", :rows => 20
-    
+        = f.check_box :auto_url, :class => "span9"
+
+    .control-group.url
+      = f.label :url, :class => 'control-label'
+>>>>>>> develop
+      .controls
+        .full_url
+          %span.path>= @page.parent.full_url unless @page.parent.nil?
+          \/
+          %span.address>= @page.url
+        = f.text_field :url, :class => "span3"
+        %i.address_icon.icon-pencil
+
     - unless @page.new_record?
-      .control-group
-        .controls
-          = link_to "<i class='icon-plus icon-white'></i> Добавить изображение".html_safe, "/admin/images/#{@page.id}/new", :class => "btn btn-mini btn-success"                    
-        
-    - unless @page.images.empty?
-      .row-fluid               
+      - @page.template.fields.each do |field|
         .control-group
-          = f.label "Изображения", :class => 'control-label'        
+          = label_tag "", field.name, :class => 'control-label'
           .controls
-            - @page.images.each do |image|
-              .images_controls
-                = link_to image_tag(image.image.thumb('150x150#').url, :class => "thumbnail"),                  image.image.url                 
-                .actions
-                  = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_image_path(image, @page), :class => "btn btn-primary btn-mini"
-                  = link_to "<i class='icon-th icon-white'></i>".html_safe, sizes_image_path(image), :class => "btn btn-inverse"                                
-                  = link_to "<i class='icon-remove icon-white'></i>".html_safe, image_path(image), :class => "btn btn-mini btn-danger", :method => :delete, :confirm => "Вы уверены?"                          
+            = render :partial => "constructor_pages/fields/types/#{field.type_value}", :locals => {:field => field, :page => @page}
 
     .accordion
       .accordion-group
         .accordion-heading.text-center
-          = link_to 'Дополнительные опции', '#collapse', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
+          = link_to 'Настройки', '#collapse', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
         .accordion-body.in.collapse#collapse
           .accordion-inner
+            .control-group
+              = f.label :parent, :class => 'control-label'
+              .controls
+                = f.select :parent_id, options_for_select(for_select(@roots), :selected => @page.parent_id, :disabled => @page.self_and_descendants.map{|p| p.id}), :include_blank => 'Нет'
+
+            .control-group
+              = f.label :template, :class => 'control-label'
+              .controls
+                = f.select :template_id, options_for_select(templates, :selected => @template)
             .control-group
               = f.label :link, :class => 'control-label'
               .controls
@@ -80,7 +98,7 @@
 
                 %label.checkbox.inline.span2{:for => 'in_nav'}
                   = f.check_box :in_nav
-                  Хлебные крошки        
+                  Хлебные крошки
 
     .accordion
       .accordion-group
@@ -89,14 +107,20 @@
         .accordion-body.in.collapse#collapse-three
           .accordion-inner
             .control-group
+<<<<<<< HEAD
               = f.label :seo_title, :class => 'control-label'
               .controls
                 = f.text_field :seo_title, :class => "span9"
+=======
+              = f.label :title, :class => 'control-label'
+              .controls
+                = f.text_field :title, :class => "span9"
+>>>>>>> develop
             .control-group
               = f.label :keywords, :class => 'control-label'
               .controls
-                = f.text_field :keywords, :class => "span9"          
-            .control-group            
+                = f.text_field :keywords, :class => "span9"
+            .control-group
               = f.label :description, :class => 'control-label'
               .controls
                 = f.text_area :description, :class => "span9", :rows => 8

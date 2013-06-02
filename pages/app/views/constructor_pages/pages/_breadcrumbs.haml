@@ -1,7 +1,14 @@
-- unless @page.ancestors.empty?
+- unless page.ancestors.empty?
   %ul.breadcrumb
+<<<<<<< HEAD
     - @page.ancestors.each do |i|
       - if i.in_nav
         %li
           = link_to i.title, i.full_url, :title => i.title
+=======
+    - page.ancestors.each do |i|
+      - if i.in_nav
+        %li
+          = link_to i.name, i.full_url, :title => i.name, :class => 'b-page-json'
+>>>>>>> develop
           %span{:class => "divider"} /

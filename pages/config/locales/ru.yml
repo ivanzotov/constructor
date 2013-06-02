@@ -1,17 +1,25 @@
 ru:
   activerecord:
     attributes:
-      constructor_pages/image:
-        image: "Изображение"                  
       constructor_pages/field:
-        name: "Наименование"        
-        type: "Тип"       
-        child: "Дочернее"                        
+        name: "Название"
+        code_name: "Кодовое имя"
+        type_value: "Тип"
+      constructor_pages/template:
+        name: "Название"
+        code_name: "Кодовое имя"
+        parent: "Родительский"
+        child: "Дочерний"
       constructor_pages/page:
-        active: "Опубликовано"        
+        active: "Вкл./Выкл."
         image: "Изображение"                
+<<<<<<< HEAD
         title: "Заголовок"
         seo_title: "Заголовок"
+=======
+        name: "Название"
+        template: "Шаблон"
+>>>>>>> develop
         auto_url: "Авто-ссылка"
         url: "Адрес"
         in_menu: "Меню"
@@ -20,9 +28,9 @@ ru:
         parent: "Родитель"
         parent_id: "Родительская страница"
         link: "Ссылка"
-        content: "Содержание"
+        title: "Заголовок"
+        keywords: "Ключевые слова"
         description: "Описание"
-        keywords: "Ключевые слова"        
     errors:
       models:
         constructor_pages/image:
