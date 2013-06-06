@@ -12,7 +12,7 @@ ru:
         child: "Дочерний"
       constructor_pages/page:
         active: "Вкл./Выкл."
-        image: "Изображение"                
+        image: "Изображение"
         name: "Название"
         template: "Шаблон"
         auto_url: "Авто-ссылка"
