@@ -16,14 +16,6 @@ module ConstructorPages
     def index
       @user_signed_in = user_signed_in?
     end
-<<<<<<< HEAD
-
-    def sitemap
-      @pages = Page.all
-      @title = "Карта сайта"
-    end
-=======
->>>>>>> develop
 
     def new
       @page = Page.new
@@ -54,14 +46,6 @@ module ConstructorPages
         render :action => "error_404", :layout => false
         return
       end
-<<<<<<< HEAD
-
-      @seo_title = @page.seo_title.empty? ? @page.title : @page.seo_title
-      @title = @page.title
-      @description = @page.description
-      @keywords = @page.keywords      
-=======
->>>>>>> develop
 
       if @page.url != @page.link and !@page.link.empty?
         redirect_to @page.link

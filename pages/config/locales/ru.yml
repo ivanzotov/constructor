@@ -12,14 +12,9 @@ ru:
         child: "Дочерний"
       constructor_pages/page:
         active: "Вкл./Выкл."
-        image: "Изображение"                
-<<<<<<< HEAD
-        title: "Заголовок"
-        seo_title: "Заголовок"
-=======
+        image: "Изображение"
         name: "Название"
         template: "Шаблон"
->>>>>>> develop
         auto_url: "Авто-ссылка"
         url: "Адрес"
         in_menu: "Меню"

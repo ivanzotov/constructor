@@ -3,13 +3,8 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = %q{constructor-pages}
-<<<<<<< HEAD
-  s.version           = '0.2'
-  s.summary           = %q{Pages for Constructor}
-=======
   s.version           = '0.3.1'
   s.summary           = %q{Pages for ConstructorCms}
->>>>>>> develop
   s.authors           = ['Ivan Zotov']
   s.require_paths     = %w(lib)
   

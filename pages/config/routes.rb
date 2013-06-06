@@ -1,8 +1,6 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
     resources :pages, :except => [:show]
-<<<<<<< HEAD
-=======
     resources :templates, :except => [:show]
     resources :fields, :except => [:show, :new, :edit]
 
@@ -13,7 +11,6 @@ ConstructorPages::Engine.routes.draw do
       get 'move/up/:id' => "fields#move_up", :as => :field_move_up
       get 'move/down/:id' => "fields#move_down", :as => :field_move_down
     end
->>>>>>> develop
 
     scope '/pages' do
       post 'move/up/:id' => "pages#move_up", :as => :page_move_up
@@ -27,11 +24,6 @@ ConstructorPages::Engine.routes.draw do
       post 'move/down/:id' => "templates#move_down", :as => :template_move_down
     end
   end
-<<<<<<< HEAD
-  
-  get '/sitemap' => "pages#sitemap", :as => :sitemap
-=======
->>>>>>> develop
 
   root :to => "pages#show"
   get '*all/search/:what_search' => "pages#search", :format => false

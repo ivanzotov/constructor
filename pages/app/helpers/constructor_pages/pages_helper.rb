@@ -3,11 +3,7 @@ module ConstructorPages
     def for_select(roots)
       result = []
       roots.each do |r|
-<<<<<<< HEAD
-        r.self_and_descendants.each {|i| result.push(["#{'--'*i.level} #{i.title}", i.id, {'data-full_url' => i.full_url}])}
-=======
         r.self_and_descendants.each {|i| result.push(["#{'--'*i.level} #{i.name}", i.id, {'data-full_url' => i.full_url}])}
->>>>>>> develop
       end
       result
     end
