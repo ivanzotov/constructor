@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
   s.executables       = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
-    
+
+  s.add_dependency 'constructor-core', ConstructorCore::VERSION
+
   s.add_dependency 'dragonfly'
   s.add_dependency 'rack-cache'
   s.add_dependency 'awesome_nested_set', '~> 2.0'
@@ -24,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'aws-s3'
   s.add_dependency 'russian', '~> 0.6.0'
   s.add_dependency 'RedCloth'
+  s.add_dependency 'acts_as_list'
 
   s.add_development_dependency 'rspec-rails'
 end

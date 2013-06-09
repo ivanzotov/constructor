@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = 'ivanzotov@gmail.com'
   s.homepage = 'http://ivanzotov.github.com/constructor'
   s.description = 'Constructor – content management system'
-
+  s.test_files        = `git ls-files -- spec/*`.split("\n")
   s.files = %w(
     lib/constructor-cms.rb
     lib/constructor-cms/engine.rb
@@ -22,10 +22,9 @@ Gem::Specification.new do |s|
     config/routes.rb
   )
 
-  s.add_dependency 'rails', '~> 3.2.13'
-  s.add_dependency 'constructor-core'
-  s.add_dependency 'constructor-pages'
-  s.add_dependency 'acts_as_list'
+  s.add_dependency 'constructor-core', ConstructorCore::VERSION
+  s.add_dependency 'constructor-pages', ConstructorCore::VERSION
 
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec-rails'
 end

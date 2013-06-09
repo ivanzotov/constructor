@@ -20,16 +20,16 @@ module ConstructorPages
 
     default_scope order(:lft)
 
-    before_save :url_prepare, :content_filter
+    before_save :url_prepare, :content_filter, :template_check
     after_update :full_url_descendants_change
 
     before_update :full_url_change
     before_create :full_url_create
 
     after_create :create_fields
-    
+
     acts_as_nested_set
-    
+
     def self.children_of(page)
       Page.where(:parent_id => page)
     end
@@ -77,6 +77,10 @@ module ConstructorPages
     end
 
     private
+
+    def template_check
+      self.template_id = Template.first.id unless template_id
+    end
 
     def full_url_change
       if parent_id
