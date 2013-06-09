@@ -4,90 +4,84 @@ require 'spec_helper'
 
 module ConstructorPages
   describe Page do
+    before :all do
+      Template.delete_all
+      Template.create name: 'Page', code_name: 'page'
+    end
+
     it 'should be valid' do
-      page = Page.new
-      page.save
+      page = Page.create
       page.valid?.should be_true
     end
 
+    describe '#auto_url' do
+      it 'should be true by default' do
+        page = Page.create
+        page.auto_url.should be_true
+      end
+    end
+
     describe '#template' do
-      context 'if template_id nil' do
+      context 'if there is no template' do
+        it 'should not be valid' do
+          Template.delete_all
+          page = Page.create
+          page.valid?.should_not be_true
+          Template.create name: 'Page', code_name: 'page'
+        end
+      end
+
+      context 'if template_id is nil' do
         it 'should be first template' do
-          template = Template.first
-          page = Page.new
-          page.save
-          page.template.should == template
+          page = Page.create
+          page.template.should == Template.first
         end
       end
     end
 
     describe '#url' do
-      context 'If not edited by hand' do
+      context 'if url is empty or if auto_url is true' do
         it 'should be generated from name' do
-          page = Page.new name: 'Hello world'
-          page.save
+          page = Page.create name: 'Hello world'
           page.url.should == 'hello-world'
         end
       end
     end
-  end
 
-=begin
-    describe '#full_url'
-        it "should add parent url before if parent selected" do
-          page_parent = build(:page, :id => 1, :url => '/hello')
-          page = build(:page, :parent_id => page_parent, :title => 'World', :url => ' ')
-          page.url.should == '/hello/world'
+    describe '#full_url' do
+      it 'should be generated from url and ancestors' do
+        page = Page.create name: 'Hello'
+        page.full_url.should == '/hello'
 
-          # if parent not selected
-          page.parent_id = nil
-          page.url = ' '
+        page_two = Page.create name: 'World', parent: page
+        page_two.full_url.should == '/hello/world'
+      end
+
+      context 'if parent or url has been changed' do
+        it 'should update full_url' do
+          page = Page.create name: 'Change url', url: 'change-url', auto_url: false
+          page.full_url.should == '/change-url'
+
+          page.url = 'another-change-url'
           page.save
-          page.url.should == '/world'
+          page.full_url.should == '/another-change-url'
         end
 
-        it "should be empty when page not valid" do
-          build(:page, :title => "Hello", :url => "/hello")
-          page = build(:page, :title => "Hello", :url => "")
+        it 'should update descendants full_url' do
+          page = Page.create name: 'Update descendants', url: 'update-descendants', auto_url: false
+          page_two = Page.create name: 'Child', url: 'child', parent: page
+          page_two.full_url.should == '/update-descendants/child'
 
-          page.should_not be_valid
-          page.url.should == ""
+          page.url = 'another-update-descendants'
+          page.save
+
+          page_two.full_url.should == '/another-update-descendants/child'
         end
       end
 
-      context "Finish cleanup" do
-        it "should cleanup url: remove spaces, fix backslashes, unknown chars etc." do
-          page = FactoryGirl(:page, :url => "  //Hello!@#$\%^&*() my     WORLD /// привет//    ")
-          page.url.should == "\/hello-my-world\/privet"
-        end
-      end
-    end
-
-    describe "Parent" do
-      it "should not be same as self" do
-        page = build(:page)
-        page.parent_id = page.id
-
-        page.save
-        page.should have(1).errors
-      end
-    end
-
-    describe "In nav, in menu, in map" do
-      it "should be true by default" do
-        page = Page.new
-        page.in_nav.should be_true
-        page.in_menu.should be_true
-        page.in_map.should be_true
-      end
-
-      it "should change when given in new method" do
-        page = Page.new(:in_nav => false, :in_menu => false, :in_map => false)
-        page.in_nav.should be_false
-        page.in_menu.should be_false
-        page.in_map.should be_false
+      context 'if parent is root or nil' do
+        it 'should be as /self.url'
       end
     end
   end
-=end
 end

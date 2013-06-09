@@ -4,7 +4,7 @@ module ConstructorPages
   class Page < ActiveRecord::Base
     attr_accessible :name, :title, :keywords, :description,
                     :url, :full_url, :active, :auto_url,
-                    :parent_id, :link, :in_menu, :in_map,
+                    :parent, :parent_id, :link, :in_menu, :in_map,
                     :in_nav, :template_id
 
     has_many :string_types,:dependent => :destroy, :class_name => "Types::StringType"
@@ -20,12 +20,14 @@ module ConstructorPages
 
     default_scope order(:lft)
 
-    before_save :url_prepare, :content_filter, :template_check
-    after_update :full_url_descendants_change
+    validate :template_check
+
+    before_save :friendly_url, :template_assign
 
     before_update :full_url_change
-    before_create :full_url_create
+    after_update :full_url_descendants_change
 
+    before_create :full_url_create
     after_create :create_fields
 
     acts_as_nested_set
@@ -78,12 +80,31 @@ module ConstructorPages
 
     private
 
+    def friendly_url
+      # if url has been changed by manually or url is empty
+      if self.auto_url or self.url.empty?
+        # generate url from name
+        self.url = self.name.parameterize
+      else
+        # else cleanup url written by manually
+        self.url = self.url.parameterize
+      end
+    end
+
     def template_check
+      # page is not valid if there is no template
+      errors.add_on_empty(:template_id) if Template.count == 0
+    end
+
+    def template_assign
+      # if template_id is nil then get first template
       self.template_id = Template.first.id unless template_id
     end
 
     def full_url_change
+      # if parent page specified
       if parent_id
+        # generate full_url corresponding ancestors urls
         self.full_url = '/' + Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(self.url).join('/')
       else
         self.full_url = '/' + self.url
@@ -100,14 +121,6 @@ module ConstructorPages
 
     def full_url_descendants_change
       self.descendants.each { |c| c.save }
-    end
-
-    def url_prepare
-      if self.auto_url or self.url.empty?
-        self.url = self.name.parameterize
-      else
-        self.url = self.url.parameterize
-      end
     end
 
     def create_fields
