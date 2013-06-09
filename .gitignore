@@ -1,1 +1,4 @@
+.bundle/
 .idea/
+spec/dummy
+log/*.log
