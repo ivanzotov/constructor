@@ -72,15 +72,30 @@ module ConstructorPages
           page_two = Page.create name: 'Child', url: 'child', parent: page
           page_two.full_url.should == '/update-descendants/child'
 
+          page = Page.find(page.id)
           page.url = 'another-update-descendants'
           page.save
 
+          page_two = Page.find(page_two.id)
           page_two.full_url.should == '/another-update-descendants/child'
         end
       end
 
       context 'if parent is root or nil' do
-        it 'should be as /self.url'
+        it 'should be as /self.url' do
+          page = Page.create name: 'Page', url: 'page', auto_url: false, parent_id: nil
+          page.full_url.should == '/page'
+
+          parent = Page.create name: 'Parent'
+          page.parent = parent
+          page.save
+
+          page.full_url.should == '/parent/page'
+
+          page.parent = nil
+          page.save
+          page.full_url.should == '/page'
+        end
       end
     end
   end

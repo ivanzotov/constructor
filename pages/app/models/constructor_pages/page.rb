@@ -22,12 +22,8 @@ module ConstructorPages
 
     validate :template_check
 
-    before_save :friendly_url, :template_assign
-
-    before_update :full_url_change
+    before_save :friendly_url, :template_assign, :full_url_update
     after_update :full_url_descendants_change
-
-    before_create :full_url_create
     after_create :create_fields
 
     acts_as_nested_set
@@ -78,6 +74,11 @@ module ConstructorPages
       options
     end
 
+    # generate full_url from parent page and url
+    def self.full_url_generate(parent_id, url = '')
+      Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
+    end
+
     private
 
     def friendly_url
@@ -101,22 +102,8 @@ module ConstructorPages
       self.template_id = Template.first.id unless template_id
     end
 
-    def full_url_change
-      # if parent page specified
-      if parent_id
-        # generate full_url corresponding ancestors urls
-        self.full_url = '/' + Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(self.url).join('/')
-      else
-        self.full_url = '/' + self.url
-      end
-    end
-
-    def full_url_create
-      if self.parent.nil?
-        self.full_url = '/' + self.url
-      else
-        self.full_url = self.parent.full_url + '/' + self.url
-      end
+    def full_url_update
+      self.full_url = '/' + (parent_id ? Page.full_url_generate(parent_id, self.url) : self.url)
     end
 
     def full_url_descendants_change
