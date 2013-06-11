@@ -7,11 +7,33 @@ module ConstructorPages
     before :all do
       Template.delete_all
       Template.create name: 'Page', code_name: 'page'
+
+
+      Field.delete_all
+      Types::TextType.delete_all
     end
 
     it 'should be valid' do
       page = Page.create
       page.valid?.should be_true
+    end
+
+    describe '.field' do
+      it 'should get value from type_field' do
+        template = Template.create name: 'Page template', code_name: 'page_template'
+        page = Page.create name: 'Home page', template: template
+        field = Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+        page.field('desc').should == field.text_type.value
+      end
+    end
+
+    describe '.full_url_generate' do
+      it 'should generate full_url from parent_id and url' do
+      end
+    end
+
+    describe '#as_json' do
+      it 'should return page as json format with fields'
     end
 
     describe '#auto_url' do
@@ -46,6 +68,24 @@ module ConstructorPages
           page.url.should == 'hello-world'
         end
       end
+
+      context 'else' do
+        it 'should get url field value' do
+          page = Page.create name: 'Hello', auto_url: true
+          page.url.should == 'hello'
+
+          page.auto_url = false
+          page.url = 'world'
+          page.save
+          page.url.should == 'world'
+
+          page.auto_url = true
+          page.name = 'Another world'
+          page.url = 'world-two'
+          page.save
+          page.url.should == 'another-world'
+        end
+      end
     end
 
     describe '#full_url' do
@@ -66,19 +106,6 @@ module ConstructorPages
           page.save
           page.full_url.should == '/another-change-url'
         end
-
-        it 'should update descendants full_url' do
-          page = Page.create name: 'Update descendants', url: 'update-descendants', auto_url: false
-          page_two = Page.create name: 'Child', url: 'child', parent: page
-          page_two.full_url.should == '/update-descendants/child'
-
-          page = Page.find(page.id)
-          page.url = 'another-update-descendants'
-          page.save
-
-          page_two = Page.find(page_two.id)
-          page_two.full_url.should == '/another-update-descendants/child'
-        end
       end
 
       context 'if parent is root or nil' do
@@ -97,6 +124,25 @@ module ConstructorPages
           page.full_url.should == '/page'
         end
       end
+    end
+
+    describe 'descendants_update' do
+      it 'should update descendants full_url' do
+        page = Page.create name: 'Update descendants', url: 'update-descendants', auto_url: false
+        page_two = Page.create name: 'Child', url: 'child', parent: page
+        page_two.full_url.should == '/update-descendants/child'
+
+        page = Page.find(page.id)
+        page.url = 'another-update-descendants'
+        page.save
+
+        page_two = Page.find(page_two.id)
+        page_two.full_url.should == '/another-update-descendants/child'
+      end
+    end
+
+    describe 'create_fields' do
+      it 'should create type_fields after update page'
     end
   end
 end

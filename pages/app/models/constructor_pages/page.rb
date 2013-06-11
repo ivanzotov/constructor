@@ -5,40 +5,56 @@ module ConstructorPages
     attr_accessible :name, :title, :keywords, :description,
                     :url, :full_url, :active, :auto_url,
                     :parent, :parent_id, :link, :in_menu, :in_map,
-                    :in_nav, :template_id
+                    :in_nav, :template_id, :template
 
-    has_many :string_types,:dependent => :destroy, :class_name => "Types::StringType"
-    has_many :float_types, :dependent => :destroy, :class_name => "Types::FloatType"
-    has_many :boolean_types, :dependent => :destroy, :class_name => "Types::BooleanType"
-    has_many :integer_types, :dependent => :destroy, :class_name => "Types::IntegerType"
-    has_many :text_types, :dependent => :destroy, :class_name => "Types::TextType"
-    has_many :date_types, :dependent => :destroy, :class_name => "Types::DateType"
-    has_many :html_types, :dependent => :destroy, :class_name => "Types::HtmlType"
-    has_many :image_types, :dependent => :destroy, :class_name => "Types::ImageType"
+    has_many :string_types,   dependent: :destroy, class_name: 'Types::StringType'
+    has_many :float_types,    dependent: :destroy, class_name: 'Types::FloatType'
+    has_many :boolean_types,  dependent: :destroy, class_name: 'Types::BooleanType'
+    has_many :integer_types,  dependent: :destroy, class_name: 'Types::IntegerType'
+    has_many :text_types,     dependent: :destroy, class_name: 'Types::TextType'
+    has_many :date_types,     dependent: :destroy, class_name: 'Types::DateType'
+    has_many :html_types,     dependent: :destroy, class_name: 'Types::HtmlType'
+    has_many :image_types,    dependent: :destroy, class_name: 'Types::ImageType'
 
     belongs_to :template
 
-    default_scope order(:lft)
+    default_scope order :lft
 
     validate :template_check
 
     before_save :friendly_url, :template_assign, :full_url_update
-    after_update :full_url_descendants_change
+    after_update :descendants_update
     after_create :create_fields
 
     acts_as_nested_set
 
-    def self.children_of(page)
-      Page.where(:parent_id => page)
+    # generate full_url from parent page and url
+    def self.full_url_generate(parent_id, url = '')
+      Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
     end
 
-    def field(code_name, meth = "value")
-      field = ConstructorPages::Field.where(:code_name => code_name, :template_id => self.template_id).first
+    def field(code_name, meth = 'value')
+      field = Field.where(code_name: code_name, template_id: self.template_id).first
 
       if field
-        f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(:field_id => field.id, :page_id => self.id).first
+        f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(field_id: field.id, page_id: self.id).first
         f.send(meth) if f
       end
+    end
+
+    def as_json(options = {})
+      options =  {
+        :name => self.name,
+        :title => self.title
+      }.merge options
+
+      self.template.fields.each do |field|
+        unless self.send(field.code_name)
+          options = {field.code_name => self.send(field.code_name)}.merge options
+        end
+      end
+
+      options
     end
 
     def method_missing(name, *args, &block)
@@ -59,62 +75,32 @@ module ConstructorPages
       end
     end
 
-    def as_json(options = {})
-      options =  {
-        :name => self.name,
-        :title => self.title
-      }.merge options
-
-      self.template.fields.each do |field|
-        unless self.send(field.code_name)
-          options = {field.code_name => self.send(field.code_name)}.merge options
-        end
-      end
-
-      options
-    end
-
-    # generate full_url from parent page and url
-    def self.full_url_generate(parent_id, url = '')
-      Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
-    end
-
     private
 
+    # if url has been changed by manually or url is empty
     def friendly_url
-      # if url has been changed by manually or url is empty
-      if self.auto_url or self.url.empty?
-        # generate url from name
-        self.url = self.name.parameterize
-      else
-        # else cleanup url written by manually
-        self.url = self.url.parameterize
-      end
+      self.url = ((auto_url || url.empty?) ? name : url).parameterize
     end
 
+    # page is not valid if there is no template
     def template_check
-      # page is not valid if there is no template
       errors.add_on_empty(:template_id) if Template.count == 0
     end
 
+    # if template_id is nil then get first template
     def template_assign
-      # if template_id is nil then get first template
       self.template_id = Template.first.id unless template_id
     end
 
     def full_url_update
-      self.full_url = '/' + (parent_id ? Page.full_url_generate(parent_id, self.url) : self.url)
+      self.full_url = '/' + (parent_id ? Page.full_url_generate(parent_id, url) : url)
     end
 
-    def full_url_descendants_change
-      self.descendants.each { |c| c.save }
-    end
+    def descendants_update; descendants.map(&:save) end
 
     def create_fields
       template.fields.each do |field|
-        "constructor_pages/types/#{field.type_value}_type".classify.constantize.create(
-            :page_id => id,
-            :field_id => field.id)
+        "constructor_pages/types/#{field.type_value}_type".classify.constantize.create page_id: id, field: field
       end
     end
   end
