@@ -53,8 +53,8 @@ module ConstructorPages
 
       instance_variable_set('@'+@page.template.code_name.to_s, @page)
 
-      @children_of_current_root = Page.children_of(@page.root)
-      @children_of_current_page = Page.children_of(@page)
+      @children_of_current_root = @page.root.children
+      @children_of_current_page = @page.children
 
       respond_to do |format|
         format.html { render :template => "html_templates/#{@page.template.code_name}" }
@@ -107,8 +107,8 @@ module ConstructorPages
 
       instance_variable_set('@'+template.code_name.pluralize, @pages)
 
-      @children_of_current_root = Page.children_of(@page.root)
-      @children_of_current_page = Page.children_of(@page)
+      @children_of_current_root = @page.root.children
+      @children_of_current_page = @page.children
 
       render :template => "templates/#{template.code_name}_search"
     end

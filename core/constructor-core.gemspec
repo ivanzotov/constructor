@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
   s.executables       = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
-  
-  s.add_dependency 'devise'  
+
+  s.add_dependency 'rails', '~> 3.2.13'
+  s.add_dependency 'devise'
 end

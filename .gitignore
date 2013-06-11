@@ -2,3 +2,6 @@
 .idea/
 spec/dummy
 log/*.log
+Gemfile.lock
+
+Gemfile.lock
