@@ -92,7 +92,6 @@
     .row-fluid        
       .span12
         .form-actions
-          .btn-group
-            = f.submit :class => "btn btn-primary"
-            = link_to "Отмена", pages_url, :class => "btn"   
+          = f.submit :class => "btn btn-primary"
+          = link_to "Отмена", pages_url, :class => "btn"
           = link_to "Удалить страницу", @page, :confirm => 'Вы уверены?', :method => :delete, :class => "btn btn-danger pull-right" unless @page.new_record?

@@ -3,9 +3,7 @@
   %head
     %meta{:charset => 'utf-8'}/
     %meta{'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge,chrome=1'}/
-    %title Панель управления     
-  
-    %meta{:name => 'viewport', :content => 'width=device-width,initial-scale=1'}/      
+    %title Панель управления
     
     / [if lt IE 9]
       %script{:src => 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
@@ -33,14 +31,24 @@
             %span.icon-bar
           .nav-collapse
             %ul.nav
-              %li= link_to 'Структура', '/admin/pages'
-              %li= link_to 'Шаблоны', '/admin/templates'
+              %li
+                = link_to '/admin/pages' do
+                  %i.icon-sitemap
+                  Структура
+              %li
+                = link_to '/admin/templates' do
+                  %i.icon-film
+                  Шаблоны
+              %li
+                = link_to '/admin/users' do
+                  %i.icon-group
+                  Пользователи
 
             - if user_signed_in?
               %ul.nav.pull-right
                 %li
                   = link_to @current_user do
-                    = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24
+                    = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24, class: 'avatar'
                     %span= current_user.email
                 %li
                   = link_to @current_user, class: 'logout', method: :delete do
