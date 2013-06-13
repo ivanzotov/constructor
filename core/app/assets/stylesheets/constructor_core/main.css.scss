@@ -1,0 +1,57 @@
+@import 'bootstrap';
+@import 'font-awesome';
+
+body {
+  min-width: 900px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.images_controls {
+  float: left;
+  overflow: hidden;
+  display: inline-block;
+  width: 180px;
+  margin-bottom: 20px;
+
+  .actions {
+    margin-top: 5px;
+    margin-left: 28px;
+  }
+}
+
+.sizes .controls {
+  margin-bottom: 30px;
+}
+
+.url {
+  font-size: 12px;
+
+  .full_url {
+    margin-top: 6px;
+    float: left;
+  }
+
+  .icon-pencil {
+    margin-top: 5px;
+    margin-left: 3px;
+  }
+
+  .address {
+    font-weight: bold;
+
+    &:hover {
+      background-color: #ffa;
+    }
+  }
+}
+
+.url .icon-pencil {
+  display: none;
+}
+
+.url:hover .icon-pencil {
+  display: inline-block;
+}

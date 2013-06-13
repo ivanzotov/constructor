@@ -1,11 +1,9 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class FieldsController < ConstructorCore::AdminController
-    # TODO
-    include ConstructorCore::DeviseHelper
-
+  class FieldsController < ConstructorCore::ApplicationController
     before_filter :authenticate_user!
+
     layout 'constructor_core/application_admin'
 
     def new

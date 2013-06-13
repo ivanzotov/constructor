@@ -1,11 +1,9 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class TemplatesController < ConstructorCore::AdminController
-    # TODO
-    include ConstructorCore::DeviseHelper
-
+  class TemplatesController < ConstructorCore::ApplicationController
     before_filter :authenticate_user!
+
     before_filter {@roots = Template.roots}
     layout 'constructor_core/application_admin'
 
