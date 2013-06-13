@@ -68,6 +68,13 @@ body {
     color: $white;
   }
 
+  &.btn-success {
+    background-image: none;
+    border: none;
+    background-color: #36af00;
+    color: $white;
+  }
+
   &.btn-large { font-size: $baseFontSize*1.5 }
 }
 
