@@ -23,9 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rack-cache'
   s.add_dependency 'awesome_nested_set', '~> 2.0'
   s.add_dependency 'haml-rails'
-  s.add_dependency 'aws-s3'
-  s.add_dependency 'russian', '~> 0.6.0'
-  s.add_dependency 'RedCloth'
   s.add_dependency 'acts_as_list'
 
   s.add_development_dependency 'rspec-rails'
