@@ -20,7 +20,8 @@ Content management system on Ruby on Rails
     rake db:migrate
 
 ## Screenshots
-![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_structure.png) { width: 477px; }
+<img src="https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_structure.png" alt="Screenshot structure" width="477"/>
+
 
 ## Copyright
   Copyright © 2012—2013 Ivan Zotov. See [LICENSE][] for details.
