@@ -39,20 +39,15 @@
                 = link_to '/admin/templates' do
                   %i.icon-film
                   =t :templates
-              /
-                %li
-                  = link_to '/admin/users' do
-                    %i.icon-group
-                    =t :users
 
-            - if user_signed_in?
+            - if current_user
               %ul.nav.pull-right
                 %li
-                  = link_to @current_user do
+                  = link_to core.user_path(current_user.id) do
                     = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24, class: 'avatar'
                     %span= current_user.email
                 %li
-                  = link_to @current_user, class: 'logout', method: :delete do
+                  = link_to core.destroy_user_session_path, method: :delete do
                     %i.icon-signout
                     =t :logout
 

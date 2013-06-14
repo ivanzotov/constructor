@@ -8,6 +8,10 @@ ru:
   error: 'Ошибка'
   sitemap: 'Карта сайта'
   remember_me: 'Запомнить меня'
+  profile: 'Профиль'
+  save_password: 'Сохранить пароль'
+  password_changed: 'Пароль успешно изменен'
+  password_error_confirm: 'Пароли не совпадают'
 
   activerecord:
     attributes:

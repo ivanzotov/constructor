@@ -1,0 +1,16 @@
+- content_for :page_title do
+  =t :profile
+
+= form_for @current_user, method: :post do |f|
+  .form-horizontal
+    .control-group
+      = f.label :password, :class => 'control-label'
+      .controls
+        = f.password_field :password, required: true
+    .control-group
+      = f.label :password_confirmation, :class => 'control-label'
+      .controls
+        = f.password_field :password_confirm, required: true
+    .control-group
+      .controls
+        = f.submit t(:save_password), :class => "btn btn-primary"

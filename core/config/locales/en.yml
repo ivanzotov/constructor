@@ -8,3 +8,7 @@ en:
   error: 'Error'
   sitemap: 'Site map'
   remember_me: 'Remember me'
+  profile: 'Profile'
+  password_error_confirm: 'Password confirmation failed'
+  save_password: 'Save password'
+  password_changed: 'Password changed'
