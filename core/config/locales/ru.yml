@@ -1,4 +1,14 @@
-ru:  
+ru:
+  dashboard: 'Панель управления'
+  homepage: 'Главная страница'
+  login: 'Войти'
+  logout: 'Выйти'
+  cancel: 'Отмена'
+  no: 'Нет'
+  error: 'Ошибка'
+  sitemap: 'Карта сайта'
+  remember_me: 'Запомнить меня'
+
   activerecord:
     attributes:
       constructor_core/user:

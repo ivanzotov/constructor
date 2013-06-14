@@ -1,4 +1,37 @@
 ru:
+  structure: 'Структура'
+  templates: 'Шаблоны'
+  settings: 'Настройки'
+  new_field: 'Новое поле'
+  edit_field: 'Редактирование поля'
+  seo: 'Поисковая оптимизация'
+  are_you_sure?: 'Вы уверены?'
+  display_in: 'Отображать в'
+
+  menu: 'Меню'
+  breadcrumbs: 'Хлебные крошки'
+
+  new_page: 'Создать страницу'
+  edit_page: 'Редактирование страницы'
+  delete_page: 'Удалить страницу'
+
+  new_template: 'Создать шаблон'
+  edit_template: 'Редактирование шаблона'
+  delete_template: 'Удалить шаблон'
+
+  new_field: 'Добавить поле'
+
+  string: 'Строка'
+  integer: 'Целое число'
+  float: 'Дробное число'
+  boolean: 'Булево'
+  date: 'Дата'
+  text: 'Текст'
+  html: 'HTML'
+  image: 'Изображение'
+
+  page_not_found: 'Страница не найдена'
+
   activerecord:
     attributes:
       constructor_pages/field:

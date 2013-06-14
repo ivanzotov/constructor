@@ -1,12 +1,12 @@
 - content_for :page_title do
-  Структура
+  =t :structure
 
 - content_for :actions do
   .span4.clearfix.text-right
-    = link_to "<i class='icon-plus icon-white'></i>".html_safe, pages.new_page_path, :class => "btn btn-success"
+    = link_to "<i class='icon-plus icon-white'></i> #{t :new_page}".html_safe, pages.new_page_path, :class => "btn btn-large btn-link"
 
-%section.span8
-  %ul#tree.treeview-gray
+%section.b-tree.span8
+  %ul
     - @roots.each do |root|
       - level = root.level
       - last_page = nil

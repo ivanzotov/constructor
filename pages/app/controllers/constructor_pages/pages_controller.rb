@@ -1,21 +1,14 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class PagesController < ConstructorCore::AdminController
-    # TODO
-    include ConstructorCore::DeviseHelper
+  class PagesController < ConstructorCore::ApplicationController
+    before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
 
     caches_page :show
 
-    before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
     before_filter {@roots = Page.roots}
     layout 'constructor_core/application_admin', :except => [:show, :search, :sitemap]
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
-
-    # TODO
-    def index
-      @user_signed_in = user_signed_in?
-    end
 
     def new
       @page = Page.new
@@ -52,9 +45,6 @@ module ConstructorPages
       end
 
       instance_variable_set('@'+@page.template.code_name.to_s, @page)
-
-      @children_of_current_root = @page.root.children
-      @children_of_current_page = @page.children
 
       respond_to do |format|
         format.html { render :template => "html_templates/#{@page.template.code_name}" }
@@ -106,9 +96,6 @@ module ConstructorPages
       end
 
       instance_variable_set('@'+template.code_name.pluralize, @pages)
-
-      @children_of_current_root = @page.root.children
-      @children_of_current_page = @page.children
 
       render :template => "templates/#{template.code_name}_search"
     end

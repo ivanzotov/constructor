@@ -1,4 +1,6 @@
 require 'devise'
+require 'bootstrap-sass'
+require 'font-awesome-sass-rails'
 require 'constructor_core/engine'
 
 class String

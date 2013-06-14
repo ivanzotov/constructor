@@ -1,9 +1,14 @@
-ConstructorCore::Engine.routes.draw do 
-  get '/admin' => redirect('/admin/pages')
-  
-  devise_for "constructor_core/users", :skip => [:sessions, :passwords] do
+ConstructorCore::Engine.routes.draw do
+  devise_for :users, {
+      class_name: 'ConstructorCore::User',
+      skip: [:sessions, :passwords],
+      module: :devise
+  }
+
+  as :user do
+    get '/admin' => 'sessions#new'
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
-  end  
+  end
 end

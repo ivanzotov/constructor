@@ -1,0 +1,34 @@
+en:
+  structure: 'Structure'
+  templates: 'Templates'
+  settings: 'Settings'
+  new_field: 'New field'
+  edit_field: 'Edit field'
+  seo: 'SEO'
+  display_in: 'Display in'
+
+  string: 'String'
+  integer: 'Integer'
+  float: 'Float'
+  boolean: 'Boolean'
+  date: 'Date'
+  text: 'Text'
+  html: 'HTML'
+  image: 'Image'
+
+  menu: 'Menu'
+  breadcrumbs: 'Breadcrumbs'
+
+  are_you_sure?: 'Are you sure?'
+
+  new_page: 'New page'
+  edit_page: 'Edit page'
+  delete_page: 'Delete page'
+
+  new_template: 'New template'
+  edit_template: 'Edit template'
+  delete_template: 'Delete template'
+
+  new_field: 'New field'
+
+  page_not_found: 'Page not found'

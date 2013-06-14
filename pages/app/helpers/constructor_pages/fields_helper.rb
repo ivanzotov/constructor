@@ -4,14 +4,14 @@ module ConstructorPages
   module FieldsHelper
     def types_value
       [
-          ["Строка", "string"],
-          ["Целое число", "integer"],
-          ["Дробное число", "float"],
-          ["Булево", "boolean"],
-          ["Дата", "date"],
-          ["Текст", "text"],
-          ["HTML", "html"],
-          ["Изображение", "image"]
+          [t(:string), "string"],
+          [t(:integer), "integer"],
+          [t(:float), "float"],
+          [t(:boolean), "boolean"],
+          [t(:date), "date"],
+          [t(:text), "text"],
+          [t(:html), "html"],
+          [t(:image), "image"]
       ]
     end
   end

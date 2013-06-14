@@ -39,13 +39,13 @@
     .accordion
       .accordion-group
         .accordion-heading.text-center
-          = link_to 'Настройки', '#collapse', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
+          = link_to t(:settings), '#collapse', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
         .accordion-body.in.collapse#collapse
           .accordion-inner
             .control-group
               = f.label :parent, :class => 'control-label'
               .controls
-                = f.select :parent_id, options_for_select(for_select(@roots), :selected => @page.parent_id, :disabled => @page.self_and_descendants.map{|p| p.id}), :include_blank => 'Нет'
+                = f.select :parent_id, options_for_select(for_select(@roots), :selected => @page.parent_id, :disabled => @page.self_and_descendants.map{|p| p.id}), :include_blank => t(:no)
 
             .control-group
               = f.label :template, :class => 'control-label'
@@ -56,24 +56,24 @@
               .controls
                 = f.text_field :link, :class => "span9"          
             .control-group
-              %label.control-label Отображать в
+              %label.control-label=t :display_in
               .controls
                 %label.checkbox.inline.span2{:for => 'in_menu'}
                   = f.check_box :in_menu
-                  Меню
+                  =t :menu
 
                 %label.checkbox.inline.span2{:for => 'in_map'}
                   = f.check_box :in_map
-                  Карта сайта
+                  =t :sitemap
 
                 %label.checkbox.inline.span2{:for => 'in_nav'}
                   = f.check_box :in_nav
-                  Хлебные крошки
+                  =t :breadcrumbs
 
     .accordion
       .accordion-group
         .accordion-heading.text-center
-          = link_to 'Поисковая оптимизация', '#collapse-three', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
+          = link_to t(:seo), '#collapse-three', :class => 'accordion-toggle', 'data-toggle' => 'collapse'
         .accordion-body.in.collapse#collapse-three
           .accordion-inner
             .control-group
@@ -92,7 +92,6 @@
     .row-fluid        
       .span12
         .form-actions
-          .btn-group
-            = f.submit :class => "btn btn-primary"
-            = link_to "Отмена", pages_url, :class => "btn"   
-          = link_to "Удалить страницу", @page, :confirm => 'Вы уверены?', :method => :delete, :class => "btn btn-danger pull-right" unless @page.new_record?
+          = f.submit :class => "btn btn-primary"
+          = link_to t(:cancel), pages_url, :class => "btn"
+          = link_to t(:delete_page), @page, :confirm => t(:are_you_sure?), :method => :delete, :class => "btn btn-danger pull-right" unless @page.new_record?
