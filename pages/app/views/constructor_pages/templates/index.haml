@@ -1,9 +1,9 @@
 - content_for :page_title do
-  Шаблоны
+  =t :templates
 
 - content_for :actions do
   .span4.clearfix.text-right
-    = link_to "<i class='icon-plus icon-white'></i> Создать шаблон".html_safe, new_template_path, :class => "btn btn-link btn-large"
+    = link_to "<i class='icon-plus icon-white'></i> #{t :new_template}".html_safe, new_template_path, :class => "btn btn-link btn-large"
 
 %section.b-tree.span8
   %ul

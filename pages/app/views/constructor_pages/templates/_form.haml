@@ -17,17 +17,17 @@
     .control-group
       = f.label :parent, :class => 'control-label'
       .controls
-        = f.select :parent_id, options_for_select(for_select(@roots), :selected => @template.parent_id), :include_blank => 'Нет'
+        = f.select :parent_id, options_for_select(for_select(@roots), :selected => @template.parent_id), :include_blank => t(:no)
 
     .control-group
       = f.label :child, :class => 'control-label'
       .controls
-        = f.select :child_id, options_for_select(for_select(@roots), :selected => @template.child_id), :include_blank => 'Нет'
+        = f.select :child_id, options_for_select(for_select(@roots), :selected => @template.child_id), :include_blank => t(:no)
 
     - unless @template.new_record?
       .control-group
         .controls
-          = link_to "<i class='icon-plus icon-white'></i> Добавить поле".html_safe, new_field_path(@template.id), :class => "btn btn-mini btn-link"
+          = link_to "<i class='icon-plus icon-white'></i> #{t :new_field}".html_safe, new_field_path(@template.id), :class => "btn btn-mini btn-link"
 
     - @template.fields.each do |field|
       .control-group
@@ -37,11 +37,11 @@
           = link_to "<i class='icon-arrow-up'></i>".html_safe, field_move_up_path(field), :class => "btn btn-mini #{"disabled" if field.first?}"
 
           = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_field_path(field, field.template), :class => "btn btn-mini btn-primary"
-          = link_to "<i class='icon-remove icon-white'></i>".html_safe, field_path(field), :method => :delete, :confirm => "Вы уверены?", :class => "btn btn-mini btn-danger"
+          = link_to "<i class='icon-remove icon-white'></i>".html_safe, field_path(field), :method => :delete, :confirm => t(:are_you_sure?), :class => "btn btn-mini btn-danger"
 
     .row-fluid
       .span12
         .form-actions
           = f.submit :class => "btn btn-primary"
-          = link_to "Отмена", templates_url, :class => "btn"
-          = link_to "Удалить шаблон", @template, :confirm => 'Вы уверены?', :method => :delete, :class => "btn btn-danger pull-right" unless @template.new_record?
+          = link_to t(:cancel), templates_url, :class => "btn"
+          = link_to t(:delete_template), @template, :confirm => t(:are_you_sure?), :method => :delete, :class => "btn btn-danger pull-right" unless @template.new_record?

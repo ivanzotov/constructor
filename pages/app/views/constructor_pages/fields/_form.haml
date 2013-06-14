@@ -25,4 +25,4 @@
       .span12
         .form-actions
           = f.submit :class => "btn btn-primary"
-          = link_to "Отмена", edit_template_url(@field.template), :class => "btn"
+          = link_to t(:cancel), edit_template_url(@field.template), :class => "btn"

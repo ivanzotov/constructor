@@ -1,5 +1,5 @@
 - content_for :page_title do
-  Вход на сайт
+  =t :login
 
 = form_for(resource, :as => resource_name, :url => '/login') do |f|
   .form-horizontal
@@ -16,6 +16,6 @@
         .controls
           %label.checkbox.inline{:for => 'remember_me'}
             = f.check_box :remember_me
-            Запомнить меня
+            =t :remember_me
       .controls
-        = f.submit "Войти", :class => "btn btn-primary"
+        = f.submit t(:login), :class => "btn btn-primary"

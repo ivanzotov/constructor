@@ -3,7 +3,7 @@
   %head
     %meta{:charset => 'utf-8'}/
     %meta{'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge,chrome=1'}/
-    %title Панель управления
+    %title=t :dashboard
     
     / [if lt IE 9]
       %script{:src => 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
@@ -24,7 +24,7 @@
     .navbar.navbar-constructor
       .navbar-inner
         .container-fluid          
-          = link_to 'Главная страница', '/', :class => 'brand'
+          = link_to t(:homepage), '/', :class => 'brand'
           %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
             %span.icon-bar
             %span.icon-bar
@@ -34,16 +34,16 @@
               %li
                 = link_to '/admin/pages' do
                   %i.icon-sitemap
-                  Структура
+                  =t :structure
               %li
                 = link_to '/admin/templates' do
                   %i.icon-film
-                  Шаблоны
+                  =t :templates
               /
                 %li
                   = link_to '/admin/users' do
                     %i.icon-group
-                    Пользователи
+                    =t :users
 
             - if user_signed_in?
               %ul.nav.pull-right
@@ -54,7 +54,7 @@
                 %li
                   = link_to @current_user, class: 'logout', method: :delete do
                     %i.icon-signout
-                    Выйти
+                    =t :logout
 
     .container-fluid
       .page-header
