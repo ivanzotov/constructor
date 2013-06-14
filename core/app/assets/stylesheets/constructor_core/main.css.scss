@@ -1,10 +1,33 @@
 @import 'bootstrap';
 @import 'font-awesome';
 
+$red: #ED2B00;
+$yellow: #FFC404;
+$green: #2AB500;
+$violet: #8E0BD6;
+$blue: #0D98FF;
+
+$redDark: #B82100;
+$yellowDark: #D9A603;
+$greenDark: #218F00;
+$violetDark: #6B08A1;
+$blueDark: #0A7BCF;
+
 body {
   min-width: 950px;
   color: $gray;
 }
+
+a {
+  &:link {
+    color: $blue;
+  }
+
+  &:active, &:hover, &:focus {
+    color: $red;
+  }
+}
+
 
 h3 {
   font-weight: normal;
@@ -33,7 +56,7 @@ h3 {
 }
 
 .navbar .nav > li > a {
-  &:hover { color: #e00 }
+  &:hover { color: $red }
 }
 
 .btn {
@@ -45,26 +68,39 @@ h3 {
   font-weight: normal;
   @include box-shadow(none);
 
+  &:active, &:link, &:hover, &:focus {
+    color: $gray;
+  }
+
   &.btn-link {
     background-image: none;
-    color: #0090ff;
+    color: $blue;
     border: none;
     background-color: transparent;
 
-    &:hover {
+    &:link {
+      color: $blue
+    }
+
+    &:active,  &:hover, &:focus {
+      color: $red;
       text-decoration: none;
-      color: #e00;
     }
   }
 
   &.btn-danger {
     background-image: none;
     border: none;
-    color: #e00;
+    color: $red;
     background-color: transparent;
 
-    &:hover {
-      background-color: #e22;
+
+    &:link {
+      color: $red;
+    }
+
+    &:active,  &:hover, &:focus {
+      background-color: $red;
       color: $white;
     }
   }
@@ -72,15 +108,27 @@ h3 {
   &.btn-primary {
     background-image: none;
     border: none;
-    background-color: #006dff;
+    background-color: $blueDark;
     color: $white;
+
+    &:link {
+      color: $white;
+    }
+
+    &:active,  &:hover, &:focus {}
   }
 
   &.btn-success {
     background-image: none;
     border: none;
-    background-color: #36af00;
+    background-color: $green;
     color: $white;
+
+    &:link {
+      color: $white;
+    }
+
+    &:active,  &:hover, &:focus {}
   }
 
   &.btn-large { font-size: $baseFontSize*1.5 }
@@ -143,6 +191,10 @@ h3 {
       margin-left: 0;
       padding-left: 0;
       margin-top: 0;
+    }
+
+    li {
+      margin-top: 10px;
     }
   }
 }
