@@ -2,6 +2,9 @@
 
 Content management system on Ruby on Rails
 
+## Screenshots
+![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_structure.png)
+
 ## Installation
 
 ### Add to Gemfile
