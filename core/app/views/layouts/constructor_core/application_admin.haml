@@ -39,10 +39,11 @@
                 = link_to '/admin/templates' do
                   %i.icon-film
                   Шаблоны
-              %li
-                = link_to '/admin/users' do
-                  %i.icon-group
-                  Пользователи
+              /
+                %li
+                  = link_to '/admin/users' do
+                    %i.icon-group
+                    Пользователи
 
             - if user_signed_in?
               %ul.nav.pull-right
