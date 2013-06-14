@@ -6,6 +6,9 @@ en:
   edit_field: 'Edit field'
   seo: 'SEO'
   display_in: 'Display in'
+  help: 'Help'
+  edit: 'Edit'
+
 
   string: 'String'
   integer: 'Integer'
@@ -25,6 +28,7 @@ en:
   edit_page: 'Edit page'
   delete_page: 'Delete page'
 
+  template: 'Template'
   new_template: 'New template'
   edit_template: 'Edit template'
   delete_template: 'Delete template'

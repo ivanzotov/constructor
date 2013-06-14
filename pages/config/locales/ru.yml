@@ -15,6 +15,7 @@ ru:
   edit_page: 'Редактирование страницы'
   delete_page: 'Удалить страницу'
 
+  template: 'Шаблон'
   new_template: 'Создать шаблон'
   edit_template: 'Редактирование шаблона'
   delete_template: 'Удалить шаблон'
@@ -29,6 +30,8 @@ ru:
   text: 'Текст'
   html: 'HTML'
   image: 'Изображение'
+  help: 'Помощь'
+  edit: 'Редактировать'
 
   page_not_found: 'Страница не найдена'
 

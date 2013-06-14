@@ -5,7 +5,7 @@
   .span4.clearfix.text-right
     = link_to "<i class='icon-plus icon-white'></i> #{t :new_template}".html_safe, new_template_path, :class => "btn btn-link btn-large"
 
-%section.b-tree.span8
+%section.b-tree.span12
   %ul
     - @roots.each do |root|
       - level = root.level
@@ -21,15 +21,16 @@
           </li>
 
         <li>
-        %button.btn.disabled= template.name
+        %button.btn.btn-link.disabled= template.name
 
-        .btn-group
-          - if not template.right_sibling.nil? and template.move_possible?(template.right_sibling)
-            = link_to "<i class='icon-arrow-down'></i>".html_safe, template_move_down_path(template), :method => :post, :class => "btn btn-mini"
-          - if not template.left_sibling.nil? and template.move_possible?(template.left_sibling)
-            = link_to "<i class='icon-arrow-up'></i>".html_safe, template_move_up_path(template), :method => :post, :class => "btn btn-mini"
+        .b-tree__buttons
+          .btn-group
+            - if not template.right_sibling.nil? and template.move_possible?(template.right_sibling)
+              = link_to "<i class='icon-arrow-down'></i>".html_safe, template_move_down_path(template), :method => :post, :class => "btn btn-mini"
+            - if not template.left_sibling.nil? and template.move_possible?(template.left_sibling)
+              = link_to "<i class='icon-arrow-up'></i>".html_safe, template_move_up_path(template), :method => :post, :class => "btn btn-mini"
 
-        = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_template_path(template), :class => "btn btn-primary btn-mini"
+          = link_to "<i class='icon-pencil'></i> #{t :edit} #{ t(:template).downcase}".html_safe, edit_template_path(template), :class => "btn btn-primary btn-mini"
 
 
         - level = template.level

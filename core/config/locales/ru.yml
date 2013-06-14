@@ -1,6 +1,7 @@
 ru:
   dashboard: 'Панель управления'
   homepage: 'Главная страница'
+  users: 'Пользователи'
   login: 'Войти'
   logout: 'Выйти'
   cancel: 'Отмена'

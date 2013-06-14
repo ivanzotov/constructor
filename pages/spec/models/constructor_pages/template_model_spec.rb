@@ -9,6 +9,10 @@ module ConstructorPages
       template.valid?.should be_true
     end
 
+    describe '#name' do
+      it 'should convert russian suffix'
+    end
+
     describe '#code_name' do
       context 'validation' do
         it 'should be uniqueness'
