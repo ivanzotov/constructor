@@ -36,6 +36,23 @@ module ConstructorPages
       it 'should return page as json format with fields'
     end
 
+    describe '#redirect?' do
+      it 'should check if link specified or not' do
+        page = Page.create name: 'Test redirection'
+        page.redirect?.should be_false
+
+        page.link = ''
+        page.save
+
+        page.redirect?.should be_false
+
+        page.link = '/hello-redirect'
+        page.save
+
+        page.redirect?.should be_true
+      end
+    end
+
     describe '#auto_url' do
       it 'should be true by default' do
         page = Page.create
