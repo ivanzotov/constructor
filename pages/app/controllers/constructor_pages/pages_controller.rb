@@ -112,7 +112,7 @@ module ConstructorPages
       @page = Page.new params[:page]
 
       if @page.save
-        redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно добавлена."
+        redirect_to pages_url, notice: t(:page_success_added, name: @page.name)
       else
         render :action => "new"
       end
@@ -152,7 +152,7 @@ module ConstructorPages
           end
         end
 
-        redirect_to pages_url, :notice => "Страница «#{@page.name}» успешно обновлена."
+        redirect_to pages_url, notice: t(:page_success_updated, name: @page.name)
       else
         render :action => "edit"
       end
@@ -162,7 +162,7 @@ module ConstructorPages
       @page = Page.find(params[:id])
       title = @page.name
       @page.destroy
-      redirect_to pages_url, :notice => "Страница «#{title}» успешно удалена."
+      redirect_to pages_url, notice: t(:page_success_removed, name: @page.name)
     end
 
     def move_up

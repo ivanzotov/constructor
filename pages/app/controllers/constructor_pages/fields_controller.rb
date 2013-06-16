@@ -20,7 +20,7 @@ module ConstructorPages
       @field = Field.new params[:field]
 
       if @field.save
-        redirect_to edit_template_path(@field.template_id), :notice => "Поле «#{@field.name}» успешно добавлено."
+        redirect_to edit_template_path(@field.template_id), notice: t(:field_success_added, name: @field.name)
       else
         render :action => 'new', :template_id => @field.template_id
       end
@@ -47,7 +47,7 @@ module ConstructorPages
           end
         end
       if @field.update_attributes params[:field]
-        redirect_to edit_template_url(@field.template.id), :notice => "Поле «#{@field.name}» успешно обновлено."
+        redirect_to edit_template_url(@field.template.id), notice: t(:field_success_updated, name: @field.name)
       else
         render :action => "edit"
       end
@@ -58,19 +58,19 @@ module ConstructorPages
       name = @field.name
       template = @field.template.id
       @field.destroy
-      redirect_to edit_template_url(template), :notice => "Поле «#{name}» успешно удалено."
+      redirect_to edit_template_url(template), notice: t(:field_success_removed, name: name)
     end
 
     def move_up
       @field = Field.find(params[:id])
       @field.move_higher
-      redirect_to :back, :notice => 'Поле успешно перемещено.'
+      redirect_to :back, notice: t(:field_success_moved, name: @field.name)
     end
 
     def move_down
       @field = Field.find(params[:id])
       @field.move_lower
-      redirect_to :back, :notice => 'Поле успешно перемещено.'
+      redirect_to :back, notice: t(:field_success_moved, name: @field.name)
     end
   end
 end
