@@ -24,6 +24,31 @@ module ConstructorPages
     acts_as_list  scope: :template_id
     default_scope order: :position
 
+    # return constant of model by type_value
+    def type_model; "constructor_pages/types/#{type_value}_type".classify.constantize end
+
+    # remove all type_fields values for specified page
+    def remove_values_for(page); type_model.destroy_all field_id: id, page_id: page.id end
+
+    def update_value(page, params)
+      _type_value = type_model.where(field_id: id, page_id: page.id).first_or_create
+
+      if params
+        _type_value.value = 0 if type_value == 'boolean'
+
+        if params[type_value]
+          if type_value == 'date'
+            value = params[type_value][id.to_s]
+            _type_value.value = Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i).to_s
+          else
+            _type_value.value = params[type_value][id.to_s]
+          end
+        end
+
+        _type_value.save
+      end
+    end
+
     private
 
     def method_uniqueness

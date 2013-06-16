@@ -50,7 +50,7 @@
             .control-group
               = f.label :template, :class => 'control-label'
               .controls
-                = f.select :template_id, options_for_select(templates, :selected => @template)
+                = f.select :template_id, options_for_select(templates, :selected => @template_id)
             .control-group
               = f.label :link, :class => 'control-label'
               .controls
