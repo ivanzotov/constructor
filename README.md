@@ -24,7 +24,7 @@ Content management system on Ruby on Rails
     rake db:migrate
 
 ## Screenshots
-![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_structure.png)
+![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_structure_0.5.3.png)
 
 ## Copyright
   Copyright © 2012—2013 Ivan Zotov. See [LICENSE][] for details.
