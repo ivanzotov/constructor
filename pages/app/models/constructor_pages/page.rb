@@ -16,6 +16,8 @@ module ConstructorPages
     has_many :html_types,     dependent: :destroy, class_name: 'Types::HtmlType'
     has_many :image_types,    dependent: :destroy, class_name: 'Types::ImageType'
 
+    has_many :fields, through: :template
+
     belongs_to :template
 
     default_scope order :lft
@@ -74,6 +76,9 @@ module ConstructorPages
         field(name)
       end
     end
+
+    # check if link specified
+    def redirect?; url != link && !link.empty? end
 
     private
 

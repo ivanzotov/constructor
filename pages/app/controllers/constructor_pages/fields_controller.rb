@@ -61,15 +61,15 @@ module ConstructorPages
       redirect_to edit_template_url(template), notice: t(:field_success_removed, name: name)
     end
 
-    def move_up
-      @field = Field.find(params[:id])
-      @field.move_higher
-      redirect_to :back, notice: t(:field_success_moved, name: @field.name)
-    end
+    def move_up; move_to :up end
 
-    def move_down
+    def move_down; move_to :down end
+
+    private
+
+    def move_to(to)
       @field = Field.find(params[:id])
-      @field.move_lower
+      to == :up ? @field.move_higher : @field.move_lower
       redirect_to :back, notice: t(:field_success_moved, name: @field.name)
     end
   end

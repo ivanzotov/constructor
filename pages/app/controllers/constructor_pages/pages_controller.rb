@@ -11,52 +11,47 @@ module ConstructorPages
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
 
     def new
-      @page = Page.new
-      @template = Template.first.id
-      @multipart = false
+      @page, @template_id, @multipart = Page.new, Template.first.id, false
 
       if params[:page]
-        @parent = Page.find(params[:page])
-        @page.parent_id = @parent.id
+        _parent = @page.parent = Page.find(params[:page])
 
-        if @parent.template.child_id.nil? and !@parent.template.leaf?
-          @template = @parent.template.descendants.first.id
-        else
-          @template = @parent.template.child_id
+        if _parent
+          if _parent.template.child_id.nil? and !_parent.template.leaf?
+            @template_id = _parent.template.children.first.id
+          else
+            @template_id = _parent.template.child_id
+          end
         end
       end
     end
 
     def show
-      if params[:all].nil?
-        @page = Page.first
-      else
-        @request = '/' + params[:all]
-        @page = Page.where(:full_url => @request).first
-      end
+      @page = params[:all].nil? ? Page.first : Page.find_by_full_url('/' + params[:all])
 
       if @page.nil? or !@page.active
-        render :action => "error_404", :layout => false
+        render action: 'error_404', layout: false
         return
       end
 
-      if @page.url != @page.link and !@page.link.empty?
-        redirect_to @page.link
-      end
+      redirect_to @page.link if @page.redirect?
 
-      instance_variable_set('@'+@page.template.code_name.to_s, @page)
+      _code_name = @page.template.code_name.to_s
+
+      instance_variable_set('@'+_code_name, @page)
 
       respond_to do |format|
-        format.html { render :template => "html_templates/#{@page.template.code_name}" }
+        format.html { render template: "html_templates/#{_code_name}" }
         format.json {
-          _template = render_to_string :partial => "json_templates/#{@page.template.code_name}.json.erb", :layout => false, :locals => {@page.template.code_name.to_sym => @page, :page => @page}
-          _js = render_to_string :partial => "js_partials/#{@page.template.code_name}.js"
+          _template = render_to_string partial: "json_templates/#{_code_name}.json.erb", layout: false, locals: {_code_name.to_sym => @page, page: @page}
+          _js = render_to_string partial: "js_partials/#{_code_name}.js"
 
-          render :json => @page, :self_and_ancestors => @page.self_and_ancestors.map{|a| a.id}, :template => _template.gsub(/\n/, '\\\\n'), :js => _js
+          render json: @page, self_and_ancestors: @page.self_and_ancestors.map(&:id), template: _template.gsub(/\n/, '\\\\n'), js: _js
         }
       end
     end
 
+=begin
     def search
       if params[:all].nil?
         @page = Page.first
@@ -99,22 +94,23 @@ module ConstructorPages
 
       render :template => "templates/#{template.code_name}_search"
     end
+=end
 
     def edit
       @page = Page.find(params[:id])
       @page.template ||= Template.first
-      @template = @page.template.id
+      @template_id = @page.template.id
 
-      @multipart = @page.template.fields.map{|f| f.type_value == "image"}.include?(true) ? true : false
+      @multipart = @page.fields.map{|f| f.type_value == 'image'}.include?(true) ? true : false
     end
 
     def create
       @page = Page.new params[:page]
 
       if @page.save
-        redirect_to pages_url, notice: t(:page_success_added, name: @page.name)
+        redirect_to pages.pages_url, notice: t(:page_success_added, name: @page.name)
       else
-        render :action => "new"
+        render action: :new
       end
     end
 
@@ -122,70 +118,41 @@ module ConstructorPages
       @page = Page.find params[:id]
 
       if @page.template.id != params[:page][:template_id].to_i
-        @page.template.fields.each do |field|
-          "constructor_pages/types/#{field.type_value}_type".classify.constantize.destroy_all(
-              :field_id => field.id,
-              :page_id => @page.id)
-        end
+        @page.fields.each {|f| f.remove_values_for @page}
       end
 
       if @page.update_attributes params[:page]
+        @page.fields.each {|f| f.update_value(@page, params[:fields])}
 
-        @page.template.fields.each do |field|
-          f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(
-              :field_id => field.id,
-              :page_id => @page.id).first_or_create
-
-          if params[:fields]
-            f.value = 0 if field.type_value == 'boolean'
-
-            if params[:fields][field.type_value]
-              if field.type_value == "date"
-                value = params[:fields][field.type_value][field.id.to_s]
-                f.value = Date.new(value["date(1i)"].to_i, value["date(2i)"].to_i, value["date(3i)"].to_i).to_s
-              else
-                f.value = params[:fields][field.type_value][field.id.to_s]
-              end
-            end
-
-            f.save
-          end
-        end
-
-        redirect_to pages_url, notice: t(:page_success_updated, name: @page.name)
+        redirect_to pages.pages_url, notice: t(:page_success_updated, name: @page.name)
       else
-        render :action => "edit"
+        render action: :edit
       end
     end
 
     def destroy
       @page = Page.find(params[:id])
-      title = @page.name
+      _name = @page.name
       @page.destroy
-      redirect_to pages_url, notice: t(:page_success_removed, name: @page.name)
+      redirect_to pages_url, notice: t(:page_success_removed, name: _name)
     end
 
-    def move_up
-      from = Page.find(params[:id])
-      ls = from.left_sibling
-      if not ls.nil? and from.move_possible?(ls)
-        from.move_left
-      end
+    def move_up; move_to :up end
 
-      redirect_to :back
-    end
-
-    def move_down
-      from = Page.find(params[:id])
-      rs = from.right_sibling
-      if not rs.nil? and from.move_possible?(rs)
-        from.move_right
-      end
-
-      redirect_to :back
-    end
+    def move_down; move_to :down end
 
     private
+
+    def move_to(to)
+      from = Page.find(params[:id])
+      to_sibling = to == :up ? from.left_sibling : from.right_sibling
+
+      if not to_sibling.nil? and from.move_possible?(to_sibling)
+        to == :up ? from.move_left : from.move_right
+      end
+
+      redirect_to :back
+    end
 
     def cache
       expire_page :action => :show

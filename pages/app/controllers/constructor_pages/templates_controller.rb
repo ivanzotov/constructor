@@ -47,21 +47,18 @@ module ConstructorPages
       redirect_to templates_url, :notice => "Шаблон «#{name}» успешно удален."
     end
 
-    def move_up
-      from = Template.find(params[:id])
-      ls = from.left_sibling
-      if not ls.nil? and from.move_possible?(ls)
-        from.move_left
-      end
+    def move_up; move_to :up end
 
-      redirect_to :back
-    end
+    def move_down; move_to :down end
 
-    def move_down
+    private
+
+    def move_to(to)
       from = Template.find(params[:id])
-      rs = from.right_sibling
-      if not rs.nil? and from.move_possible?(rs)
-        from.move_right
+      to_sibling = to == :up ? from.left_sibling : from.right_sibling
+
+      if not to_sibling.nil? and from.move_possible?(to_sibling)
+        to == :up ? from.move_left : from.move_right
       end
 
       redirect_to :back

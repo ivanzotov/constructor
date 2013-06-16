@@ -25,5 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml-rails'
   s.add_dependency 'acts_as_list'
 
+
   s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'capybara'
 end
