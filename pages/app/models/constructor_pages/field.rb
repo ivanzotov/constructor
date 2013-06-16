@@ -2,24 +2,25 @@
 
 module ConstructorPages
   class Field < ActiveRecord::Base
+    TYPES = %w{string integer float boolean text date html image}
+
     attr_accessible :name, :code_name, :type_value, :template_id, :template
     validates_presence_of :name
     validates_uniqueness_of :code_name, :scope => :template_id
     validate :method_uniqueness
 
     after_create :create_page_fields
-    after_destroy :destroy_page_fields
+    after_destroy :destroy_all_page_fields
 
     belongs_to :template
 
-    has_one :string_type,   class_name: 'Types::StringType'
-    has_one :integer_type,  class_name: 'Types::IntegerType'
-    has_one :float_type,    class_name: 'Types::FloatType'
-    has_one :boolean_type,  class_name: 'Types::BooleanType'
-    has_one :text_type,     class_name: 'Types::TextType'
-    has_one :date_type,     class_name: 'Types::DateType'
-    has_one :html_type,     class_name: 'Types::HtmlType'
-    has_one :image_type,    class_name: 'Types::ImageType'
+    TYPES.each do |t|
+      class_eval %{
+        has_one :#{t}_type, class_name: 'Types::#{t.titleize}Type'
+      }
+    end
+
+    has_many :pages, through: :template
 
     acts_as_list  scope: :template_id
     default_scope order: :position
@@ -63,16 +64,12 @@ module ConstructorPages
       end
     end
 
-    def create_page_fields
-      self.template.pages.each do |page|
-        "constructor_pages/types/#{type_value}_type".classify.constantize.create page_id: page.id, field_id: id
-      end
-    end
-
-    def destroy_page_fields
-      self.template.pages.each do |page|
-        "constructor_pages/types/#{type_value}_type".classify.constantize.destroy_all page_id: page.id, field_id: id
-      end
+    %w{create destroy_all}.each do |m|
+      class_eval %{
+          def #{m}_page_fields
+            pages.each {|page| type_model.#{m} page_id: page.id, field_id: id}
+          end
+      }
     end
   end
 end

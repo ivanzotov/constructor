@@ -7,14 +7,11 @@ module ConstructorPages
                     :parent, :parent_id, :link, :in_menu, :in_map,
                     :in_nav, :template_id, :template
 
-    has_many :string_types,   dependent: :destroy, class_name: 'Types::StringType'
-    has_many :float_types,    dependent: :destroy, class_name: 'Types::FloatType'
-    has_many :boolean_types,  dependent: :destroy, class_name: 'Types::BooleanType'
-    has_many :integer_types,  dependent: :destroy, class_name: 'Types::IntegerType'
-    has_many :text_types,     dependent: :destroy, class_name: 'Types::TextType'
-    has_many :date_types,     dependent: :destroy, class_name: 'Types::DateType'
-    has_many :html_types,     dependent: :destroy, class_name: 'Types::HtmlType'
-    has_many :image_types,    dependent: :destroy, class_name: 'Types::ImageType'
+    Field::TYPES.each do |t|
+      class_eval %{
+        has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'
+      }
+    end
 
     has_many :fields, through: :template
 
@@ -36,11 +33,11 @@ module ConstructorPages
     end
 
     def field(code_name, meth = 'value')
-      field = Field.where(code_name: code_name, template_id: self.template_id).first
+      field = Field.find_by_code_name_and_template_id code_name, template_id
 
       if field
-        f = "constructor_pages/types/#{field.type_value}_type".classify.constantize.where(field_id: field.id, page_id: self.id).first
-        f.send(meth) if f
+        _field = field.type_model.find_by_field_id_and_page_id field.id, id
+        _field.send(meth) if _field
       end
     end
 
@@ -50,7 +47,7 @@ module ConstructorPages
         :title => self.title
       }.merge options
 
-      self.template.fields.each do |field|
+      fields.each do |field|
         unless self.send(field.code_name)
           options = {field.code_name => self.send(field.code_name)}.merge options
         end
@@ -63,13 +60,12 @@ module ConstructorPages
       name = name.to_s
 
       if field(name).nil?
-        _template = Template.find_by_code_name(name.singularize)
+        _template = Template.find_by_code_name name.singularize
         template_id = _template.id if _template
 
         if template_id
-          result = []
-          result = descendants.where(:template_id => template_id) if name == name.pluralize
-          result = ancestors.where(:template_id => template_id).first if result.empty?
+          result = descendants.where(template_id: template_id) if name == name.pluralize
+          result = ancestors.where(template_id: template_id).first if result.empty?
           result || []
         end
       else
@@ -110,9 +106,7 @@ module ConstructorPages
     def descendants_update; descendants.map(&:save) end
 
     def create_fields
-      template.fields.each do |field|
-        "constructor_pages/types/#{field.type_value}_type".classify.constantize.create page_id: id, field: field
-      end
+      fields.each {|field| field.type_model.create page_id: id, field_id: field.id}
     end
   end
 end
