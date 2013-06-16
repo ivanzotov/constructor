@@ -6,6 +6,15 @@ en:
   edit_field: 'Edit field'
   seo: 'SEO'
   display_in: 'Display in'
+  help: 'Help'
+  edit: 'Edit'
+
+  new_field: 'New field'
+
+  field_success_added: 'Field «%{name}» added successfully.'
+  field_success_updated: 'Field «%{name}» updated successfully.'
+  field_success_removed: 'Field «%{name}» removed successfully.'
+  field_success_moved: 'Field «%{name} moved successfully.'
 
   string: 'String'
   integer: 'Integer'
@@ -21,14 +30,17 @@ en:
 
   are_you_sure?: 'Are you sure?'
 
+  page_not_found: 'Page not found'
+
   new_page: 'New page'
   edit_page: 'Edit page'
   delete_page: 'Delete page'
 
+  page_success_added: 'Page «%{name}» added successfully.'
+  page_success_updated: 'Page «%{name}» updated successfully.'
+  page_success_removed: 'Page «%{name}» removed successfully.'
+
+  template: 'Template'
   new_template: 'New template'
   edit_template: 'Edit template'
   delete_template: 'Delete template'
-
-  new_field: 'New field'
-
-  page_not_found: 'Page not found'

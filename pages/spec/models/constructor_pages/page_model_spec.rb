@@ -97,14 +97,6 @@ module ConstructorPages
         page_two.full_url.should == '/hello/world'
       end
 
-      it 'should be translit utf-8' do
-        page = Page.create name: 'Проверка'
-        page.full_url.should == '/proverka'
-
-        page_two = Page.create name: 'Тест', parent: page
-        page_two.full_url.should == '/proverka/test'
-      end
-
       context 'if parent or url has been changed' do
         it 'should update full_url' do
           page = Page.create name: 'Change url', url: 'change-url', auto_url: false
@@ -131,6 +123,16 @@ module ConstructorPages
           page.save
           page.full_url.should == '/page'
         end
+      end
+    end
+
+    describe 'translit' do
+      it 'should translit utf-8' do
+        page = Page.create name: 'Проверка'
+        page.full_url.should == '/proverka'
+
+        page_two = Page.create name: 'Тест', parent: page
+        page_two.full_url.should == '/proverka/test'
       end
     end
 

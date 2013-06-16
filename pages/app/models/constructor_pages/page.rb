@@ -79,7 +79,13 @@ module ConstructorPages
 
     # if url has been changed by manually or url is empty
     def friendly_url
-      self.url = ((auto_url || url.empty?) ? name : url).parameterize
+      self.url = ((auto_url || url.empty?) ? translit(name) : url).parameterize
+    end
+
+    # TODO: add more languages
+    # translit to english
+    def translit(str)
+      Russian.translit(str)
     end
 
     # page is not valid if there is no template

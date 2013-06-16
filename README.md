@@ -2,6 +2,8 @@
 
 Content management system on Ruby on Rails
 
+[![Build Status](https://travis-ci.org/ivanzotov/constructor.png?branch=master)](https://travis-ci.org/ivanzotov/constructor)
+
 ## Installation
 
 ### Add to Gemfile

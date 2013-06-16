@@ -8,18 +8,21 @@ ru:
   are_you_sure?: 'Вы уверены?'
   display_in: 'Отображать в'
 
+
   menu: 'Меню'
   breadcrumbs: 'Хлебные крошки'
 
-  new_page: 'Создать страницу'
-  edit_page: 'Редактирование страницы'
-  delete_page: 'Удалить страницу'
-
+  template: 'Шаблон'
   new_template: 'Создать шаблон'
   edit_template: 'Редактирование шаблона'
   delete_template: 'Удалить шаблон'
 
   new_field: 'Добавить поле'
+
+  field_success_added: 'Поле «%{name}» успешно добавлено.'
+  field_success_updated: 'Поле «%{name}» успешно обновлено.'
+  field_success_removed: 'Поле «%{name}» успешно удалено.'
+  field_success_moved: 'Поле «%{name}» успешно перемещено.'
 
   string: 'Строка'
   integer: 'Целое число'
@@ -29,8 +32,18 @@ ru:
   text: 'Текст'
   html: 'HTML'
   image: 'Изображение'
+  help: 'Помощь'
+  edit: 'Редактировать'
 
   page_not_found: 'Страница не найдена'
+
+  new_page: 'Создать страницу'
+  edit_page: 'Редактирование страницы'
+  delete_page: 'Удалить страницу'
+
+  page_success_added: 'Страница «%{name}» успешно добавлена.'
+  page_success_updated: 'Страница «%{name}» успешно обновлена.'
+  page_success_removed: 'Страница «%{name}» успешно удалена.'
 
   activerecord:
     attributes:

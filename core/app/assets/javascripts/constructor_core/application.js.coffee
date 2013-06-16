@@ -5,11 +5,6 @@
 #= require_self
 
 $(document).ready ->
-  $('#tree').treeview({
-    collapsed: false,
-    persist: 'cookie'
-  })
-
   $(".alert").alert()
   $(".collapse").collapse()
   

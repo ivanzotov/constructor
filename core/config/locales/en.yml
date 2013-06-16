@@ -1,5 +1,6 @@
 en:
   dashboard: 'Dashboard'
+  users: 'Users'
   homepage: 'Home page'
   login: 'Login'
   logout: 'Logout'
