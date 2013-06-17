@@ -2,10 +2,6 @@
 
 module ConstructorPages
   class FieldsController < ConstructorCore::ApplicationController
-    before_filter :authenticate_user!
-
-    layout 'constructor_core/application_admin'
-
     def new
       @field = Field.new
       @field.template = Template.find(params[:template_id])

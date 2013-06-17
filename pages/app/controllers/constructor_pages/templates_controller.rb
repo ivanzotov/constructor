@@ -2,11 +2,6 @@
 
 module ConstructorPages
   class TemplatesController < ConstructorCore::ApplicationController
-    before_filter :authenticate_user!
-
-    before_filter {@roots = Template.roots}
-    layout 'constructor_core/application_admin'
-
     def new
       @template = Template.new
 

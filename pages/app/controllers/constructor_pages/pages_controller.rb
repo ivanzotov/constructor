@@ -2,12 +2,8 @@
 
 module ConstructorPages
   class PagesController < ConstructorCore::ApplicationController
-    before_filter :authenticate_user!, :except => [:show, :search, :sitemap]
-
     caches_page :show
 
-    before_filter {@roots = Page.roots}
-    layout 'constructor_core/application_admin', :except => [:show, :search, :sitemap]
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
 
     def new
