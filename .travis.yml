@@ -1,4 +1,8 @@
 language: ruby
+before_script:
+  - "rake app:constructor_core:install:migrations"
+  - "rake app:constructor_pages:install:migrations"
+  - "rake app:db:migrate"
 script:
   - "rspec ."
 rvm:
