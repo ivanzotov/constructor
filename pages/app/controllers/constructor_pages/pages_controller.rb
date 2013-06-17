@@ -6,31 +6,20 @@ module ConstructorPages
     caches_page :show
 
     before_filter {@roots = Page.roots}
-    before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
+    before_filter :cache, only: [:create, :update, :destroy, :move_up, :move_down]
 
     def new
       @page, @template_id, @multipart = Page.new, Template.first.id, false
 
-      if params[:page]
-        _parent = @page.parent = Page.find(params[:page])
-
-        if _parent
-          if _parent.template.child_id.nil? and !_parent.template.leaf?
-            @template_id = _parent.template.children.first.id
-          else
-            @template_id = _parent.template.child_id
-          end
-        end
+      if params[:page] and (@page.parent = Page.find(params[:page]))
+        @template_id = @page.parent.template.child.id
       end
     end
 
     def show
-      @page = params[:all].nil? ? Page.first : Page.find_by_full_url('/' + params[:all])
+      @page = Page.find_by_request_or_first params[:all]
 
-      if @page.nil? or !@page.active
-        render action: 'error_404', layout: false
-        return
-      end
+      error_404 unless @page and @page.active?
 
       redirect_to @page.link if @page.redirect?
 
@@ -116,13 +105,13 @@ module ConstructorPages
       @page = Page.find params[:id]
 
       if @page.template.id != params[:page][:template_id].to_i
-        @page.fields.each {|f| f.remove_values_for @page}
+        @page.remove_fields_values
       end
 
       if @page.update_attributes params[:page]
-        @page.fields.each {|f| f.update_value(@page, params[:fields])}
+        @page.update_fields_values params[:fields]
 
-        redirect_to pages.pages_url, notice: t(:page_success_updated, name: @page.name)
+        redirect_to pages_url, notice: t(:page_success_updated, name: @page.name)
       else
         render action: :edit
       end
@@ -138,6 +127,10 @@ module ConstructorPages
     %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, m.to_sym end}
 
     private
+
+    def error_404
+      render file: '#{Rails.root}/public/404', layout: false, status: :not_found
+    end
 
     def cache
       expire_page :action => :show

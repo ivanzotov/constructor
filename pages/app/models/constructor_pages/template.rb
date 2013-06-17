@@ -16,6 +16,15 @@ module ConstructorPages
 
     acts_as_nested_set
 
+    # return child corresponding child_id or children first
+    def child
+      if child_id.nil? and !leaf?
+        children.first
+      else
+        Template.find child_id
+      end
+    end
+
     private
 
     def method_uniqueness

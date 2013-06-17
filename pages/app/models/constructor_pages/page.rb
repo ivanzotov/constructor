@@ -27,10 +27,16 @@ module ConstructorPages
 
     acts_as_nested_set
 
+    def self.find_by_request_or_first(request)
+      request.nil? ? Page.first : Page.find_by_full_url('/' + request)
+    end
+
     # generate full_url from parent page and url
     def self.full_url_generate(parent_id, url = '')
       Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
     end
+
+    alias_method :active?, :active
 
     def field(code_name, meth = 'value')
       field = Field.find_by_code_name_and_template_id code_name, template_id
@@ -54,6 +60,16 @@ module ConstructorPages
       end
 
       options
+    end
+
+    # remove all type fields
+    def remove_fields_values
+      fields.each {|f| f.remove_values_for self}
+    end
+
+    # update all type fields
+    def update_fields_values(params)
+      fields.each {|f| f.update_value(self, params)}
     end
 
     def method_missing(name, *args, &block)
