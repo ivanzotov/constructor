@@ -2,6 +2,7 @@
 
 Content management system on Ruby on Rails
 
+[![Gem Version(https://badge.fury.io/rb/constructor-cms.png)](https://rubygems.org/gems/constructor-cms)
 [![Build Status](https://travis-ci.org/ivanzotov/constructor.png?branch=master)](https://travis-ci.org/ivanzotov/constructor)
 [![Dependency Status](https://gemnasium.com/ivanzotov/constructor.png)](https://gemnasium.com/ivanzotov/constructor)
 [![Code Climate](https://codeclimate.com/github/ivanzotov/constructor.png)](https://codeclimate.com/github/ivanzotov/constructor)
