@@ -2,6 +2,8 @@
 
 module ConstructorCore
   class ApplicationController < ApplicationController
+    before_filter :authenticate_user!, :except => [:show]
+
     helper_method :current_user
 
     private

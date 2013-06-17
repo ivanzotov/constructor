@@ -169,7 +169,10 @@ module ConstructorPages
     end
 
     describe 'create_fields' do
-      it 'should create type_fields after update page'
+      it 'should create type_fields after update page' do
+        page = Page.create name: 'Hello fields'
+
+      end
     end
   end
 end

@@ -45,6 +45,10 @@ ru:
   page_success_updated: 'Страница «%{name}» успешно обновлена.'
   page_success_removed: 'Страница «%{name}» успешно удалена.'
 
+  template_success_added: 'Шаблон «%{name}» успешно добавлен.'
+  template_success_updated: 'Шаблон «%{name}» успешно обновлен.'
+  template_success_removed: 'Шаблон «%{name}» успешно удален.'
+
   activerecord:
     attributes:
       constructor_pages/field:

@@ -1,7 +1,8 @@
 language: ruby
+before_script:
+  - "rake app:railties:install:migrations"
+  - "rake app:db:migrate"
 script:
-  - "rspec ."
+  - "rake spec"
 rvm:
   - 1.9.3
-  - jruby-19mode
-  - rbx-19mode

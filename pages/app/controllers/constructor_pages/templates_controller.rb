@@ -2,10 +2,9 @@
 
 module ConstructorPages
   class TemplatesController < ConstructorCore::ApplicationController
-    before_filter :authenticate_user!
+    include MoveHelper
 
     before_filter {@roots = Template.roots}
-    layout 'constructor_core/application_admin'
 
     def new
       @template = Template.new
@@ -24,9 +23,9 @@ module ConstructorPages
       @template = Template.new params[:template]
 
       if @template.save
-        redirect_to templates_url, :notice => "Шаблон «#{@template.name}» успешно добавлен."
+        redirect_to templates_url, notice: t(:template_success_added, name: @template.name)
       else
-        render :action => "new"
+        render action: :new
       end
     end
 
@@ -34,9 +33,9 @@ module ConstructorPages
       @template = Template.find params[:id]
 
       if @template.update_attributes params[:template]
-        redirect_to templates_url, :notice => "Шаблон «#{@template.name}» успешно обновлен."
+        redirect_to templates_url, notice: t(:template_success_updated, name: @template.name)
       else
-        render :action => "edit"
+        render action: :edit
       end
     end
 
@@ -44,24 +43,9 @@ module ConstructorPages
       @template = Template.find(params[:id])
       name = @template.name
       @template.destroy
-      redirect_to templates_url, :notice => "Шаблон «#{name}» успешно удален."
+      redirect_to templates_url, notice: t(:template_success_removed, name: name)
     end
 
-    def move_up; move_to :up end
-
-    def move_down; move_to :down end
-
-    private
-
-    def move_to(to)
-      from = Template.find(params[:id])
-      to_sibling = to == :up ? from.left_sibling : from.right_sibling
-
-      if not to_sibling.nil? and from.move_possible?(to_sibling)
-        to == :up ? from.move_left : from.move_right
-      end
-
-      redirect_to :back
-    end
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to :template, m.to_sym end}
   end
 end

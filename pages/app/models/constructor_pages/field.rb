@@ -32,25 +32,27 @@ module ConstructorPages
     def remove_values_for(page); type_model.destroy_all field_id: id, page_id: page.id end
 
     def update_value(page, params)
-      _type_value = type_model.where(field_id: id, page_id: page.id).first_or_create
+      _type_model = type_model.where(field_id: id, page_id: page.id).first_or_create
 
-      if params
-        _type_value.value = 0 if type_value == 'boolean'
-
-        if params[type_value]
-          if type_value == 'date'
-            value = params[type_value][id.to_s]
-            _type_value.value = Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i).to_s
-          else
-            _type_value.value = params[type_value][id.to_s]
-          end
-        end
-
-        _type_value.save
-      end
+      update_type_model(_type_model, type_value, params) if params
     end
 
     private
+
+    def update_type_model(type_model, type_value, params)
+      type_model.value = 0 if type_value == 'boolean'
+
+      if params[type_value]
+        if type_value == 'date'
+          value = params[type_value][id.to_s]
+          type_model.value = Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i).to_s
+        else
+          type_model.value = params[type_value][id.to_s]
+        end
+      end
+
+      type_model.save
+    end
 
     def method_uniqueness
       if Page.first.respond_to?(code_name) \
@@ -67,7 +69,7 @@ module ConstructorPages
     %w{create destroy_all}.each do |m|
       class_eval %{
           def #{m}_page_fields
-            pages.each {|page| type_model.#{m} page_id: page.id, field_id: id}
+            template.pages.each {|page| type_model.#{m} page_id: page.id, field_id: id}
           end
       }
     end
