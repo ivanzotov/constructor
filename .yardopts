@@ -1,0 +1,9 @@
+--title "Constructor CMS"
+Gemfile
+lib/**/*
+Rakefile
+core/**/*.rb
+pages/**/*.rb
+-
+README.md
+LICENSE.md
