@@ -36,27 +36,40 @@ module ConstructorPages
       Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
     end
 
-    def active?; active end
+    def field(code_name)
+      Field.find_by_code_name_and_template_id code_name, template_id
+    end
 
-    def field(code_name, meth = 'value')
-      field = Field.find_by_code_name_and_template_id code_name, template_id
+    def get_field_value(code_name, meth = 'value')
+      field = field(code_name)
+      field.get_value_for(self, meth) if field
+    end
 
-      if field
-        _field = field.type_model.find_by_field_id_and_page_id field.id, id
-        _field.send(meth) if _field
+    def find_page_in_branch_template(code_name)
+      _template = Template.find_by_code_name code_name.singularize
+
+      if _template
+        result = []
+        result = descendants.where(template_id: _template.id) if code_name == code_name.pluralize
+        result = ancestors.find_by_template_id(_template.id) if result.empty?
+        result
       end
     end
 
-    def as_json(options = {})
-      options =  {
-        :name => self.name,
-        :title => self.title
-      }.merge options
+    alias_method :find_pages_in_branch_template, :find_page_in_branch_template
 
-      fields.each do |field|
-        unless self.send(field.code_name)
-          options = {field.code_name => self.send(field.code_name)}.merge options
-        end
+    def set_field_value(code_name, value, meth = 'value')
+      field = field(code_name)
+      field.set_value_for(self, value, meth) if field
+    end
+
+    def active?; active end
+
+    def as_json(options = {})
+      options = {name: self.name, title: self.title}.merge options
+
+      template.fields.each do |field|
+        options = {field.code_name.to_sym => field.get_value_for(self)}.merge options
       end
 
       options
@@ -69,23 +82,16 @@ module ConstructorPages
 
     # update all type fields
     def update_fields_values(params)
-      fields.each {|f| f.update_value(self, params)}
+      fields.each {|f| f.update_value_for(self, params)}
     end
 
     def method_missing(name, *args, &block)
       name = name.to_s
 
-      if field(name).nil?
-        _template = Template.find_by_code_name name.singularize
-        template_id = _template.id if _template
-
-        if template_id
-          result = descendants.where(template_id: template_id) if name == name.pluralize
-          result = ancestors.where(template_id: template_id).first if result.empty?
-          result || []
-        end
+      if name[-1] == '='
+        set_field_value(name[0..-2], args[0])
       else
-        field(name)
+        get_field_value(name) || find_pages_in_branch_template(name)
       end
     end
 
@@ -122,7 +128,7 @@ module ConstructorPages
     def descendants_update; descendants.map(&:save) end
 
     def create_fields
-      fields.each {|field| field.type_model.create page_id: id, field_id: field.id}
+      fields.each {|field| field.type_class.create page_id: id, field_id: field.id}
     end
   end
 end

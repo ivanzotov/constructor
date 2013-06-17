@@ -18,22 +18,54 @@ module ConstructorPages
       page.valid?.should be_true
     end
 
-    describe '.field' do
-      it 'should get value from type_field' do
-        template = Template.create name: 'Page template', code_name: 'page_template'
-        page = Page.create name: 'Home page', template: template
-        field = Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
-        page.field('desc').should == field.text_type.value
-      end
-    end
-
     describe '.full_url_generate' do
       it 'should generate full_url from parent_id and url' do
       end
     end
 
+    describe '#set_field' do
+      it 'should set value for type_field' do
+        template = Template.create name: 'Page template', code_name: 'page_template'
+        page = Page.create name: 'Home page', template: template
+        field = Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+
+        page.set_field_value('desc', 'my world')
+
+        field.get_value_for(page).should == 'my world'
+      end
+    end
+
+    describe '#get_field' do
+      it 'should get value from type_field' do
+        template = Template.create name: 'Page template', code_name: 'page_template'
+        page = Page.create name: 'Home page', template: template
+        Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+
+        page.set_field_value('desc', 'Hello world')
+        page.get_field_value('desc').should == 'Hello world'
+      end
+    end
+
+    describe '#find_page_in_branch_template' do
+      it 'should find page in one branch template by code_name' do
+        brand_template = Template.create name: 'Brand', code_name: 'brand'
+        series_template = Template.create name: 'Series', code_name: 'series', parent: brand_template
+
+        brand_page = Page.create name: 'Zanussi', template: brand_template
+        series_page = Page.create name: 'Fresco', template: series_template, parent: brand_page
+
+        series_page.find_page_in_branch_template('brand').should == brand_page
+      end
+    end
+
     describe '#as_json' do
-      it 'should return page as json format with fields'
+      it 'should return page as json format with fields' do
+        template = Template.create name: 'JSON', code_name: 'json_template'
+        page = Page.create name: 'Hi json', template: template
+        Field.create name: 'Content', code_name: 'content', template: template, type_value: 'text'
+        page.content = 'Hello world'
+        page.as_json.should == {content: 'Hello world', name: page.name, title: page.title}
+      end
     end
 
     describe '#redirect?' do
@@ -105,6 +137,20 @@ module ConstructorPages
       end
     end
 
+    describe '#remove_fields_values' do
+      it 'should destroy all type_values fields' do
+        template = Template.create name: 'New template', code_name: 'template'
+        field = Field.create name: 'Price', code_name: 'price', template: template, type_value: 'float'
+        page = Page.create name: 'New page', template: template
+
+        page.price = 500
+        field.type_object(page).value.should == 500
+
+        page.remove_fields_values
+        field.type_object(page).should be_nil
+      end
+    end
+
     describe '#full_url' do
       it 'should be generated from url and ancestors' do
         page = Page.create name: 'Hello'
@@ -169,9 +215,37 @@ module ConstructorPages
     end
 
     describe 'create_fields' do
-      it 'should create type_fields after update page' do
-        page = Page.create name: 'Hello fields'
+      it 'should create type_fields after update page'
+    end
 
+    describe 'method_missing' do
+      it 'should return value of type_value for missing method' do
+        template = Template.create name: 'Page', code_name: 'page_template'
+        page = Page.create name: 'No method', template: template
+        field = Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+        field.set_value_for(page, 'my world')
+
+        page.desc.should == 'my world'
+      end
+
+      it 'should set value for type_value for missing method' do
+        template = Template.create name: 'Page', code_name: 'page_templ'
+        page = Page.create name: 'No method', template: template
+        field = Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+
+        page.desc = 'my world 2'
+        field.get_value_for(page).should == 'my world 2'
+      end
+
+      it 'should find page in branch template if no field found' do
+        Template.delete_all
+        brand_template = Template.create name: 'Brand', code_name: 'brand'
+        series_template = Template.create name: 'Series', code_name: 'series', parent: brand_template
+
+        brand_page = Page.create name: 'Zanussi', template: brand_template
+        series_page = Page.create name: 'Fresco', template: series_template, parent: brand_page
+
+        series_page.brand.should == brand_page
       end
     end
   end

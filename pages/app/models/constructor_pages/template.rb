@@ -2,7 +2,7 @@
 
 module ConstructorPages
   class Template < ActiveRecord::Base
-    attr_accessible :name, :code_name, :child_id, :parent_id
+    attr_accessible :name, :code_name, :child_id, :parent_id, :parent
 
     validates_presence_of :name, :code_name
     validates_uniqueness_of :code_name
