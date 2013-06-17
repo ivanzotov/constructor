@@ -9,6 +9,9 @@ require 'capybara/rspec'
 require 'rspec/autorun'
 require 'database_cleaner'
 
+require 'coveralls'
+Coveralls.wear!
+
 Rails.backtrace_cleaner.remove_silencers!
 
 Dir[File.join(ENGINE_RAILS_ROOT, 'spec/support/**/*.rb')].each {|f| require f}
