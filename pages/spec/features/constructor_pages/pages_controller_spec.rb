@@ -6,7 +6,8 @@ require 'capybara/rspec'
 module ConstructorPages
   describe 'Page Controller', type: :feature do
     it 'should be valid' do
-      visit '/'
+      Page.create name: 'Hello'
+      visit '/hello'
     end
   end
 end

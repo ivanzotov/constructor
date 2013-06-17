@@ -19,7 +19,7 @@ module ConstructorPages
     def show
       @page = Page.find_by_request_or_first params[:all]
 
-      error_404 unless @page and @page.active?
+      error_404 and return if @page.nil? or !@page.active?
 
       redirect_to @page.link if @page.redirect?
 
@@ -129,9 +129,7 @@ module ConstructorPages
     private
 
     def error_404
-      rescue_from(ActionController::RoutingError) {
-        render file: "#{Rails.root}/public/404", layout: false, status: :not_found
-      }
+      render file: "#{Rails.root}/public/404", layout: false, status: 404
     end
 
     def cache
