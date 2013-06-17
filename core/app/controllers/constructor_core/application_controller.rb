@@ -3,7 +3,8 @@
 module ConstructorCore
   class ApplicationController < ApplicationController
     before_filter :authenticate_user!, :except => [:show]
-    layout 'constructor_core/application_admin', :except => [:show]
+    layout 'constructor_core/application', :except => [:show]
+
     helper_method :current_user
 
     private
