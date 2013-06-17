@@ -18,8 +18,7 @@ Content management system on Ruby on Rails
 
 ### Migrate
     
-    rake constructor_core:install:migrations
-    rake constructor_pages:install:migrations
+    rake railties:install:migrations
     
     rake db:migrate
 
