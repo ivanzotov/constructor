@@ -36,7 +36,7 @@ module ConstructorPages
       Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
     end
 
-    alias_method :active?, :active
+    def active?; active end
 
     def field(code_name, meth = 'value')
       field = Field.find_by_code_name_and_template_id code_name, template_id
