@@ -2,7 +2,8 @@
 .idea/
 log/*.log
 Gemfile.lock
-
+coverage/
+.DS_Store
 spec/dummy/log/*.log
 spec/dummy/db/*.sqlite3
 spec/dummy/public/system

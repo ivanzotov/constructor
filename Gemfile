@@ -2,7 +2,10 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem 'coveralls', require: false
+group :test do
+  gem 'coveralls', require: false
+  gem 'simplecov', :require => false
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
