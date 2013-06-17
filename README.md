@@ -6,6 +6,7 @@ Content management system on Ruby on Rails
 [![Build Status](https://travis-ci.org/ivanzotov/constructor.png?branch=master)](https://travis-ci.org/ivanzotov/constructor)
 [![Dependency Status](https://gemnasium.com/ivanzotov/constructor.png)](https://gemnasium.com/ivanzotov/constructor)
 [![Code Climate](https://codeclimate.com/github/ivanzotov/constructor.png)](https://codeclimate.com/github/ivanzotov/constructor)
+[![Coverage Status](https://coveralls.io/repos/ivanzotov/constructor/badge.png)](https://coveralls.io/r/ivanzotov/constructor)
 
 ## Installation
 
