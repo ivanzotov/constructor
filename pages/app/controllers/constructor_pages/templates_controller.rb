@@ -2,6 +2,10 @@
 
 module ConstructorPages
   class TemplatesController < ConstructorCore::ApplicationController
+    include MoveHelper
+
+    before_filter {@roots = Template.roots}
+
     def new
       @template = Template.new
 
@@ -42,19 +46,6 @@ module ConstructorPages
       redirect_to templates_url, notice: t(:template_success_removed, name: name)
     end
 
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to m.to_sym end}
-
-    private
-
-    def move_to(to)
-      from = Template.find(params[:id])
-      to_sibling = to == :up ? from.left_sibling : from.right_sibling
-
-      if not to_sibling.nil? and from.move_possible?(to_sibling)
-        to == :up ? from.move_left : from.move_right
-      end
-
-      redirect_to :back
-    end
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to :template, m.to_sym end}
   end
 end

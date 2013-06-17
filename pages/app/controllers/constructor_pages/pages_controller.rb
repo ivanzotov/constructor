@@ -2,8 +2,10 @@
 
 module ConstructorPages
   class PagesController < ConstructorCore::ApplicationController
+    include MoveHelper
     caches_page :show
 
+    before_filter {@roots = Page.roots}
     before_filter :cache, :only => [:create, :update, :destroy, :move_up, :move_down]
 
     def new
@@ -133,20 +135,9 @@ module ConstructorPages
       redirect_to pages_url, notice: t(:page_success_removed, name: _name)
     end
 
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to m.to_sym end}
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, m.to_sym end}
 
     private
-
-    def move_to(to)
-      from = Page.find(params[:id])
-      to_sibling = to == :up ? from.left_sibling : from.right_sibling
-
-      if not to_sibling.nil? and from.move_possible?(to_sibling)
-        to == :up ? from.move_left : from.move_right
-      end
-
-      redirect_to :back
-    end
 
     def cache
       expire_page :action => :show
