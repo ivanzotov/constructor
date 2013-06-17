@@ -30,7 +30,7 @@ module ConstructorPages
       @field = Field.find params[:id]
 
         if @field.type_value != params[:field][:type_value]
-          "constructor_pages/types/#{@field.type_value}_type".classify.constantize.where(:field_id => @field.id).each do |field|
+          @field.type_model.where(:field_id => @field.id).each do |field|
             new_field = "constructor_pages/types/#{params[:field][:type_value]}_type".classify.constantize.new(
                 :field_id => @field.id,
                 :page_id => field.page_id)
@@ -61,9 +61,7 @@ module ConstructorPages
       redirect_to edit_template_url(template), notice: t(:field_success_removed, name: name)
     end
 
-    def move_up; move_to :up end
-
-    def move_down; move_to :down end
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to m.to_sym end}
 
     private
 

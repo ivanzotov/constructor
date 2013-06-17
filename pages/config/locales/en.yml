@@ -44,3 +44,7 @@ en:
   new_template: 'New template'
   edit_template: 'Edit template'
   delete_template: 'Delete template'
+
+  template_success_added: 'Template «%{name}» added successfully.'
+  template_success_updated: 'Template «%{name}» updated successfully.'
+  template_success_removed: 'Template «%{name}» removed successfully.'

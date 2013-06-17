@@ -137,9 +137,7 @@ module ConstructorPages
       redirect_to pages_url, notice: t(:page_success_removed, name: _name)
     end
 
-    def move_up; move_to :up end
-
-    def move_down; move_to :down end
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to m.to_sym end}
 
     private
 

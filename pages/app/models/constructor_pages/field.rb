@@ -67,7 +67,7 @@ module ConstructorPages
     %w{create destroy_all}.each do |m|
       class_eval %{
           def #{m}_page_fields
-            pages.each {|page| type_model.#{m} page_id: page.id, field_id: id}
+            template.pages.each {|page| type_model.#{m} page_id: page.id, field_id: id}
           end
       }
     end
