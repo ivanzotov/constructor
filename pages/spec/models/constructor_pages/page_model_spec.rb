@@ -137,6 +137,24 @@ module ConstructorPages
       end
     end
 
+    describe '#update_fields_values' do
+      it 'should update fields values with params' do
+        template = Template.create name: 'New template', code_name: 'brand'
+        Field.create name: 'Price', code_name: 'price', template: template, type_value: 'float'
+        Field.create name: 'Check', code_name: 'check', template: template, type_value: 'boolean'
+
+        page = Page.create name: 'New page', template: template
+
+        page.check = true
+        page.check.should be_true
+
+        page.update_fields_values({price: 1000})
+
+        page.price.should == 1000
+        page.check.should be_false
+      end
+    end
+
     describe '#remove_fields_values' do
       it 'should destroy all type_values fields' do
         template = Template.create name: 'New template', code_name: 'template'
@@ -144,10 +162,10 @@ module ConstructorPages
         page = Page.create name: 'New page', template: template
 
         page.price = 500
-        field.type_object(page).value.should == 500
+        field.find_type_object(page).value.should == 500
 
         page.remove_fields_values
-        field.type_object(page).should be_nil
+        field.find_type_object(page).should be_nil
       end
     end
 

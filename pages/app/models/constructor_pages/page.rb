@@ -40,9 +40,9 @@ module ConstructorPages
       Field.find_by_code_name_and_template_id code_name, template_id
     end
 
-    def get_field_value(code_name, meth = 'value')
+    def get_field_value(code_name)
       field = field(code_name)
-      field.get_value_for(self, meth) if field
+      field.get_value_for(self) if field
     end
 
     def find_page_in_branch_template(code_name)
@@ -58,9 +58,9 @@ module ConstructorPages
 
     alias_method :find_pages_in_branch_template, :find_page_in_branch_template
 
-    def set_field_value(code_name, value, meth = 'value')
+    def set_field_value(code_name, value)
       field = field(code_name)
-      field.set_value_for(self, value, meth) if field
+      field.set_value_for(self, value) if field
     end
 
     def active?; active end
@@ -81,18 +81,24 @@ module ConstructorPages
     end
 
     # update all type fields
-    def update_fields_values(params)
-      fields.each {|f| f.update_value_for(self, params)}
+    def update_fields_values(params, reset_booleans = true)
+      fields.each do |field|
+        value = params[field.code_name.to_sym]
+
+        _type_object = field.find_or_create_type_object(self)
+        _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
+
+        if value
+          _type_object.value = field.type_value == 'date' ? parse_date(value).to_s : value
+        end
+
+        _type_object.save
+      end
     end
 
     def method_missing(name, *args, &block)
       name = name.to_s
-
-      if name[-1] == '='
-        set_field_value(name[0..-2], args[0])
-      else
-        get_field_value(name) || find_pages_in_branch_template(name)
-      end
+      name[-1] == '=' ? set_field_value(name[0..-2], args[0]) : get_field_value(name) || find_pages_in_branch_template(name)
     end
 
     # check if link specified
@@ -103,6 +109,10 @@ module ConstructorPages
     # if url has been changed by manually or url is empty
     def friendly_url
       self.url = ((auto_url || url.empty?) ? translit(name) : url).parameterize
+    end
+
+    def parse_date(value)
+      Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i)
     end
 
     # TODO: add more languages

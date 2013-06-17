@@ -1,1 +1,1 @@
-= text_area_tag "fields[#{field.type_value}][#{field.id}]", page.text_types.where(:field_id => field.id).first.value, :rows => 10, :class => "span6"
+= text_area_tag "fields[#{field.code_name}]", page.get_field_value(field.code_name), :rows => 10, :class => 'span6'

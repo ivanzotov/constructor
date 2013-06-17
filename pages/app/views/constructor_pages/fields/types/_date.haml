@@ -1,1 +1,1 @@
-= date_select "fields[#{field.type_value}][#{field.id}]", "date", :default => page.date_types.where(:field_id => field.id).first.value
+= date_select "fields[#{field.code_name}]", "date", default: page.get_field_value(field.code_name)

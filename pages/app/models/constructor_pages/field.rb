@@ -29,49 +29,33 @@ module ConstructorPages
     def type_class; "constructor_pages/types/#{type_value}_type".classify.constantize end
 
     # return object of type_value
-    def type_object(page); type_class.find_by_field_id_and_page_id(id, page.id) end
+    def find_type_object(page); type_class.find_by_field_id_and_page_id(id, page.id) end
+
+    # return created object of type_value
+    def create_type_object(page); type_class.create(field_id: id, page_id: page.id) end
+
+    def find_or_create_type_object(page); find_type_object(page) || create_type_object(page) end
 
     # get value from type_field for specified page
-    def get_value_for(page, meth = 'value')
-      _field = type_object(page)
-      _field ? _field.send(meth) : nil
+    def get_value_for(page)
+      _type_object = find_type_object(page)
+      _type_object ? _type_object.value : nil
     end
 
     # set value type_field for specified page
-    def set_value_for(page, value, meth = 'value')
-      _field = type_object(page)
+    def set_value_for(page, value)
+      _type_object = find_type_object(page)
 
-      if _field
-        _field.send("#{meth}=", value)
-        _field.save!
+      if _type_object
+        _type_object.value = value
+        _type_object.save!
       end
-    end
-
-    def update_value_for(page, params)
-      _type_model = type_class.where(field_id: id, page_id: page.id).first_or_create
-
-      update_type_model(_type_model, type_value, params) if params
     end
 
     # remove all type_fields values for specified page
     def remove_values_for(page); type_class.destroy_all field_id: id, page_id: page.id end
 
     private
-
-    def update_type_model(type_model, type_value, params)
-      type_model.value = 0 if type_value == 'boolean'
-
-      if params[type_value]
-        if type_value == 'date'
-          value = params[type_value][id.to_s]
-          type_model.value = Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i).to_s
-        else
-          type_model.value = params[type_value][id.to_s]
-        end
-      end
-
-      type_model.save
-    end
 
     def method_uniqueness
       if Page.first.respond_to?(code_name) \
