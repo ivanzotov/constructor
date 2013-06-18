@@ -83,15 +83,17 @@ module ConstructorPages
 
         describe '#update_fields_values' do
           it 'should update fields values with params' do
-            Field.create name: 'Count', code_name: 'count', template: @template, type_value: 'integer'
+            @template.reload
+            Field.create name: 'Count', code_name: 'amount', template: @template, type_value: 'integer'
+
             @page.reload
 
-            @page.count = 10
+            @page.amount = 10
 
-            @page.update_fields_values({price: 1000, count: 20})
+            @page.update_fields_values({price: 1000, amount: 20})
 
             @page.price.should == 1000
-            @page.count.should == 20
+            @page.amount.should == 20
           end
 
           it 'should reset boolean fields' do
