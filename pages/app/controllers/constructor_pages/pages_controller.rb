@@ -109,6 +109,7 @@ module ConstructorPages
       end
 
       if @page.update_attributes params[:page]
+        @page.create_fields_values
         @page.update_fields_values params[:fields]
 
         redirect_to pages_url, notice: t(:page_success_updated, name: @page.name)

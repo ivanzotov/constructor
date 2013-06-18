@@ -7,6 +7,7 @@ module ConstructorPages
                     :parent, :parent_id, :link, :in_menu, :in_map,
                     :in_nav, :template_id, :template
 
+    # Adding has_many for all field types
     Field::TYPES.each do |t|
       class_eval %{
         has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'
@@ -23,7 +24,7 @@ module ConstructorPages
 
     before_save :friendly_url, :template_assign, :full_url_update
     after_update :descendants_update
-    after_create :create_fields
+    after_create :create_fields_values
 
     acts_as_nested_set
 
@@ -77,7 +78,7 @@ module ConstructorPages
       fields.each do |field|
         value = params[field.code_name.to_sym]
 
-        _type_object = field.find_or_create_type_object(self)
+        _type_object = field.find_type_object(self)
         _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
 
         if value
@@ -88,9 +89,12 @@ module ConstructorPages
       end
     end
 
+    # Create fields values
+    def create_fields_values; fields.each {|field| field.create_type_object(self) } end
+
     # Remove all fields values
     def remove_fields_values
-      fields.each {|f| f.remove_values_for self}
+      fields.each {|f| f.remove_type_object self}
     end
 
     # Search page by template code_name in same branch of pages and templates.
@@ -181,8 +185,5 @@ module ConstructorPages
 
     # Reload all descendants
     def descendants_update; descendants.map(&:save) end
-
-    # Create fields values
-    def create_fields; fields.each {|field| field.create_type_object(self) } end
   end
 end

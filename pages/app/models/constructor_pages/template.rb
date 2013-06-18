@@ -2,6 +2,8 @@
 
 module ConstructorPages
   class Template < ActiveRecord::Base
+
+    # Adding code_name_uniqueness method
     include CodeNameUniq
 
     attr_accessible :name, :code_name, :child_id, :parent_id, :parent
