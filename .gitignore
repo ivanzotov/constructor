@@ -10,3 +10,4 @@ spec/dummy/public/system
 spec/dummy/tmp
 doc/
 .yardoc/
+tmp/

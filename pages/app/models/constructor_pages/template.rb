@@ -2,12 +2,13 @@
 
 module ConstructorPages
   class Template < ActiveRecord::Base
+    include CodeNameUniq
+
     attr_accessible :name, :code_name, :child_id, :parent_id, :parent
 
     validates_presence_of :name, :code_name
     validates_uniqueness_of :code_name
-
-    validate :method_uniqueness
+    validate :code_name_uniqueness
 
     default_scope order(:lft)
 
@@ -27,15 +28,14 @@ module ConstructorPages
 
     private
 
-    def method_uniqueness
-      if Page.first.respond_to?(code_name) \
-      or Page.first.respond_to?(code_name.pluralize) \
-      or Page.first.respond_to?(code_name.singularize) \
-      or root.descendants.map{|t| t.code_name unless t.code_name == code_name}.include?(code_name.pluralize) \
-      or root.descendants.map{|t| t.code_name unless t.code_name == code_name}.include?(code_name.singularize) \
-
-        errors.add(:base, "Такой метод уже используется")
+    def check_code_name(code_name)
+      [code_name.pluralize, code_name.singularize].each do |name|
+        if root.descendants.map{|t| t.code_name unless t.code_name == code_name}.include?(name)
+          return false
+        end
       end
+
+      true
     end
   end
 end
