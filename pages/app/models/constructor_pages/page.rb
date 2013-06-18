@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 module ConstructorPages
+  # Page model. Pages are core for company websites, blogs etc.
   class Page < ActiveRecord::Base
     attr_accessible :name, :title, :keywords, :description,
                     :url, :full_url, :active, :auto_url,

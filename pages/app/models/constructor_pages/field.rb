@@ -1,6 +1,9 @@
 # encoding: utf-8
 
 module ConstructorPages
+  # Field model. Fields allows to add custom fields for template.
+  #
+  # Each field has type of value such as float, integer, string...
   class Field < ActiveRecord::Base
     attr_accessible :name, :code_name, :type_value, :template_id, :template
 

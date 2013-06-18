@@ -1,6 +1,11 @@
 # encoding: utf-8
 
 module ConstructorPages
+  # Template model. Template allows assing different design for pages.
+  #
+  # Templates has many fields.
+  # For example:
+  #   template "Product" should has fields like "price", "description", "size" etc.
   class Template < ActiveRecord::Base
 
     # Adding code_name_uniqueness method
