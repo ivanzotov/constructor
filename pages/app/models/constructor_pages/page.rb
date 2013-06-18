@@ -145,29 +145,30 @@ module ConstructorPages
     end
 
     # TODO: add more languages
-    # translit to english
+    # Translit to english
     def translit(str)
       Russian.translit(str)
     end
 
-    # page is not valid if there is no template
+    # Page is not valid if there is no template
     def template_check
       errors.add_on_empty(:template_id) if Template.count == 0
     end
 
-    # if template_id is nil then get first template
+    # If template_id is nil then get first template
     def template_assign
       self.template_id = Template.first.id unless template_id
     end
 
+    # Update full_url
     def full_url_update
       self.full_url = (parent_id ? Page.full_url_generate(parent_id, url) : '/' + url)
     end
 
+    # Reload all descendants
     def descendants_update; descendants.map(&:save) end
 
-    def create_fields
-      fields.each {|field| field.type_class.create page_id: id, field_id: field.id}
-    end
+    # Create fields values
+    def create_fields; fields.each {|field| field.create_type_object(self) } end
   end
 end
