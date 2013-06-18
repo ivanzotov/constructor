@@ -5,4 +5,5 @@ before_script:
 script:
   - "rake spec"
 rvm:
+  - 2.0.0
   - 1.9.3
