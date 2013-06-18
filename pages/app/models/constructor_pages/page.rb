@@ -27,11 +27,12 @@ module ConstructorPages
 
     acts_as_nested_set
 
-    def self.find_by_request_or_first(request)
+    # Used for find page by request. It return first page if no request given
+    def self.find_by_request_or_first(request = nil)
       request.nil? ? Page.first : Page.find_by_full_url('/' + request)
     end
 
-    # generate full_url from parent page and url
+    # Generate full_url from parent page and url
     def self.full_url_generate(parent_id, url = '')
       Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
     end

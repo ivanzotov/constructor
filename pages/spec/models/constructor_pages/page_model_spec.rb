@@ -4,18 +4,31 @@ require 'spec_helper'
 
 module ConstructorPages
   describe Page do
-    before :all do
+    before :each do
       Template.delete_all
       Template.create name: 'Page', code_name: 'page'
 
-
+      Page.delete_all
       Field.delete_all
       Types::TextType.delete_all
     end
 
     it 'should be valid' do
-      page = Page.create
-      page.valid?.should be_true
+      Page.create.valid?.should be_true
+    end
+
+    describe '.find_by_request_or_first' do
+      before :each do
+        @page = Page.create name: 'New page', url: 'new-page'
+      end
+
+      it 'should return page by given request path' do
+        Page.find_by_request_or_first('new-page').should == @page
+      end
+
+      it 'should return first page if no given request' do
+        Page.find_by_request_or_first.should == @page
+      end
     end
 
     describe '.full_url_generate' do
