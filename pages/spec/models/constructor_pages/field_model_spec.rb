@@ -19,6 +19,24 @@ module ConstructorPages
         _field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
         _field.should be_valid
       end
+
+      it 'should create page fields' do
+        _page = Page.create name: 'Page', template: @template
+        _field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
+
+        _page.content.should == ''
+      end
+    end
+
+    describe '#destroy' do
+      it 'should destroy page fields' do
+        _field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
+        _page = Page.create name: 'Page', template: @template
+
+        _page.content.should == ''
+        _field.destroy
+        _page.content.should be_nil
+      end
     end
 
     describe '#type_class' do
