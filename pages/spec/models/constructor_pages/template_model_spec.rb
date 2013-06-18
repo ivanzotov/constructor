@@ -8,15 +8,5 @@ module ConstructorPages
       template = Template.create name: 'Page template', code_name: 'page_template'
       template.valid?.should be_true
     end
-
-    describe '#name' do
-      it 'should convert russian suffix'
-    end
-
-    describe '#code_name' do
-      context 'validation' do
-        it 'should be uniqueness'
-      end
-    end
   end
 end

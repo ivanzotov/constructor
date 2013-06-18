@@ -18,7 +18,7 @@ ru:
   delete_template: 'Удалить шаблон'
 
   new_field: 'Добавить поле'
-
+  code_name_already_in_use: 'Такое имя уже используется.'
   field_success_added: 'Поле «%{name}» успешно добавлено.'
   field_success_updated: 'Поле «%{name}» успешно обновлено.'
   field_success_removed: 'Поле «%{name}» успешно удалено.'

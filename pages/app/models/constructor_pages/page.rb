@@ -40,6 +40,19 @@ module ConstructorPages
       '/' + Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
     end
 
+    # Check code_name for field and template.
+    # When missing method Page find field or page in branch with plural and singular code_name so
+    # field and template code_name should be uniqueness for page methods
+    def self.check_code_name(code_name)
+      [code_name, code_name.pluralize, code_name.singularize].each do |name|
+        if Page.first.respond_to?(name)
+          return false
+        end
+      end
+
+      true
+    end
+
     # Get field by code_name
     def field(code_name)
       Field.find_by_code_name_and_template_id code_name, template_id
@@ -140,6 +153,7 @@ module ConstructorPages
       self.url = ((auto_url || url.empty?) ? translit(name) : url).parameterize
     end
 
+    # TODO: move out
     def parse_date(value)
       Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i)
     end

@@ -104,8 +104,6 @@ module ConstructorPages
             @page.price.should == 1000
             @page.check.should be_false
           end
-
-          it 'should parse date type'
         end
 
         describe '#remove_fields_values' do
