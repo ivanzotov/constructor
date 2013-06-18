@@ -23,7 +23,7 @@ module ConstructorPages
       end
 
       it 'should return page by given request path' do
-        Page.find_by_request_or_first('new-page').should == @page
+        Page.find_by_request_or_first('/new-page').should == @page
       end
 
       it 'should return first page if no given request' do
@@ -33,51 +33,111 @@ module ConstructorPages
 
     describe '.full_url_generate' do
       it 'should generate full_url from parent_id and url' do
+        first_page = Page.create name: 'First page', url: 'first-page'
+        second_page = Page.create name: 'Second page', url: 'second-page', parent: first_page
+        Page.full_url_generate(second_page.id, 'third-page').should == '/first-page/second-page/third-page'
       end
     end
 
-    describe '#set_field' do
-      it 'should set value for type_field' do
-        template = Template.create name: 'Page template', code_name: 'page_template'
-        page = Page.create name: 'Home page', template: template
-        field = Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+    context 'Getting and setting field value' do
+      before :each do
+        @template = Template.create name: 'Page template', code_name: 'page_template'
+        @page = Page.create name: 'Home page', template: @template
+        @field = Field.create name: 'Desc', code_name: 'desc', template: @template, type_value: 'text'
+      end
 
-        page.set_field_value('desc', 'my world')
+      describe '#get_field' do
+        it 'should get value from type_field' do
+          @field.set_value_for(@page, 'Hello world')
+          @page.get_field_value('desc').should == 'Hello world'
+        end
+      end
 
-        field.get_value_for(page).should == 'my world'
+      describe '#set_field' do
+        it 'should set value for type_field' do
+          @page.set_field_value('desc', 'my world')
+          @field.get_value_for(@page).should == 'my world'
+        end
       end
     end
 
-    describe '#get_field' do
-      it 'should get value from type_field' do
-        template = Template.create name: 'Page template', code_name: 'page_template'
-        page = Page.create name: 'Home page', template: template
-        Field.create name: 'Content', code_name: 'desc', template: template, type_value: 'text'
+    context 'Updating and removing fields values' do
+      before :each do
+        @template = Template.create name: 'New template', code_name: 'brand'
+        @field = Field.create name: 'Price', code_name: 'price', template: @template, type_value: 'float'
+        @page = Page.create name: 'New page', template: @template
+        @page.price = 500
+      end
 
-        page.set_field_value('desc', 'Hello world')
-        page.get_field_value('desc').should == 'Hello world'
+      describe '#update_fields_values' do
+        it 'should update fields values with params' do
+          Field.create name: 'Count', code_name: 'count', template: @template, type_value: 'integer'
+          @page.reload
+
+          @page.count = 10
+
+          @page.update_fields_values({price: 1000, count: 20})
+
+          @page.price.should == 1000
+          @page.count.should == 20
+        end
+
+        it 'should reset boolean fields' do
+          Field.create name: 'Check', code_name: 'check', template: @template, type_value: 'boolean'
+
+          @page.check = true
+
+          @page.update_fields_values({price: 1000})
+
+          @page.price.should == 1000
+          @page.check.should be_false
+        end
+
+        it 'should parse date type'
+      end
+
+      describe '#remove_fields_values' do
+        it 'should destroy all type_values fields' do
+          @field.find_type_object(@page).value.should == 500
+
+          @page.remove_fields_values
+          @field.find_type_object(@page).should be_nil
+        end
       end
     end
 
-    describe '#find_page_in_branch_template' do
-      it 'should find page in one branch template by code_name' do
+    describe '#find_page_in_branch' do
+      it 'should find page(s) in same branch pages and templates by template_code_name' do
         brand_template = Template.create name: 'Brand', code_name: 'brand'
         series_template = Template.create name: 'Series', code_name: 'series', parent: brand_template
 
         brand_page = Page.create name: 'Zanussi', template: brand_template
         series_page = Page.create name: 'Fresco', template: series_template, parent: brand_page
+        brand_page.reload
 
-        series_page.find_page_in_branch_template('brand').should == brand_page
+        series_page.find_page_in_branch('brand').should == brand_page
+        brand_page.find_pages_in_branch('series').should == [series_page]
       end
     end
 
     describe '#as_json' do
-      it 'should return page as json format with fields' do
-        template = Template.create name: 'JSON', code_name: 'json_template'
-        page = Page.create name: 'Hi json', template: template
-        Field.create name: 'Content', code_name: 'content', template: template, type_value: 'text'
-        page.content = 'Hello world'
-        page.as_json.should == {content: 'Hello world', name: page.name, title: page.title}
+      context 'should return page hash attributes with fields' do
+        before :each do
+          @template = Template.create name: 'Json', code_name: 'json_template'
+          @page = Page.create name: 'Test json', template: @template
+        end
+
+        it 'should return defaults name and title attrs' do
+          @page.as_json.should == {name: @page.name, title: @page.title}
+        end
+
+        it 'should add fields to hash' do
+          Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
+          @page.content = 'Hello world'
+          @page.reload
+
+          @page.as_json.should == {name: @page.name, title: @page.title, content: 'Hello world'}
+        end
       end
     end
 
@@ -147,38 +207,6 @@ module ConstructorPages
           page.save
           page.url.should == 'another-world'
         end
-      end
-    end
-
-    describe '#update_fields_values' do
-      it 'should update fields values with params' do
-        template = Template.create name: 'New template', code_name: 'brand'
-        Field.create name: 'Price', code_name: 'price', template: template, type_value: 'float'
-        Field.create name: 'Check', code_name: 'check', template: template, type_value: 'boolean'
-
-        page = Page.create name: 'New page', template: template
-
-        page.check = true
-        page.check.should be_true
-
-        page.update_fields_values({price: 1000})
-
-        page.price.should == 1000
-        page.check.should be_false
-      end
-    end
-
-    describe '#remove_fields_values' do
-      it 'should destroy all type_values fields' do
-        template = Template.create name: 'New template', code_name: 'template'
-        field = Field.create name: 'Price', code_name: 'price', template: template, type_value: 'float'
-        page = Page.create name: 'New page', template: template
-
-        page.price = 500
-        field.find_type_object(page).value.should == 500
-
-        page.remove_fields_values
-        field.find_type_object(page).should be_nil
       end
     end
 

@@ -17,7 +17,7 @@ module ConstructorPages
     end
 
     def show
-      @page = Page.find_by_request_or_first params[:all]
+      @page = Page.find_by_request_or_first('/' + params[:all])
 
       error_404 and return if @page.nil? or !@page.active?
 
