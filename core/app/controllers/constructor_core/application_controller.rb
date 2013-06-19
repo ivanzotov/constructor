@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module ConstructorCore
-  class ApplicationController < ApplicationController
+  class ApplicationController < ::ApplicationController
     before_filter :authenticate_user!, :except => [:show]
 
     helper_method :current_user

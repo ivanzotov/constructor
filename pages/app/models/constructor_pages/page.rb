@@ -53,7 +53,7 @@ module ConstructorPages
 
     # Get field by code_name
     def field(code_name)
-      Field.where(code_name: code_name, template_id: template_id).first
+      Field.find_by code_name: code_name, template_id: template.id
     end
 
     # Get value of field by code_name
@@ -155,11 +155,6 @@ module ConstructorPages
     # if url has been changed by manually or url is empty
     def friendly_url
       self.url = ((auto_url || url.empty?) ? name : url).parameterize
-    end
-
-    # TODO: move out
-    def parse_date(value)
-      Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i)
     end
 
     # Page is not valid if there is no template
