@@ -3,10 +3,8 @@
 module ConstructorPages
   class PagesController < ConstructorCore::ApplicationController
     include MoveHelper
-    caches_page :show
 
     before_filter {@roots = Page.roots}
-    before_filter :cache, only: [:create, :update, :destroy, :move_up, :move_down]
 
     def new
       @page, @template_id, @multipart = Page.new, Template.first.id, false
@@ -131,14 +129,6 @@ module ConstructorPages
 
     def error_404
       render file: "#{Rails.root}/public/404", layout: false, status: 404
-    end
-
-    def cache
-      expire_page :action => :show
-      cache_dir = ActionController::Base.page_cache_directory
-      unless cache_dir == Rails.root.to_s+"/public"
-        FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
-      end
     end
   end
 end

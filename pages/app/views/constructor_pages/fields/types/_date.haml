@@ -1,1 +1,1 @@
-= date_select "fields[#{field.code_name}]", "date", default: page.get_field_value(field.code_name)
+= date_field "fields[#{field.code_name}]", :date, default: page.get_field_value(field.code_name), :order => [:day,:month,:year]
