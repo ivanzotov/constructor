@@ -14,7 +14,7 @@ module ConstructorPages
 
     belongs_to :template
 
-    default_scope -> { order(:lft)}
+    default_scope -> { order :lft }
 
     validate :template_check
 
@@ -53,7 +53,7 @@ module ConstructorPages
 
     # Get field by code_name
     def field(code_name)
-      Field.find_by code_name: code_name, template_id: template_id
+      Field.where(code_name: code_name, template_id: template_id).first
     end
 
     # Get value of field by code_name
@@ -146,8 +146,12 @@ module ConstructorPages
     #   puts page.price
     #   page.brand.models.each do...
     def method_missing(name, *args, &block)
-      name = name.to_s
-      name[-1] == '=' ? set_field_value(name[0..-2], args[0]) : get_field_value(name) || find_pages_in_branch(name)
+      if new_record?
+        super
+      else
+        name = name.to_s
+        name[-1] == '=' ? set_field_value(name[0..-2], args[0]) : get_field_value(name) || find_pages_in_branch(name)
+      end
     end
 
     private
