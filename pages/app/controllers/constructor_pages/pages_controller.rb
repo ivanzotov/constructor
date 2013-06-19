@@ -3,10 +3,8 @@
 module ConstructorPages
   class PagesController < ConstructorCore::ApplicationController
     include MoveHelper
-    caches_page :show
 
     before_filter {@roots = Page.roots}
-    before_filter :cache, only: [:create, :update, :destroy, :move_up, :move_down]
 
     def new
       @page, @template_id, @multipart = Page.new, Template.first.id, false
@@ -92,7 +90,7 @@ module ConstructorPages
     end
 
     def create
-      @page = Page.new params[:page]
+      @page = Page.new page_params
 
       if @page.save
         redirect_to pages.pages_url, notice: t(:page_success_added, name: @page.name)
@@ -108,7 +106,7 @@ module ConstructorPages
         @page.remove_fields_values
       end
 
-      if @page.update_attributes params[:page]
+      if @page.update page_params
         @page.create_fields_values
         @page.update_fields_values params[:fields]
 
@@ -129,16 +127,26 @@ module ConstructorPages
 
     private
 
-    def error_404
-      render file: "#{Rails.root}/public/404", layout: false, status: 404
+    def page_params
+      params.require(:page).permit(
+          :active,
+          :name,
+          :url,
+          :title,
+          :keywords,
+          :description,
+          :auto_url,
+          :parent_id,
+          :template_id,
+          :in_nav,
+          :in_map,
+          :in_menu,
+          :link
+      )
     end
 
-    def cache
-      expire_page :action => :show
-      cache_dir = ActionController::Base.page_cache_directory
-      unless cache_dir == Rails.root.to_s+"/public"
-        FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
-      end
+    def error_404
+      render file: "#{Rails.root}/public/404", layout: false, status: 404
     end
   end
 end

@@ -93,5 +93,5 @@
       .span12
         .form-actions
           = f.submit :class => "btn btn-primary"
-          = link_to t(:cancel), pages_url, :class => "btn"
-          = link_to t(:delete_page), @page, :confirm => t(:are_you_sure?), :method => :delete, :class => "btn btn-danger pull-right" unless @page.new_record?
+          = link_to t(:cancel), pages_url, class: 'btn'
+          = link_to t(:delete_page), @page, method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-danger pull-right' unless @page.new_record?

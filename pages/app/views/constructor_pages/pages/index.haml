@@ -21,8 +21,8 @@
           </li>
 
         <li>
-        - if page.active == true
-          = link_to page.name, page.full_url, :class => "btn btn-link"
+        - if page.published?
+          = link_to page.name, page.full_url, class: 'btn btn-link'
         - else
           %button.btn.disabled= page.name
 
@@ -42,9 +42,9 @@
             - else
               = link_to "<i class='icon-chevron-down'></i> #{t :add} #{ConstructorPages::Template.find(page.template.child_id).name.downcase}".html_safe, new_child_page_path(page), :class => "btn btn-success btn-mini"
 
-          = link_to "<i class='icon-remove'></i> #{t :delete}".html_safe, page_path(page), confirm: t(:are_you_sure?), method: :delete, class: 'btn btn-danger btn-mini pull-right'
+          = link_to "<i class='icon-remove'></i> #{t :delete}".html_safe, page_path(page), method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)}
 
-        
+
 
         - level = page.level
         - last_page = page

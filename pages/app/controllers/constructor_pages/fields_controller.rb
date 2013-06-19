@@ -13,7 +13,7 @@ module ConstructorPages
     end
 
     def create
-      @field = Field.new params[:field]
+      @field = Field.new field_params
 
       if @field.save
         redirect_to edit_template_path(@field.template_id), notice: t(:field_success_added, name: @field.name)
@@ -42,7 +42,7 @@ module ConstructorPages
             field.destroy
           end
         end
-      if @field.update_attributes params[:field]
+      if @field.update field_params
         redirect_to edit_template_url(@field.template.id), notice: t(:field_success_updated, name: @field.name)
       else
         render :action => "edit"
@@ -60,6 +60,15 @@ module ConstructorPages
     %w{up down}.each {|m| define_method "move_#{m}" do move_to m.to_sym end}
 
     private
+
+    def field_params
+      params.require(:field).permit(
+          :name,
+          :code_name,
+          :template_id,
+          :type_value
+      )
+    end
 
     def move_to(to)
       @field = Field.find(params[:id])

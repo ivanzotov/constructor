@@ -3,11 +3,6 @@
 module ConstructorPages
   # Page model. Pages are core for company websites, blogs etc.
   class Page < ActiveRecord::Base
-    attr_accessible :name, :title, :keywords, :description,
-                    :url, :full_url, :active, :auto_url,
-                    :parent, :parent_id, :link, :in_menu, :in_map,
-                    :in_nav, :template_id, :template
-
     # Adding has_many for all field types
     Field::TYPES.each do |t|
       class_eval %{
@@ -19,7 +14,7 @@ module ConstructorPages
 
     belongs_to :template
 
-    default_scope order :lft
+    default_scope -> { order(:lft)}
 
     validate :template_check
 
@@ -32,7 +27,7 @@ module ConstructorPages
     # Used for find page by request. It return first page if no request given
     # @param request for example <tt>'/conditioners/split-systems/zanussi'</tt>
     def self.find_by_request_or_first(request = nil)
-      request.nil? ? Page.first : Page.find_by_full_url(request)
+      request.nil? ? Page.first : Page.where(full_url: request).first
     end
 
     # Generate full_url from parent id and url
@@ -47,6 +42,7 @@ module ConstructorPages
     # field and template code_name should be uniqueness for page methods
     def self.check_code_name(code_name)
       [code_name, code_name.pluralize, code_name.singularize].each do |name|
+        # TODO: replace Page.first
         if Page.first.respond_to?(name)
           return false
         end
@@ -57,7 +53,7 @@ module ConstructorPages
 
     # Get field by code_name
     def field(code_name)
-      Field.find_by_code_name_and_template_id code_name, template_id
+      Field.find_by code_name: code_name, template_id: template_id
     end
 
     # Get value of field by code_name
@@ -80,13 +76,16 @@ module ConstructorPages
         value = params[field.code_name.to_sym]
 
         _type_object = field.find_type_object(self)
-        _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
 
-        if value
-          _type_object.value = field.type_value == 'date' ? parse_date(value).to_s : value
+        if _type_object
+          _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
+
+          if value
+            _type_object.value = value
+          end
+
+          _type_object.save
         end
-
-        _type_object.save
       end
     end
 
@@ -107,12 +106,12 @@ module ConstructorPages
     # It determines if code_name is singular or nor
     # @param code_name template code name
     def find_page_in_branch(code_name)
-      _template = Template.find_by_code_name code_name.singularize
+      _template = Template.where(code_name: code_name.singularize).first
 
       if _template
         result = []
         result = descendants.where(template_id: _template.id) if code_name == code_name.pluralize
-        result = ancestors.find_by_template_id(_template.id) if result.empty?
+        result = ancestors.where(template_id: _template.id).first if result.empty?
         result
       end
     end
@@ -158,13 +157,8 @@ module ConstructorPages
       self.url = ((auto_url || url.empty?) ? translit(name) : url).parameterize
     end
 
-    # TODO: move out
-    def parse_date(value)
-      Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i)
-    end
-
     # TODO: add more languages
-    # Translit to english
+    # translit to english
     def translit(str)
       Russian.translit(str)
     end

@@ -37,11 +37,11 @@
           = link_to "<i class='icon-arrow-up'></i>".html_safe, field_move_up_path(field), :class => "btn btn-mini #{"disabled" if field.first?}"
 
           = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_field_path(field, field.template), :class => "btn btn-mini btn-primary"
-          = link_to "<i class='icon-remove icon-white'></i>".html_safe, field_path(field), :method => :delete, :confirm => t(:are_you_sure?), :class => "btn btn-mini btn-danger"
+          = link_to "<i class='icon-remove icon-white'></i>".html_safe, field_path(field), method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-mini btn-danger'
 
     .row-fluid
       .span12
         .form-actions
           = f.submit :class => "btn btn-primary"
           = link_to t(:cancel), templates_url, :class => "btn"
-          = link_to t(:delete_template), @template, :confirm => t(:are_you_sure?), :method => :delete, :class => "btn btn-danger pull-right" unless @template.new_record?
+          = link_to t(:delete_template), @template, method: :delete, data: {confirm: t(:are_you_sure?)},  class: 'btn btn-danger pull-right' unless @template.new_record?

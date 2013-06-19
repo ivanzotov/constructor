@@ -5,8 +5,6 @@ module ConstructorPages
   #
   # Each field has type of value such as float, integer, string...
   class Field < ActiveRecord::Base
-    attr_accessible :name, :code_name, :type_value, :template_id, :template
-
     # Adding code_name_uniqueness method
     include CodeNameUniq
 
@@ -38,7 +36,7 @@ module ConstructorPages
     def type_class; "constructor_pages/types/#{type_value}_type".classify.constantize end
 
     # Return object of type_value by page
-    def find_type_object(page); type_class.find_by_field_id_and_page_id(id, page.id) end
+    def find_type_object(page); type_class.where(field_id: id, page_id: page.id).first end
 
     # Create object of type_value by page
     def create_type_object(page); type_class.create(field_id: id, page_id: page.id) end

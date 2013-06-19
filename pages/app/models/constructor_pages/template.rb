@@ -7,11 +7,8 @@ module ConstructorPages
   # For example:
   #   template "Product" should has fields like "price", "description", "size" etc.
   class Template < ActiveRecord::Base
-
     # Adding code_name_uniqueness method
     include CodeNameUniq
-
-    attr_accessible :name, :code_name, :child_id, :parent_id, :parent
 
     validates_presence_of :name, :code_name
     validates_uniqueness_of :code_name

@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.test_files        = `git ls-files -- spec/*`.split("\n")
   s.executables       = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
 
-  s.add_dependency 'rails', '~> 3.2.13'
-  s.add_dependency 'devise'
+  s.add_dependency 'rails', '~> 4.0.0.rc2'
+  s.add_dependency 'devise', '~> 3.0.0.rc'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'font-awesome-sass-rails'
 end

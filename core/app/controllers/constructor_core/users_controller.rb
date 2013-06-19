@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 module ConstructorCore
-  class UsersController < ApplicationController
-    layout 'constructor_core/application_admin'
+  class UsersController < ConstructorCore::ApplicationController
+    layout 'constructor_core/application'
 
     def profile
       @user = current_user

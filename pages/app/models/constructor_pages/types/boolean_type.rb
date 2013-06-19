@@ -2,9 +2,8 @@
 
 module ConstructorPages
   module Types
+    # Boolean type. Render as checkbox.
     class BooleanType < ActiveRecord::Base
-      attr_accessible :value, :field_id, :field, :page_id, :page
-
       belongs_to :field
       belongs_to :page
     end
