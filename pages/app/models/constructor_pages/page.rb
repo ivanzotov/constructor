@@ -80,13 +80,16 @@ module ConstructorPages
         value = params[field.code_name.to_sym]
 
         _type_object = field.find_type_object(self)
-        _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
 
-        if value
-          _type_object.value = value
+        if _type_object
+          _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
+
+          if value
+            _type_object.value = value
+          end
+
+          _type_object.save
         end
-
-        _type_object.save
       end
     end
 
