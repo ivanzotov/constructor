@@ -83,7 +83,7 @@ module ConstructorPages
         _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
 
         if value
-          _type_object.value = field.type_value == 'date' ? parse_date(value).to_s : value
+          _type_object.value = value
         end
 
         _type_object.save
@@ -156,11 +156,6 @@ module ConstructorPages
     # if url has been changed by manually or url is empty
     def friendly_url
       self.url = ((auto_url || url.empty?) ? translit(name) : url).parameterize
-    end
-
-    # TODO: move out
-    def parse_date(value)
-      Date.new(value['date(1i)'].to_i, value['date(2i)'].to_i, value['date(3i)'].to_i)
     end
 
     # TODO: add more languages

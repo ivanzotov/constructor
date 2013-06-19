@@ -1,1 +1,1 @@
-= date_select "fields[#{field.code_name}]", "date", default: page.get_field_value(field.code_name)
+= text_field_tag "fields[#{field.code_name}]", page.get_field_value(field.code_name), type: :date
