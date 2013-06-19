@@ -14,7 +14,7 @@ module ConstructorPages
     validates_uniqueness_of :code_name
     validate :code_name_uniqueness
 
-    default_scope order(:lft)
+    default_scope -> { order :lft }
 
     has_many :pages
     has_many :fields

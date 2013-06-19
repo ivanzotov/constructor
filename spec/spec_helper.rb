@@ -15,7 +15,6 @@ require File.expand_path("../dummy/config/environment", __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'rspec/autorun'
 require 'database_cleaner'
 
 Rails.backtrace_cleaner.remove_silencers!

@@ -12,7 +12,7 @@ module ConstructorPages
     TYPES = %w{string integer float boolean text date html image}
 
     validates_presence_of :name
-    validates_uniqueness_of :code_name, :scope => :template_id
+    validates_uniqueness_of :code_name, scope: :template_id
     validate :code_name_uniqueness
 
     after_create :create_page_fields
@@ -30,7 +30,7 @@ module ConstructorPages
     has_many :pages, through: :template
 
     acts_as_list  scope: :template_id
-    default_scope order: :position
+    default_scope -> { order :position }
 
     # Return constant of model type_value
     def type_class; "constructor_pages/types/#{type_value}_type".classify.constantize end
