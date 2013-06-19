@@ -1,47 +1,52 @@
 = form_for @template do |f|
   - if @template.errors.any?
     .alert.alert-error.fade.in.span12
-      = link_to "×", "#", :class => "close", 'data-dismiss' => 'alert'
+      = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
       - @template.errors.full_messages.each do |m|
         = m
 
   .form-horizontal
     .control-group
-      = f.label :name, :class => 'control-label'
-      .controls= f.text_field :name, :class => "span4"
+      = f.label :name, class: 'control-label'
+      .controls= f.text_field :name, class: 'span4'
 
     .control-group
-      = f.label :code_name, :class => 'control-label'
-      .controls= f.text_field :code_name, :class => "span4"
+      = f.label :code_name, class: 'control-label'
+      .controls= f.text_field :code_name, class: 'span4'
 
     .control-group
-      = f.label :parent, :class => 'control-label'
+      = f.label :parent, class: 'control-label'
       .controls
-        = f.select :parent_id, options_for_select(for_select(@roots), :selected => @template.parent_id), :include_blank => t(:no)
+        = f.select :parent_id, options_for_select(for_select(@roots), selected: @template.parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
 
     .control-group
-      = f.label :child, :class => 'control-label'
+      = f.label :child, class: 'control-label'
       .controls
-        = f.select :child_id, options_for_select(for_select(@roots), :selected => @template.child_id), :include_blank => t(:no)
+        = f.select :child_id, options_for_select(for_select(@roots), selected: @template.child_id), include_blank: t(:no)
 
     - unless @template.new_record?
       .control-group
         .controls
-          = link_to "<i class='icon-plus icon-white'></i> #{t :new_field}".html_safe, new_field_path(@template.id), :class => "btn btn-mini btn-link"
+          = link_to new_field_path(@template.id), class: 'btn btn-mini btn-link' do
+            %i.icon-plus
+            =t :new_field
 
     - @template.fields.each do |field|
       .control-group
-        = label_tag "", field.name, :class => 'control-label'
+        = label_tag '', field.name, class: 'control-label'
         .controls
-          = link_to "<i class='icon-arrow-down'></i>".html_safe, field_move_down_path(field), :class => "btn btn-mini #{"disabled" if field.last?}"
-          = link_to "<i class='icon-arrow-up'></i>".html_safe, field_move_up_path(field), :class => "btn btn-mini #{"disabled" if field.first?}"
-
-          = link_to "<i class='icon-pencil icon-white'></i>".html_safe, edit_field_path(field, field.template), :class => "btn btn-mini btn-primary"
-          = link_to "<i class='icon-remove icon-white'></i>".html_safe, field_path(field), method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-mini btn-danger'
+          = link_to field_move_down_path(field), class: "btn btn-mini #{'disabled' if field.last?}" do
+            %i.icon-arrow-down
+          = link_to field_move_up_path(field), class: "btn btn-mini #{'disabled' if field.first?}" do
+            %i.icon-arrow-up
+          = link_to edit_field_path(field, field.template), class: 'btn btn-mini btn-primary' do
+            %i.icon-pencil
+          = link_to field_path(field), method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-mini btn-danger' do
+            %i.icon-remove
 
     .row-fluid
       .span12
         .form-actions
-          = f.submit :class => "btn btn-primary"
-          = link_to t(:cancel), templates_url, :class => "btn"
+          = f.submit class: 'btn btn-primary'
+          = link_to t(:cancel), templates_url, class: 'btn'
           = link_to t(:delete_template), @template, method: :delete, data: {confirm: t(:are_you_sure?)},  class: 'btn btn-danger pull-right' unless @template.new_record?

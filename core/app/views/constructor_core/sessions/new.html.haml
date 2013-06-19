@@ -1,22 +1,22 @@
 - content_for :page_title do
   =t :login
 
-= form_for(resource, :as => resource_name, :url => '/login') do |f|
+= form_for(resource, as: resource_name, url: '/login') do |f|
   .form-horizontal
     .control-group
-      = f.label :email, :class => 'control-label'
+      = f.label :email, class: 'control-label'
       .controls
         = f.email_field :email
     .control-group 
-      = f.label :password, :class => 'control-label'
+      = f.label :password, class: 'control-label'
       .controls
         = f.password_field :password
 
     - if devise_mapping.rememberable?
       .control-group
         .controls
-          %label.checkbox.inline{:for => 'remember_me'}
+          %label.checkbox.inline{for: 'remember_me'}
             = f.check_box :remember_me
             =t :remember_me
       .controls
-        = f.submit t(:login), :class => "btn btn-primary"
+        = f.submit t(:login), class: 'btn btn-primary'
