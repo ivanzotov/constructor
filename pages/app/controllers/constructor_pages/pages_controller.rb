@@ -90,7 +90,7 @@ module ConstructorPages
     end
 
     def create
-      @page = Page.new params[:page]
+      @page = Page.new page_params
 
       if @page.save
         redirect_to pages.pages_url, notice: t(:page_success_added, name: @page.name)
@@ -106,7 +106,7 @@ module ConstructorPages
         @page.remove_fields_values
       end
 
-      if @page.update_attributes params[:page]
+      if @page.update page_params
         @page.create_fields_values
         @page.update_fields_values params[:fields]
 
@@ -126,6 +126,24 @@ module ConstructorPages
     %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, m.to_sym end}
 
     private
+
+    def page_params
+      params.require(:page).permit(
+          :active,
+          :name,
+          :url,
+          :title,
+          :keywords,
+          :description,
+          :auto_url,
+          :parent_id,
+          :template_id,
+          :in_nav,
+          :in_map,
+          :in_menu,
+          :link
+      )
+    end
 
     def error_404
       render file: "#{Rails.root}/public/404", layout: false, status: 404

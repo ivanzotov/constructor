@@ -8,11 +8,6 @@ module ConstructorPages
 
     def new
       @template = Template.new
-
-      if params[:template]
-        @parent = Template.find(params[:template])
-        @template.parent_id = @parent.id
-      end
     end
 
     def edit
@@ -20,7 +15,7 @@ module ConstructorPages
     end
 
     def create
-      @template = Template.new params[:template]
+      @template = Template.new template_params
 
       if @template.save
         redirect_to templates_url, notice: t(:template_success_added, name: @template.name)
@@ -32,7 +27,7 @@ module ConstructorPages
     def update
       @template = Template.find params[:id]
 
-      if @template.update_attributes params[:template]
+      if @template.update template_params
         redirect_to templates_url, notice: t(:template_success_updated, name: @template.name)
       else
         render action: :edit
@@ -47,5 +42,16 @@ module ConstructorPages
     end
 
     %w{up down}.each {|m| define_method "move_#{m}" do move_to :template, m.to_sym end}
+
+    private
+
+    def template_params
+      params.require(:template).permit(
+          :name,
+          :code_name,
+          :parent_id,
+          :child_id
+      )
+    end
   end
 end
