@@ -3,7 +3,9 @@
 
 - content_for :actions do
   .span4.clearfix.text-right
-    = link_to "<i class='icon-plus icon-white'></i> #{t :new_page}".html_safe, pages.new_page_path, :class => "btn btn-large btn-link"
+    = link_to pages.new_page_path, class: 'btn btn-large btn-link' do
+      %i.icon-plus
+      =t :new_page
 
 %section.b-tree.span12
   %ul
@@ -29,24 +31,37 @@
         .b-tree__buttons
           .btn-group
             - if not page.right_sibling.nil? and page.move_possible?(page.right_sibling)
-              = link_to "<i class='icon-arrow-down'></i>".html_safe, page_move_down_path(page), :method => :post, :class => "btn btn-mini"
+              = link_to page_move_down_path(page), method: :post, class: 'btn btn-mini' do
+                %i.icon-arrow-down
             - if not page.left_sibling.nil? and page.move_possible?(page.left_sibling)
-              = link_to "<i class='icon-arrow-up'></i>".html_safe, page_move_up_path(page), :method => :post, :class => "btn btn-mini"
+              = link_to page_move_up_path(page), method: :post, class: 'btn btn-mini' do
+                %i.icon-arrow-up
 
-          = link_to "<i class='icon-pencil'></i> #{t :edit} #{page.template.name.downcase}".html_safe, edit_page_path(page), :class => "btn btn-primary btn-mini"
+          = link_to edit_page_path(page), class: 'btn btn-primary btn-mini' do
+            %i.icon-pencil
+            =t :edit
+            = page.template.name.downcase
 
           - unless page.template.nil?
             - if page.template.child_id.nil?
               - if !page.template.leaf?
-                = link_to "<i class='icon-chevron-down'></i> #{t :add} #{page.template.descendants.first.name.downcase}".html_safe, new_child_page_path(page), :class => "btn btn-success btn-mini"
+                = link_to new_child_page_path(page), class: 'btn btn-success btn-mini' do
+                  %i.icon-chevron-down
+                  =t :add
+                  = page.template.descendants.first.name.downcase
             - else
-              = link_to "<i class='icon-chevron-down'></i> #{t :add} #{ConstructorPages::Template.find(page.template.child_id).name.downcase}".html_safe, new_child_page_path(page), :class => "btn btn-success btn-mini"
+              = link_to new_child_page_path(page), class: 'btn btn-success btn-mini' do
+                %i.icon-chevron-down
+                =t :add
+                = ConstructorPages::Template.find(page.template.child_id).name.downcase
 
-          = link_to "<i class='icon-remove'></i> #{t :delete}".html_safe, page_path(page), method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)}
+          = link_to page_path(page), method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
+            %i.icon-remove
+            =t :delete
 
 
 
         - level = page.level
         - last_page = page
       </li>
-      = raw "</ul></li>" * last_page.level
+      = raw '</ul></li>' * last_page.level
