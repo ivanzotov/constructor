@@ -14,7 +14,7 @@ module ConstructorPages
 
     belongs_to :template
 
-    default_scope order :lft
+    default_scope -> { order(:lft)}
 
     validate :template_check
 
@@ -53,7 +53,7 @@ module ConstructorPages
 
     # Get field by code_name
     def field(code_name)
-      Field.find_by code_name: code_name, template_id: template.id
+      Field.find_by code_name: code_name, template_id: template_id
     end
 
     # Get value of field by code_name
@@ -156,7 +156,13 @@ module ConstructorPages
     def friendly_url
       self.url = ((auto_url || url.empty?) ? name : url).parameterize
     end
-
+=begin
+    def translit(name)
+      name.each_byte.map do |c|
+        t(c.to_sym)
+      end.join
+    end
+=end
     # Page is not valid if there is no template
     def template_check
       errors.add_on_empty(:template_id) if Template.count == 0

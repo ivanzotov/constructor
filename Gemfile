@@ -2,8 +2,6 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem 'rails', git: 'https://github.com/rails/rails.git'
-
 group :test do
   gem 'coveralls', require: false
   gem 'simplecov', :require => false
