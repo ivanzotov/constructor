@@ -19,6 +19,9 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
 Rails.backtrace_cleaner.remove_silencers!
 
 Dir[File.join(ENGINE_RAILS_ROOT, 'spec/support/**/*.rb')].each {|f| require f}

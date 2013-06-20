@@ -2,9 +2,6 @@
 
 require 'spec_helper'
 
-include Warden::Test::Helpers
-Warden.test_mode!
-
 module ConstructorPages
   describe 'Pages Controller' do
     before :all do
@@ -14,6 +11,12 @@ module ConstructorPages
 
     before :each do
       Page.delete_all
+      Field.delete_all
+
+      Field::TYPES.each do |t|
+        "constructor_pages/types/#{t}_type".classify.constantize.delete_all
+      end
+
       login_as @user
     end
 
@@ -45,29 +48,65 @@ module ConstructorPages
         page.should_not have_text 'Create at least one template'
       end
 
-      it 'should contain pages list' do
+      it 'should has pages list' do
         Page.create name: 'Zanussi'
         visit pages.pages_path
         page.should have_selector 'ul li'
         page.should have_link 'Zanussi'
       end
 
-      it 'should contain new page link' do
+      it 'should has new page link' do
         visit pages.pages_path
         page.should have_link 'New page', pages.new_page_path
       end
 
-      it 'should contain edit_page link' do
+      it 'should has edit_page link' do
         _page = Page.create name: 'Zanussi'
         visit pages.pages_path
         page.should have_link 'Edit page', pages.edit_page_path(_page)
       end
 
-      it 'should contain delete_page link' do
-        login_as @user
+      it 'should has delete_page link' do
         _page = Page.create name: 'Zanussi'
         visit pages.pages_path
         page.should have_link 'Delete', pages.page_path(_page)
+      end
+
+      it 'should has Add child' do
+        _template = Template.create name: 'Child', code_name: 'child_page', parent: @template
+        _page = Page.create name: 'Zanussi', template: @template
+        visit pages.pages_path
+        page.should have_link 'Add child', pages.new_child_page_path(_page)
+      end
+    end
+
+    describe 'Moving' do
+      it 'should move up' do
+        _page_first = Page.create name: 'First'
+        _page_second = Page.create name: 'Second'
+        _page_third = Page.create name: 'Third'
+
+        # test
+        _page_first.lft.should == 1
+        _page_first.rgt.should == 2
+
+        _page_second.lft.should == 3
+        _page_second.rgt.should == 4
+
+        _page_third.lft.should == 5
+        _page_third.rgt.should == 6
+
+
+        # test
+
+        _page_first.left_sibling.should be_nil
+        _page_first.right_sibling.should == _page_second
+
+        _page_second.left_sibling.should == _page_first
+        _page_second.right_sibling.should == _page_third
+
+        _page_third.left_sibling.should == _page_second
+        _page_third.right_sibling.should be_nil
       end
     end
 
@@ -82,6 +121,15 @@ module ConstructorPages
         logout
         visit pages.new_page_path
         current_path.should == '/'
+      end
+
+      it 'should has child template of parent page' do
+        _template = Template.create name: 'Child', code_name: 'child_page', parent: @template
+        _page = Page.create name: 'Zanussi', template: @template
+        visit pages.pages_path
+        click_link 'Add child'
+        current_path.should == pages.new_child_page_path(_page)
+        page.should have_select 'Template', selected: '-- Child'
       end
 
       it 'should has published checkbox' do
@@ -140,7 +188,92 @@ module ConstructorPages
 
       it 'should edit page' do
         visit pages.edit_page_path(@page)
+        fill_in 'Name', with: 'Zanussi'
+        fill_in 'Title', with: 'Zanussi conditioners'
+        fill_in 'Keywords', with: 'Zanussi, conditioners, Voronezh'
+        fill_in 'Description', with: 'Zanussi conditioners Voronezh'
+        @page.name.should == 'Hello world'
+        click_button 'Update Page'
+        @page.reload
+        @page.name.should == 'Zanussi'
+        @page.url.should == 'zanussi'
+        @page.title.should == 'Zanussi conditioners'
+        @page.keywords.should == 'Zanussi, conditioners, Voronezh'
+        @page.description.should == 'Zanussi conditioners Voronezh'
+      end
+    end
 
+    describe 'Delete page' do
+      it 'should delete from pages index' do
+        Page.create name: 'Page'
+        visit pages.pages_path
+        Page.count.should == 1
+        click_link 'Delete'
+        Page.count.should == 0
+      end
+
+      it 'should delete from page' do
+        _page = Page.create name: 'Page'
+        visit pages.edit_page_path(_page)
+        Page.count.should == 1
+        click_link 'Delete'
+        Page.count.should == 0
+      end
+    end
+
+    describe 'Fields' do
+      it 'should create fields after create page' do
+        Field.create name: 'Short description', code_name: 'short_description', template: @template, type_value: 'text'
+        Field.create name: 'Long description', code_name: 'long_description', template: @template, type_value: 'html'
+
+        visit pages.new_page_path
+        fill_in 'Name', with: 'Page'
+        click_button 'Create Page'
+        page.should have_content 'added successfully'
+
+        _page = Page.first
+        _page.short_description.should == ''
+
+        visit pages.edit_page_path(_page)
+
+        fill_in 'Short description', with: 'This is short description'
+        fill_in 'Long description', with: 'This is long description'
+
+        click_button 'Update Page'
+
+        _page.reload
+        _page.short_description.should == 'This is short description'
+      end
+
+      it 'should change fields if template change' do
+        Field.create name: 'Price', code_name: 'price', template: @template, type_value: 'float'
+        _template = Template.create name: 'Brand', code_name: 'brand'
+        Field.create name: 'Amount', code_name: 'amount', template: _template, type_value: 'integer'
+
+        visit pages.new_page_path
+        fill_in 'Name', with: 'Simple page'
+        click_button 'Create Page'
+        _page = Page.first
+        visit pages.edit_page_path(_page)
+        page.should have_selector('#fields_price')
+        fill_in 'Price', with: '250.20'
+        click_button 'Update Page'
+        _page.reload
+        _page.price.should == 250.2
+        visit pages.edit_page_path(_page)
+        select 'Brand', from: 'Template'
+        click_button 'Update Page'
+        _page.reload
+        _page.template.should == _template
+        _page.price.should be_nil
+        _page.amount.should == 0
+        visit pages.edit_page_path(_page)
+        page.should_not have_selector('#fields_price')
+        page.should have_selector('#fields_amount')
+        fill_in 'Amount', with: 200
+        click_button 'Update Page'
+        _page.reload
+        _page.amount.should == 200
       end
     end
   end

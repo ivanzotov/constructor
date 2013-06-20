@@ -107,12 +107,12 @@ module ConstructorPages
     def update
       @page = Page.find params[:id]
 
-      if @page.template.id != params[:page][:template_id].to_i
-        @page.remove_fields_values
-      end
+      _template_changed = @page.template.id != params[:page][:template_id].to_i
+
+      @page.remove_fields_values if _template_changed
 
       if @page.update page_params
-        @page.create_fields_values
+        @page.create_fields_values if _template_changed
         @page.update_fields_values params[:fields]
 
         redirect_to pages_url, notice: t(:page_success_updated, name: @page.name)

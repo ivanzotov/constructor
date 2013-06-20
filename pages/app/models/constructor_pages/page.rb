@@ -72,6 +72,8 @@ module ConstructorPages
     # @param params should looks like <tt>{price: 500, content: 'Hello'}</tt>
     # @param reset_booleans reset all boolean fields to false before assign params
     def update_fields_values(params, reset_booleans = true)
+      return if params.nil?
+
       fields.each do |field|
         value = params[field.code_name.to_sym]
 

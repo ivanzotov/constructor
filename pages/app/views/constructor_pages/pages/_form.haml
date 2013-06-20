@@ -32,7 +32,7 @@
     - unless @page.new_record?
       - @page.template.fields.each do |field|
         .control-group
-          = label_tag '', field.name, class: 'control-label'
+          = label_tag "fields[#{field.code_name}]", field.name, class: 'control-label'
           .controls
             = render :partial => "constructor_pages/fields/types/#{field.type_value}", locals: {field: field, page: @page}
 
@@ -43,14 +43,14 @@
         .accordion-body.in.collapse#collapse
           .accordion-inner
             .control-group
-              = f.label :parent, class: 'control-label'
+              = f.label :parent_id, class: 'control-label'
               .controls
                 = f.select :parent_id, options_for_select(for_select(@roots), selected: @page.parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
 
             .control-group
-              = f.label :template, :class => 'control-label'
+              = f.label :template_id, :class => 'control-label'
               .controls
-                = f.select :template_id, options_for_select(templates, selected: @template_id)
+                = f.select :template_id,  options_for_select(templates, selected: @template_id)
             .control-group
               = f.label :link, class: 'control-label'
               .controls
