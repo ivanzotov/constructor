@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem 'awesome_nested_set', path: './../awesome_nested_set'
+gem 'awesome_nested_set', github: 'ivanzotov/awesome_nested_set'
 
 group :test do
   gem 'coveralls', require: false
