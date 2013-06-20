@@ -1,5 +1,7 @@
 module ConstructorPages
   module PagesHelper
+    include TreeviewHelper
+
     def for_select(roots)
       result = []
       roots.each do |r|

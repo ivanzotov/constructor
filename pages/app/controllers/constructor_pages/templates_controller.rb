@@ -3,6 +3,7 @@
 module ConstructorPages
   class TemplatesController < ConstructorCore::ApplicationController
     include MoveHelper
+    include TreeviewHelper
 
     before_filter {@roots = Template.roots}
 
@@ -41,7 +42,7 @@ module ConstructorPages
       redirect_to templates_url, notice: t(:template_success_removed, name: name)
     end
 
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to :template, m.to_sym end}
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to :template, params[:id], m.to_sym end}
 
     private
 

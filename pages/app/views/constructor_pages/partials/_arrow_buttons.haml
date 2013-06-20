@@ -1,0 +1,6 @@
+.btn-group
+  - {down: :right, up: :left}.each_pair do |a, b|
+    - sibling = item.send(b.to_s+'_sibling')
+    - if sibling and item.move_possible?(sibling)
+      = link_to "/admin/#{item.class.to_s.demodulize.downcase.pluralize}/move/#{a}/#{item.id}", class: 'btn btn-mini' do
+        %i{class: "icon-arrow-#{a}"}

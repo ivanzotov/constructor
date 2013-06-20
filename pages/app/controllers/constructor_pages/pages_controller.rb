@@ -123,7 +123,7 @@ module ConstructorPages
       redirect_to pages_url, notice: t(:page_success_removed, name: _name)
     end
 
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, m.to_sym end}
+    %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, params[:id], m.to_sym end}
 
     private
 

@@ -9,59 +9,33 @@
 
 %section.b-tree.span12
   %ul
-    - @roots.each do |root|
-      - level = root.level
-      - last_page = nil
+    = render_tree @roots do |page|
+      - if page.published?
+        = link_to page.name, page.full_url, class: 'btn btn-link'
+      - else
+        %button.btn.disabled= page.name
 
-      - root.self_and_descendants.each do |page|
-        - if page.level > level
-          <ul>
-        - elsif page.level < level
-          </li>
-          = raw "</ul></li>" * (level-page.level)
-        - elsif !page.root?
-          </li>
+      .b-tree__buttons
+        = render partial: 'constructor_pages/partials/arrow_buttons', locals: {item: page}
 
-        <li>
-        - if page.published?
-          = link_to page.name, page.full_url, class: 'btn btn-link'
-        - else
-          %button.btn.disabled= page.name
+        = link_to edit_page_path(page), class: 'btn btn-primary btn-mini' do
+          %i.icon-pencil
+          =t :edit
+          = page.template.name.downcase
 
-        .b-tree__buttons
-          .btn-group
-            - if not page.right_sibling.nil? and page.move_possible?(page.right_sibling)
-              = link_to page_move_down_path(page), method: :post, class: 'btn btn-mini' do
-                %i.icon-arrow-down
-            - if not page.left_sibling.nil? and page.move_possible?(page.left_sibling)
-              = link_to page_move_up_path(page), method: :post, class: 'btn btn-mini' do
-                %i.icon-arrow-up
-
-          = link_to edit_page_path(page), class: 'btn btn-primary btn-mini' do
-            %i.icon-pencil
-            =t :edit
-            = page.template.name.downcase
-
-          - unless page.template.nil?
-            - if page.template.child_id.nil?
-              - if !page.template.leaf?
-                = link_to new_child_page_path(page), class: 'btn btn-success btn-mini' do
-                  %i.icon-chevron-down
-                  =t :add
-                  = page.template.descendants.first.name.downcase
-            - else
+        - unless page.template.nil?
+          - if page.template.child_id.nil?
+            - if !page.template.leaf?
               = link_to new_child_page_path(page), class: 'btn btn-success btn-mini' do
                 %i.icon-chevron-down
                 =t :add
-                = ConstructorPages::Template.find(page.template.child_id).name.downcase
+                = page.template.descendants.first.name.downcase
+          - else
+            = link_to new_child_page_path(page), class: 'btn btn-success btn-mini' do
+              %i.icon-chevron-down
+              =t :add
+              = ConstructorPages::Template.find(page.template.child_id).name.downcase
 
-          = link_to page_path(page), method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
-            %i.icon-remove
-            =t :delete
-
-
-
-        - level = page.level
-        - last_page = page
-      </li>
-      = raw '</ul></li>' * last_page.level
+        = link_to page_path(page), method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
+          %i.icon-remove
+          =t :delete
