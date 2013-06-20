@@ -2,8 +2,6 @@
 
 module ConstructorCore
   class UsersController < ConstructorCore::ApplicationController
-    layout 'constructor_core/application'
-
     def profile
       @user = current_user
     end

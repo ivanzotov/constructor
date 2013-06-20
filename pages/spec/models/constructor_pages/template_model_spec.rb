@@ -20,7 +20,7 @@ module ConstructorPages
         _brand.reload
 
         _brand.child.should == _series
-        _brand.child_id = 1
+        _brand.child_id = _brand.id
 
         _brand.child.should == _brand
       end

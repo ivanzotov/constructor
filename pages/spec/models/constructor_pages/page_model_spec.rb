@@ -36,8 +36,9 @@ module ConstructorPages
           Page.find_by_request_or_first('/new-page').should == @page
         end
 
-        it 'should return first page if no given request' do
+        it 'should return first page if no given request or request is home page' do
           Page.find_by_request_or_first.should == @page
+          Page.find_by_request_or_first('/').should == @page
         end
       end
 

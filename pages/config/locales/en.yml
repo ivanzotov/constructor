@@ -8,6 +8,7 @@ en:
   display_in: 'Display in'
   help: 'Help'
   edit: 'Edit'
+  delete: 'Delete'
 
   new_field: 'New field'
 

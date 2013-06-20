@@ -2,10 +2,11 @@
   =t :structure
 
 - content_for :actions do
-  .span4.clearfix.text-right
-    = link_to pages.new_page_path, class: 'btn btn-large btn-link' do
-      %i.icon-plus
-      =t :new_page
+  - if @template_exists
+    .span4.clearfix.text-right
+      = link_to pages.new_page_path, class: 'btn btn-large btn-link' do
+        %i.icon-plus
+        =t :new_page
 
 %section.b-tree.span12
   %ul

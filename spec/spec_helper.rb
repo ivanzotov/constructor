@@ -7,6 +7,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
     SimpleCov::Formatter::HTMLFormatter,
     Coveralls::SimpleCov::Formatter
 ]
+
 SimpleCov.start 'rails'
 
 ENGINE_RAILS_ROOT = File.join(File.dirname(__FILE__), '../') unless defined?(ENGINE_RAILS_ROOT)
@@ -14,8 +15,12 @@ ENGINE_RAILS_ROOT = File.join(File.dirname(__FILE__), '../') unless defined?(ENG
 require File.expand_path("../dummy/config/environment", __FILE__)
 
 require 'rspec/rails'
+require 'capybara/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
+
+include Warden::Test::Helpers
+Warden.test_mode!
 
 Rails.backtrace_cleaner.remove_silencers!
 

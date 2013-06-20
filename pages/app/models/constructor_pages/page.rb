@@ -24,10 +24,10 @@ module ConstructorPages
 
     acts_as_nested_set
 
-    # Used for find page by request. It return first page if no request given
+    # Used for find page by request. It return first page if no request given or request is home page
     # @param request for example <tt>'/conditioners/split-systems/zanussi'</tt>
     def self.find_by_request_or_first(request = nil)
-      request.nil? ? Page.first : Page.where(full_url: request).first
+      request.nil? || request == '/' ? Page.first : Page.where(full_url: request).first
     end
 
     # Generate full_url from parent id and url

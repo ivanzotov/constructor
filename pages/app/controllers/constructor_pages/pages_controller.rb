@@ -6,6 +6,11 @@ module ConstructorPages
 
     before_filter {@roots = Page.roots}
 
+    def index
+      @template_exists = Template.count > 0
+      flash.notice = 'Create at least one template' unless @template_exists
+    end
+
     def new
       @page, @template_id, @multipart = Page.new, Template.first.id, false
 
@@ -15,7 +20,7 @@ module ConstructorPages
     end
 
     def show
-      @page = Page.find_by_request_or_first('/' + params[:all])
+      @page = Page.find_by_request_or_first("/#{params[:all]}")
 
       error_404 and return if @page.nil? or !@page.active?
 
