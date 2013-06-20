@@ -13,6 +13,6 @@ ConstructorCore::Engine.routes.draw do
     get '/admin' => 'sessions#new'
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
-    delete '/logout' => 'sessions#destroy'
+    delete '/logout' => 'sessions#destroy', as: :logout
   end
 end

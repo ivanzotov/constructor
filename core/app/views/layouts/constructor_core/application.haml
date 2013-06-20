@@ -63,7 +63,7 @@
                     %i.icon-question-sign
                     =t :help
                 %li
-                  = link_to core.destroy_user_session_path, method: :delete do
+                  = link_to core.logout_path, method: :delete do
                     %i.icon-signout
                     =t :logout
 
