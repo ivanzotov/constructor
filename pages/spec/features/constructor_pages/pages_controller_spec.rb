@@ -86,19 +86,6 @@ module ConstructorPages
         _page_second = Page.create name: 'Second'
         _page_third = Page.create name: 'Third'
 
-        # test
-        _page_first.lft.should == 1
-        _page_first.rgt.should == 2
-
-        _page_second.lft.should == 3
-        _page_second.rgt.should == 4
-
-        _page_third.lft.should == 5
-        _page_third.rgt.should == 6
-
-
-        # test
-
         _page_first.left_sibling.should be_nil
         _page_first.right_sibling.should == _page_second
 
@@ -107,6 +94,35 @@ module ConstructorPages
 
         _page_third.left_sibling.should == _page_second
         _page_third.right_sibling.should be_nil
+
+        visit pages.pages_path
+        find("a[href='#{pages.page_move_down_path(_page_first.id)}']").click
+
+        _page_first.reload
+        _page_first.left_sibling.should == _page_second
+        _page_first.right_sibling.should == _page_third
+
+        _page_second.reload
+        _page_second.left_sibling.should be_nil
+        _page_second.right_sibling.should == _page_first
+
+        _page_third.reload
+        _page_third.left_sibling.should == _page_first
+        _page_third.right_sibling.should be_nil
+
+        find("a[href='#{pages.page_move_up_path(_page_third.id)}']").click
+
+        _page_first.reload
+        _page_first.left_sibling.should == _page_third
+        _page_first.right_sibling.should be_nil
+
+        _page_second.reload
+        _page_second.left_sibling.should be_nil
+        _page_second.right_sibling.should == _page_third
+
+        _page_third.reload
+        _page_third.left_sibling.should == _page_second
+        _page_third.right_sibling.should == _page_first
       end
     end
 
