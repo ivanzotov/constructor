@@ -1,6 +1,6 @@
 # Constructor CMS
 
-Constructor – Ruby on Rails 4 content management system (cms)
+Constructor – an open source Ruby on Rails content management system for Rails 4.
 
 [![Gem Version](https://badge.fury.io/rb/constructor-cms.png)](https://rubygems.org/gems/constructor-cms)
 [![Build Status](https://travis-ci.org/ivanzotov/constructor.png?branch=master)](https://travis-ci.org/ivanzotov/constructor)
@@ -12,7 +12,7 @@ Constructor – Ruby on Rails 4 content management system (cms)
 
 ### Add to Gemfile
 
-    gem 'constructor-cms'    
+    gem 'constructor-cms', '~> 0.6.4'
 
 ### Install
 
