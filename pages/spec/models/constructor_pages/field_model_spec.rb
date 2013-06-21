@@ -113,14 +113,11 @@ module ConstructorPages
       end
 
       it 'should be uniqueness in scope Page' do
-        Page.create name: 'Page', template: @template
         _field = Field.create name: 'Content', code_name: 'get_field_value', template: @template, type_value: 'text'
         _field.should_not be_valid
       end
 
       it 'should be uniqueness in scope Template branch' do
-        Page.create name: 'Page', template: @template
-
         _template = Template.create name: 'Brand', code_name: 'brand', parent: @template
         @template.reload
 

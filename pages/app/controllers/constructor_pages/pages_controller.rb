@@ -1,8 +1,8 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class PagesController < ConstructorCore::ApplicationController
-    include MoveHelper
+  class PagesController < ApplicationController
+    movable :page
 
     before_filter {@roots, @template_exists = Page.roots, Template.count > 0}
 
@@ -127,8 +127,6 @@ module ConstructorPages
       @page.destroy
       redirect_to pages_url, notice: t(:page_success_removed, name: _name)
     end
-
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, params[:id], m.to_sym end}
 
     private
 

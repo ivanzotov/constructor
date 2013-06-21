@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class FieldsController < ConstructorCore::ApplicationController
+  class FieldsController < ApplicationController
     def new
       @field = Field.new
       @field.template = Template.find(params[:template_id])
