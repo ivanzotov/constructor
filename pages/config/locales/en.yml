@@ -51,6 +51,8 @@ en:
   template_success_updated: 'Template «%{name}» updated successfully.'
   template_success_removed: 'Template «%{name}» removed successfully.'
 
+  template_error_delete_pages: 'Delete pages with this template before'
+
   activerecord:
     errors:
       models:

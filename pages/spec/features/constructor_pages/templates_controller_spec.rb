@@ -22,16 +22,18 @@ module ConstructorPages
     end
 
     describe 'Index' do
-      it 'should be accessed by pages.templates_path if logged in' do
-        visit pages.templates_path
-        current_path.should == pages.templates_path
-        status_code.should == 200
-      end
+      describe 'Access' do
+        it 'should be accessed by pages.templates_path if logged in' do
+          visit pages.templates_path
+          current_path.should == pages.templates_path
+          status_code.should == 200
+        end
 
-      it 'should not be accessed by pages.templates_path if not logged in' do
-        logout
-        visit pages.templates_path
-        current_path.should == '/'
+        it 'should not be accessed by pages.templates_path if not logged in' do
+          logout
+          visit pages.templates_path
+          current_path.should == '/'
+        end
       end
 
       it 'should has new template link' do
@@ -107,16 +109,18 @@ module ConstructorPages
     end
 
     describe 'New template' do
-      it 'should be accessed by new_template_path if logged in' do
-        visit pages.new_template_path
-        current_path.should == pages.new_template_path
-        status_code.should == 200
-      end
+      describe 'Access' do
+        it 'should be accessed by new_template_path if logged in' do
+          visit pages.new_template_path
+          current_path.should == pages.new_template_path
+          status_code.should == 200
+        end
 
-      it 'should not be accessed by new_template_path if not logged in' do
-        logout
-        visit pages.new_template_path
-        current_path.should == '/'
+        it 'should not be accessed by new_template_path if not logged in' do
+          logout
+          visit pages.new_template_path
+          current_path.should == '/'
+        end
       end
 
       it 'should has name field' do
@@ -138,6 +142,11 @@ module ConstructorPages
       it 'should not has link new field' do
         visit pages.new_template_path
         page.should_not have_link 'New field'
+      end
+
+      it 'should not has delete link' do
+        visit pages.new_template_path
+        page.should_not have_link 'Delete template'
       end
 
       it 'should has Create Template button' do
@@ -176,6 +185,78 @@ module ConstructorPages
         click_button 'Create Template'
         Template.count.should == 0
         page.should have_text 'Code name has already been taken'
+      end
+    end
+
+    describe 'Edit template' do
+      before :each do
+        @template = Template.create name: 'Page', code_name: 'page'
+      end
+
+      describe 'Access' do
+        it 'should be accessed by edit_template_path if logged in' do
+          visit pages.edit_template_path(@template)
+          status_code.should == 200
+        end
+
+        it 'should not be accessed by edit_template_path if not logged in' do
+          logout
+          visit pages.edit_template_path(@template)
+          current_path.should == '/'
+        end
+      end
+
+      it 'should has delete link' do
+        visit pages.edit_template_path(@template)
+        page.should have_link 'Delete template'
+      end
+
+      it 'should has new field link' do
+        visit pages.edit_template_path(@template)
+        page.should have_link 'New field', pages.new_field_path(@template)
+      end
+
+      it 'should has update template button' do
+        visit pages.edit_template_path(@template)
+        page.should have_button 'Update Template'
+      end
+
+      it 'should edit template' do
+        visit pages.edit_template_path(@template)
+        fill_in 'Name', with: 'New brand'
+        fill_in 'Code name', with: 'new_brand'
+        click_button 'Update Template'
+        @template.reload
+        @template.name.should == 'New brand'
+        @template.code_name.should == 'new_brand'
+      end
+    end
+
+    describe 'Delete template' do
+      it 'should delete from templates index' do
+        Template.create name: 'Page', code_name: 'page'
+        visit pages.templates_path
+        Template.count.should == 1
+        click_link 'Delete'
+        Template.count.should == 0
+      end
+
+      it 'should delete from template' do
+        _template = Template.create name: 'Page', code_name: 'page'
+        visit pages.edit_template_path(_template)
+        Template.count.should == 1
+        click_link 'Delete'
+        Template.count.should == 0
+      end
+
+      it 'should not delete if there are any pages' do
+        _template = Template.create name: 'Page', code_name: 'page'
+        Page.create name: 'Home page', template: _template
+        visit pages.edit_template_path(_template)
+        Template.count.should == 1
+        click_link 'Delete'
+        Template.count.should == 1
+        page.should have_text 'Delete pages with this template before'
       end
     end
   end

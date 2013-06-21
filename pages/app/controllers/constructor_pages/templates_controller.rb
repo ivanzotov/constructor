@@ -38,9 +38,14 @@ module ConstructorPages
 
     def destroy
       @template = Template.find(params[:id])
-      name = @template.name
-      @template.destroy
-      redirect_to templates_url, notice: t(:template_success_removed, name: name)
+
+      if @template.pages.count == 0
+        name = @template.name
+        @template.destroy
+        redirect_to templates_url, notice: t(:template_success_removed, name: name)
+      else
+        redirect_to :back, alert: t(:template_error_delete_pages)
+      end
     end
 
     private

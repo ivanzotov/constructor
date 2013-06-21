@@ -130,16 +130,18 @@ module ConstructorPages
     end
 
     describe 'New page' do
-      it 'should be accessed by new_page_path if logged in' do
-        visit pages.new_page_path
-        current_path.should == pages.new_page_path
-        status_code.should == 200
-      end
+      describe 'Access' do
+        it 'should be accessed by new_page_path if logged in' do
+          visit pages.new_page_path
+          current_path.should == pages.new_page_path
+          status_code.should == 200
+        end
 
-      it 'should not be accessed by new_page_path if not logged in' do
-        logout
-        visit pages.new_page_path
-        current_path.should == '/'
+        it 'should not be accessed by new_page_path if not logged in' do
+          logout
+          visit pages.new_page_path
+          current_path.should == '/'
+        end
       end
 
       it 'should has child template of parent page' do
@@ -196,15 +198,17 @@ module ConstructorPages
         @page = Page.create name: 'Hello world'
       end
 
-      it 'should be accessed by edit_page_path if logged in' do
-        visit pages.edit_page_path(@page)
-        status_code.should == 200
-      end
+      describe 'Access' do
+        it 'should be accessed by edit_page_path if logged in' do
+          visit pages.edit_page_path(@page)
+          status_code.should == 200
+        end
 
-      it 'should not be accessed by edit_page_path if not logged in' do
-        logout
-        visit pages.edit_page_path(@page)
-        current_path.should == '/'
+        it 'should not be accessed by edit_page_path if not logged in' do
+          logout
+          visit pages.edit_page_path(@page)
+          current_path.should == '/'
+        end
       end
 
       it 'should has delete link' do

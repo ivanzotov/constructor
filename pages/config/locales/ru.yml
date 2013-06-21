@@ -49,6 +49,8 @@ ru:
   template_success_updated: 'Шаблон «%{name}» успешно обновлен.'
   template_success_removed: 'Шаблон «%{name}» успешно удален.'
 
+  template_error_delete_pages: 'Удалите страницы с данным шаблоном'
+
   activerecord:
     attributes:
       constructor_pages/field:

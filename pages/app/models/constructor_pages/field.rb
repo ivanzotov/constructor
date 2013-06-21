@@ -23,7 +23,7 @@ module ConstructorPages
     # Adding has_many for all field types
     TYPES.each do |t|
       class_eval %{
-        has_many :#{t}_types, class_name: 'Types::#{t.titleize}Type'
+        has_many :#{t}_types, dependent: :destroy, class_name: 'Types::#{t.titleize}Type'
       }
     end
 
