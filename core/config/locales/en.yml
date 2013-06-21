@@ -1,15 +1,15 @@
 en:
-  dashboard: 'Dashboard'
-  users: 'Users'
-  homepage: 'Home page'
-  login: 'Login'
-  logout: 'Logout'
-  cancel: 'Cancel'
-  no: 'No'
-  error: 'Error'
-  sitemap: 'Site map'
-  remember_me: 'Remember me'
-  profile: 'Profile'
-  password_error_confirm: 'Password confirmation failed'
-  save_password: 'Save password'
-  password_changed: 'Password changed'
+  dashboard: Dashboard
+  users: Users
+  homepage: Home page
+  login: Login
+  logout: Logout
+  cancel: Cancel
+  no: No
+  error: Error
+  sitemap: Site map
+  remember_me: Remember me
+  profile: Profile
+  password_error_confirm: Password confirmation failed
+  save_password: Save password
+  password_changed: Password changed

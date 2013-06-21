@@ -1,27 +1,27 @@
 ru:
-  dashboard: 'Панель управления'
-  homepage: 'Главная страница'
-  users: 'Пользователи'
-  login: 'Войти'
-  logout: 'Выйти'
-  cancel: 'Отмена'
-  no: 'Нет'
-  error: 'Ошибка'
-  sitemap: 'Карта сайта'
-  remember_me: 'Запомнить меня'
-  profile: 'Профиль'
-  save_password: 'Сохранить пароль'
-  password_changed: 'Пароль успешно изменен'
-  password_error_confirm: 'Пароли не совпадают'
+  dashboard: Панель управления
+  homepage: Главная страница
+  users: Пользователи
+  login: Войти
+  logout: Выйти
+  cancel: Отмена
+  no: Нет
+  error: Ошибка
+  sitemap: Карта сайта
+  remember_me: Запомнить меня
+  profile: Профиль
+  save_password: Сохранить пароль
+  password_changed: Пароль успешно изменен
+  password_error_confirm: Пароли не совпадают
 
   activerecord:
     attributes:
       constructor_core/user:
-        email: "Эл. почта"
-        password: "Пароль"
-        password_confirmation: "Пароль, еще раз"
-        remember_me: "Запомнить меня"  
+        email: Эл. почта
+        password: Пароль
+        password_confirmation: Пароль, еще раз
+        remember_me: Запомнить меня  
   helpers:
     submit:
-      create: "Добавить"
-      update: "Сохранить"
+      create: Добавить
+      update: Сохранить

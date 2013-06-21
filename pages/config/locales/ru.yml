@@ -1,56 +1,55 @@
 ru:
-  structure: 'Структура'
-  templates: 'Шаблоны'
-  settings: 'Настройки'
-  new_field: 'Новое поле'
-  edit_field: 'Редактирование поля'
-  seo: 'Поисковая оптимизация'
-  are_you_sure?: 'Вы уверены?'
-  display_in: 'Отображать в'
-  delete: 'Удалить'
+  structure: Структура
+  templates: Шаблоны
+  settings: Настройки
+  new_field: Новое поле
+  edit_field: Редактирование поля
+  seo: Поисковая оптимизация
+  are_you_sure?: Вы уверены?
+  display_in: Отображать в
+  delete: Удалить
 
-  menu: 'Меню'
-  breadcrumbs: 'Хлебные крошки'
-  code_name_already_in_use: 'Такое кодовое имя уже используется'
-  template: 'Шаблон'
-  new_template: 'Создать шаблон'
-  edit_template: 'Редактирование шаблона'
-  delete_template: 'Удалить шаблон'
+  menu: Меню
+  breadcrumbs: Хлебные крошки
+  code_name_already_in_use: Такое кодовое имя уже используется
+  template: Шаблон
+  new_template: Создать шаблон
+  edit_template: Редактирование шаблона
+  delete_template: Удалить шаблон
 
-  new_field: 'Добавить поле'
-  code_name_already_in_use: 'Такое имя уже используется.'
-  field_success_added: 'Поле «%{name}» успешно добавлено.'
-  field_success_updated: 'Поле «%{name}» успешно обновлено.'
-  field_success_removed: 'Поле «%{name}» успешно удалено.'
-  field_success_moved: 'Поле «%{name}» успешно перемещено.'
-  delete_field: 'Удалить поле'
+  code_name_already_in_use: Такое имя уже используется.
+  field_success_added: Поле «%{name}» успешно добавлено.
+  field_success_updated: Поле «%{name}» успешно обновлено.
+  field_success_removed: Поле «%{name}» успешно удалено.
+  field_success_moved: Поле «%{name}» успешно перемещено.
+  delete_field: Удалить поле
 
-  string: 'Строка'
-  integer: 'Целое число'
-  float: 'Дробное число'
-  boolean: 'Булево'
-  date: 'Дата'
-  text: 'Текст'
-  html: 'HTML'
-  image: 'Изображение'
-  help: 'Помощь'
-  edit: 'Редактировать'
+  string: Строка
+  integer: Целое число
+  float: Дробное число
+  boolean: Булево
+  date: Дата
+  text: Текст
+  html: HTML
+  image: Изображение
+  help: Помощь
+  edit: Редактировать
 
-  page_not_found: 'Страница не найдена'
+  page_not_found: Страница не найдена
 
-  new_page: 'Создать страницу'
-  edit_page: 'Редактирование страницы'
-  delete_page: 'Удалить страницу'
+  new_page: Создать страницу
+  edit_page: Редактирование страницы
+  delete_page: Удалить страницу
 
-  page_success_added: 'Страница «%{name}» успешно добавлена.'
-  page_success_updated: 'Страница «%{name}» успешно обновлена.'
-  page_success_removed: 'Страница «%{name}» успешно удалена.'
+  page_success_added: Страница «%{name}» успешно добавлена.
+  page_success_updated: Страница «%{name}» успешно обновлена.
+  page_success_removed: Страница «%{name}» успешно удалена.
 
-  template_success_added: 'Шаблон «%{name}» успешно добавлен.'
-  template_success_updated: 'Шаблон «%{name}» успешно обновлен.'
-  template_success_removed: 'Шаблон «%{name}» успешно удален.'
+  template_success_added: Шаблон «%{name}» успешно добавлен.
+  template_success_updated: Шаблон «%{name}» успешно обновлен.
+  template_success_removed: Шаблон «%{name}» успешно удален.
 
-  template_error_delete_pages: 'Удалите страницы с данным шаблоном'
+  template_error_delete_pages: Удалите страницы с данным шаблоном
 
   activerecord:
     attributes:
@@ -94,8 +93,8 @@ ru:
         constructor_pages/template:
           attributes:
             base:
-              code_name_already_in_use: 'Такое кодовое имя уже используется'
+              code_name_already_in_use: Такое кодовое имя уже используется
         constructor_pages/field:
           attributes:
             base:
-              code_name_already_in_use: 'Такое кодовое имя уже используется'
+              code_name_already_in_use: Такое кодовое имя уже используется
