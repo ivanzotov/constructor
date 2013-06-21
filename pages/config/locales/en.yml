@@ -50,3 +50,13 @@ en:
   template_success_added: 'Template «%{name}» added successfully.'
   template_success_updated: 'Template «%{name}» updated successfully.'
   template_success_removed: 'Template «%{name}» removed successfully.'
+
+  template_error_delete_pages: 'Delete pages with this template before'
+
+  activerecord:
+    errors:
+      models:
+        constructor_pages/template:
+          attributes:
+            base:
+              code_name_already_in_use: 'Code name has already been taken'

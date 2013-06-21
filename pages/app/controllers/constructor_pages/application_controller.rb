@@ -1,5 +1,11 @@
+# encoding: utf-8
+
 module ConstructorPages
-  module MoveHelper
+  class ApplicationController < ConstructorCore::ApplicationController
+    def self.movable(what)
+      %w{up down}.each {|m| define_method "move_#{m}" do move_to what, params[:id], m.to_sym end}
+    end
+
     def move_to(what, id, to)
       from = ('constructor_pages/'+what.to_s).classify.constantize.find(id)
       to_sibling = to == :up ? from.left_sibling : from.right_sibling

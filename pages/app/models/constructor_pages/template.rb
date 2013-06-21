@@ -16,8 +16,8 @@ module ConstructorPages
 
     default_scope -> { order :lft }
 
-    has_many :pages
-    has_many :fields
+    has_many :pages, dependent: :destroy
+    has_many :fields, dependent: :destroy
 
     acts_as_nested_set
 

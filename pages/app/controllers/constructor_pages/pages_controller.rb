@@ -1,17 +1,17 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class PagesController < ConstructorCore::ApplicationController
-    include MoveHelper
+  class PagesController < ApplicationController
+    movable :page
 
-    before_filter {@roots = Page.roots}
+    before_filter {@roots, @template_exists = Page.roots, Template.count > 0}
 
     def index
-      @template_exists = Template.count > 0
       flash.notice = 'Create at least one template' unless @template_exists
     end
 
     def new
+      redirect_to pages_path and return unless @template_exists
       @page, @template_id, @multipart = Page.new, Template.first.id, false
 
       if params[:page] and (@page.parent = Page.find(params[:page]))
@@ -127,8 +127,6 @@ module ConstructorPages
       @page.destroy
       redirect_to pages_url, notice: t(:page_success_removed, name: _name)
     end
-
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to :page, params[:id], m.to_sym end}
 
     private
 

@@ -1,9 +1,10 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class TemplatesController < ConstructorCore::ApplicationController
-    include MoveHelper
+  class TemplatesController < ApplicationController
     include TreeviewHelper
+
+    movable :template
 
     before_filter {@roots = Template.roots}
 
@@ -37,12 +38,15 @@ module ConstructorPages
 
     def destroy
       @template = Template.find(params[:id])
-      name = @template.name
-      @template.destroy
-      redirect_to templates_url, notice: t(:template_success_removed, name: name)
-    end
 
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to :template, params[:id], m.to_sym end}
+      if @template.pages.count == 0
+        name = @template.name
+        @template.destroy
+        redirect_to templates_url, notice: t(:template_success_removed, name: name)
+      else
+        redirect_to :back, alert: t(:template_error_delete_pages)
+      end
+    end
 
     private
 
