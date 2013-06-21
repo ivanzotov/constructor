@@ -1,9 +1,10 @@
 = form_for @page, html: {multipart: @multipart} do |f|
   - if @page.errors.any?
-    .alert.alert-error.fade.in.span12
-      = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
-      - @page.errors.full_messages.each do |m|
-        = m
+    .row-fluid
+      .alert.alert-error.fade.in.span12
+        = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
+        - @page.errors.full_messages.each do |m|
+          = m
           
   .form-horizontal
     .control-group

@@ -4,14 +4,14 @@ module ConstructorPages
   class PagesController < ConstructorCore::ApplicationController
     include MoveHelper
 
-    before_filter {@roots = Page.roots}
+    before_filter {@roots, @template_exists = Page.roots, Template.count > 0}
 
     def index
-      @template_exists = Template.count > 0
       flash.notice = 'Create at least one template' unless @template_exists
     end
 
     def new
+      redirect_to pages_path and return unless @template_exists
       @page, @template_id, @multipart = Page.new, Template.first.id, false
 
       if params[:page] and (@page.parent = Page.find(params[:page]))

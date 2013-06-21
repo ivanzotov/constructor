@@ -42,10 +42,7 @@ module ConstructorPages
     # field and template code_name should be uniqueness for page methods
     def self.check_code_name(code_name)
       [code_name, code_name.pluralize, code_name.singularize].each do |name|
-        # TODO: replace Page.first
-        if Page.first.respond_to?(name)
-          return false
-        end
+        return false if Page.instance_methods.include?(name.to_sym)
       end
 
       true

@@ -11,7 +11,7 @@ ru:
 
   menu: 'Меню'
   breadcrumbs: 'Хлебные крошки'
-
+  code_name_already_in_use: 'Такое кодовое имя уже используется'
   template: 'Шаблон'
   new_template: 'Создать шаблон'
   edit_template: 'Редактирование шаблона'
@@ -60,6 +60,7 @@ ru:
         code_name: "Кодовое имя"
         parent: "Родительский"
         child: "Дочерний"
+
       constructor_pages/page:
         active: "Вкл./Выкл."
         image: "Изображение"
@@ -87,3 +88,7 @@ ru:
               blank: "не может быть пустым"
             url:
               blank: "не может быть пустой"
+        constructor_pages/template:
+          attributes:
+            base:
+              code_name_already_in_use: 'Такое кодовое имя уже используется'

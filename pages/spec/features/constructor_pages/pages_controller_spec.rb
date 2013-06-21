@@ -5,17 +5,20 @@ require 'spec_helper'
 module ConstructorPages
   describe 'Pages Controller' do
     before :all do
+      ConstructorCore::User.delete_all
       @user = ConstructorCore::User.create email: 'ivanzotov@gmail.com', password: '123qweASD'
-      @template = Template.create name: 'Page', code_name: 'page'
     end
 
     before :each do
       Page.delete_all
       Field.delete_all
+      Template.delete_all
 
       Field::TYPES.each do |t|
         "constructor_pages/types/#{t}_type".classify.constantize.delete_all
       end
+
+      @template = Template.create name: 'Page', code_name: 'page'
 
       login_as @user
     end
@@ -72,7 +75,7 @@ module ConstructorPages
         page.should have_link 'Delete', pages.page_path(_page)
       end
 
-      it 'should has Add child' do
+      it 'should has Add child if child exists' do
         _template = Template.create name: 'Child', code_name: 'child_page', parent: @template
         _page = Page.create name: 'Zanussi', template: @template
         visit pages.pages_path
@@ -81,7 +84,7 @@ module ConstructorPages
     end
 
     describe 'Moving' do
-      it 'should move up' do
+      it 'should move page' do
         _page_first = Page.create name: 'First'
         _page_second = Page.create name: 'Second'
         _page_third = Page.create name: 'Third'
@@ -158,7 +161,7 @@ module ConstructorPages
         page.should have_field 'Name'
       end
 
-      it 'should has not delete link' do
+      it 'should has no delete link' do
         visit pages.new_page_path
         page.should_not have_link 'Delete'
       end
@@ -172,12 +175,19 @@ module ConstructorPages
         visit pages.new_page_path
         fill_in 'Name', with: 'Hello world'
         Page.count.should == 0
-        page.click_button 'Create Page'
+        click_button 'Create Page'
         Page.count.should == 1
         _page = Page.first
         _page.name.should == 'Hello world'
         _page.url.should == 'hello-world'
         current_path.should == pages.pages_path
+      end
+
+      it 'should redirect to back if no template exists' do
+        Template.delete_all
+        visit pages.new_page_path
+        current_path.should == pages.pages_path
+        page.should have_text 'Create at least one template'
       end
     end
 

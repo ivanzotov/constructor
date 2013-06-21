@@ -49,6 +49,14 @@ module ConstructorPages
           Page.full_url_generate(second_page.id, 'third-page').should == '/first-page/second-page/third-page'
         end
       end
+
+      describe '.check_code_name' do
+        it 'should check existing code_name in instance_methods' do
+          Page.check_code_name('get_field_value').should be_false
+          Page.check_code_name('class').should be_false
+          Page.check_code_name('hello_world').should be_true
+        end
+      end
     end
 
     context 'INSTANCE METHODS' do
