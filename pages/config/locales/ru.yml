@@ -23,6 +23,7 @@ ru:
   field_success_updated: 'Поле «%{name}» успешно обновлено.'
   field_success_removed: 'Поле «%{name}» успешно удалено.'
   field_success_moved: 'Поле «%{name}» успешно перемещено.'
+  delete_field: 'Удалить поле'
 
   string: 'Строка'
   integer: 'Целое число'
@@ -91,6 +92,10 @@ ru:
             url:
               blank: "не может быть пустой"
         constructor_pages/template:
+          attributes:
+            base:
+              code_name_already_in_use: 'Такое кодовое имя уже используется'
+        constructor_pages/field:
           attributes:
             base:
               code_name_already_in_use: 'Такое кодовое имя уже используется'

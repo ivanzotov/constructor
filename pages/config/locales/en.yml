@@ -17,6 +17,7 @@ en:
   field_success_updated: 'Field «%{name}» updated successfully.'
   field_success_removed: 'Field «%{name}» removed successfully.'
   field_success_moved: 'Field «%{name} moved successfully.'
+  delete_field: 'Delete field'
 
   string: 'String'
   integer: 'Integer'
@@ -57,6 +58,10 @@ en:
     errors:
       models:
         constructor_pages/template:
+          attributes:
+            base:
+              code_name_already_in_use: 'Code name has already been taken'
+        constructor_pages/field:
           attributes:
             base:
               code_name_already_in_use: 'Code name has already been taken'
