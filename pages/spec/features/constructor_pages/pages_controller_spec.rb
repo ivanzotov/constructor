@@ -275,7 +275,6 @@ module ConstructorPages
 
         click_button 'Update Page'
 
-        _page.reload
         _page.short_description.should == 'This is short description'
       end
 

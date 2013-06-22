@@ -5,9 +5,7 @@ module ConstructorPages
   class Page < ActiveRecord::Base
     # Adding has_many for all field types
     Field::TYPES.each do |t|
-      class_eval %{
-        has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'
-      }
+      class_eval %{ has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'}
     end
 
     has_many :fields, through: :template
@@ -24,81 +22,73 @@ module ConstructorPages
 
     acts_as_nested_set
 
-    # Used for find page by request. It return first page if no request given or request is home page
-    # @param request for example <tt>'/conditioners/split-systems/zanussi'</tt>
-    def self.find_by_request_or_first(request = nil)
-      request.nil? || request == '/' ? Page.first : Page.where(full_url: request).first
-    end
-
-    # Generate full_url from parent id and url
-    # @param parent_id integer
-    # @param url should looks like <tt>'hello-world-page'</tt> without leading slash
-    def self.full_url_generate(parent_id, url = '')
-      '/' + Page.find(parent_id).self_and_ancestors.map {|c| c.url}.append(url).join('/')
-    end
-
-    # Check code_name for field and template.
-    # When missing method Page find field or page in branch with plural and singular code_name so
-    # field and template code_name should be uniqueness for page methods
-    def self.check_code_name(code_name)
-      [code_name, code_name.pluralize, code_name.singularize].each do |name|
-        return false if Page.instance_methods.include?(name.to_sym)
+    class << self
+      # Used for find page by request. It return first page if no request given or request is home page
+      # @param request for example <tt>'/conditioners/split-systems/zanussi'</tt>
+      def find_by_request_or_first(request = nil)
+        request == nil || '/' ? Page.first : Page.find_by(full_url: request)
       end
 
-      true
-    end
+      # Generate full_url from parent id and url
+      # @param parent_id integer
+      # @param url should looks like <tt>'hello-world-page'</tt> without leading slash
+      def full_url_generate(parent_id, url = '')
+        '/' + Page.find(parent_id).self_and_ancestors.map(&:url).append(url).join('/')
+      end
 
-    def self.search(what_search = nil)
-      @what_search = what_search.to_s.singularize if what_search
-      self
-    end
-
-    def search(what_search = nil)
-      Page.search(what_search).in(self)
-    end
-
-    def self.in(where_search = nil)
-      @where_search = where_search
-      self
-    end
-
-    def self.by(params_search = nil)
-      @params_search = params_search
-      self
-    end
-
-    def self.result
-      if @where_search
-        if @where_search.is_a?(String)
-          _page = Page.find_by full_url: @where_search
-        elsif @where_search.is_a?(Page)
-          _page = @where_search
+      # Check code_name for field and template.
+      # When missing method Page find field or page in branch with plural and singular code_name so
+      # field and template code_name should be uniqueness for page methods
+      def check_code_name(code_name)
+        [code_name, code_name.pluralize, code_name.singularize].each do |name|
+          return false if Page.instance_methods.include?(name.to_sym)
         end
 
-        @result = _page ? _page.descendants : []
-      else
-        @result = Page.all
+        true
       end
 
-      if @what_search
-        _template = Template.find_by code_name: @what_search.to_s.downcase
-        @result = _template ? @result.where(template: _template) : []
-      end
+      def search(what_search = nil)
+        if @where_search
+          if @where_search.is_a?(String)
+            _page = Page.find_by full_url: @where_search
+          elsif @where_search.is_a?(Page)
+            _page = @where_search
+          end
 
-      if @params_search
-        @params_search.each_pair do |k, v|
-          @result = @result.select { |p| p.send(k) == v }
+          @result = _page ? _page.descendants : []
+        else
+          @result = Page.all
         end
+
+        if what_search
+          _template = Template.find_by code_name: what_search.to_s.singularize.downcase
+          @result = _template ? @result.where(template: _template) : []
+        end
+
+        if @params_search
+          @params_search.each_pair do |k, v|
+            @result = @result.select { |p| p.send(k) == v }
+          end
+        end
+
+        @where_search = @params_search = nil
+
+        @result
       end
 
-      @what_search = @where_search = @params_search = nil
+      def in(where_search  = nil); tap {@where_search  = where_search}  end
+      def by(params_search = nil); tap {@params_search = params_search} end
 
-      @result
+      def search_in(where_search  = nil); self.in(where_search).search  end
+      def search_by(params_search = nil); self.by(params_search).search end
     end
+
+    def search(what_search = nil); Page.in(self).search(what_search) end
+    def search_by(params_search = nil); Page.by(params_search).in(self).search end
 
     # Get field by code_name
     def field(code_name)
-      Field.where(code_name: code_name, template_id: template_id).first
+      Field.find_by code_name: code_name, template_id: template_id
     end
 
     # Get value of field by code_name
@@ -147,12 +137,12 @@ module ConstructorPages
     # It determines if code_name is singular or nor
     # @param code_name template code name
     def find_page_in_branch(code_name)
-      _template = Template.where(code_name: code_name.singularize).first
+      _template = Template.find_by code_name: code_name.singularize
 
       if _template
         result = []
         result = descendants.where(template_id: _template.id) if code_name == code_name.pluralize
-        result = ancestors.where(template_id: _template.id).first if result.empty?
+        result = ancestors.find_by(template_id: _template.id) if result.empty?
         result
       end
     end

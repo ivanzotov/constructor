@@ -102,35 +102,32 @@ module ConstructorPages
 
       context 'search in all pages' do
         it 'should search with what search' do
-          Page.search.result.should == [@page, @first_brand_page, @second_brand_page, @second_page, @third_brand_page]
-          Page.search(:hello).result.should == []
-          Page.search(:brand).result.should == [@first_brand_page, @second_brand_page, @third_brand_page]
-          Page.search(:brands).result.should == [@first_brand_page, @second_brand_page, @third_brand_page]
+          Page.search.should == [@page, @first_brand_page, @second_brand_page, @second_page, @third_brand_page]
+          Page.search(:hello).should == []
+          Page.search(:brand).should == [@first_brand_page, @second_brand_page, @third_brand_page]
+          Page.search(:brands).should == [@first_brand_page, @second_brand_page, @third_brand_page]
         end
 
         it 'should search with where string search' do
-          Page.search(:brand).in(@second_page).result == [@third_brand_page]
-          Page.search('brand').in(@second_page).result == [@third_brand_page]
-          Page.search.in('/world').result.should == []
+          Page.search_in('/world').should == []
         end
 
         it 'should search with where page search' do
-          Page.search.in(@page).result.should == [@first_brand_page, @second_brand_page]
+          Page.search_in(@page).should == [@first_brand_page, @second_brand_page]
+          Page.in(@second_page).search(:brands).should == [@third_brand_page]
+          Page.in(@second_page).search(:brand).should == [@third_brand_page]
+          Page.in(@second_page).search('brand').should == [@third_brand_page]
         end
 
         it 'it should search with by params' do
-          @first_brand_page.reload
-          @first_brand_page.price.should == 20000
-          @first_brand_page.area.should == 25
-          Page.search.in(@page).by(area: 25).result.should == [@first_brand_page]
-          Page.search.by(area: 10).result.should == [@second_page]
-          Page.search.by(price: 15000).result.should == [@page]
-          Page.search(:brand).in(@page).by(area: 25).result == [@first_brand_page]
-          Page.search(:brand).in(@second_page).by(area: 38).result == [@third_brand_page]
-          Page.search(:brand).in(@second_page).by(area: 40).result == []
-          Page.search.in('/world').by(area: 10).result.should == []
+          Page.in(@page).search_by(area: 25).should == [@first_brand_page]
+          Page.search_by(area: 10).should == [@second_page]
+          Page.search_by(price: 15000).should == [@page]
+          Page.in(@page).by(area: 25).search(:brand).should == [@first_brand_page]
+          Page.in(@second_page).by(area: 38).search(:brand).should == [@third_brand_page]
+          Page.in(@second_page).by(area: 40).search(:brand).should == []
+          Page.in('/world').search_by(area: 10).should == []
         end
-
 
         it 'should search with less' do
           pending#Page.search(price: ['<', 20000]).should == [@page]
@@ -141,19 +138,19 @@ module ConstructorPages
         end
       end
 
+
       context 'search in certain page' do
         it 'should search with what search' do
-          @page.search.result.should == [@first_brand_page, @second_brand_page]
-          @page.search(:hello).result.should == []
-          @page.search(:brand).result.should == [@first_brand_page, @second_brand_page]
-          @second_page.search(:brand).result.should == [@third_brand_page]
+          @page.search.should == [@first_brand_page, @second_brand_page]
+          @page.search(:hello).should == []
+          @page.search(:brand).should == [@first_brand_page, @second_brand_page]
+          @second_page.search(:brand).should == [@third_brand_page]
         end
 
-
         it 'it should search with by params' do
-          @page.search.by(area: 25).result.should == [@first_brand_page]
-          @page.search.by(price: 30000).result.should == [@second_brand_page]
-          @page.search.by(area: 10).result.should == []
+          @page.search_by(area: 25).should == [@first_brand_page]
+          @page.search_by(price: 30000).should == [@second_brand_page]
+          @page.search_by(area: 10).should == []
         end
       end
     end
