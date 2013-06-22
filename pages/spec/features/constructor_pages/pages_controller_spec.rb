@@ -183,6 +183,7 @@ module ConstructorPages
         _page.name.should == 'Hello world'
         _page.url.should == 'hello-world'
         current_path.should == pages.pages_path
+        page.should have_text 'added successfully'
       end
 
       it 'should redirect to back if no template exists' do
@@ -230,6 +231,7 @@ module ConstructorPages
         @page.title.should == 'Zanussi conditioners'
         @page.keywords.should == 'Zanussi, conditioners, Voronezh'
         @page.description.should == 'Zanussi conditioners Voronezh'
+        page.should have_text 'updated successfully'
       end
     end
 
@@ -240,6 +242,7 @@ module ConstructorPages
         Page.count.should == 1
         click_link 'Delete'
         Page.count.should == 0
+        page.should have_text 'removed successfully'
       end
 
       it 'should delete from page' do
@@ -248,6 +251,7 @@ module ConstructorPages
         Page.count.should == 1
         click_link 'Delete'
         Page.count.should == 0
+        page.should have_text 'removed successfully'
       end
     end
 
@@ -271,7 +275,6 @@ module ConstructorPages
 
         click_button 'Update Page'
 
-        _page.reload
         _page.short_description.should == 'This is short description'
       end
 

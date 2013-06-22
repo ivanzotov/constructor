@@ -1,57 +1,56 @@
 en:
-  structure: 'Structure'
-  templates: 'Templates'
-  settings: 'Settings'
-  new_field: 'New field'
-  edit_field: 'Edit field'
-  seo: 'SEO'
-  display_in: 'Display in'
-  help: 'Help'
-  edit: 'Edit'
-  delete: 'Delete'
+  structure: Structure
+  templates: Templates
+  settings: Settings
+  new_field: New field
+  edit_field: Edit field
+  seo: SEO
+  display_in: Display in
+  help: Help
+  edit: Edit
+  delete: Delete
 
-  new_field: 'New field'
+  code_name_already_in_use: This code name is already in use.
+  field_success_added: Field «%{name}» added successfully.
+  field_success_updated: Field «%{name}» updated successfully.
+  field_success_removed: Field «%{name}» removed successfully.
+  field_success_moved: Field «%{name} moved successfully.
+  delete_field: Delete field
 
-  code_name_already_in_use: 'This code name is already in use.'
-  field_success_added: 'Field «%{name}» added successfully.'
-  field_success_updated: 'Field «%{name}» updated successfully.'
-  field_success_removed: 'Field «%{name}» removed successfully.'
-  field_success_moved: 'Field «%{name} moved successfully.'
+  string: String
+  integer: Integer
+  float: Float
+  boolean: Boolean
+  date: Date
+  text: Text
+  html: HTML
+  image: Image
 
-  string: 'String'
-  integer: 'Integer'
-  float: 'Float'
-  boolean: 'Boolean'
-  date: 'Date'
-  text: 'Text'
-  html: 'HTML'
-  image: 'Image'
+  menu: Menu
+  breadcrumbs: Breadcrumbs
 
-  menu: 'Menu'
-  breadcrumbs: 'Breadcrumbs'
+  are_you_sure?: Are you sure?
 
-  are_you_sure?: 'Are you sure?'
+  page_not_found: Page not found
 
-  page_not_found: 'Page not found'
+  new_page: New page
+  edit_page: Edit page
+  delete_page: Delete page
 
-  new_page: 'New page'
-  edit_page: 'Edit page'
-  delete_page: 'Delete page'
+  page_success_added: Page «%{name}» added successfully.
+  page_success_updated: Page «%{name}» updated successfully.
+  page_success_removed: Page «%{name}» removed successfully.
 
-  page_success_added: 'Page «%{name}» added successfully.'
-  page_success_updated: 'Page «%{name}» updated successfully.'
-  page_success_removed: 'Page «%{name}» removed successfully.'
+  template: Template
+  new_template: New template
+  edit_template: Edit template
+  delete_template: Delete template
 
-  template: 'Template'
-  new_template: 'New template'
-  edit_template: 'Edit template'
-  delete_template: 'Delete template'
+  template_success_added: Template «%{name}» added successfully.
+  template_success_updated: Template «%{name}» updated successfully.
+  template_success_removed: Template «%{name}» removed successfully.
 
-  template_success_added: 'Template «%{name}» added successfully.'
-  template_success_updated: 'Template «%{name}» updated successfully.'
-  template_success_removed: 'Template «%{name}» removed successfully.'
-
-  template_error_delete_pages: 'Delete pages with this template before'
+  template_error_delete_pages: Delete pages with this template before
 
   activerecord:
     errors:
@@ -59,4 +58,8 @@ en:
         constructor_pages/template:
           attributes:
             base:
-              code_name_already_in_use: 'Code name has already been taken'
+              code_name_already_in_use: Code name has already been taken
+        constructor_pages/field:
+          attributes:
+            base:
+              code_name_already_in_use: Code name has already been taken

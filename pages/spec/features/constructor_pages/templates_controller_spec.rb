@@ -165,6 +165,7 @@ module ConstructorPages
         _template = Template.first
         _template.name.should == 'Brand'
         _template.code_name.should == 'brand'
+        page.should have_text 'added successfully'
       end
 
       it 'should validate uniqueness of code name' do
@@ -229,6 +230,7 @@ module ConstructorPages
         @template.reload
         @template.name.should == 'New brand'
         @template.code_name.should == 'new_brand'
+        page.should have_text 'updated successfully'
       end
     end
 
@@ -239,6 +241,7 @@ module ConstructorPages
         Template.count.should == 1
         click_link 'Delete'
         Template.count.should == 0
+        page.should have_text 'removed successfully'
       end
 
       it 'should delete from template' do
@@ -247,6 +250,7 @@ module ConstructorPages
         Template.count.should == 1
         click_link 'Delete'
         Template.count.should == 0
+        page.should have_text 'removed successfully'
       end
 
       it 'should not delete if there are any pages' do

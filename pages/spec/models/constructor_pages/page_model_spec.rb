@@ -59,6 +59,103 @@ module ConstructorPages
       end
     end
 
+    describe 'SEARCH' do
+      before :each do
+        @price_field = Field.create name: 'Price', code_name: 'price', template: @template, type_value: 'float'
+        @area_field = Field.create name: 'Area', code_name: 'area', template: @template, type_value: 'integer'
+
+        @brand_template = Template.create name: 'Brand', code_name: 'brand', parent: @template
+        @content_field = Field.create name: 'Content', code_name: 'content', template: @brand_template, type_value: 'text'
+        @check_field = Field.create name: 'Check', code_name: 'check', template: @brand_template, type_value: 'boolean'
+        @brand_price_field = Field.create name: 'Price', code_name: 'price', template: @brand_template, type_value: 'float'
+        @brand_area_field = Field.create name: 'Area', code_name: 'area', template: @brand_template, type_value: 'integer'
+
+        @page = Page.create name: 'Fresco', template: @template
+        @page.price = 15000
+        @page.area = 35
+
+        @second_page = Page.create name: 'Zanussi', template: @template
+        @second_page.price = 1000
+        @second_page.area = 10
+
+        @first_brand_page = Page.create name: 'Midea', template: @brand_template, parent: @page
+        @first_brand_page.price = 20000
+        @first_brand_page.area = 25
+        @first_brand_page.content = 'This is first brand page'
+        @first_brand_page.check = true
+
+        @second_brand_page = Page.create name: 'Dantex', template: @brand_template, parent: @page
+        @second_brand_page.price = 30000
+        @second_brand_page.area = 55
+        @second_brand_page.content = 'This is second brand page'
+        @second_brand_page.check = false
+
+        @third_brand_page = Page.create name: 'LG', template: @brand_template, parent: @second_page
+        @third_brand_page.price = 10000
+        @third_brand_page.area = 38
+        @third_brand_page.content = 'This is third brand page'
+        @third_brand_page.check = true
+
+        @page.reload
+        @second_page.reload
+      end
+
+      context 'search in all pages' do
+        it 'should search with what search' do
+          Page.search.should == [@page, @first_brand_page, @second_brand_page, @second_page, @third_brand_page]
+          Page.search(:hello).should == []
+          Page.search(:brand).should == [@first_brand_page, @second_brand_page, @third_brand_page]
+          Page.search(:brands).should == [@first_brand_page, @second_brand_page, @third_brand_page]
+        end
+
+        it 'should search with where string search' do
+          Page.search_in('/world').should == []
+        end
+
+        it 'should search with where page search' do
+          Page.search_in(@page).should == [@first_brand_page, @second_brand_page]
+          Page.in(@second_page).search(:brands).should == [@third_brand_page]
+          Page.in(@second_page).search(:brand).should == [@third_brand_page]
+          Page.in(@second_page).search('brand').should == [@third_brand_page]
+        end
+
+        it 'it should search with by params' do
+          Page.in(@page).search_by(area: 25).should == [@first_brand_page]
+          Page.search_by(area: 10).should == [@second_page]
+          Page.search_by(price: 15000).should == [@page]
+          Page.in(@page).by(area: 25).search(:brand).should == [@first_brand_page]
+          Page.in(@second_page).by(area: 38).search(:brand).should == [@third_brand_page]
+          Page.in(@second_page).by(area: 40).search(:brand).should == []
+          Page.in('/world').search_by(area: 10).should == []
+        end
+
+        it 'should search with less' do
+          pending#Page.search(price: ['<', 20000]).should == [@page]
+        end
+
+        it 'should search with more' do
+          pending#Page.search(price: ['<', 20000], price: ['>', 5000]).should == [@page, @second_page]
+        end
+      end
+
+
+      context 'search in certain page' do
+        it 'should search with what search' do
+          @page.search.should == [@first_brand_page, @second_brand_page]
+          @page.search(:hello).should == []
+          @page.search(:brand).should == [@first_brand_page, @second_brand_page]
+          @second_page.search(:brand).should == [@third_brand_page]
+        end
+
+        it 'it should search with by params' do
+          @page.search_by(area: 25).should == [@first_brand_page]
+          @page.search_by(price: 30000).should == [@second_brand_page]
+          @page.search_by(area: 10).should == []
+        end
+      end
+    end
+
+
     context 'INSTANCE METHODS' do
       context 'Getting and setting field value' do
         before :each do

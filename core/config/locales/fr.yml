@@ -1,0 +1,15 @@
+fr:
+  dashboard: Tableau de bord
+  users: Utilisateurs
+  homepage: Page d'accueil
+  login: S'identifier
+  logout: Déconnexion
+  cancel: Résilier
+  no: Pas
+  error: Erreur
+  sitemap: Plan du site
+  remember_me: Se souvenir de moi
+  profile: Profil
+  password_error_confirm: Confirmation mot de passe n'a pas
+  save_password: Enregistrer le mot de passe
+  password_changed: Mot de passe modifié

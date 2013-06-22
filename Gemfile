@@ -20,3 +20,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+platform :jruby do
+  gem 'activerecord-jdbcsqlite3-adapter', '1.3.0.beta2'
+  gem 'therubyrhino', group: :assets
+end
+
+platform :ruby do
+  gem 'sqlite3'
+end

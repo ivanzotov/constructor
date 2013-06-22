@@ -1,0 +1,74 @@
+fr:
+  errors:
+    messages:
+      not_found: "introuvable"
+      already_confirmed: "déjà confirmé !"
+      not_locked: "non bloqué"
+      not_saved:
+        one: "Erreur lors de l'enregistrement de '%{resource}': 1 erreur"
+        other: "Erreur lors de l'enregistrement de '%{resource}': %{count} erreurs."
+
+  devise:
+    shared:
+      sign_in: "connexion"
+      sign_up: "inscription"
+      forgot_password: "Mot de passe oublié ?"
+    failure:
+      unauthenticated: "non autentifié, créez un compte si vous n'en avez pas encore."
+      unconfirmed: "Compte toujours pas confirmé."
+      locked: "Votre compte est bloqué!"
+      invalid: "Email ou mot de passe invalide."
+      invalid_token: "Code d'autentification invalide!"
+      timeout: "Session expirée !"
+      inactive: "Compte inactif !"
+    sessions:
+      signed_in: "Connexion réussie."
+      signed_out: "Déconnecté avec succès"
+    passwords:
+      change_your_password: "Veuillez changer votre mot de passe."
+      new_password: "Nouveau mot de passe."
+      confirm_new_password: "Veuillez confirmer votre mot de passer"
+      change_my_password: "Changer mon mot de passe."
+      send_reset_password_instructions: "Envoi des instructions pour la réinitialisation du mot de passe."
+      send_instructions: "Vous recevrez un email avec des instructions pour réinitialiser votre mot de passe dans quelques minutes."
+      updated: "Votre mot de passe a été changé. Vous êtes actuellement connecté."
+    confirmations:
+      resend_instructions: 'Renvoyer la confirmation des instructions.'
+      send_instructions: "Vous recevrez un email avec les instructions pour confirmer votre compte en quelques minutes."
+      confirmed: "Votre compte a bien été confirmée. Vous êtes actuellement connecté."
+    registrations:
+      edit: "Modifier %{resourcename}"
+      leave_blank: "laisser vide si vous ne voulez pas changer"
+      current_password_label: "Entrez votre mot de passe actuel pour confirmer les changements"
+      update: "Mise à jour"
+      unhappy: "Insatisfait ?"
+      cancel_my_account: "Supprimer mon compte"
+      confirm: "Etes-vous sûr(e) ?"
+      back: "Retour"
+      signed_up: "Inscription correctement exécutée. Une confirmation a été envoyée à votre adresse e-mail."
+      inactive_signed_up: 'Inscription correctement exécutée. Cependant, nous ne pouvons pas signer, car votre compte est %{reason}.'
+      updated: "Votre compte a été mis à jour."
+      destroyed: "Au revoir! Votre compte a été supprimé. Nous espérons vous revoir bientôt."
+    omniauth_callbacks:
+      success: "Autorisation réussie pour %{kind}."
+      failure: "Echec de l'autorisation de : %{kind} à cause de : %{reason}"
+    unlocks:
+      send_instructions: "Vous recevrez un email avec les instructions pour déverrouiller votre compte en quelques minutes."
+      unlocked: "Votre compte a été débloqué. Vous êtes actuellement connecté."
+    mailer:
+      hello: "Bonjour, %{email}!"
+      welcome: "Nous vous souhaitons la bienvenue : %{email}!"
+      confirm: "Confirmer mon compte"
+      change: 'Changer mon mot de passe'
+      someone_requested: "Quelqu'un a demandé un lien pour changer votre mot de passe, vous pouvez le faire via le lien ci-dessous."
+      please_ignore: "Si vous n'avez pas fait la demande, ignorez ce message."
+      password_wont_change: "Votre mot de passe ne sera pas modifié jusqu'à ce que vous cliquez sur le lien ci-dessus."
+      locked: "Votre compte a été bloqué en raison d'un nombre excessif de tentatives de connexion infructueuses."
+      click_to_unlock: 'Cliquez sur le lien ci-dessous pour débloquer votre compte : '
+      unlock: 'Débloquer mon compte'
+      confirmation_instructions:
+        subject: "Confirmation de l'utilisateur"
+      reset_password_instructions:
+        subject: "Instructions pour réinitialiser votre mot de passe"
+      unlock_instructions:
+        subject: "Instructions pour déverrouiller le compte"

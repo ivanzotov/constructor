@@ -13,6 +13,11 @@ module ConstructorPages
       _template.valid?.should be_true
     end
 
+    it 'should be uniqueness with Page' do
+      _template = Template.create name: 'Page', code_name: 'get_field_value'
+      _template.valid?.should be_false
+    end
+
     describe '#child' do
       it 'should return child corresponding child_id or children first' do
         _brand = Template.create name: 'Brand', code_name: 'brand'

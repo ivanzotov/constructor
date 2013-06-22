@@ -1,0 +1,65 @@
+fr:
+  structure: Structure
+  templates: Modèles
+  settings: Réglages
+  new_field: Nouveau champ
+  edit_field: Champ dédition
+  seo: SEO
+  display_in: Montrer
+  help: Aider
+  edit: Èditer
+  delete: Supprimer
+
+  code_name_already_in_use: Ce nom de code est déjà utilisé
+  field_success_added: Champ %{name} a ajouté avec succès
+  field_success_updated: Champ %{name} mis à jour
+  field_success_removed: Champ %{name} supprimé avec succès
+  field_success_moved: Champ %{name} passé avec succès
+  delete_field: Supprimer le champ
+
+  string: String
+  integer: Entier
+  float: Flotter
+  boolean: Booléen
+  date: Date
+  text: Texte
+  html: HTML
+  image: Image
+
+  menu: Menu
+  breadcrumbs: Chapelure
+
+  are_you_sure?: Etes-vous sûr?
+
+  page_not_found: Page introuvable
+
+  new_page: Nouvelle page
+  edit_page: Modifier cette page
+  delete_page: Supprimer page
+
+  page_success_added: Page %{name} a ajouté avec succès
+  page_success_updated: Page %{name} mis à jour avec succès
+  page_success_removed: Page %{name} supprimé avec succès
+
+  template: Modèle
+  new_template: Nouveau modèle
+  edit_template: Modifier le modèle
+  delete_template: Supprimer le modèle
+
+  template_success_added: Modèle %{name} a ajouté avec succès
+  template_success_updated: Modèle %{name} mis à jour
+  template_success_removed: Modèle %{name} supprimé avec succès.
+
+  template_error_delete_pages: Supprimer les pages avec ce modèle avant
+
+  activerecord:
+    errors:
+      models:
+        constructor_pages/template:
+          attributes:
+            base:
+              code_name_already_in_use: Nom de code a déjà été prise
+        constructor_pages/field:
+          attributes:
+            base:
+              code_name_already_in_use: Nom de code a déjà été prise
