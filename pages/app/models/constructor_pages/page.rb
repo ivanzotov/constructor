@@ -103,14 +103,12 @@ module ConstructorPages
 
     # Get value of field by code_name
     def get_field_value(code_name)
-      field = field(code_name)
-      field.get_value_for(self) if field
+      field(code_name).tap {|f| return f.get_value_for(self) if f}
     end
 
     # Set value of field by code_name and value
     def set_field_value(code_name, value)
-      field = field(code_name)
-      field.set_value_for(self, value) if field
+      field(code_name).tap {|f| f.set_value_for(self, value) if f}
     end
 
     # Update all fields values with given params.
@@ -126,18 +124,14 @@ module ConstructorPages
 
         if _type_object
           _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
-
-          if value
-            _type_object.value = value
-          end
-
+          _type_object.value = value if value
           _type_object.save
         end
       end
     end
 
     # Create fields values
-    def create_fields_values; fields.each {|field| field.create_type_object(self) } end
+    def create_fields_values; fields.each {|f| f.create_type_object(self) } end
 
     # Remove all fields values
     def remove_fields_values
@@ -174,13 +168,11 @@ module ConstructorPages
     # Default attributes are name and title. Options param allows to add more.
     # @param options default merge name and title page attributes
     def as_json(options = {})
-      options = {name: self.name, title: self.title}.merge options
-
-      fields.each do |field|
-        options.merge!({field.code_name.to_sym => field.get_value_for(self)})
+      {name: self.name, title: self.title}.merge(options).tap do |options|
+        fields.each do |f|
+          options.merge!({f.code_name.to_sym => f.get_value_for(self)})
+        end
       end
-
-      options
     end
 
     # Check if link specified
