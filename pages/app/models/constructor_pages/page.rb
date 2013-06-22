@@ -48,6 +48,54 @@ module ConstructorPages
       true
     end
 
+    def self.search(what_search = nil)
+      @what_search = what_search.to_s.singularize if what_search
+      self
+    end
+
+    def search(what_search = nil)
+      Page.search(what_search).in(self)
+    end
+
+    def self.in(where_search = nil)
+      @where_search = where_search
+      self
+    end
+
+    def self.by(params_search = nil)
+      @params_search = params_search
+      self
+    end
+
+    def self.result
+      if @where_search
+        if @where_search.is_a?(String)
+          _page = Page.find_by full_url: @where_search
+        elsif @where_search.is_a?(Page)
+          _page = @where_search
+        end
+
+        @result = _page ? _page.descendants : []
+      else
+        @result = Page.all
+      end
+
+      if @what_search
+        _template = Template.find_by code_name: @what_search.to_s.downcase
+        @result = _template ? @result.where(template: _template) : []
+      end
+
+      if @params_search
+        @params_search.each_pair do |k, v|
+          @result = @result.select { |p| p.send(k) == v }
+        end
+      end
+
+      @what_search = @where_search = @params_search = nil
+
+      @result
+    end
+
     # Get field by code_name
     def field(code_name)
       Field.where(code_name: code_name, template_id: template_id).first
