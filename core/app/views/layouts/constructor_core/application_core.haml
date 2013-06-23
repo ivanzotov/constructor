@@ -31,10 +31,11 @@
             %span.icon-bar
           .nav-collapse
             %ul.nav
-              %li
-                = link_to '/admin/dashboard' do
-                  %i.icon-dashboard
-                  =t :dashboard
+              /
+                %li
+                  = link_to '/admin/dashboard' do
+                    %i.icon-dashboard
+                    =t :dashboard
               %li
                 = link_to '/admin/pages' do
                   %i.icon-sitemap
@@ -43,14 +44,15 @@
                 = link_to '/admin/templates' do
                   %i.icon-film
                   =t :templates
-              %li
-                = link_to '/admin/users' do
-                  %i.icon-group
-                  =t :users
-              %li
-                = link_to '/admin/settings' do
-                  %i.icon-cogs
-                  =t :settings
+              /
+                %li
+                  = link_to '/admin/users' do
+                    %i.icon-group
+                    =t :users
+                %li
+                  = link_to '/admin/settings' do
+                    %i.icon-cogs
+                    =t :settings
 
             - if current_user
               %ul.nav.pull-right
@@ -59,7 +61,7 @@
                     = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24, class: 'avatar'
                     %span= current_user.email
                 %li
-                  = link_to '/admin/help' do
+                  = link_to 'http://ivanzotov.github.io/constructor/' do
                     %i.icon-question-sign
                     =t :help
                 %li

@@ -2,6 +2,8 @@
 
 module ConstructorPages
   class PagesController < ApplicationController
+    layout 'constructor_core/application_core', except: [:show, :search]
+
     movable :page
 
     before_filter {@roots, @template_exists = Page.roots, Template.count > 0}
@@ -13,84 +15,43 @@ module ConstructorPages
     def new
       redirect_to pages_path and return unless @template_exists
       @page, @template_id, @multipart = Page.new, Template.first.id, false
-
-      if params[:page] and (@page.parent = Page.find(params[:page]))
-        @template_id = @page.parent.template.child.id
-      end
+      @template_id = @page.parent.template.child.id if params[:page] and (@page.parent = Page.find(params[:page]))
     end
 
     def show
       @page = Page.find_by_request_or_first("/#{params[:all]}")
-
       error_404 and return if @page.nil? or !@page.active?
-
       redirect_to @page.link if @page.redirect?
-
       _code_name = @page.template.code_name.to_s
-
       instance_variable_set('@'+_code_name, @page)
-
       respond_to do |format|
         format.html { render template: "html_templates/#{_code_name}" }
         format.json {
           _template = render_to_string partial: "json_templates/#{_code_name}.json.erb", layout: false, locals: {_code_name.to_sym => @page, page: @page}
           _js = render_to_string partial: "js_partials/#{_code_name}.js"
-
           render json: @page, self_and_ancestors: @page.self_and_ancestors.map(&:id), template: _template.gsub(/\n/, '\\\\n'), js: _js
         }
       end
     end
 
-=begin
     def search
-      if params[:all].nil?
-        @page = Page.first
-      else
-        @request = '/' + params[:all]
-        @page = Page.where(:full_url => @request).first
-      end
+      @page = Page.find_by_request_or_first("/#{params[:all]}")
 
-      instance_variable_set('@'+@page.template.code_name.to_s, @page)
+      _params = request.query_parameters
+      _params.each_pair {|k,v| v || (_params.delete(k); next)
+        _params[k] = v.numeric? ? v.to_f : (v.to_bool if v.boolean?)}
 
-      what_search = params[:what_search]
-      params_selection = request.query_parameters
+      @pages = Page.in(@page).by(_params).search(params[:what_search])
 
-      template = Template.find_by_code_name(what_search.singularize)
-
-      if template.nil?
-        render :action => "error_404", :layout => false
-        return
-      end
-
-      @pages = @page.descendants.where(:template_id => template.id)
-
-      params_selection.each_pair do |code_name, value|
-        if value.numeric?
-          value = value.to_f
-        elsif value.boolean?
-          value = value.to_bool
-        end
-
-        @pages = @pages.select do |page|
-          if code_name == 'name'
-            page.name == value
-          else
-            page.field(code_name) == value
-          end
-        end
-      end
-
-      instance_variable_set('@'+template.code_name.pluralize, @pages)
-
-      render :template => "templates/#{template.code_name}_search"
+      instance_variable_set('@'+@page.template.code_name.pluralize, @pages)
+      instance_variable_set('@'+@page.template.code_name.singularize, @page)
+      render :template => "html_templates/#{@page.template.code_name}_search"
     end
-=end
 
     def edit
       @page = Page.find(params[:id])
       @page.template ||= Template.first
       @template_id = @page.template.id
-
       @multipart = @page.fields.map{|f| f.type_value == 'image'}.include?(true) ? true : false
     end
 

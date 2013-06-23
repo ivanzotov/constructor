@@ -39,10 +39,8 @@ module ConstructorPages
       # When missing method Page find field or page in branch with plural and singular code_name so
       # field and template code_name should be uniqueness for page methods
       def check_code_name(code_name)
-        [code_name, code_name.pluralize, code_name.singularize].each do |name|
-          return false if Page.instance_methods.include?(name.to_sym)
-        end
-
+        [code_name, code_name.pluralize, code_name.singularize].each {|name|
+          return false if Page.instance_methods.include?(name.to_sym)}
         true
       end
 
