@@ -2,6 +2,8 @@
 
 module ConstructorPages
   class PagesController < ApplicationController
+    layout 'constructor_core/application_core', except: [:show, :search]
+
     movable :page
 
     before_filter {@roots, @template_exists = Page.roots, Template.count > 0}

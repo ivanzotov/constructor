@@ -2,6 +2,7 @@
 
 module ConstructorCore
   class ApplicationController < ::ApplicationController
+    layout 'constructor_core/application_core'
     before_filter :authenticate_user!, :except => [:show]
 
     helper_method :current_user
