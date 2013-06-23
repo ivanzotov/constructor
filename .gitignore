@@ -11,3 +11,4 @@ spec/dummy/tmp
 doc/
 .yardoc/
 tmp/
+pkg/

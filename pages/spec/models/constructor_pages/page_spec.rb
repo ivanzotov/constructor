@@ -138,7 +138,6 @@ module ConstructorPages
         end
       end
 
-
       context 'search in certain page' do
         it 'should search with what search' do
           @page.search.should == [@first_brand_page, @second_brand_page]
@@ -150,7 +149,9 @@ module ConstructorPages
         it 'it should search with by params' do
           @page.search_by(area: 25).should == [@first_brand_page]
           @page.search_by(price: 30000).should == [@second_brand_page]
+          @page.by(price: 30000).search.should == [@second_brand_page]
           @page.search_by(area: 10).should == []
+          @page.by(area: 10).search.should == []
         end
       end
     end
