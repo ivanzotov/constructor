@@ -23,23 +23,15 @@ module ConstructorPages
 
     # Return child corresponding child_id or children first
     def child
-      if child_id.nil? and !leaf?
-        children.first
-      else
-        Template.find child_id
-      end
+      !child_id && !leaf? ? children.first : self.class.find(child_id)
     end
 
     private
 
     # Check if there is code_name in same branch
-    def check_code_name(code_name)
-      [code_name.pluralize, code_name.singularize].each do |name|
-        if root.descendants.map{|t| t.code_name unless t.code_name == code_name}.include?(name)
-          return false
-        end
-      end
-
+    def check_code_name(cname)
+      [cname.pluralize, cname.singularize].each {|name|
+        return false if root.descendants.map{|t| t.code_name unless t.code_name == cname}.include?(name)}
       true
     end
   end

@@ -5,11 +5,10 @@ module ConstructorPages
   class Page < ActiveRecord::Base
     # Adding has_many for all field types
     Field::TYPES.each do |t|
-      class_eval %{ has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'}
+      class_eval %{has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'}
     end
 
     has_many :fields, through: :template
-
     belongs_to :template
 
     default_scope -> { order :lft }

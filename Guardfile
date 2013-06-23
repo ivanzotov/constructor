@@ -5,7 +5,7 @@ guard 'rspec', :spec_paths => extensions.map{|e| "#{e}/spec"}, :cli => (['~/.rsp
     watch(%r{^#{extension}/spec/.+_spec\.rb$})
     watch(%r{^#{extension}/app/(.+)\.rb$})                           { |m| "#{extension}/spec/#{m[1]}_spec.rb" }
     watch(%r{^#{extension}/lib/(.+)\.rb$})                           { |m| "#{extension}/spec/lib/#{m[1]}_spec.rb" }
-    watch(%r{^#{extension}/app/controllers/(.+)_(controller)\.rb$})  { |m| ["#{extension}/spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb", "#{extension}/spec/features/#{m[1]}_spec.rb"] }
+    watch(%r{^#{extension}/app/controllers/constructor_#{extension}/(.+)_(controller)\.rb$})  { |m| "#{extension}/spec/features/constructor_#{extension}/#{m[1]}_spec.rb" }
     watch(%r{^#{extension}/spec/support/(.+)\.rb$})                  { "#{extension}/spec" }
     watch("#{extension}/spec/spec_helper.rb")                        { "#{extension}/spec" }
     # Capybara request specs

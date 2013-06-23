@@ -15,12 +15,11 @@ ConstructorPages::Engine.routes.draw do
       get ':id/:template_id/edit/' => 'fields#edit', as: :edit_field
     end
 
-    scope '/pages' do
-      get ':page/new' => 'pages#new', as: :new_child_page
-    end
+    get '/pages/:page/new' => 'pages#new', as: :new_child_page
   end
 
   root :to => 'pages#show'
+
   get '*all/search/:what_search' => 'pages#search', format: false
   get '*all.:format' => 'pages#show'
   get '*all' => 'pages#show'
