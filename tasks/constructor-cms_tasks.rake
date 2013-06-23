@@ -10,6 +10,6 @@ namespace :all do
 
   desc 'Push all gems to Rubygems'
   task :push do
-     sh 'for i in pkg/*; do gem push $i; done'
+     sh "for i in pkg/*#{ConstructorCore::VERSION}.gem; do gem push $i; done"
   end
 end
