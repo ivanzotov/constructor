@@ -48,31 +48,12 @@ module ConstructorPages
       end
 
       def search(what_search = nil)
-        if @where_search
-          if @where_search.is_a?(String)
-            _page = Page.find_by full_url: @where_search
-          elsif @where_search.is_a?(Page)
-            _page = @where_search
-          end
-
-          @result = _page ? _page.descendants : []
-        else
-          @result = Page.all
-        end
-
-        if what_search
-          _template = Template.find_by code_name: what_search.to_s.singularize.downcase
-          @result = _template ? @result.where(template: _template) : []
-        end
-
-        if @params_search
-          @params_search.each_pair do |k, v|
-            @result = @result.select { |p| p.send(k) == v }
-          end
-        end
-
+        (@where_search.is_a?(String) ? Page.find_by(full_url: @where_search) : @where_search)
+        .tap {|p| @result = @where_search ? p ? p.descendants : [] : Page.all }
+        what_search && Template.find_by(code_name: what_search.to_s.singularize.downcase)
+        .tap {|t| @result = t ? @result.where(template: t) : [] }
+        @params_search && @params_search.each_pair {|k,v| @result = @result.select {|p| p.send(k) == v}}
         @where_search = @params_search = nil
-
         @result
       end
 
@@ -84,6 +65,7 @@ module ConstructorPages
     end
 
     def search(what_search = nil); Page.in(self).search(what_search) end
+    def by(params_search = nil); Page.by(params_search); self end
     def search_by(params_search = nil); Page.by(params_search).in(self).search end
 
     # Get field by code_name
@@ -105,28 +87,19 @@ module ConstructorPages
     # @param params should looks like <tt>{price: 500, content: 'Hello'}</tt>
     # @param reset_booleans reset all boolean fields to false before assign params
     def update_fields_values(params, reset_booleans = true)
-      return if params.nil?
+      params || return
 
-      fields.each do |field|
-        value = params[field.code_name.to_sym]
-
-        _type_object = field.find_type_object(self)
-
-        if _type_object
-          _type_object.value = 0 if field.type_value == 'boolean' and reset_booleans
-          _type_object.value = value if value
-          _type_object.save
-        end
-      end
+      fields.each {|f| f.find_type_object(self).tap {|t| t || break
+        t.value = 0 if f.type_value == 'boolean' && reset_booleans
+        params[f.code_name.to_sym].tap {|v| v && t.value = v}
+        t.save }}
     end
 
     # Create fields values
-    def create_fields_values; fields.each {|f| f.create_type_object(self) } end
+    def create_fields_values; fields.each {|f| f.create_type_object self} end
 
     # Remove all fields values
-    def remove_fields_values
-      fields.each {|f| f.remove_type_object self}
-    end
+    def remove_fields_values; fields.each {|f| f.remove_type_object self} end
 
     # Search page by template code_name in same branch of pages and templates.
     # It allows to call page.category.brand.series.model etc.
@@ -135,16 +108,11 @@ module ConstructorPages
     # and return array of pages if founded in descendants
     #
     # It determines if code_name is singular or nor
-    # @param code_name template code name
-    def find_page_in_branch(code_name)
-      _template = Template.find_by code_name: code_name.singularize
-
-      if _template
-        result = []
-        result = descendants.where(template_id: _template.id) if code_name == code_name.pluralize
-        result = ancestors.find_by(template_id: _template.id) if result.empty?
-        result
-      end
+    # @param cname template code name
+    def find_page_in_branch(cname)
+      Template.find_by(code_name: cname.singularize).tap {|t| t || return
+        (descendants.where(template_id: t.id) if cname == cname.pluralize).tap {|r| r ||= []
+          return r.empty? ? ancestors.find_by(template_id: t.id) : r}}
     end
 
     alias_method :find_pages_in_branch, :find_page_in_branch
@@ -159,9 +127,7 @@ module ConstructorPages
     # @param options default merge name and title page attributes
     def as_json(options = {})
       {name: self.name, title: self.title}.merge(options).tap do |options|
-        fields.each do |f|
-          options.merge!({f.code_name.to_sym => f.get_value_for(self)})
-        end
+        fields.each {|f| options.merge!({f.code_name.to_sym => f.get_value_for(self)})}
       end
     end
 
@@ -175,12 +141,9 @@ module ConstructorPages
     #   puts page.price
     #   page.brand.models.each do...
     def method_missing(name, *args, &block)
-      if new_record?
-        super
-      else
-        name = name.to_s
-        name[-1] == '=' ? set_field_value(name[0..-2], args[0]) : get_field_value(name) || find_pages_in_branch(name)
-      end
+      super && return if new_record?
+      name = name.to_s
+      name[-1] == '=' ? set_field_value(name[0..-2], args[0]) : get_field_value(name) || find_pages_in_branch(name)
     end
 
     private
@@ -192,19 +155,13 @@ module ConstructorPages
 
     # TODO: add more languages
     # translit to english
-    def translit(str)
-      Russian.translit(str)
-    end
+    def translit(str); Russian.translit(str) end
 
     # Page is not valid if there is no template
-    def template_check
-      errors.add_on_empty(:template_id) if Template.count == 0
-    end
+    def template_check; errors.add_on_empty(:template_id) if Template.count == 0 end
 
     # If template_id is nil then get first template
-    def template_assign
-      self.template_id = Template.first.id unless template_id
-    end
+    def template_assign; self.template_id = Template.first.id unless template_id end
 
     # Update full_url
     def full_url_update
