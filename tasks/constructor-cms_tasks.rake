@@ -4,7 +4,9 @@ namespace :all do
     sh 'rake build'
 
     %w{core pages}.each do |engine|
-      sh "gem build #{engine}/constructor-#{engine}.gemspec && mv constructor-#{engine}-#{ConstructorCore::VERSION}.gem pkg/"
+      sh "cd #{engine}"
+      sh "gem build constructor-#{engine}.gemspec && mv constructor-#{engine}-#{ConstructorCore::VERSION}.gem ./../pkg/"
+      sh "cd .."
     end
   end
 
