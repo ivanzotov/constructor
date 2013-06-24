@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage = 'http://ivanzotov.github.com/constructor'
   s.description = 'Constructor – content management system'
 
-  s.files             = `git ls-files`.split("\n")
+  s.files             = ['config/routes.rb', 'lib/constructor-cms.rb', 'lib/constructor-cms/engine.rb', 'LICENSE.md', 'README.md', 'Rakefile']
   s.test_files        = `git ls-files -- spec/*`.split("\n")
 
   s.add_dependency 'constructor-core', ConstructorCore::VERSION
