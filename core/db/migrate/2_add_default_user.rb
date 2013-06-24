@@ -1,6 +1,6 @@
 class AddDefaultUser < ActiveRecord::Migration
   def self.up
-    ConstructorCore::User.create!(:email => "admin@admin.ru", :password => "admin")
+    ConstructorCore::User.create!(:email => "admin@admin.ru", :password => "123qweASD")
   end
 
   def self.down
