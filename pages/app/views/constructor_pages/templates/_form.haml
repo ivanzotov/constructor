@@ -28,22 +28,11 @@
     - unless @template.new_record?
       .control-group
         .controls
-          = link_to new_field_path(@template.id), class: 'btn btn-mini btn-link' do
+          = link_to new_template_field_path(@template), class: 'btn btn-mini btn-link' do
             %i.icon-plus
             =t :new_field
 
-    - @template.fields.each do |field|
-      .control-group
-        = label_tag '', field.name, class: 'control-label'
-        .controls
-          = link_to field_move_down_path(field), class: "btn btn-mini #{'disabled' if field.last?}" do
-            %i.icon-arrow-down
-          = link_to field_move_up_path(field), class: "btn btn-mini #{'disabled' if field.first?}" do
-            %i.icon-arrow-up
-          = link_to edit_field_path(field, field.template), class: 'btn btn-mini btn-primary' do
-            %i.icon-pencil
-          = link_to field_path(field), method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-mini btn-danger' do
-            %i.icon-remove
+    = render @template.fields
 
     .row-fluid
       .span12

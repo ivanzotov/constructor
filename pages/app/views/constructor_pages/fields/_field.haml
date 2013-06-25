@@ -1,0 +1,11 @@
+.control-group
+  = label_tag '', field.name, class: 'control-label'
+  .controls
+    = link_to field_move_down_path(field), class: "btn btn-mini #{'disabled' if field.last?}" do
+      %i.icon-arrow-down
+    = link_to field_move_up_path(field), class: "btn btn-mini #{'disabled' if field.first?}" do
+      %i.icon-arrow-up
+    = link_to edit_template_field_path(field.template, field), class: 'btn btn-mini btn-primary' do
+      %i.icon-pencil
+    = link_to [field.template, field], method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-mini btn-danger' do
+      %i.icon-remove
