@@ -1,6 +1,9 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
-    resources :pages, except: [:show]
+    resources :pages, except: [:show] do
+      get :new_child, on: :member
+    end
+
     resources :templates, except: [:show] do
       resources :fields, except: [:show, :index]
     end  
@@ -10,8 +13,6 @@ ConstructorPages::Engine.routes.draw do
         get "#{c.pluralize}/move/#{d}/:id" => "#{c.pluralize}#move_#{d}", as: "#{c}_move_#{d}"
       end
     end
-
-    get '/pages/:page/new' => 'pages#new', as: :new_child_page
   end
 
   root :to => 'pages#show'
