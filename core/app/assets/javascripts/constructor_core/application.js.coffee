@@ -1,7 +1,7 @@
 #= require constructor_core/jquery_bundle
 #= require constructor_core/bootstrap
 #= require ckeditor/ckeditor
-#= require constructor_core/urlify
+#= require constructor_pages/urlify
 #= require_self
 
 $(document).ready ->

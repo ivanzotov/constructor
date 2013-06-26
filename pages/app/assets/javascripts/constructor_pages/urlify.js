@@ -1,4 +1,4 @@
-var RUSSIAN_MAP = {
+var ru = {
     'а':'a', 'б':'b', 'в':'v', 'г':'g', 'д':'d', 'е':'e', 'ё':'yo', 'ж':'zh',
     'з':'z', 'и':'i', 'й':'y', 'к':'k', 'л':'l', 'м':'m', 'н':'n', 'о':'o',
     'п':'p', 'р':'r', 'с':'s', 'т':'t', 'у':'u', 'ф':'f', 'х':'h', 'ц':'ts',
@@ -13,7 +13,7 @@ var RUSSIAN_MAP = {
 
 var ALL_DOWNCODE_MAPS=new Array()
 
-ALL_DOWNCODE_MAPS[0]=RUSSIAN_MAP
+ALL_DOWNCODE_MAPS[0] = ru
 
 var Downcoder = new Object();
 Downcoder.Initialize = function()
