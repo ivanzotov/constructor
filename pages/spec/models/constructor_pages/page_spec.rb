@@ -325,11 +325,13 @@ module ConstructorPages
           end
 
           it 'should translit utf-8' do
+            I18n.locale = :ru
             page = Page.create name: 'Проверка'
             page.full_url.should == '/proverka'
 
             page_two = Page.create name: 'Тест', parent: page
             page_two.full_url.should == '/proverka/test'
+            I18n.locale = :en
           end
         end
 

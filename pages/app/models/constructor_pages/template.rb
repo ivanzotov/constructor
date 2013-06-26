@@ -32,7 +32,7 @@ module ConstructorPages
 
     # Convert name to accusative
     def to_accusative
-      self.name.mb_chars.downcase.accusative
+      self.name.mb_chars.downcase.to_s.accusative
     end
 
     private

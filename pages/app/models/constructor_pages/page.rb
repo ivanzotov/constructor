@@ -21,9 +21,6 @@ module ConstructorPages
     after_update :descendants_update
     after_create :create_fields_values
 
-    before_update :remove_fields_values
-    after_update :create_fields_values
-
     acts_as_nested_set
 
     class << self
