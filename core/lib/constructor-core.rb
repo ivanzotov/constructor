@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'devise'
 require 'bootstrap-sass'
 require 'font-awesome-sass-rails'
@@ -17,9 +19,13 @@ class String
     end
   end
 
-  def to_bool
+  def to_boolean
     return true if self == true || self =~ (/(true|t|yes|y|1)$/i)
     return false if self == false || self.blank? || self =~ (/(false|f|no|n|0)$/i)
     raise ArgumentError.new("invalid value for Boolean: \"#{self}\"")
+  end
+
+  def genitive
+    self.sub(/а$/, 'у').sub(/я$/, 'ю')
   end
 end
