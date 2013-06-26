@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class String
   def numeric?
     return true if self =~ /^\d+$/
