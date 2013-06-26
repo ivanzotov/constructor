@@ -1,6 +1,0 @@
-- @children_of_current_root.each do |page|
-  - if page.full_url == @request
-    %li.active
-      = link_to page.title, page.full_url 
-  - else
-    %li= link_to page.title, page.full_url 
