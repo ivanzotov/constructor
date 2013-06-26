@@ -3,6 +3,8 @@
 module ConstructorPages
   # Page model. Pages are core for company websites, blogs etc.
   class Page < ActiveRecord::Base
+    include ActiveSupport::Inflector
+
     # Adding has_many for all field types
     Field::TYPES.each do |t|
       class_eval %{has_many :#{t}_types,  dependent: :destroy, class_name: 'Types::#{t.titleize}Type'}
@@ -18,6 +20,9 @@ module ConstructorPages
     before_save :friendly_url, :template_assign, :full_url_update
     after_update :descendants_update
     after_create :create_fields_values
+
+    before_update :remove_fields_values
+    after_update :create_fields_values
 
     acts_as_nested_set
 
@@ -114,9 +119,13 @@ module ConstructorPages
 
     alias_method :find_pages_in_branch, :find_page_in_branch
 
-    def published?; active end
+    def published?; active? end
 
-    alias_method :active?, :published?
+    # Return true if there is a file upload field in page
+    def multipart?
+      fields.each {|f| return true if f.type_value == 'image'}
+      false
+    end
 
     # Returns page hash attributes with fields.
     #
@@ -147,12 +156,8 @@ module ConstructorPages
 
     # if url has been changed by manually or url is empty
     def friendly_url
-      self.url = ((auto_url || url.empty?) ? translit(name) : url).parameterize
+      self.url = ((auto_url || url.empty?) ? transliterate(name, '') : url).parameterize
     end
-
-    # TODO: add more languages
-    # translit to english
-    def translit(str); Russian.translit(str) end
 
     # Page is not valid if there is no template
     def template_check; errors.add_on_empty(:template_id) if Template.count == 0 end
