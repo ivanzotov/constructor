@@ -93,10 +93,14 @@ ru:
               blank: "не может быть пустой"
         constructor_pages/template:
           attributes:
+            code_name:
+              taken: уже используется
             base:
               code_name_already_in_use: Такое кодовое имя уже используется
         constructor_pages/field:
           attributes:
+            code_name:
+              taken: уже используется
             base:
               code_name_already_in_use: Такое кодовое имя уже используется
   i18n:
