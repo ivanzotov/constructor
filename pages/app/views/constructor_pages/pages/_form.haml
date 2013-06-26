@@ -1,4 +1,4 @@
-= form_for @page, html: {multipart: @multipart} do |f|
+= form_for @page, html: {multipart: @page.multipart?} do |f|
   - if @page.errors.any?
     .row-fluid
       .alert.alert-error.fade.in.span12
@@ -24,18 +24,13 @@
       = f.label :url, class: 'control-label'
       .controls
         .full_url
-          %span.path>= @page.parent.full_url unless @page.parent.nil?
+          %span.path>= @page.parent.full_url if @page.parent
           \/
           %span.address>= @page.url
         = f.text_field :url, class: 'span3'
         %i.address_icon.icon-pencil
 
-    - unless @page.new_record?
-      - @page.template.fields.each do |field|
-        .control-group
-          = label_tag "fields[#{field.code_name}]", field.name, class: 'control-label'
-          .controls
-            = render :partial => "constructor_pages/fields/types/#{field.type_value}", locals: {field: field, page: @page}
+    = render partial: 'field', collection: @page.fields
 
     .accordion
       .accordion-group
@@ -46,7 +41,7 @@
             .control-group
               = f.label :parent_id, class: 'control-label'
               .controls
-                = f.select :parent_id, options_for_select(for_select(@roots), selected: @page.parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
+                = f.select :parent_id, options_for_select(for_select(@roots), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
 
             .control-group
               = f.label :template_id, :class => 'control-label'

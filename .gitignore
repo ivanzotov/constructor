@@ -8,6 +8,7 @@ spec/dummy/log/*.log
 spec/dummy/db/
 spec/dummy/public/system
 spec/dummy/tmp
+spec/dummy/app/views/templates/*.*ml*
 doc/
 .yardoc/
 tmp/

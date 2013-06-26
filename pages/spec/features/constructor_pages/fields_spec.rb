@@ -38,14 +38,14 @@ module ConstructorPages
 
       it 'should has edit field link' do
         visit pages.edit_template_path(@template)
-        find("a[href='#{pages.edit_field_path(@content_field, @template)}']").should be_true
-        find("a[href='#{pages.edit_field_path(@price_field, @template)}']").should be_true
+        find("a[href='#{pages.edit_template_field_path(@template, @content_field)}']").should be_true
+        find("a[href='#{pages.edit_template_field_path(@template, @price_field)}']").should be_true
       end
 
       it 'should has delete field link' do
         visit pages.edit_template_path(@template)
-        find("a[href='#{pages.field_path(@content_field)}']").should be_true
-        find("a[href='#{pages.field_path(@price_field)}']").should be_true
+        find("a[href='#{pages.template_field_path(@template, @content_field)}']").should be_true
+        find("a[href='#{pages.template_field_path(@template, @price_field)}']").should be_true
       end
 
       it 'should has move field link' do
@@ -62,14 +62,14 @@ module ConstructorPages
 
       context 'Access' do
         it 'should be accessed by new_field_path if loggen in' do
-          visit pages.new_field_path(@template)
-          current_path.should == pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
+          current_path.should == pages.new_template_field_path(@template)
           status_code.should == 200
         end
 
         it 'should not be accessed by new_field_path if not loggen in' do
           logout
-          visit pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
           current_path.should == '/'
         end
       end
@@ -81,33 +81,33 @@ module ConstructorPages
         end
 
         it 'should has name field' do
-          visit pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
           page.should have_field 'Name'
         end
 
         it 'should has code name field' do
-          visit pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
           page.should have_field 'Code name'
         end
 
         it 'should has select type' do
-          visit pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
           page.should have_select 'Type value'
         end
 
         it 'should has no delete link' do
-          visit pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
           page.should_not have_link 'Delete'
         end
 
         it 'should has Create Field button' do
-          visit pages.new_field_path(@template)
+          visit pages.new_template_field_path(@template)
           page.should have_button 'Create Field'
         end
       end
 
       it 'should create new field' do
-        visit pages.new_field_path(@template)
+        visit pages.new_template_field_path(@template)
         fill_in 'Name', with: 'Amount'
         fill_in 'Code name', with: 'amount'
         select 'Integer', from: 'Type value'
@@ -124,22 +124,33 @@ module ConstructorPages
       end
 
       it 'should validate uniqueness of code_name' do
-        visit pages.new_field_path(@template)
+        visit pages.new_template_field_path(@template)
         fill_in 'Name', with: 'Hello'
         fill_in 'Code name', with: 'get_field_value'
         Field.count.should == 0
         click_button 'Create Field'
         Field.count.should == 0
-        current_path.should == pages.fields_path
+        current_path.should == pages.template_fields_path(@template)
         page.should have_text 'Code name has already been taken'
 
-        visit pages.new_field_path(@template)
+        visit pages.new_template_field_path(@template)
         fill_in 'Name', with: 'Hello'
         fill_in 'Code name', with: 'brand'
         Field.count.should == 0
         click_button 'Create Field'
         Field.count.should == 0
-        current_path.should == pages.fields_path
+        current_path.should == pages.template_fields_path(@template)
+        page.should have_text 'Code name has already been taken'
+
+        _field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
+
+        visit pages.edit_template_field_path(@template, _field)
+        fill_in 'Name', with: 'Hello'
+        fill_in 'Code name', with: 'brand'
+        Field.count.should == 1
+        click_button 'Update Field'
+        Field.count.should == 1
+        current_path.should == pages.template_field_path(@template, _field)
         page.should have_text 'Code name has already been taken'
       end
     end
@@ -152,30 +163,30 @@ module ConstructorPages
 
       context 'Access' do
         it 'should be accessed by edit_field_path if loggen in' do
-          visit pages.edit_field_path(@field_content, @template)
-          current_path.should == pages.edit_field_path(@field_content, @template)
+          visit pages.edit_template_field_path(@template, @field_content)
+          current_path.should == pages.edit_template_field_path(@template, @field_content)
           status_code.should == 200
         end
 
         it 'should not be accessed by new_field_path if not loggen in' do
           logout
-          visit pages.edit_field_path(@field_content, @template)
+          visit pages.edit_template_field_path(@template, @field_content)
           current_path.should == '/'
         end
       end
 
       it 'should has delete link' do
-        visit pages.edit_field_path(@field_content, @template)
-        page.should have_link 'Delete', pages.field_path(@field_content)
+        visit pages.edit_template_field_path(@template, @field_content)
+        page.should have_link 'Delete', pages.template_field_path(@template, @field_content)
       end
 
       it 'should has Update Field button' do
-        visit pages.edit_field_path(@field_content, @template)
+        visit pages.edit_template_field_path(@template, @field_content)
         page.should have_button 'Update Field'
       end
 
       it 'should edit field' do
-        visit pages.edit_field_path(@field_content, @template)
+        visit pages.edit_template_field_path(@template, @field_content)
         fill_in 'Name', with: 'Long content'
         fill_in 'Code name', with: 'long_content'
         select 'HTML', from: 'Type value'
@@ -198,14 +209,14 @@ module ConstructorPages
       it 'should delete field from template edit' do
         visit pages.edit_template_path(@template)
         Field.count.should == 1
-        find("a[href='#{pages.field_path(@field_content)}']").click
+        find("a[href='#{pages.template_field_path(@template, @field_content)}']").click
         Field.count.should == 0
         current_path.should == pages.edit_template_path(@template)
         page.should have_text 'removed successfully'
       end
 
       it 'should delete from field edit' do
-        visit pages.edit_field_path(@field_content, @template)
+        visit pages.edit_template_field_path(@template, @field_content)
         Field.count.should == 1
         click_link 'Delete'
         Field.count.should == 0

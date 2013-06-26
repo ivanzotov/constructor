@@ -22,7 +22,7 @@ module ConstructorPages
       if @template.save
         redirect_to templates_url, notice: t(:template_success_added, name: @template.name)
       else
-        render action: :new
+        render :new
       end
     end
 
@@ -32,7 +32,7 @@ module ConstructorPages
       if @template.update template_params
         redirect_to templates_url, notice: t(:template_success_updated, name: @template.name)
       else
-        render action: :edit
+        render :edit
       end
     end
 

@@ -214,7 +214,7 @@ module ConstructorPages
 
       it 'should has new field link' do
         visit pages.edit_template_path(@template)
-        page.should have_link 'New field', pages.new_field_path(@template)
+        page.should have_link 'New field', pages.new_template_field_path(@template)
       end
 
       it 'should has update template button' do

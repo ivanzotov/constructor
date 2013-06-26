@@ -1,4 +1,4 @@
-= form_for @field do |f|
+= form_for [@template, @field] do |f|
   - if @field.errors.any?
     .alert.alert-error.fade.in.span12
       = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
@@ -13,7 +13,7 @@
     .control-group
       = f.label :code_name, class: 'control-label'
       .controls= f.text_field :code_name, class: 'span4'
-      = f.hidden_field :template_id, value: @field.template.id, class: 'span4'
+      = f.hidden_field :template_id, value: @template.id, class: 'span4'
 
     - unless @field.type_value == 'image'
       .control-group
@@ -25,5 +25,5 @@
       .span12
         .form-actions
           = f.submit class: 'btn btn-primary'
-          = link_to t(:cancel), edit_template_url(@field.template), class: 'btn'
-          = link_to t(:delete_field), @field, method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-danger pull-right' unless @field.new_record?
+          = link_to t(:cancel), edit_template_path(@template), class: 'btn'
+          = link_to t(:delete_field), [@template, @field], method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-danger pull-right' unless @field.new_record?
