@@ -12,12 +12,12 @@
     %button.btn.btn-link.disabled= template.name
 
     .b-tree__buttons
-      = render partial: 'constructor_pages/partials/arrow_buttons', locals: {item: template}
+      = arrow_buttons_for(template)
 
       = link_to edit_template_path(template), class: 'btn btn-primary btn-mini' do
         %i.icon-pencil
         =t :edit
-        = t(:template).downcase
+        = t(:template).mb_chars.downcase
 
       = link_to template, method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
         %i.icon-remove

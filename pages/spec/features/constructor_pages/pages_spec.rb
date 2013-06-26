@@ -79,7 +79,13 @@ module ConstructorPages
         _template = Template.create name: 'Child', code_name: 'child_page', parent: @template
         _page = Page.create name: 'Zanussi', template: @template
         visit pages.pages_path
-        page.should have_link 'Add child', pages.new_child_page_path(_page)
+        page.should have_link 'Add child', pages.new_page_path(_page)
+      end
+
+      it 'should not has if child not exists' do
+        _page = Page.create name: 'Zanussi', template: @template
+        visit pages.pages_path
+        page.should have_no_link 'Add'
       end
     end
 
@@ -184,13 +190,6 @@ module ConstructorPages
         _page.url.should == 'hello-world'
         current_path.should == pages.pages_path
         page.should have_text 'added successfully'
-      end
-
-      it 'should redirect to back if no template exists' do
-        Template.delete_all
-        visit pages.new_page_path
-        current_path.should == pages.pages_path
-        page.should have_text 'Create at least one template'
       end
     end
 

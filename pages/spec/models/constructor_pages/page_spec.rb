@@ -239,6 +239,19 @@ module ConstructorPages
         end
       end
 
+      describe '#multipart?' do
+        it 'should return true if there is file upload in page fields' do
+          Field.create name: 'Photo', code_name: 'photo', template: @template, type_value: 'image'
+          _page = Page.create name: 'Product', template: @template
+          _page.multipart?.should be_true
+        end
+
+        it 'should return false if there is no file upload in page fields' do
+          _page = Page.create name: 'Product', template: @template
+          _page.multipart?.should be_false
+        end
+      end
+
       describe '#as_json' do
         context 'should return page hash attributes with fields' do
           before :each do
