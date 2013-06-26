@@ -30,9 +30,9 @@ module ConstructorPages
       end
     end
 
-    # Convert name to genetive
-    def to_genetive
-      name.mb_chars.downcase.genitive
+    # Convert name to accusative
+    def to_accusative
+      self.name.mb_chars.downcase.accusative
     end
 
     private
