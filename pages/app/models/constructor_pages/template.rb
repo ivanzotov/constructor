@@ -23,7 +23,11 @@ module ConstructorPages
 
     # Return child corresponding child_id or children first
     def child
-      !child_id && !leaf? ? children.first : self.class.find(child_id)
+      if child_id
+        self.class.find(child_id)
+      else
+        children.first if !leaf?
+      end
     end
 
     private
