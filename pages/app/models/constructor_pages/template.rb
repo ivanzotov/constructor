@@ -30,6 +30,11 @@ module ConstructorPages
       end
     end
 
+    # Convert name to genetive
+    def to_genetive
+      name.mb_chars.downcase.genitive
+    end
+
     private
 
     # Check if there is code_name in same branch
