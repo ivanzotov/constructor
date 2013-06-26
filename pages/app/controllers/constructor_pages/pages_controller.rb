@@ -6,32 +6,29 @@ module ConstructorPages
 
     movable :page
 
-    before_filter {@roots, @template_exists = Page.roots, Template.count > 0}
+    before_filter -> {@roots = Page.roots}, except: [:show, :create, :update, :destroy, :search]
 
     def index
-      flash.notice = 'Create at least one template' unless @template_exists
+      @template_exists = Template.count != 0
+      flash[:notice] = 'Create at least one template' unless @template_exists
     end
 
     def new
-      redirect_to pages_path and return unless @template_exists
-      @page, @template_id, @multipart = Page.new, Template.first.id, false
-      @template_id = @page.parent.template.child.id if params[:page] and (@page.parent = Page.find(params[:page]))
+      @page = Page.new
+    end
+
+    def new_child
+      @page, @parent_id = Page.new, params[:id]
+      @template_id = Page.find(@parent_id).try(:template).child.id
     end
 
     def show
       @page = Page.find_by_request_or_first("/#{params[:all]}")
-      error_404 and return if @page.nil? or !@page.active?
+      error_404 and return unless @page.try(:published?)
       redirect_to @page.link if @page.redirect?
-      _code_name = @page.template.code_name.to_s
+      _code_name = @page.template.code_name
       instance_variable_set('@'+_code_name, @page)
-      respond_to do |format|
-        format.html { render template: "html_templates/#{_code_name}" }
-        format.json {
-          _template = render_to_string partial: "json_templates/#{_code_name}.json.erb", layout: false, locals: {_code_name.to_sym => @page, page: @page}
-          _js = render_to_string partial: "js_partials/#{_code_name}.js"
-          render json: @page, self_and_ancestors: @page.self_and_ancestors.map(&:id), template: _template.gsub(/\n/, '\\\\n'), js: _js
-        }
-      end
+      render template: "templates/#{_code_name}"
     end
 
     def search
@@ -39,29 +36,27 @@ module ConstructorPages
 
       _params = request.query_parameters
       _params.each_pair {|k,v| v || (_params.delete(k); next)
-        _params[k] = v.numeric? ? v.to_f : (v.to_bool if v.boolean?)}
+        _params[k] = v.numeric? ? v.to_f : (v.to_boolean if v.boolean?)}
 
       @pages = Page.in(@page).by(_params).search(params[:what_search])
 
-      instance_variable_set('@'+@page.template.code_name.pluralize, @pages)
-      instance_variable_set('@'+@page.template.code_name.singularize, @page)
-      render :template => "html_templates/#{@page.template.code_name}_search"
+      @page.template.code_name.tap {|c| [c.pluralize, c.singularize].each {|name|
+        instance_variable_set('@'+name, @pages)}
+        render template: "templates/#{c}_search"}
     end
 
     def edit
       @page = Page.find(params[:id])
-      @page.template ||= Template.first
-      @template_id = @page.template.id
-      @multipart = @page.fields.map{|f| f.type_value == 'image'}.include?(true) ? true : false
+      @parent_id, @template_id = @page.parent.try(:id), @page.template.id
     end
 
     def create
       @page = Page.new page_params
 
       if @page.save
-        redirect_to pages.pages_url, notice: t(:page_success_added, name: @page.name)
+        redirect_to pages_path, notice: t(:page_success_added, name: @page.name)
       else
-        render action: :new
+        render :new
       end
     end
 
@@ -76,17 +71,15 @@ module ConstructorPages
         @page.create_fields_values if _template_changed
         @page.update_fields_values params[:fields]
 
-        redirect_to pages_url, notice: t(:page_success_updated, name: @page.name)
+        redirect_to pages_path, notice: t(:page_success_updated, name: @page.name)
       else
-        render action: :edit
+        render :edit
       end
     end
 
     def destroy
-      @page = Page.find(params[:id])
-      _name = @page.name
-      @page.destroy
-      redirect_to pages_url, notice: t(:page_success_removed, name: _name)
+      @page = Page.find(params[:id]).destroy
+      redirect_to pages_path, notice: t(:page_success_removed, name: @page.name)
     end
 
     private
@@ -110,7 +103,7 @@ module ConstructorPages
     end
 
     def error_404
-      render file: "#{Rails.root}/public/404", layout: false, status: 404
+      render file: "#{Rails.root}/public/404", layout: false, status: :not_found
     end
   end
 end
