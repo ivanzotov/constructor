@@ -21,7 +21,6 @@ class String
   end
 
   def accusative
-    self.sub(/а$/, 'у').sub(/я$/, 'ю')
+    self.sub(/(.*)ая( ?)/, '\1ую\2').sub(/(.*)а( (.+))?$/, '\1у\2').sub(/(.*)я( (.+))?$/, '\1ю\2')
   end
-
 end
