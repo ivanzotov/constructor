@@ -8,7 +8,9 @@ spec/dummy/log/*.log
 spec/dummy/db/
 spec/dummy/public/system
 spec/dummy/tmp
-spec/dummy/app/views/templates/*.*ml*
+spec/dummy/app/views/templates/*
+!spec/dummy/app/views/templates/home_page.haml
+!spec/dummy/app/views/templates/page.haml
 doc/
 .yardoc/
 tmp/

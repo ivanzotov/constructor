@@ -89,6 +89,20 @@ module ConstructorPages
       end
     end
 
+    describe 'Show' do
+      it 'should show page with its template' do
+        _page = Page.create name: 'First page', template: @template
+        _template = Template.create name: 'Home page', code_name: 'home_page'
+        _second_page = Page.create name: 'Second page', template: _template
+
+        visit _page.full_url
+        page.should have_content 'Page'
+
+        visit _second_page.full_url
+        page.should have_content 'Home page'
+      end
+    end
+
     describe 'Moving' do
       it 'should move page' do
         _page_first = Page.create name: 'First'

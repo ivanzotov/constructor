@@ -29,16 +29,18 @@ module ConstructorPages
 
       describe '.find_by_request_or_first' do
         before :each do
-          @page = Page.create name: 'New page', url: 'new-page'
+          @first_page = Page.create name: 'New page'
+          @second_page = Page.create name: 'Second page'
         end
 
         it 'should return page by given request path' do
-          Page.find_by_request_or_first('/new-page').should == @page
+          Page.find_by_request_or_first('/new-page').should == @first_page
+          Page.find_by_request_or_first('/second-page').should == @second_page
         end
 
         it 'should return first page if no given request or request is home page' do
-          Page.find_by_request_or_first.should == @page
-          Page.find_by_request_or_first('/').should == @page
+          Page.find_by_request_or_first.should == @first_page
+          Page.find_by_request_or_first('/').should == @first_page
         end
       end
 
