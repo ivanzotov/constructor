@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise', '~> 3.0.0.rc'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'font-awesome-sass-rails'
+  s.add_dependency 'cache_digests'
 end

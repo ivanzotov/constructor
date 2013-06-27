@@ -2,10 +2,10 @@ module ConstructorPages
   module PagesHelper
     include TreeviewHelper
 
-    def for_select(roots)
+    def for_select(items)
       result = []
-      roots.each do |r|
-        r.self_and_descendants.each {|i| result.push(["#{'--'*i.level} #{i.name}", i.id, {'data-full_url' => i.full_url}])}
+      items.each do |i|
+        result.push(["#{'--'*i.level} #{i.name}", i.id, {'data-full_url' => i.full_url}])
       end
       result
     end

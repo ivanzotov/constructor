@@ -227,3 +227,7 @@ h3 {
   display: inline;
   visibility: hidden;
 }
+
+<% (1..10).each do |i| %>
+<%= ".level#{i} { margin-left: #{i*45}px }" %>
+<% end %>

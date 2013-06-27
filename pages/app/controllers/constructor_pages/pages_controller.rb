@@ -6,10 +6,10 @@ module ConstructorPages
 
     movable :page
 
-    before_filter -> {@roots = Page.roots}, except: [:show, :create, :update, :destroy, :search]
+    before_filter -> {@pages = Page.all}, only: [:new, :edit]
 
     def index
-      @pages = Page.all.includes(:template).only(:name, :full_url, :active)
+      @pages = Page.includes(:template).all
       @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.name, p.lft, p.template_id]}.join)
       @template_exists = Template.count != 0
       flash[:notice] = 'Create at least one template' unless @template_exists
