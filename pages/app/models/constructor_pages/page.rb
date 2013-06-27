@@ -27,7 +27,7 @@ module ConstructorPages
       # Used for find page by request. It return first page if no request given or request is home page
       # @param request for example <tt>'/conditioners/split-systems/zanussi'</tt>
       def find_by_request_or_first(request = nil)
-        request == nil || '/' ? Page.first : Page.find_by(full_url: request)
+        (request.nil? || request == '/') ? Page.first : Page.find_by(full_url: request)
       end
 
       # Generate full_url from parent id and url
@@ -73,14 +73,10 @@ module ConstructorPages
     end
 
     # Get value of field by code_name
-    def get_field_value(code_name)
-      field(code_name).tap {|f| return f.get_value_for(self) if f}
-    end
+    def get_field_value(code_name); field(code_name).try(:get_value_for, self) end
 
     # Set value of field by code_name and value
-    def set_field_value(code_name, value)
-      field(code_name).tap {|f| f.set_value_for(self, value) if f}
-    end
+    def set_field_value(code_name, value); field(code_name).try(:set_value_for, self, value) end
 
     # Update all fields values with given params.
     # @param params should looks like <tt>{price: 500, content: 'Hello'}</tt>
