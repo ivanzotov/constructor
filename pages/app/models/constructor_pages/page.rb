@@ -135,12 +135,7 @@ module ConstructorPages
 
     # Touch all pages in same branch
     def touch_branch
-      [ancestors, descendants].each do |branch|
-        branch.each do |p|
-          p.updated_at = Time.now
-          p.save
-        end
-      end
+      [ancestors, descendants].each {|p| p.map(&:touch)}
     end
 
     # When method missing it get/set field value or get page in branch
