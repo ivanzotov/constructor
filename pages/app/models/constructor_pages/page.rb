@@ -133,6 +133,16 @@ module ConstructorPages
     # Check if link specified
     def redirect?; url != link && !link.empty? end
 
+    # Touch all pages in same branch
+    def touch_branch
+      [ancestors, descendants].each do |branch|
+        branch.each do |p|
+          p.updated_at = Time.now
+          p.save
+        end
+      end
+    end
+
     # When method missing it get/set field value or get page in branch
     #
     # Examples:
@@ -165,7 +175,7 @@ module ConstructorPages
 
     # Reload all descendants
     def descendants_update
-      descendants.map(&:save) if self.url_changed?
+      descendants.map(&:save) if self.full_url_changed?
     end
   end
 end

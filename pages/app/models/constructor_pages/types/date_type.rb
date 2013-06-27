@@ -5,7 +5,7 @@ module ConstructorPages
     # Date time. Render as three select lists (day, month, year).
     class DateType < ActiveRecord::Base
       belongs_to :field
-      belongs_to :page
+      belongs_to :page, touch: true
     end
   end
 end
