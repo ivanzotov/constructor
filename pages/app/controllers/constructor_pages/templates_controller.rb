@@ -6,7 +6,7 @@ module ConstructorPages
 
     movable :template
 
-    before_filter {@roots = Template.roots}
+    before_filter -> {@roots = Template.roots}, only: [:new, :edit]
 
     def index
       @templates = Template.all
