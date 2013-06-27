@@ -17,8 +17,7 @@ module ConstructorPages
 
     validate :template_check
 
-    before_save :friendly_url, :template_assign, :full_url_update
-    after_update :descendants_update
+    before_save :friendly_url, :template_assign, :full_url_update, :descendants_update
     after_create :create_fields_values
 
     acts_as_nested_set
@@ -164,6 +163,8 @@ module ConstructorPages
     end
 
     # Reload all descendants
-    def descendants_update; descendants.map(&:save) end
+    def descendants_update
+      descendants.map(&:save) if self.url_changed?
+    end
   end
 end
