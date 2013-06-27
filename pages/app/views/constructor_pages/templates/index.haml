@@ -8,17 +8,20 @@
       =t :new_template
 
 %section.b-tree.span12
-  = render_tree(@roots) do |template|
-    %button.btn.btn-link.disabled= template.name
+  %ul
+    - cache @templates_cache do
+      - @templates.each do |template|
+        %li{class: "level#{template.level}"}
+          %button.btn.btn-link.disabled= template.name
 
-    .b-tree__buttons
-      = arrow_buttons_for(template)
+          .b-tree__buttons
+            = arrow_buttons_for(template)
 
-      = link_to edit_template_path(template), class: 'btn btn-primary btn-mini' do
-        %i.icon-pencil
-        =t :edit
-        = t(:template).mb_chars.downcase
+            = link_to edit_template_path(template), class: 'btn btn-primary btn-mini' do
+              %i.icon-pencil
+              =t :edit
+              = t(:template).mb_chars.downcase
 
-      = link_to template, method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
-        %i.icon-remove
-        =t :delete
+            = link_to template, method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
+              %i.icon-remove
+              =t :delete
