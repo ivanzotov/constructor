@@ -41,7 +41,7 @@
             .control-group
               = f.label :parent_id, class: 'control-label'
               .controls
-                = f.select :parent_id, options_for_select(for_select(@pages), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
+                = f.select :parent_id, options_for_select(for_select(@pages, true), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
 
             .control-group
               = f.label :template_id, :class => 'control-label'
