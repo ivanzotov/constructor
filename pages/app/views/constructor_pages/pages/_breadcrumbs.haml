@@ -1,7 +1,0 @@
-- unless page.ancestors.empty?
-  %ul.breadcrumb
-    - page.ancestors.each do |i|
-      - if i.in_nav
-        %li
-          = link_to i.name, i.full_url, title: i.name, class: 'b-page-json'
-          %span{class: 'divider'} /
