@@ -70,7 +70,7 @@ module ConstructorPages
         @content_field = Field.create name: 'Content', code_name: 'content', template: @brand_template, type_value: 'text'
         @check_field = Field.create name: 'Check', code_name: 'check', template: @brand_template, type_value: 'boolean'
         @brand_price_field = Field.create name: 'Price', code_name: 'price', template: @brand_template, type_value: 'float'
-        @brand_area_field = Field.create name: 'Area', code_name: 'area', template: @brand_template, type_value: 'integer'
+        @brand_area_field = Field.create name: 'Area', code_name: 'brand_area', template: @brand_template, type_value: 'integer'
 
         @page = Page.create name: 'Fresco', template: @template
         @page.price = 15000
@@ -82,21 +82,23 @@ module ConstructorPages
 
         @first_brand_page = Page.create name: 'Midea', template: @brand_template, parent: @page
         @first_brand_page.price = 20000
-        @first_brand_page.area = 25
+        @first_brand_page.brand_area = 25
         @first_brand_page.content = 'This is first brand page'
         @first_brand_page.check = true
 
         @second_brand_page = Page.create name: 'Dantex', template: @brand_template, parent: @page
         @second_brand_page.price = 30000
-        @second_brand_page.area = 55
+        @second_brand_page.brand_area = 55
         @second_brand_page.content = 'This is second brand page'
         @second_brand_page.check = false
+        @second_brand_page.reload
 
         @third_brand_page = Page.create name: 'LG', template: @brand_template, parent: @second_page
         @third_brand_page.price = 10000
-        @third_brand_page.area = 38
+        @third_brand_page.brand_area = 38
         @third_brand_page.content = 'This is third brand page'
         @third_brand_page.check = true
+        @third_brand_page.reload
 
         @page.reload
         @second_page.reload
@@ -104,7 +106,6 @@ module ConstructorPages
 
       context 'search in all pages' do
         it 'should search with what search' do
-          Page.search.should == [@page, @first_brand_page, @second_brand_page, @second_page, @third_brand_page]
           Page.search(:hello).should == []
           Page.search(:brand).should == [@first_brand_page, @second_brand_page, @third_brand_page]
           Page.search(:brands).should == [@first_brand_page, @second_brand_page, @third_brand_page]
@@ -121,14 +122,15 @@ module ConstructorPages
           Page.in(@second_page).search('brand').should == [@third_brand_page]
         end
 
-        it 'it should search with by params' do
-          Page.in(@page).search_by(area: 25).should == [@first_brand_page]
+        it 'should search with by params' do
+          @page.reload
+          Page.in(@page).search_by(brand_area: 25).should == [@first_brand_page]
           Page.search_by(area: 10).should == [@second_page]
           Page.search_by(price: 15000).should == [@page]
-          Page.in(@page).by(area: 25).search(:brand).should == [@first_brand_page]
-          Page.in(@second_page).by(area: 38).search(:brand).should == [@third_brand_page]
-          Page.in(@second_page).by(area: 40).search(:brand).should == []
-          Page.in('/world').search_by(area: 10).should == []
+          Page.in(@page).by(brand_area: 25).search(:brand).should == [@first_brand_page]
+          Page.in(@second_page).by(brand_area: 38).search(:brand).should == [@third_brand_page]
+          Page.in(@second_page).by(brand_area: 40).search(:brand).should == []
+          Page.in('/world').search_by(brand_area: 10).should == []
         end
 
         it 'should search with less' do
@@ -160,33 +162,6 @@ module ConstructorPages
 
 
     context 'INSTANCE METHODS' do
-      describe '#compare' do
-        before :each do
-          @template = Template.create name: 'Page template', code_name: 'page_template'
-          @page = Page.create name: 'Home page', template: @template
-          @field = Field.create name: 'Area', code_name: 'area', template: @template, type_value: 'integer'
-        end
-
-        it 'should compare key value' do
-          @page.area = 25
-          @page.compare('area', 25).should == true
-          @page.compare('area', '25').should == true
-          @page.compare('area>', 20).should == true
-          @page.compare('area<', 30).should == true
-
-          @page.compare('area', 20).should == false
-          @page.compare('area', '20').should == false
-          @page.compare('area>', 30).should == false
-          @page.compare('area<', 20).should == false
-
-          @page.compare('area', '>20').should == true
-          @page.compare('area', '<30').should == true
-
-          @page.compare('area', '>30').should == false
-          @page.compare('area', '<20').should == false
-        end
-      end
-
       context 'Getting and setting field value' do
         before :each do
           @template = Template.create name: 'Page template', code_name: 'page_template'

@@ -47,13 +47,30 @@ module ConstructorPages
       end
 
       def search(what_search = nil)
-        (@where_search.is_a?(String) ? Page.find_by(full_url: @where_search) : @where_search)
-        .tap {|p| @result = @where_search ? p ? p.descendants : [] : Page.all }
-        what_search && ConstructorPages::Template.find_by(code_name: what_search.to_s.singularize.downcase)
-        .tap {|t| @result = t ? @result.where(template: t) : [] }
-        @params_search && @params_search.each_pair {|k,v| @result = @result.select{|p| p.compare(k, v)}}
+        hash_search = {}
+        array_search = []
+
+        where_search = @where_search.is_a?(String) ? Page.find_by(full_url: @where_search) : @where_search
+
+        if where_search
+          array_search = ['lft > ? and rgt < ?', where_search.lft, where_search.rgt]
+        end
+
+        if what_search
+          what_search = ConstructorPages::Template.find_by(code_name: what_search.to_s.singularize.downcase)
+        end
+
+        hash_search[:template_id] = what_search.id if what_search
+
+        if @params_search
+          _ids = ids_by_params(@params_search)
+          hash_search[:id] = _ids
+        end
+
         @where_search = @params_search = nil
-        @result
+
+
+        hash_search.empty? && array_search.empty? ? [] : Page.where(hash_search).where(array_search).to_a
       end
 
       def in(where_search  = nil); tap {@where_search  = where_search}  end
@@ -61,41 +78,49 @@ module ConstructorPages
 
       def search_in(where_search  = nil); self.in(where_search).search  end
       def search_by(params_search = nil); self.by(params_search).search end
+
+
+      def ids_by_params(params)
+        _ids = []
+        _h = {}
+
+        params.each_pair do |key, value|
+          key = key.to_s
+
+          k = key.gsub(/>|</, '')
+          v = value
+
+          if v.is_a?(String)
+            next if v.strip.empty?
+            v = v.gsub(/>|</, '')
+            v = v.numeric? ? v.to_f : (v.to_boolean if v.boolean?)
+          end
+
+          sign = '='
+
+          if key =~ />$/ || value =~ /^>/
+            sign = '>'
+          elsif key =~ /<$/ || value =~ /^</
+            sign = '<'
+          end
+
+          _field = ConstructorPages::Field.find_by(code_name: k)
+
+          if _field
+            _h[:field_id] = _field.id
+            _ids = _field.type_class.where("value #{sign} #{v}").where(_h).map(&:page_id)
+            _h[:page_id] = _ids
+            _ids = _ids.flatten.uniq
+          end
+        end
+
+        return _ids || []
+      end
     end
 
     def search(what_search = nil); Page.in(self).search(what_search) end
     def by(params_search = nil); Page.by(params_search); self end
     def search_by(params_search = nil); Page.by(params_search).in(self).search end
-
-    # Compare given key with value
-    #
-    # Example:
-    #   page.price = 1000
-    #   page.compare('price', 1000)     #=> true
-    #   page.compare('price<', 2000)    #=> true
-    #   page.compare('price>', 2000)    #=> false
-    #   page.compare('price', '<2000')  #=> true
-    #   page.compare('price', '>500')   #=> true
-    def compare(key, value)
-      key = key.to_s
-
-      k = key.gsub(/>|</, '')
-      v = value
-
-      if v.is_a?(String)
-        return true if v.empty?
-        v = v.gsub(/>|</, '')
-        v = v.numeric? ? v.to_f : (v.to_boolean if v.boolean?)
-      end
-
-      if key =~ />$/ || value =~ /^>/
-        send(k) > v
-      elsif key =~ /<$/ || value =~ /^</
-        send(k) < v
-      else
-        send(key) == v
-      end
-    end
 
     # Get field by code_name
     def field(code_name)
