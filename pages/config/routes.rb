@@ -17,7 +17,6 @@ ConstructorPages::Engine.routes.draw do
 
   root :to => 'pages#show'
 
-  get '*all/search/:what_search' => 'pages#search', format: false
   get '*all.:format' => 'pages#show'
   get '*all' => 'pages#show'
 end

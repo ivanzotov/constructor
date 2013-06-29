@@ -33,20 +33,6 @@ module ConstructorPages
       render template: "templates/#{_code_name}"
     end
 
-    def search
-      @page = Page.find_by_request_or_first("/#{params[:all]}")
-
-      _params = request.query_parameters
-      _params.each_pair {|k,v| v || (_params.delete(k); next)
-        _params[k] = v.numeric? ? v.to_f : (v.to_boolean if v.boolean?)}
-
-      @pages = Page.in(@page).by(_params).search(params[:what_search])
-
-      @page.template.code_name.tap {|c| [c.pluralize, c.singularize].each {|name|
-        instance_variable_set('@'+name, @pages)}
-        render template: "templates/#{c}_search"}
-    end
-
     def edit
       @page = Page.find(params[:id])
       @parent_id, @template_id = @page.parent.try(:id), @page.template.id
