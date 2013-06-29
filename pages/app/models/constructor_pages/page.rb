@@ -49,9 +49,9 @@ module ConstructorPages
       def search(what_search = nil)
         (@where_search.is_a?(String) ? Page.find_by(full_url: @where_search) : @where_search)
         .tap {|p| @result = @where_search ? p ? p.descendants : [] : Page.all }
-        what_search && Template.find_by(code_name: what_search.to_s.singularize.downcase)
+        what_search && ConstructorPages::Template.find_by(code_name: what_search.to_s.singularize.downcase)
         .tap {|t| @result = t ? @result.where(template: t) : [] }
-        @params_search && @params_search.each_pair {|k,v| @result = @result.select {|p| p.send(k) == v}}
+        @params_search && @params_search.each_pair {|k,v| @result = @result.select{|p| p.compare(k, v)}}
         @where_search = @params_search = nil
         @result
       end
@@ -66,6 +66,36 @@ module ConstructorPages
     def search(what_search = nil); Page.in(self).search(what_search) end
     def by(params_search = nil); Page.by(params_search); self end
     def search_by(params_search = nil); Page.by(params_search).in(self).search end
+
+    # Compare given key with value
+    #
+    # Example:
+    #   page.price = 1000
+    #   page.compare('price', 1000)     #=> true
+    #   page.compare('price<', 2000)    #=> true
+    #   page.compare('price>', 2000)    #=> false
+    #   page.compare('price', '<2000')  #=> true
+    #   page.compare('price', '>500')   #=> true
+    def compare(key, value)
+      key = key.to_s
+
+      k = key.gsub(/>|</, '')
+      v = value
+
+      if v.is_a?(String)
+        return true if v.empty?
+        v = v.gsub(/>|</, '')
+        v = v.numeric? ? v.to_f : (v.to_boolean if v.boolean?)
+      end
+
+      if key =~ />$/ || value =~ /^>/
+        send(k) > v
+      elsif key =~ /<$/ || value =~ /^</
+        send(k) < v
+      else
+        send(key) == v
+      end
+    end
 
     # Get field by code_name
     def field(code_name)

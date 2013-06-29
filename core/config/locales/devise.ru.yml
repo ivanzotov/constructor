@@ -47,6 +47,9 @@ ru:
       timeout: Ваш сеанс закончился. Пожалуйста, войдите в систему снова.
       inactive: Ваша учётная запись ещё не активирована.
       already_authenticated: Вы уже вошли.
+      user:
+        not_found_in_database: "Пользователь не найден в системе."
+
     omniauth_callbacks:
       success: Successfully authorized from %{kind} account.
       failure: Could not authorize you from %{kind} because "%{reason}".

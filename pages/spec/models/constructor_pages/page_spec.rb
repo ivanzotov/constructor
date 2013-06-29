@@ -132,11 +132,11 @@ module ConstructorPages
         end
 
         it 'should search with less' do
-          pending#Page.search(price: ['<', 20000]).should == [@page]
+          Page.search_by('price<' => 20000).should == [@page, @second_page, @third_brand_page]
         end
 
         it 'should search with more' do
-          pending#Page.search(price: ['<', 20000], price: ['>', 5000]).should == [@page, @second_page]
+          Page.search_by('price>' => 20000).should == [@second_brand_page]
         end
       end
 
@@ -160,6 +160,33 @@ module ConstructorPages
 
 
     context 'INSTANCE METHODS' do
+      describe '#compare' do
+        before :each do
+          @template = Template.create name: 'Page template', code_name: 'page_template'
+          @page = Page.create name: 'Home page', template: @template
+          @field = Field.create name: 'Area', code_name: 'area', template: @template, type_value: 'integer'
+        end
+
+        it 'should compare key value' do
+          @page.area = 25
+          @page.compare('area', 25).should == true
+          @page.compare('area', '25').should == true
+          @page.compare('area>', 20).should == true
+          @page.compare('area<', 30).should == true
+
+          @page.compare('area', 20).should == false
+          @page.compare('area', '20').should == false
+          @page.compare('area>', 30).should == false
+          @page.compare('area<', 20).should == false
+
+          @page.compare('area', '>20').should == true
+          @page.compare('area', '<30').should == true
+
+          @page.compare('area', '>30').should == false
+          @page.compare('area', '<20').should == false
+        end
+      end
+
       context 'Getting and setting field value' do
         before :each do
           @template = Template.create name: 'Page template', code_name: 'page_template'
