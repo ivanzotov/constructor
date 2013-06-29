@@ -47,28 +47,17 @@ module ConstructorPages
       end
 
       def search(what_search = nil)
-        hash_search = {}
-        array_search = []
+        hash_search, array_search = {}, []
 
-        where_search = @where_search.is_a?(String) ? Page.find_by(full_url: @where_search) : @where_search
+        @where_search = Page.find_by(full_url: @where_search) if @where_search.is_a?(String)
+        array_search = ['lft > ? and rgt < ?', @where_search.lft, @where_search.rgt] if @where_search
 
-        if where_search
-          array_search = ['lft > ? and rgt < ?', where_search.lft, where_search.rgt]
-        end
+        what_search && what_search = what_search.to_s.singularize.downcase
+        hash_search[:template_id] = ConstructorPages::Template.find_by(code_name: what_search).try(:id) if what_search
 
-        if what_search
-          what_search = ConstructorPages::Template.find_by(code_name: what_search.to_s.singularize.downcase)
-        end
-
-        hash_search[:template_id] = what_search.id if what_search
-
-        if @params_search
-          _ids = ids_by_params(@params_search)
-          hash_search[:id] = _ids
-        end
+        hash_search[:id] = ids_by_params(@params_search) if @params_search
 
         @where_search = @params_search = nil
-
 
         hash_search.empty? && array_search.empty? ? [] : Page.where(hash_search).where(array_search).to_a
       end
@@ -81,19 +70,18 @@ module ConstructorPages
 
 
       def ids_by_params(params)
-        _ids = []
-        _h = {}
+        _hash = {}
 
         params.each_pair do |key, value|
+          next if key == 'utf8'
+
           key = key.to_s
+          _key, _value = key.gsub(/>|</, ''), value
 
-          k = key.gsub(/>|</, '')
-          v = value
-
-          if v.is_a?(String)
-            next if v.strip.empty?
-            v = v.gsub(/>|</, '')
-            v = v.numeric? ? v.to_f : (v.to_boolean if v.boolean?)
+          if _value.is_a?(String)
+            next if _value.strip.empty?
+            _value = _value.gsub(/>|</, '')
+            _value = _value.numeric? ? _value.to_f : (_value.to_boolean if _value.boolean?)
           end
 
           sign = '='
@@ -104,17 +92,19 @@ module ConstructorPages
             sign = '<'
           end
 
-          _field = ConstructorPages::Field.find_by(code_name: k)
+          _fields = ConstructorPages::Field.where(code_name: _key)
 
-          if _field
-            _h[:field_id] = _field.id
-            _ids = _field.type_class.where("value #{sign} #{v}").where(_h).map(&:page_id)
-            _h[:page_id] = _ids
-            _ids = _ids.flatten.uniq
+          _ids = []
+
+          _fields.each do |_field|
+            _hash[:field_id] = _field.id
+            _ids << _field.type_class.where("value #{sign} #{_value}").where(_hash).map(&:page_id)
           end
+
+          _hash[:page_id] = _ids.flatten.uniq
         end
 
-        return _ids || []
+        return _hash[:page_id] || []
       end
     end
 

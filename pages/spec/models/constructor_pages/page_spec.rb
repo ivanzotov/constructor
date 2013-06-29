@@ -134,7 +134,7 @@ module ConstructorPages
         end
 
         it 'should search with less' do
-          Page.search_by('price<' => 20000).should == [@page, @second_page, @third_brand_page]
+          Page.search_by('price<' => '20000').should == [@page, @second_page, @third_brand_page]
         end
 
         it 'should search with more' do
@@ -151,7 +151,7 @@ module ConstructorPages
         end
 
         it 'it should search with by params' do
-          @page.search_by(area: 25).should == [@first_brand_page]
+          @page.search_by(brand_area: 25).should == [@first_brand_page]
           @page.search_by(price: 30000).should == [@second_brand_page]
           @page.by(price: 30000).search.should == [@second_brand_page]
           @page.search_by(area: 10).should == []
