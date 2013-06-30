@@ -98,7 +98,7 @@ module ConstructorPages
 
           _fields.each do |_field|
             _hash[:field_id] = _field.id
-            _ids << _field.type_class.where("value #{sign} #{_value}").where(_hash).map(&:page_id)
+            _ids << _field.type_class.where("value #{sign} ?", _value).where(_hash).map(&:page_id)
           end
 
           _hash[:page_id] = _ids.flatten.uniq
