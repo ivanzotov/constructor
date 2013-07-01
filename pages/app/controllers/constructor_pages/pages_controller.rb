@@ -30,7 +30,12 @@ module ConstructorPages
       redirect_to @page.link if @page.redirect?
       _code_name = @page.template.code_name
       instance_variable_set('@'+_code_name, @page)
-      render template: "templates/#{_code_name}"
+
+      respond_to do |format|
+        format.html { render "templates/#{_code_name}" }
+        format.json { render "templates/#{_code_name}.json", layout: false }
+        format.xml  { render "templates/#{_code_name}.xml",  layout: false }
+      end
     end
 
     def edit
