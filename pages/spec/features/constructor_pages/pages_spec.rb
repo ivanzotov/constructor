@@ -173,6 +173,23 @@ module ConstructorPages
         page.should have_select 'Template', selected: '-- Child'
       end
 
+      it 'should new with template view' do
+        _template = Template.create name: 'Brand', code_name: 'brand'
+        _template.child_id = _template.id
+        _template.save
+        _template.reload
+        _page = Page.create name: 'New child page', template: _template
+        visit pages.new_child_page_path(_page)
+        page.should have_content 'This page show new with template'
+      end
+
+      it 'should edit with page view if no view found' do
+        _template = Template.create name: 'Hello', code_name: 'hello'
+        _page = Page.create name: 'Hello', template: _template
+        visit pages.new_child_page_path(_page)
+        page.should_not have_content 'This page show new with template'
+      end
+
       it 'should has published checkbox' do
         visit pages.new_page_path
         page.should have_checked_field 'Active'
@@ -223,6 +240,18 @@ module ConstructorPages
           visit pages.edit_page_path(@page)
           current_path.should == '/'
         end
+      end
+
+      it 'should edit with template view' do
+        visit pages.edit_page_path(@page)
+        page.should have_content 'This page show edit with template'
+      end
+
+      it 'should edit with page view if no view found' do
+        _template = Template.create name: 'Hello', code_name: 'hello'
+        _page = Page.create name: 'Hello', template: _template
+        visit pages.edit_page_path(_page)
+        page.should_not have_content 'This page show edit with template'
       end
 
       it 'should has delete link' do

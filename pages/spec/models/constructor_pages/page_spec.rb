@@ -21,8 +21,7 @@ module ConstructorPages
 
         it 'should create type_fields after' do
           field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
-          page = Page.create name: 'New page', template: @template
-
+          page = FactoryGirl.create(:page, name: 'New page', template: @template)
           field.get_value_for(page).should == ''
         end
       end
@@ -159,7 +158,6 @@ module ConstructorPages
         end
       end
     end
-
 
     context 'INSTANCE METHODS' do
       context 'Getting and setting field value' do

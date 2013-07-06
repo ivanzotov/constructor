@@ -2,6 +2,9 @@ ENV["RAILS_ENV"] ||= 'test'
 
 require 'simplecov'
 require 'coveralls'
+require 'factory_girl_rails'
+
+#FactoryGirl.definition_file_paths << File.expand_path("../../../pages/spec")
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
     SimpleCov::Formatter::HTMLFormatter,

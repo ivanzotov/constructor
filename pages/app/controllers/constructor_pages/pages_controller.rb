@@ -21,26 +21,31 @@ module ConstructorPages
 
     def new_child
       @page, @parent_id = Page.new, params[:id]
-      @template_id = Page.find(@parent_id).try(:template).child.id
+      @template_id = Page.find(@parent_id).try(:template).try(:child).try(:id)
+      _template = Template.find(@template_id) if @template_id
+      _code_name = _template.code_name.pluralize if _template
+      render "#{_code_name}/new"
     end
 
     def show
       @page = Page.find_by_request_or_first("/#{params[:all]}")
       error_404 and return unless @page.try(:published?)
       redirect_to @page.link if @page.redirect?
-      _code_name = @page.template.code_name
+      _code_name = @page.template.code_name.pluralize
       instance_variable_set('@'+_code_name, @page)
 
       respond_to do |format|
-        format.html { render "templates/#{_code_name}" }
-        format.json { render "templates/#{_code_name}.json", layout: false }
-        format.xml  { render "templates/#{_code_name}.xml",  layout: false }
+        format.html { render "#{_code_name}/show" rescue render :show }
+        format.json { render "#{_code_name}/show.json", layout: false rescue render json: @page }
+        format.xml  { render "#{_code_name}/show.xml",  layout: false rescue render xml: @page }
       end
     end
 
     def edit
       @page = Page.find(params[:id])
       @parent_id, @template_id = @page.parent.try(:id), @page.template.id
+      _code_name = @page.template.code_name.pluralize
+      render "#{_code_name}/edit" rescue render :edit
     end
 
     def create
@@ -50,7 +55,13 @@ module ConstructorPages
         @page.touch_branch
         redirect_to pages_path, notice: t(:page_success_added, name: @page.name)
       else
-        render :new
+        if @page.template_id
+          _template = Template.find(@page.template_id)
+          _code_name = _template.code_name.pluralize if _template
+          render "#{_code_name}/new" rescue render :new
+        else
+          render :new
+        end
       end
     end
 
@@ -68,7 +79,7 @@ module ConstructorPages
 
         redirect_to pages_path, notice: t(:page_success_updated, name: @page.name)
       else
-        render :edit
+        render "#{@page.template.code_name.pluralize}/new" rescue render :edit
       end
     end
 
