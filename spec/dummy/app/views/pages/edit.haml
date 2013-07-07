@@ -5,7 +5,7 @@
         = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
         - @page.errors.full_messages.each do |m|
           = m
-          
+  This page show edit with template
   .form-horizontal
     .control-group
       = f.label :active, class: 'control-label'
@@ -66,10 +66,6 @@
                   = f.check_box :in_nav
                   =t :breadcrumbs
 
-                %label.checkbox.inline.span2{for: 'in_url'}
-                  = f.check_box :in_url
-                  =t :url
-
     .accordion
       .accordion-group
         .accordion-heading.text-center
@@ -89,7 +85,7 @@
               .controls
                 = f.text_area :description, class: 'span9', rows: 8
 
-    .row-fluid        
+    .row-fluid
       .span12
         .form-actions
           = f.submit class: 'btn btn-primary'

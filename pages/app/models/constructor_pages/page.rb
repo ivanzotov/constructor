@@ -34,7 +34,7 @@ module ConstructorPages
       # @param parent_id integer
       # @param url should looks like <tt>'hello-world-page'</tt> without leading slash
       def full_url_generate(parent_id, url = '')
-        '/' + Page.find(parent_id).self_and_ancestors.map(&:url).append(url).join('/')
+        '/' + Page.find(parent_id).self_and_ancestors.map{|p| p.url if p.in_url}.append(url).compact.join('/')
       end
 
       # Check code_name for field and template.
@@ -157,6 +157,8 @@ module ConstructorPages
 
     alias_method :find_pages_in_branch, :find_page_in_branch
 
+    def in_breadcrumbs; in_nav end
+
     def published?; active? end
 
     # Return true if there is a file upload field in page
@@ -199,7 +201,7 @@ module ConstructorPages
 
     # if url has been changed by manually or url is empty
     def friendly_url
-      self.url = ((auto_url || url.empty?) ? transliterate(name, '') : url).parameterize
+      self.url = ((auto_url || url.empty?) ? parameterize(transliterate(name, '')) : url)
     end
 
     # Page is not valid if there is no template
@@ -215,7 +217,7 @@ module ConstructorPages
 
     # Reload all descendants
     def descendants_update
-      descendants.map(&:save) if self.full_url_changed?
+      descendants.map(&:save) if self.full_url_changed? or self.in_url_changed?
     end
   end
 end

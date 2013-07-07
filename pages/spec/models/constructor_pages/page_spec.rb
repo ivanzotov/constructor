@@ -21,8 +21,7 @@ module ConstructorPages
 
         it 'should create type_fields after' do
           field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'
-          page = Page.create name: 'New page', template: @template
-
+          page = Page.create(name: 'New page', template: @template)
           field.get_value_for(page).should == ''
         end
       end
@@ -159,7 +158,6 @@ module ConstructorPages
         end
       end
     end
-
 
     context 'INSTANCE METHODS' do
       context 'Getting and setting field value' do
@@ -368,6 +366,39 @@ module ConstructorPages
             page.save
             page.url.should == 'another-world'
           end
+
+          it 'should doesn\'t parameterize' do
+            page = Page.create name: 'Hello', url: 'hello_world_How_Are/You', auto_url: false
+            page.url.should == 'hello_world_How_Are/You'
+          end
+        end
+      end
+
+      describe '#in_menu' do
+        it 'should be true by default' do
+          page = Page.create name: 'Hello'
+          page.in_menu.should be_true
+        end
+      end
+
+      describe '#in_nav' do
+        it 'should be true by default' do
+          page = Page.create name: 'Hello'
+          page.in_nav.should be_true
+        end
+      end
+
+      describe '#in_map' do
+        it 'should be true by default' do
+          page = Page.create name: 'Hello'
+          page.in_map.should be_true
+        end
+      end
+
+      describe '#in_url' do
+        it 'should be true by default' do
+          page = Page.create name: 'Hello'
+          page.in_url.should be_true
         end
       end
 
@@ -412,6 +443,17 @@ module ConstructorPages
             page.parent = nil
             page.save
             page.full_url.should == '/page'
+          end
+        end
+
+        context 'if page in_url false' do
+          it 'should generate without url' do
+            page = Page.create name: 'Hello world'
+            second_page = Page.create name: 'Sub page', url: 'my-world', auto_url: false, parent_id: page.id, in_url: false
+            third_page = Page.create name: 'Third page', url: 'third', auto_url: false, parent_id: second_page.id
+            page.full_url.should == '/hello-world'
+            second_page.full_url.should == '/hello-world/my-world'
+            third_page.full_url.should == '/hello-world/third'
           end
         end
       end

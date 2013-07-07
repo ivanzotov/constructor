@@ -23,7 +23,7 @@ module ConstructorPages
 
     # Return child corresponding child_id or children first
     def child
-      child_id ? self.class.find(child_id) : children.first if !leaf?
+      child_id ? Template.find(child_id) : children.first if !leaf?
     end
 
     # Convert name to accusative

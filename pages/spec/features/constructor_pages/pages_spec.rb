@@ -173,6 +173,13 @@ module ConstructorPages
         page.should have_select 'Template', selected: '-- Child'
       end
 
+      it 'should edit with page view if no view found' do
+        _template = Template.create name: 'Hello', code_name: 'hello'
+        _page = Page.create name: 'Hello', template: _template
+        visit pages.new_child_page_path(_page)
+        page.should_not have_content 'This page show new with template'
+      end
+
       it 'should has published checkbox' do
         visit pages.new_page_path
         page.should have_checked_field 'Active'
@@ -225,6 +232,18 @@ module ConstructorPages
         end
       end
 
+      it 'should edit with template view' do
+        visit pages.edit_page_path(@page)
+        page.should have_content 'This page show edit with template'
+      end
+
+      it 'should edit with page view if no view found' do
+        _template = Template.create name: 'Hello', code_name: 'hello'
+        _page = Page.create name: 'Hello', template: _template
+        visit pages.edit_page_path(_page)
+        page.should_not have_content 'This page show edit with template'
+      end
+
       it 'should has delete link' do
         visit pages.edit_page_path(@page)
         page.should have_link 'Delete'
@@ -245,6 +264,40 @@ module ConstructorPages
         @page.keywords.should == 'Zanussi, conditioners, Voronezh'
         @page.description.should == 'Zanussi conditioners Voronezh'
         page.should have_text 'updated successfully'
+      end
+
+      describe 'renegerate descendants' do
+        before :each do
+          _template = Template.create name: 'Another page', code_name: 'another_page'
+          _page_first = Page.create name: 'First', template: _template
+          _page_second = Page.create name: 'Second', parent_id: _page_first.id, template: _template
+          _page_third = Page.create name: 'Third', parent_id: _page_second.id, template: _template
+
+          visit pages.pages_path
+          page.should have_link('First', '/first')
+          page.should have_link('Second', '/first/second')
+          page.should have_link('Third', '/first/second/third')
+
+          visit pages.edit_page_path(_page_first)
+        end
+
+        it 'should regenerate full_url of descendants without url if full_url or in_url changed' do
+          check 'Url', false
+          click_button 'Update Page'
+
+          page.should have_link('First', '/first')
+          page.should have_link('Second', '/second')
+          page.should have_link('Third', '/second/third')
+        end
+
+        it 'should regenerate full_url of descendants with url if full_url or in_url changed' do
+          check 'Url', true
+          click_button 'Update Page'
+
+          page.should have_link('First', '/first')
+          page.should have_link('Second', '/first/second')
+          page.should have_link('Third', '/first/second/third')
+        end
       end
     end
 
