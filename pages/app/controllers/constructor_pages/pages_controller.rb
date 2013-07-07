@@ -30,11 +30,10 @@ module ConstructorPages
       redirect_to @page.link if @page.redirect?
       _code_name = @page.template.code_name
       instance_variable_set('@'+_code_name, @page)
-      _code_name = _code_name.pluralize
       respond_to do |format|
-        format.html { render "#{_code_name}/show" }
-        format.json { render "#{_code_name}/show.json", layout: false rescue render json: @page }
-        format.xml  { render "#{_code_name}/show.xml",  layout: false rescue render xml: @page }
+        format.html { render "#{_code_name.pluralize}/show" rescue render "templates/#{_code_name}"}
+        format.json { render "#{_code_name.pluralize}/show.json", layout: false rescue render json: @page }
+        format.xml  { render "#{_code_name.pluralize}/show.xml",  layout: false rescue render xml: @page }
       end
     end
 
