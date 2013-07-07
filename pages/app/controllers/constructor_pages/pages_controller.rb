@@ -10,7 +10,7 @@ module ConstructorPages
 
     def index
       @pages = Page.includes(:template).load
-      @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.name, p.url, p.lft, p.template_id]}.join)
+      @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.name, p.full_url, p.in_url, p.lft, p.template_id]}.join)
       @template_exists = Template.count != 0
       flash[:notice] = 'Create at least one template' unless @template_exists
     end
@@ -22,20 +22,17 @@ module ConstructorPages
     def new_child
       @page, @parent_id = Page.new, params[:id]
       @template_id = Page.find(@parent_id).try(:template).try(:child).try(:id)
-      _template = Template.find(@template_id) if @template_id
-      _code_name = _template.code_name.pluralize if _template
-      render "#{_code_name}/new"
     end
 
     def show
       @page = Page.find_by_request_or_first("/#{params[:all]}")
       error_404 and return unless @page.try(:published?)
       redirect_to @page.link if @page.redirect?
-      _code_name = @page.template.code_name.pluralize
+      _code_name = @page.template.code_name
       instance_variable_set('@'+_code_name, @page)
-
+      _code_name = _code_name.pluralize
       respond_to do |format|
-        format.html { render "#{_code_name}/show" rescue render :show }
+        format.html { render "#{_code_name}/show" }
         format.json { render "#{_code_name}/show.json", layout: false rescue render json: @page }
         format.xml  { render "#{_code_name}/show.xml",  layout: false rescue render xml: @page }
       end
@@ -106,6 +103,7 @@ module ConstructorPages
           :in_nav,
           :in_map,
           :in_menu,
+          :in_url,
           :link
       )
     end
