@@ -133,10 +133,9 @@ module ConstructorPages
         page.should have_field 'Code name'
       end
 
-      it 'should has parent and child selects' do
+      it 'should has parent select' do
         visit pages.new_template_path
         page.should have_select 'Parent'
-        page.should have_select 'Child'
       end
 
       it 'should not has link new field' do

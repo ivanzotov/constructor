@@ -6,10 +6,9 @@ module ConstructorPages
 
     movable :template
 
-    before_filter -> {@roots = Template.roots}, only: [:new, :edit]
+    before_filter -> {@templates = Template.all}, only: [:index, :new, :edit, :update, :create]
 
     def index
-      @templates = Template.all
       @templates_cache = Digest::MD5.hexdigest(@templates.map{|t| [t.name, t.lft]}.join)
     end
 

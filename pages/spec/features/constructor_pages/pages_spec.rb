@@ -74,19 +74,6 @@ module ConstructorPages
         visit pages.pages_path
         page.should have_link 'Delete', pages.page_path(_page)
       end
-
-      it 'should has Add child if child exists' do
-        _template = Template.create name: 'Child', code_name: 'child_page', parent: @template
-        _page = Page.create name: 'Zanussi', template: @template
-        visit pages.pages_path
-        page.should have_link 'Add child', pages.new_page_path(_page)
-      end
-
-      it 'should not has if child not exists' do
-        _page = Page.create name: 'Zanussi', template: @template
-        visit pages.pages_path
-        page.should have_no_link 'Add'
-      end
     end
 
     describe 'Show' do
@@ -162,22 +149,6 @@ module ConstructorPages
           visit pages.new_page_path
           current_path.should == '/'
         end
-      end
-
-      it 'should has child template of parent page' do
-        _template = Template.create name: 'Child', code_name: 'child_page', parent: @template
-        _page = Page.create name: 'Zanussi', template: @template
-        visit pages.pages_path
-        click_link 'Add child'
-        current_path.should == pages.new_child_page_path(_page)
-        page.should have_select 'Template', selected: '-- Child'
-      end
-
-      it 'should edit with page view if no view found' do
-        _template = Template.create name: 'Hello', code_name: 'hello'
-        _page = Page.create name: 'Hello', template: _template
-        visit pages.new_child_page_path(_page)
-        page.should_not have_content 'This page show new with template'
       end
 
       it 'should has published checkbox' do
@@ -266,7 +237,7 @@ module ConstructorPages
         page.should have_text 'updated successfully'
       end
 
-      describe 'renegerate descendants' do
+      describe 'regenerate descendants' do
         before :each do
           _template = Template.create name: 'Another page', code_name: 'another_page'
           _page_first = Page.create name: 'First', template: _template
@@ -282,7 +253,7 @@ module ConstructorPages
         end
 
         it 'should regenerate full_url of descendants without url if full_url or in_url changed' do
-          check 'Url', false
+          check 'URL', false
           click_button 'Update Page'
 
           page.should have_link('First', '/first')
@@ -291,7 +262,7 @@ module ConstructorPages
         end
 
         it 'should regenerate full_url of descendants with url if full_url or in_url changed' do
-          check 'Url', true
+          check 'URL', true
           click_button 'Update Page'
 
           page.should have_link('First', '/first')

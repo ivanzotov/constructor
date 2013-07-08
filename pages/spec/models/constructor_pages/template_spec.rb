@@ -17,18 +17,5 @@ module ConstructorPages
       _template = Template.create name: 'Page', code_name: 'get_field_value'
       _template.valid?.should be_false
     end
-
-    describe '#child' do
-      it 'should return child corresponding child_id or children first' do
-        _brand = Template.create name: 'Brand', code_name: 'brand'
-        _series = Template.create name: 'Series', code_name: 'series', parent: _brand
-        _brand.reload
-
-        _brand.child.should == _series
-        _brand.child_id = _brand.id
-
-        _brand.child.should == _brand
-      end
-    end
   end
 end

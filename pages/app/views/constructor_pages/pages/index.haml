@@ -26,12 +26,6 @@
               =t :edit
               = page.template.to_accusative
 
-            - if page.template.child
-              = link_to new_child_page_path(page), class: 'btn btn-success btn-mini' do
-                %i.icon-chevron-down
-                =t :add
-                = page.template.child.to_accusative
-
             = link_to page, method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
               %i.icon-remove
               =t :delete

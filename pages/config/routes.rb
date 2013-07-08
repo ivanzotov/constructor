@@ -1,9 +1,6 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
-    resources :pages, except: [:show] do
-      get :new_child, on: :member
-    end
-
+    resources :pages, except: [:show]
     resources :templates, except: [:show] do
       resources :fields, except: [:show, :index]
     end  
@@ -17,6 +14,5 @@ ConstructorPages::Engine.routes.draw do
 
   root :to => 'pages#show'
 
-  get '*all.:format' => 'pages#show'
-  get '*all' => 'pages#show'
+  get '*all(.:format)' => 'pages#show', format: /(html|json|xml)/
 end

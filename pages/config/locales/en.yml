@@ -9,6 +9,7 @@ en:
   help: Help
   edit: Edit
   delete: Delete
+  url: URL
 
   code_name_already_in_use: This code name is already in use.
   field_success_added: Field «%{name}» added successfully.
