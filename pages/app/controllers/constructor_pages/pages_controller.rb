@@ -10,7 +10,7 @@ module ConstructorPages
 
     def index
       @pages = Page.includes(:template).load
-      @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.name, p.full_url, p.in_url, p.lft, p.template_id]}.join)
+      @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.name, p.full_url, p.in_url, p.template.lft, p.lft, p.template_id]}.join)
       @template_exists = Template.count != 0
       flash[:notice] = 'Create at least one template' unless @template_exists
     end
