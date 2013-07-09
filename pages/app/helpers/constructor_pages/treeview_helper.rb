@@ -17,7 +17,9 @@ module ConstructorPages
     def for_select(items, full_url = false)
       result = []
       items && items.each do |i|
-        result.push(["#{'--'*i.level} #{i.name}", i.id, ({'data-full_url' => i.full_url} if full_url) ])
+        arr = ["#{'--'*i.level} #{i.name}", i.id]
+        arr << {'data-full_url' => i.full_url} if full_url
+        result.push(arr)
       end
       result
     end

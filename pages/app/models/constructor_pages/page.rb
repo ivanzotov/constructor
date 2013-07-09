@@ -129,7 +129,7 @@ module ConstructorPages
     def update_fields_values(params, reset_booleans = true)
       params || return
 
-      fields.each {|f| f.find_type_object(self).tap {|t| t || break
+      fields.each {|f| f.find_or_create_type_object(self).tap {|t| t || next
         t.value = 0 if f.type_value == 'boolean' && reset_booleans
         params[f.code_name.to_sym].tap {|v| v && t.value = v}
         t.save }}

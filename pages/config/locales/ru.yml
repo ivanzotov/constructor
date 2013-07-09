@@ -8,6 +8,7 @@ ru:
   are_you_sure?: Вы уверены?
   display_in: Отображать в
   delete: Удалить
+  url: "Адрес"
 
   menu: Меню
   breadcrumbs: Хлебные крошки
@@ -74,6 +75,7 @@ ru:
         in_menu: "Меню"
         in_nav: "Хлебные крошки"
         in_map: "Карта сайта"
+        in_url: "Адрес"
         parent: "Родитель"
         parent_id: "Родительская страница"
         link: "Ссылка"

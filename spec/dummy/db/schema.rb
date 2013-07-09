@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130707103916) do
+ActiveRecord::Schema.define(version: 20130708141016) do
 
   create_table "constructor_core_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20130707103916) do
   end
 
   create_table "constructor_pages_date_types", force: true do |t|
-    t.date     "value",      default: '2013-07-07'
+    t.date     "value",      default: '2013-07-08'
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"
@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 20130707103916) do
     t.string   "name"
     t.string   "code_name"
     t.integer  "parent_id"
-    t.integer  "child_id"
     t.integer  "lft"
     t.integer  "rgt"
     t.datetime "created_at"
