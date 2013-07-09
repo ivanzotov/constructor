@@ -253,7 +253,7 @@ module ConstructorPages
         end
 
         it 'should regenerate full_url of descendants without url if full_url or in_url changed' do
-          check 'URL', false
+          uncheck 'URL'
           click_button 'Update Page'
 
           page.should have_link('First', '/first')
@@ -262,7 +262,7 @@ module ConstructorPages
         end
 
         it 'should regenerate full_url of descendants with url if full_url or in_url changed' do
-          check 'URL', true
+          uncheck 'URL'
           click_button 'Update Page'
 
           page.should have_link('First', '/first')

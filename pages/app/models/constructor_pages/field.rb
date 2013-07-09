@@ -33,6 +33,9 @@ module ConstructorPages
     # Create object of type_value by page
     def create_type_object(page); type_class.create(field_id: id, page_id: page.id) end
 
+    # Find or create type object by page
+    def find_or_create_type_object(page); find_type_object(page) || create_type_object(page) end
+
     # Remove all type_fields values for specified page
     def remove_type_object(page); find_type_object(page).destroy end
 

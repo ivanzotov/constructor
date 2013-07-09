@@ -72,6 +72,19 @@ module ConstructorPages
       end
     end
 
+    describe '#find_or_create_type_object' do
+      it 'should find or create object of type_value by page' do
+        field = Field.create name: 'Logo', code_name: 'logo', template: @template, type_value: 'image'
+        page = Page.create name: 'Page', template: @template
+        image_type = field.find_type_object(page)
+        image_type.should be_nil
+        image_type = field.find_or_create_type_object(page)
+        image_type.should be_an_instance_of(Types::ImageType)
+        image_type.page_id.should == page.id
+        image_type.field_id.should == field.id
+      end
+    end
+
     describe '#remove_type_object' do
       it 'should remote object of type_value by page' do
         field = Field.create name: 'Content', code_name: 'content', template: @template, type_value: 'text'

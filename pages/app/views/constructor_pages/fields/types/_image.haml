@@ -1,7 +1,7 @@
-- image = page.get_field_value(field.code_name)
+- image = field.get_value_for(page)
 
 - if image
   = image_tag image.thumb('200x200').url
+  %br/
 
-%br/
 = file_field_tag "fields[#{field.code_name}]", class: 'span6'
