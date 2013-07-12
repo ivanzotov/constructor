@@ -15,9 +15,9 @@ module ConstructorPages
 
     default_scope -> { order :lft }
 
-    validate :template_check
+    validate :templates_existing_check
 
-    before_save :friendly_url, :template_assign, :full_url_update
+    before_save :friendly_url, :assing_template, :full_url_update
     after_update :descendants_update
     after_create :create_fields_values
 
@@ -46,29 +46,32 @@ module ConstructorPages
         true
       end
 
-      def search(what_search = nil)
-        hash_search, array_search = {}, []
-
-        @where_search = Page.find_by(full_url: @where_search) if @where_search.is_a?(String)
-        array_search = ['lft > ? and rgt < ?', @where_search.lft, @where_search.rgt] if @where_search
-
-        what_search && what_search = what_search.to_s.singularize.downcase
-        hash_search[:template_id] = ConstructorPages::Template.find_by(code_name: what_search).try(:id) if what_search
-
-        hash_search[:id] = ids_by_params(@params_search) if @params_search
-
-        @where_search = @params_search = nil
-
-        hash_search.empty? && array_search.empty? ? [] : Page.where(hash_search).where(array_search).to_a
+      # Search pages
+      #
+      # Example:
+      #   Page.in('/conditioners').search_by(area: 25)
+      #   Page.by('price<' => 5000).search_in('/zanussi')
+      #   Page.in('/midea').by('price>' => 10000).search(:models)
+      def search(what = nil)
+        _hash, _array = {}, []
+        @where = Page.find_by(full_url: @where) if @where.is_a?(String)
+        _array = ['lft > ? and rgt < ?', @where.lft, @where.rgt] if @where
+        if what
+          what = what.to_s.singularize.downcase
+          _hash[:template_id] = ConstructorPages::Template.find_by(code_name: what).try(:id)
+        end
+        _hash[:id] = ids_by_params(@params) if @params
+        @where = @params = nil
+        _hash.empty? && _array.empty? ? [] : Page.where(_hash).where(_array).to_a
       end
 
-      def in(where_search  = nil); tap {@where_search  = where_search}  end
-      def by(params_search = nil); tap {@params_search = params_search} end
+      def in(where  = nil); tap {@where  = where}  end
+      def by(params = nil); tap {@params = params} end
 
-      def search_in(where_search  = nil); self.in(where_search).search  end
-      def search_by(params_search = nil); self.by(params_search).search end
+      def search_in(where  = nil); self.in(where).search  end
+      def search_by(params = nil); self.by(params).search end
 
-
+      # Return ids of pages founded by params
       def ids_by_params(params)
         _hash = {}
 
@@ -108,9 +111,9 @@ module ConstructorPages
       end
     end
 
-    def search(what_search = nil); Page.in(self).search(what_search) end
-    def by(params_search = nil); Page.by(params_search); self end
-    def search_by(params_search = nil); Page.by(params_search).in(self).search end
+    def search(what = nil); Page.in(self).search(what) end
+    def by(params = nil); Page.by(params); self end
+    def search_by(params = nil); Page.by(params).in(self).search end
 
     # Get field by code_name
     def field(code_name)
@@ -205,10 +208,10 @@ module ConstructorPages
     end
 
     # Page is not valid if there is no template
-    def template_check; errors.add_on_empty(:template_id) if Template.count == 0 end
+    def templates_existing_check; errors.add_on_empty(:template_id) if Template.count == 0 end
 
     # If template_id is nil then get first template
-    def template_assign; self.template_id = Template.first.id unless template_id end
+    def assign_template; self.template_id = Template.first.id unless template_id end
 
     # Update full_url
     def full_url_update

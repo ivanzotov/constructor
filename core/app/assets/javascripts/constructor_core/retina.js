@@ -146,3 +146,7 @@
     }
 
 })();
+
+$(document).on("page:load", function(){
+    if (typeof Retina != 'undefined') { Retina.update(); }
+});
