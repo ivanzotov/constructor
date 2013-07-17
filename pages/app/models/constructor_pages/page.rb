@@ -17,7 +17,7 @@ module ConstructorPages
 
     validate :templates_existing_check
 
-    before_save :friendly_url, :assing_template, :full_url_update
+    before_save :friendly_url, :assign_template, :full_url_update
     after_update :descendants_update
     after_create :create_fields_values
 
