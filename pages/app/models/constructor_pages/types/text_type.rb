@@ -7,7 +7,7 @@ module ConstructorPages
       belongs_to :field
       belongs_to :page, touch: true
 
-      before_save -> { value ||= '' }
+      before_save -> { self.value ||= '' }
     end
   end
 end
