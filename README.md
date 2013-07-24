@@ -12,7 +12,7 @@ Constructor – an open source Ruby on Rails content management system for Rails
 
 ### Add to Gemfile
 
-    gem 'constructor-cms', '~> 0.8.11'
+    gem 'constructor-cms', '~> 0.8.12'
 
 ### Install
 
