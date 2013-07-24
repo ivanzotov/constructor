@@ -9,7 +9,7 @@ class CreatePages < ActiveRecord::Migration
       t.string  :link,   :default => ""
       t.string  :title, :default => ""
       t.string  :keywords, :default => ""
-      t.text    :description, :default => "", :limit => 4294967295
+      t.text    :description, :limit => 4294967295
       t.boolean :in_menu, :default => true
       t.boolean :in_nav,  :default => true
       t.boolean :in_map,  :default => true
