@@ -10,6 +10,8 @@ ru:
   delete: Удалить
   url: "Адрес"
 
+  no_parent: Нет
+
   menu: Меню
   breadcrumbs: Хлебные крошки
   code_name_already_in_use: Такое кодовое имя уже используется
