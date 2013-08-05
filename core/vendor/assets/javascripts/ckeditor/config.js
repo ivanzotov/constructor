@@ -4,9 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example:
 	config.language = 'ru';
-	// config.uiColor = '#AADC6E';
 
 	config.toolbarGroups = [
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },	
@@ -29,7 +27,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeButtons = 'Smiley,PageBreak,Flash';
 
 	// Se the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;pre';
+	config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
