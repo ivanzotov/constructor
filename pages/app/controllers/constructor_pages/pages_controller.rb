@@ -100,7 +100,7 @@ module ConstructorPages
           :in_map,
           :in_menu,
           :in_url,
-          :link
+          :redirect
       )
     end
 

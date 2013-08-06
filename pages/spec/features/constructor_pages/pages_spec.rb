@@ -92,7 +92,6 @@ module ConstructorPages
       it 'should redirect if redirect specified' do
         _page = Page.create name: 'First page', template: @template
         _template = Template.create name: 'Home page', code_name: 'home_page'
-        Page.create name: 'Second page', template: _template
 
         visit _page.full_url
         current_path.should == '/first-page'
@@ -102,6 +101,13 @@ module ConstructorPages
 
         visit _page.full_url
         current_path.should == '/second-page'
+
+        visit pages.edit_page_path(_page)
+        fill_in 'Redirect', with: '/third-page'
+        click_button 'Update Page'
+
+        visit _page.full_url
+        current_path.should == '/third-page'
       end
     end
 
