@@ -2,8 +2,6 @@ source 'http://rubygems.org'
 
 gemspec
 
-gem 'awesome_nested_set', github: 'collectiveidea/awesome_nested_set', branch: 'rails4'
-
 group :test do
   gem 'coveralls', require: false
   gem 'simplecov', :require => false

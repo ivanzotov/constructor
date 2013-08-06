@@ -10,8 +10,6 @@ ru:
   delete: Удалить
   url: "Адрес"
 
-  no_parent: Нет
-
   menu: Меню
   breadcrumbs: Хлебные крошки
   code_name_already_in_use: Такое кодовое имя уже используется
@@ -64,14 +62,14 @@ ru:
       constructor_pages/template:
         name: "Название"
         code_name: "Кодовое имя"
-        parent: "Родительский"
+        parent_id: "Родительский"
         child: "Дочерний"
 
       constructor_pages/page:
         active: "Вкл./Выкл."
         image: "Изображение"
         name: "Название"
-        template: "Шаблон"
+        template_id: "Шаблон"
         auto_url: "Авто-ссылка"
         url: "Адрес"
         in_menu: "Меню"
@@ -80,7 +78,7 @@ ru:
         in_url: "Адрес"
         parent: "Родитель"
         parent_id: "Родительская страница"
-        link: "Ссылка"
+        redirect: "Редирект"
         title: "Заголовок"
         keywords: "Ключевые слова"
         description: "Описание"

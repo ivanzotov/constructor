@@ -11,8 +11,6 @@ en:
   delete: Delete
   url: URL
 
-  no_parent: No
-
   code_name_already_in_use: This code name is already in use.
   field_success_added: Field «%{name}» added successfully.
   field_success_updated: Field «%{name}» updated successfully.

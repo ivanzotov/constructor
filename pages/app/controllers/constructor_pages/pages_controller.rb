@@ -23,7 +23,7 @@ module ConstructorPages
       _request = "/#{params[:all]}"
       @page = Page.find_by_request_or_first(_request)
       error_404 and return if @page.nil? or (!@page.published? and _request != '/')
-      redirect_to @page.link if @page.redirect?
+      redirect_to(@page.redirect) && return if @page.redirect?
       _code_name = @page.template.code_name
       instance_variable_set('@'+_code_name, @page)
 
