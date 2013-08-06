@@ -88,6 +88,21 @@ module ConstructorPages
         visit _second_page.full_url
         page.should have_content 'Home page'
       end
+
+      it 'should redirect if redirect specified' do
+        _page = Page.create name: 'First page', template: @template
+        _template = Template.create name: 'Home page', code_name: 'home_page'
+        Page.create name: 'Second page', template: _template
+
+        visit _page.full_url
+        current_path.should == '/first-page'
+
+        _page.redirect = '/second-page'
+        _page.save
+
+        visit _page.full_url
+        current_path.should == '/second-page'
+      end
     end
 
     describe 'Moving' do
