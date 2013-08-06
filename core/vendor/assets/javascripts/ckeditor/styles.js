@@ -34,7 +34,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
 	{
-		name: 'Special Container',
+		name: 'Специальный контэйнер',
 		element: 'div',
 		styles: {
 			padding: '5px 10px',

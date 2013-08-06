@@ -181,7 +181,7 @@ module ConstructorPages
     end
 
     # Check if link specified
-    def redirect?; url != link && !link.empty? end
+    def redirect?; url != redirect && !redirect.empty? end
 
     # Touch all pages in same branch
     def touch_branch

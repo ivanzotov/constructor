@@ -280,12 +280,12 @@ module ConstructorPages
           page = Page.create name: 'Test redirection'
           page.redirect?.should be_false
 
-          page.link = ''
+          page.redirect = ''
           page.save
 
           page.redirect?.should be_false
 
-          page.link = '/hello-redirect'
+          page.redirect = '/hello-redirect'
           page.save
 
           page.redirect?.should be_true

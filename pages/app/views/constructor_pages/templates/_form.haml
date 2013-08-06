@@ -18,7 +18,7 @@
     .control-group
       = f.label :parent_id, class: 'control-label'
       .controls
-        = f.select :parent_id, options_for_select(for_select(@templates), selected: @template.parent_id), disabled: @template.self_and_descendants.map(&:id), include_blank: t(:no)
+        = f.select :parent_id, options_for_select(for_select(@templates), selected: @template.parent_id), disabled: @template.self_and_descendants.map(&:id), include_blank: '--'
 
     - unless @template.new_record?
       .control-group

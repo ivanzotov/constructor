@@ -41,16 +41,16 @@
             .control-group
               = f.label :parent_id, class: 'control-label'
               .controls
-                = f.select :parent_id, options_for_select(for_select(@pages, true), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: t(:no)
+                = f.select :parent_id, options_for_select(for_select(@pages, true), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: '--'
 
             .control-group
               = f.label :template_id, :class => 'control-label'
               .controls
                 = f.select :template_id,  options_for_select(templates, selected: @template_id)
             .control-group
-              = f.label :link, class: 'control-label'
+              = f.label :redirect, class: 'control-label'
               .controls
-                = f.text_field :link, class: 'span9'
+                = f.text_field :redirect, class: 'span9'
             .control-group
               %label.control-label=t :display_in
               .controls
