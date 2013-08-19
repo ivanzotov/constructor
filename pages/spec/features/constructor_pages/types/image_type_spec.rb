@@ -34,7 +34,6 @@ module ConstructorPages
       _page.reload
       _page.logo.should_not be_nil
       visit pages.edit_page_path(_page)
-      save_and_open_page
       page.should have_selector('img[alt="Upload image"]')
     end
   end
