@@ -9,7 +9,7 @@ module ConstructorPages
     before_filter -> {@templates = Template.all}, only: [:index, :new, :edit, :update, :create]
 
     def index
-      @templates_cache = Digest::MD5.hexdigest(@templates.map{|t| [t.name, t.lft]}.join)
+      @templates_cache = Digest::MD5.hexdigest(@templates.map{|t| [t.id, t.name, t.lft]}.join)
     end
 
     def new
