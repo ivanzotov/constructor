@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805180709) do
+ActiveRecord::Schema.define(version: 20140103091824) do
 
   create_table "constructor_core_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20130805180709) do
   end
 
   create_table "constructor_pages_date_types", force: true do |t|
-    t.date     "value",      default: '2013-07-07'
+    t.date     "value",      default: '2014-01-03'
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20130805180709) do
   end
 
   create_table "constructor_pages_html_types", force: true do |t|
-    t.text     "value",      limit: 4294967295, default: ""
+    t.text     "value",      limit: 4294967295
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20130805180709) do
     t.string   "redirect",                       default: ""
     t.string   "title",                          default: ""
     t.string   "keywords",                       default: ""
-    t.text     "description", limit: 4294967295, default: ""
+    t.text     "description", limit: 4294967295
     t.boolean  "in_menu",                        default: true
     t.boolean  "in_nav",                         default: true
     t.boolean  "in_map",                         default: true
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20130805180709) do
   end
 
   create_table "constructor_pages_text_types", force: true do |t|
-    t.text     "value",      limit: 4294967295, default: ""
+    t.text     "value",      limit: 4294967295
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"
