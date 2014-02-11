@@ -1,0 +1,33 @@
+.l-row {
+  @include clearfix;
+  overflow: hidden;
+  margin-left: -20px;
+}
+
+.l-col {
+  float: left;
+  overflow: hidden;
+  margin-left: 20px;
+  @include box-sizing(border-box);
+}
+
+.l-col-i {
+  padding: 0 10px;
+}
+
+.l-col-1 { width: 40px; }
+.l-col-2 { width: 100px; }
+.l-col-3 { width: 160px; }
+.l-col-4 { width: 220px; }
+.l-col-5 { width: 280px; }
+.l-col-6 { width: 340px; }
+.l-col-7 { width: 400px; }
+.l-col-8 { width: 460px; }
+.l-col-9 { width: 520px; }
+.l-col-10 { width: 580px; }
+.l-col-11 { width: 640px; }
+.l-col-12 { width: 700px; }
+.l-col-13 { width: 760px; }
+.l-col-14 { width: 820px; }
+.l-col-15 { width: 880px; }
+.l-col-16 { width: 940px; }

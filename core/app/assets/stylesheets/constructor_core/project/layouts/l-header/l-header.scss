@@ -1,0 +1,7 @@
+.l-header {
+  height: 46px;
+  width: 840px;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  @include gradient-vertical(#f9f9f9, #f3f3f3);
+}

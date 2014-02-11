@@ -1,0 +1,12 @@
+.l-header__email {
+  @include display-inline;
+  margin-right: 20px;
+  font-size: 14px;
+  line-height: 25px;
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    color: #dd4b39;
+  }
+}

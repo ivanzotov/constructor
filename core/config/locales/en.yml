@@ -1,7 +1,7 @@
 en:
   dashboard: Dashboard
+  are_you_sure?: Are you sure?
   users: Users
-  homepage: Home page
   login: Login
   logout: Logout
   cancel: Cancel
@@ -13,3 +13,4 @@ en:
   password_error_confirm: Password confirmation failed
   save_password: Save password
   password_changed: Password changed
+  go_to_website: Go to website

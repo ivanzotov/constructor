@@ -1,0 +1,7 @@
+.b-form__label {
+  @include display-inline;
+  width: 200px;
+  padding-left: 15px;
+  font-size: 15px;
+  color: #555;
+}

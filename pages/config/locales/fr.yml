@@ -1,5 +1,5 @@
 fr:
-  structure: Structure
+  pages: Pages
   templates: Modèles
   settings: Réglages
   new_field: Nouveau champ
@@ -28,8 +28,6 @@ fr:
 
   menu: Menu
   breadcrumbs: Chapelure
-
-  are_you_sure?: Etes-vous sûr?
 
   page_not_found: Page introuvable
 

@@ -1,31 +1,8 @@
-- content_for :page_title do
-  =t :structure
-
-- content_for :actions do
+.l-pages
   - if @template_exists
-    .span4.clearfix.text-right
-      = link_to pages.new_page_path, class: 'btn btn-large btn-link' do
-        i.icon-plus>
-        =t :new_page
+    = link_to new_page_path, class: 'b-button' do
+      =t :new_page
 
-section.b-tree.span12
-  ul
-    - cache @pages_cache do
-      - @pages.each do |page|
-        li class="level#{page.level}"
-          - if page.published?
-            = link_to page.name, page.full_url, class: 'btn btn-link'
-          - else
-            button.btn.disabled= page.name
 
-          .b-tree__buttons
-            = arrow_buttons_for(page)
-
-            = link_to edit_page_path(page), class: 'btn btn-primary btn-mini' do
-              i.icon-pencil>
-              =>t :edit
-              = page.template.to_accusative
-
-            = link_to page, method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
-              i.icon-remove>
-              =t :delete
+  ol.b-block.b-tree.g-out data-rebuild_url="#{rebuild_pages_path}" data-expand-node-url="#{expand_node_pages_path}" data-cookie-store='true'
+    = expandable_tree(@pages, title: :name)

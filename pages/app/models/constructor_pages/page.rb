@@ -4,6 +4,7 @@ module ConstructorPages
   # Page model. Pages are core for company websites, blogs etc.
   class Page < ActiveRecord::Base
     include ActiveSupport::Inflector
+    include TheSortableTree::Scopes
 
     # Adding has_many for all field types
     Field::TYPES.each do |t|

@@ -1,0 +1,12 @@
+.l-header__link {
+  @include display-inline;
+  padding: 10px 15px;
+  font-size: 14px;
+  line-height: 26px;
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    color: #dd4b39;
+  }
+}

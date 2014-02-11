@@ -9,6 +9,7 @@ module ConstructorPages
   class Template < ActiveRecord::Base
     # Adding code_name_uniqueness method
     include CodeNameUniq
+    include TheSortableTree::Scopes
 
     validates_presence_of :name, :code_name
     validates_uniqueness_of :code_name

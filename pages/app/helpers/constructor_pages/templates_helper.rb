@@ -1,5 +1,5 @@
 module ConstructorPages
   module TemplatesHelper
-    include TreeviewHelper
+    include ForSelect
   end
 end

@@ -1,6 +1,6 @@
 module ConstructorPages
   module PagesHelper
-    include TreeviewHelper
+    include ForSelect
 
     def templates
       Template.all.map{|t| ["#{'--'*t.level} #{t.name}", t.id]}

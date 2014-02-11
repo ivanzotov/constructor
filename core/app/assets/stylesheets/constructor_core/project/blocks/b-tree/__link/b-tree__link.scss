@@ -1,0 +1,14 @@
+.b-tree__link {
+  display: block;
+  padding: 10px 10px 10px 0;
+  color: #333;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  line-height: 150%;
+  margin-left: 40px;
+  text-decoration: none !important;
+
+  &:hover {
+    color: #dd4b39;
+  }
+}

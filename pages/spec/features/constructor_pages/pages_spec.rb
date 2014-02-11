@@ -66,13 +66,7 @@ module ConstructorPages
       it 'should has edit_page link' do
         _page = Page.create name: 'Zanussi'
         visit pages.pages_path
-        page.should have_link 'Edit page', pages.edit_page_path(_page)
-      end
-
-      it 'should has delete_page link' do
-        _page = Page.create name: 'Zanussi'
-        visit pages.pages_path
-        page.should have_link 'Delete', pages.page_path(_page)
+        page.should have_link 'Zanussi', pages.edit_page_path(_page)
       end
     end
 
@@ -108,52 +102,6 @@ module ConstructorPages
 
         visit _page.full_url
         current_path.should == '/third-page'
-      end
-    end
-
-    describe 'Moving' do
-      it 'should move page' do
-        _page_first = Page.create name: 'First'
-        _page_second = Page.create name: 'Second'
-        _page_third = Page.create name: 'Third'
-
-        _page_first.left_sibling.should be_nil
-        _page_first.right_sibling.should == _page_second
-
-        _page_second.left_sibling.should == _page_first
-        _page_second.right_sibling.should == _page_third
-
-        _page_third.left_sibling.should == _page_second
-        _page_third.right_sibling.should be_nil
-
-        visit pages.pages_path
-        find("a[href='#{pages.page_move_down_path(_page_first.id)}']").click
-
-        _page_first.reload
-        _page_first.left_sibling.should == _page_second
-        _page_first.right_sibling.should == _page_third
-
-        _page_second.reload
-        _page_second.left_sibling.should be_nil
-        _page_second.right_sibling.should == _page_first
-
-        _page_third.reload
-        _page_third.left_sibling.should == _page_first
-        _page_third.right_sibling.should be_nil
-
-        find("a[href='#{pages.page_move_up_path(_page_third.id)}']").click
-
-        _page_first.reload
-        _page_first.left_sibling.should == _page_third
-        _page_first.right_sibling.should be_nil
-
-        _page_second.reload
-        _page_second.left_sibling.should be_nil
-        _page_second.right_sibling.should == _page_third
-
-        _page_third.reload
-        _page_third.left_sibling.should == _page_second
-        _page_third.right_sibling.should == _page_first
       end
     end
 
@@ -257,52 +205,9 @@ module ConstructorPages
         @page.description.should == 'Zanussi conditioners Voronezh'
         page.should have_text 'updated successfully'
       end
-
-      describe 'regenerate descendants' do
-        before :each do
-          _template = Template.create name: 'Another page', code_name: 'another_page'
-          _page_first = Page.create name: 'First', template: _template
-          _page_second = Page.create name: 'Second', parent_id: _page_first.id, template: _template
-          _page_third = Page.create name: 'Third', parent_id: _page_second.id, template: _template
-
-          visit pages.pages_path
-          page.should have_link('First', '/first')
-          page.should have_link('Second', '/first/second')
-          page.should have_link('Third', '/first/second/third')
-
-          visit pages.edit_page_path(_page_first)
-        end
-
-        it 'should regenerate full_url of descendants without url if full_url or in_url changed' do
-          uncheck 'URL'
-          click_button 'Update Page'
-
-          page.should have_link('First', '/first')
-          page.should have_link('Second', '/second')
-          page.should have_link('Third', '/second/third')
-        end
-
-        it 'should regenerate full_url of descendants with url if full_url or in_url changed' do
-          uncheck 'URL'
-          click_button 'Update Page'
-
-          page.should have_link('First', '/first')
-          page.should have_link('Second', '/first/second')
-          page.should have_link('Third', '/first/second/third')
-        end
-      end
     end
 
     describe 'Delete page' do
-      it 'should delete from pages index' do
-        Page.create name: 'Page'
-        visit pages.pages_path
-        Page.count.should == 1
-        click_link 'Delete'
-        Page.count.should == 0
-        page.should have_text 'removed successfully'
-      end
-
       it 'should delete from page' do
         _page = Page.create name: 'Page'
         visit pages.edit_page_path(_page)

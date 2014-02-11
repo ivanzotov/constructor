@@ -1,0 +1,13 @@
+.b-login__field {
+  display: block;
+  width: 250px;
+  margin-bottom: 20px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  outline: none;
+
+  &:focus, &:active, &:hover {
+    border-color: #aaa;
+  }
+}

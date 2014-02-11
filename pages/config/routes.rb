@@ -1,18 +1,27 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
-    resources :pages, except: [:show]
-    resources :templates, except: [:show] do
-      resources :fields, except: [:show, :index]
-    end  
+    resources :pages, except: [:show] do
+      collection do
+        post :rebuild
+        post :expand_node
+      end
+    end
 
-    %w{page template field}.each do |c|
-      %w{up down}.each do |d|
-        get "#{c.pluralize}/move/#{d}/:id" => "#{c.pluralize}#move_#{d}", as: "#{c}_move_#{d}"
+    resources :templates, except: [:show] do
+      collection do
+        post :rebuild
+        post :expand_node
+      end
+
+      resources :fields, except: [:show, :index] do
+        collection do
+          post :rebuild
+        end
       end
     end
   end
 
-  root :to => 'pages#show'
+  root to: 'pages#show'
 
   get '*all(.:format)' => 'pages#show', format: /(html|json|xml)/
 end

@@ -1,5 +1,0 @@
-p
-  | Добро пожаловать, #{@resource.email}!
-p Для того чтобы подтвердить ваш аккаунт, пройдите по следующей ссылке:
-p= link_to 'Подтвердить аккаунт', confirmation_url(@resource, confirmation_token: @resource.confirmation_token)
-

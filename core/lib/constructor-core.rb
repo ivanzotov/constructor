@@ -1,7 +1,10 @@
 # encoding: utf-8
 
 require 'devise'
-require 'bootstrap-sass'
-require 'font-awesome-sass-rails'
+require 'slim'
+require 'sass-rails'
+require 'font/awesome/sass'
+require 'jquery-ui-rails'
+require 'the_sortable_tree'
 require 'constructor_core/engine'
 require 'constructor_core/string'

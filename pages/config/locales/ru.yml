@@ -1,11 +1,10 @@
 ru:
-  structure: Структура
+  pages: Страницы
   templates: Шаблоны
   settings: Настройки
   new_field: Новое поле
   edit_field: Редактирование поля
   seo: Поисковая оптимизация
-  are_you_sure?: Вы уверены?
   display_in: Отображать в
   delete: Удалить
   url: "Адрес"

@@ -1,0 +1,12 @@
+.b-button.b-button_color_light {
+  font-weight: 300;
+  color: #555;
+  background: #ddd;
+  border: 1px solid #ddd;
+  @include gradient-vertical(#f5f5f5, #f1f1f1);
+
+  &:hover, &:active, &:focus {
+    border: 1px solid #ccc;
+    @include gradient-vertical(#f1f1f1, #f5f5f5);
+  }
+}

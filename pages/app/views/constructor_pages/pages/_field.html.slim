@@ -1,4 +1,3 @@
-.control-group
-  = label_tag "fields[#{field.code_name}]", field.name, class: 'control-label'
-  .controls
-    = render "constructor_pages/fields/types/#{field.type_value}", field: field, page: @page
+.b-form__row
+  = label_tag "fields[#{field.code_name}]", field.name, class: 'b-form__label'
+  = render "constructor_pages/fields/types/#{field.type_value}", field: field, page: @page

@@ -1,7 +1,10 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class FieldsController < ApplicationController
+  class FieldsController < ConstructorCore::ApplicationController
+    include TheSortableTreeController::Rebuild
+    include TheSortableTreeController::ExpandNode
+
     def new
       @field = Field.new.tap {|f| @template = f.template = Template.find(params[:template_id])}
     end
@@ -50,7 +53,13 @@ module ConstructorPages
       redirect_to edit_template_url(template), notice: t(:field_success_removed, name: name)
     end
 
-    %w{up down}.each {|m| define_method "move_#{m}" do move_to m.to_sym end}
+    def sortable_model
+      Field
+    end
+
+    def sortable_collection
+      ConstructorPages::Field
+    end
 
     private
 
@@ -61,12 +70,6 @@ module ConstructorPages
           :template_id,
           :type_value
       )
-    end
-
-    def move_to(to)
-      @field = Field.find(params[:id])
-      to == :up ? @field.move_higher : @field.move_lower
-      redirect_to :back, notice: t(:field_success_moved, name: @field.name)
     end
   end
 end

@@ -1,0 +1,5 @@
+.l-header__avatar {
+  @include display-inline;
+  margin-right: 10px;
+  @include border-radius(50%);
+}

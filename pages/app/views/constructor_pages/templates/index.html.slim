@@ -1,27 +1,6 @@
-- content_for :page_title do
-  =t :templates
+.l-pages
+  = link_to new_template_path, class: 'b-button' do
+    =t :new_template
 
-- content_for :actions do
-  .span4.clearfix.text-right
-    = link_to new_template_path, class: 'btn btn-link btn-large' do
-      i.icon-plus>
-      =t :new_template
-
-section.b-tree.span12
-  ul
-    - cache @templates_cache do
-      - @templates.each do |template|
-        li class="level#{template.level}"
-          button.btn.btn-link.disabled= template.name
-
-          .b-tree__buttons
-            = arrow_buttons_for(template)
-
-            = link_to edit_template_path(template), class: 'btn btn-primary btn-mini' do
-              i.icon-pencil>
-              =>t :edit
-              = t(:template).mb_chars.downcase
-
-            = link_to template, method: :delete, class: 'btn btn-danger btn-mini pull-right', data: {confirm: t(:are_you_sure?)} do
-              i.icon-remove>
-              =t :delete
+  ol.b-block.b-tree.g-out data-rebuild_url="#{rebuild_templates_path}" data-expand-node-url="#{expand_node_templates_path}" data-cookie-store='true'
+    = expandable_tree(@templates, title: :name)

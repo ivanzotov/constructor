@@ -1,0 +1,11 @@
+.l-header__logout {
+  @include display-inline;
+  font-size: 14px;
+  line-height: 25px;
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    color: #dd4b39;
+  }
+}

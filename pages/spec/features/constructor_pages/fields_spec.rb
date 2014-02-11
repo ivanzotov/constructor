@@ -47,12 +47,6 @@ module ConstructorPages
         find("a[href='#{pages.template_field_path(@template, @content_field)}']").should be_true
         find("a[href='#{pages.template_field_path(@template, @price_field)}']").should be_true
       end
-
-      it 'should has move field link' do
-        visit pages.edit_template_path(@template)
-        find("a[href='#{pages.field_move_down_path(@content_field)}']").should be_true
-        find("a[href='#{pages.field_move_up_path(@price_field)}']").should be_true
-      end
     end
 
     describe 'New field' do

@@ -1,97 +1,80 @@
-= form_for @page, html: {multipart: @page.multipart?} do |f|
+= form_for @page, html: {multipart: @page.multipart?, class: 'b-form'} do |f|
   - if @page.errors.any?
-    .row-fluid
-      .alert.alert-error.fade.in.span12
-        = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
-        - @page.errors.full_messages.each do |m|
-          = m
-          
-  .form-horizontal
-    .control-group
-      = f.label :active, class: 'control-label'
-      .controls= f.check_box :active, class: 'span6'
+    .b-error
+      = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
+      - @page.errors.full_messages.each do |m|
+        = m
 
-    .control-group
-      = f.label :name, class: 'control-label'
-      .controls= f.text_field :name, class: 'span4'
+  .b-form__row
+    = f.label :active, class: 'b-form__label'
+    = f.check_box :active
 
-    .control-group.auto_url
-      = f.label :auto_url, class: 'control-label'
-      .controls
-        = f.check_box :auto_url, class: 'span9'
+  .b-form__row
+    = f.label :name, class: 'b-form__label'
+    = f.text_field :name, class: 'b-form__field'
 
-    .control-group.url
-      = f.label :url, class: 'control-label'
-      .controls
-        .full_url
-          span.path= @page.parent.full_url if @page.parent
-          | /
-          span.address= @page.url
-        = f.text_field :url, class: 'span3'
-        i.address_icon.icon-pencil<
+  .b-form__row.auto_url
+    = f.label :auto_url, class: 'b-form__label'
+    = f.check_box :auto_url
 
-    = render partial: 'field', collection: @page.fields
+  .b-form__row.url
+    = f.label :url, class: 'b-form__label'
+    .b-inline.b-full-url
+      span.b-full-url__path
+        = @page.parent.full_url if @page.parent
+        | /
+      span.b-full-url__url= @page.url
+      = f.text_field :url, class: 'b-form__field'
+      i.fa.fa-pencil.b-full-url__icon
 
-    .accordion
-      .accordion-group
-        .accordion-heading.text-center
-          = link_to t(:settings), '#collapse', class: 'accordion-toggle', 'data-toggle' => 'collapse'
-        .accordion-body.in.collapse#collapse
-          .accordion-inner
-            .control-group
-              = f.label :parent_id, class: 'control-label'
-              .controls
-                = f.select :parent_id, options_for_select(for_select(@pages, true), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: '--'
+  = render partial: 'field', collection: @page.fields
 
-            .control-group
-              = f.label :template_id, :class => 'control-label'
-              .controls
-                = f.select :template_id,  options_for_select(templates, selected: @template_id)
-            .control-group
-              = f.label :redirect, class: 'control-label'
-              .controls
-                = f.text_field :redirect, class: 'span9'
-            .control-group
-              label.control-label=t :display_in
-              .controls
-                label.checkbox.inline.span2 for='in_menu'
-                  = f.check_box :in_menu
-                  =t :menu
+  .b-form__row
+    = f.label :parent_id, class: 'b-form__label'
+    = f.select :parent_id, options_for_select(for_select(@pages, true), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: '--'
 
-                label.checkbox.inline.span2 for='in_map'
-                  = f.check_box :in_map
-                  =t :sitemap
+  .b-form__row
+    = f.label :template_id, class: 'b-form__label'
+    = f.select :template_id,  options_for_select(templates, selected: @template_id)
 
-                label.checkbox.inline.span2 for='in_nav'
-                  = f.check_box :in_nav
-                  =t :breadcrumbs
+  .b-form__row
+    = f.label :redirect, class: 'b-form__label'
+    = f.text_field :redirect, class: 'b-form__field'
 
-                label.checkbox.inline.span2 for='in_url'
-                  = f.check_box :in_url
-                  =t :url
+  .b-form__row
+    label.b-form__label
+      =t :display_in
 
-    .accordion
-      .accordion-group
-        .accordion-heading.text-center
-          = link_to t(:seo), '#collapse-three', class: 'accordion-toggle', 'data-toggle' => 'collapse'
-        .accordion-body.in.collapse#collapse-three
-          .accordion-inner
-            .control-group
-              = f.label :title, class: 'control-label'
-              .controls
-                = f.text_field :title, class: 'span9'
-            .control-group
-              = f.label :keywords, class: 'control-label'
-              .controls
-                = f.text_field :keywords, class: 'span9'
-            .control-group
-              = f.label :description, class: 'control-label'
-              .controls
-                = f.text_area :description, class: 'span9', rows: 8
+    label for='in_menu'
+    = f.check_box :in_menu
+    =t :menu
 
-    .row-fluid        
-      .span12
-        .form-actions
-          = f.submit class: 'btn btn-primary'
-          = link_to t(:cancel), pages_url, class: 'btn'
-          = link_to t(:delete_page), @page, method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-danger pull-right' unless @page.new_record?
+    label for='in_map'
+    = f.check_box :in_map
+    =t :sitemap
+
+    label for='in_nav'
+    = f.check_box :in_nav
+    =t :breadcrumbs
+
+    label for='in_url'
+    = f.check_box :in_url
+    =t :url
+
+  .b-form__row
+    = f.label :title, class: 'b-form__label'
+    = f.text_field :title, class: 'b-form__field'
+
+
+  .b-form__row
+    = f.label :keywords, class: 'b-form__label'
+    = f.text_field :keywords, class: 'b-form__field'
+
+  .b-form__row
+    = f.label :description, class: 'b-form__label'
+    = f.text_area :description, class: 'b-form__field', rows: 8
+
+  .b-form__actions
+    = f.submit class: 'b-button'
+    = link_to t(:cancel), pages_url, class: 'b-button b-button_color_light'
+    = link_to t(:delete_page), @page, method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'b-button b-button_color_light g-float_right' unless @page.new_record?

@@ -1,6 +1,6 @@
 ru:
   dashboard: Панель управления
-  homepage: Главная страница
+  are_you_sure?: Вы уверены?
   users: Пользователи
   login: Войти
   logout: Выйти
@@ -13,6 +13,7 @@ ru:
   save_password: Сохранить пароль
   password_changed: Пароль успешно изменен
   password_error_confirm: Пароли не совпадают
+  go_to_website: Перейти на сайт
 
   activerecord:
     attributes:

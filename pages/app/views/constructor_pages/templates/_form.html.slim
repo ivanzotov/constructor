@@ -1,37 +1,30 @@
-= form_for @template do |f|
+= form_for @template, html: {class: 'b-form'} do |f|
   - if @template.errors.any?
-    .row-fluid
-      .alert.alert-error.fade.in.span12
-        = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
-        - @template.errors.full_messages.each do |m|
-          = m
+    = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
+    - @template.errors.full_messages.each do |m|
+      = m
 
-  .form-horizontal
-    .control-group
-      = f.label :name, class: 'control-label'
-      .controls= f.text_field :name, class: 'span4'
+  .b-form__row
+    = f.label :name, class: 'b-form__label'
+    = f.text_field :name, class: 'b-form__field'
 
-    .control-group
-      = f.label :code_name, class: 'control-label'
-      .controls= f.text_field :code_name, class: 'span4'
+  .b-form__row
+    = f.label :code_name, class: 'b-form__label'
+    = f.text_field :code_name, class: 'b-form__field'
 
-    .control-group
-      = f.label :parent_id, class: 'control-label'
-      .controls
-        = f.select :parent_id, options_for_select(for_select(@templates), selected: @template.parent_id), disabled: @template.self_and_descendants.map(&:id), include_blank: '--'
+  .b-form__row
+    = f.label :parent_id, class: 'b-form__label'
+    = f.select :parent_id, options_for_select(for_select(@templates), selected: @template.parent_id), disabled: @template.self_and_descendants.map(&:id), include_blank: '--'
 
-    - unless @template.new_record?
-      .control-group
-        .controls
-          = link_to new_template_field_path(@template), class: 'btn btn-mini btn-link' do
-            i.icon-plus
-            =t :new_field
+  - unless @template.new_record?
+    .b-form__row
+      .b-form__label
+      = link_to new_template_field_path(@template), class: 'b-button b-button_color_light b-button_size_small' do
+        =t :new_field
 
     = render @template.fields
 
-    .row-fluid
-      .span12
-        .form-actions
-          = f.submit class: 'btn btn-primary'
-          = link_to t(:cancel), templates_url, class: 'btn'
-          = link_to t(:delete_template), @template, method: :delete, data: {confirm: t(:are_you_sure?)},  class: 'btn btn-danger pull-right' unless @template.new_record?
+  .b-form__actions
+    = f.submit class: 'b-button'
+    = link_to t(:cancel), templates_url, class: 'b-button b-button_color_light'
+    = link_to t(:delete_template), @template, method: :delete, data: {confirm: t(:are_you_sure?)},  class: 'b-button b-button_color_light g-float_right' unless @template.new_record?

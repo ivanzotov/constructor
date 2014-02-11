@@ -1,0 +1,7 @@
+.l-sidebar {
+  height: 100%;
+  width: 159px;
+  background: #fff;
+  border-right: 1px solid #eee;
+  @include box-shadow(inset 1px 0 0 rgba(255, 255, 255, 0.15),1px 0 0 rgba(255, 255, 255, 0.15));
+}

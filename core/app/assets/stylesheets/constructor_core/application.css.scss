@@ -1,3 +1,26 @@
 //= require ckeditor/contents
 //= require ckeditor/skins/moono/editor.css
-//= require ./main
+//= require font-awesome
+//= require jquery.ui.all
+//= require tree
+//= require sortable_tree
+//= require nested_options
+//= require_self
+
+@import 'framework/all';
+@import 'project/**/*';
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  font-family: Ubuntu, Arial, sans-serif;
+  font-weight: 100;
+  background: #ddd;
+}

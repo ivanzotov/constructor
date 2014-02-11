@@ -51,60 +51,7 @@ module ConstructorPages
       it 'should has edit_template link' do
         _template = Template.create name: 'Page', code_name: 'page'
         visit pages.templates_path
-        page.should have_link 'Edit template', pages.edit_template_path(_template)
-      end
-
-      it 'should has delete_page link' do
-        _template = Template.create name: 'Page', code_name: 'page'
-        visit pages.templates_path
-        page.should have_link 'Delete', pages.template_path(_template)
-      end
-    end
-
-    describe 'Moving' do
-      it 'should move template' do
-        _template_first = Template.create name: 'First', code_name: 'first'
-        _template_second = Template.create name: 'Second', code_name: 'second'
-        _template_third = Template.create name: 'Third', code_name: 'third'
-
-        _template_first.left_sibling.should be_nil
-        _template_first.right_sibling.should == _template_second
-
-        _template_second.left_sibling.should == _template_first
-        _template_second.right_sibling.should == _template_third
-
-        _template_third.left_sibling.should == _template_second
-        _template_third.right_sibling.should be_nil
-
-        visit pages.templates_path
-
-        find("a[href='#{pages.template_move_down_path(_template_first.id)}']").click
-
-        _template_first.reload
-        _template_first.left_sibling.should == _template_second
-        _template_first.right_sibling.should == _template_third
-
-        _template_second.reload
-        _template_second.left_sibling.should be_nil
-        _template_second.right_sibling.should == _template_first
-
-        _template_third.reload
-        _template_third.left_sibling.should == _template_first
-        _template_third.right_sibling.should be_nil
-
-        find("a[href='#{pages.template_move_up_path(_template_third.id)}']").click
-
-        _template_first.reload
-        _template_first.left_sibling.should == _template_third
-        _template_first.right_sibling.should be_nil
-
-        _template_second.reload
-        _template_second.left_sibling.should be_nil
-        _template_second.right_sibling.should == _template_third
-
-        _template_third.reload
-        _template_third.left_sibling.should == _template_second
-        _template_third.right_sibling.should == _template_first
+        page.should have_link 'Page', pages.edit_template_path(_template)
       end
     end
 
@@ -234,15 +181,6 @@ module ConstructorPages
     end
 
     describe 'Delete template' do
-      it 'should delete from templates index' do
-        Template.create name: 'Page', code_name: 'page'
-        visit pages.templates_path
-        Template.count.should == 1
-        click_link 'Delete'
-        Template.count.should == 0
-        page.should have_text 'removed successfully'
-      end
-
       it 'should delete from template' do
         _template = Template.create name: 'Page', code_name: 'page'
         visit pages.edit_template_path(_template)

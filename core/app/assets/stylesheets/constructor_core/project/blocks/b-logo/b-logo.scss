@@ -1,0 +1,15 @@
+.b-logo {
+  @include display-block;
+  height: 36px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+  text-decoration: none;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  background: #eee;
+  @include gradient-vertical(#f9f9f9, #f3f3f3);
+}

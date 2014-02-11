@@ -16,10 +16,11 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
 
-  s.add_dependency 'rails', '~> 4.0.0'
+  s.add_dependency 'rails', '~> 4.0.2'
   s.add_dependency 'devise', '~> 3.0.0.rc'
-  s.add_dependency 'bootstrap-sass', '~> 2.0'
   s.add_dependency 'slim'
-  s.add_dependency 'font-awesome-sass-rails'
+  s.add_dependency 'jquery-ui-rails'
+  s.add_dependency 'the_sortable_tree'
+  s.add_dependency 'font-awesome-sass'
   s.add_dependency 'cache_digests'
 end

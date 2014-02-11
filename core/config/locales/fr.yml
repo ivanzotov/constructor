@@ -1,7 +1,7 @@
 fr:
   dashboard: Tableau de bord
+  are_you_sure?: Etes-vous sûr?
   users: Utilisateurs
-  homepage: Page d'accueil
   login: S'identifier
   logout: Déconnexion
   cancel: Résilier
@@ -13,3 +13,4 @@ fr:
   password_error_confirm: Confirmation mot de passe n'a pas
   save_password: Enregistrer le mot de passe
   password_changed: Mot de passe modifié
+  go_to_website: Go to website

@@ -1,0 +1,11 @@
+.b-full-url {
+  .fa-pencil {
+    display: none;
+  }
+
+  &:hover {
+    .fa-pencil {
+      display: inline;
+    }
+  }
+}

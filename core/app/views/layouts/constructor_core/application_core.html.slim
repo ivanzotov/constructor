@@ -1,18 +1,22 @@
 doctype html
-html lang="ru"
+html
   head
     meta charset="utf-8"
     meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
     title=t :dashboard
-    
-    / [if lt IE 9]
-      %script{src: 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
-    
+
+    - if Rails.env.production?
+      / [if lt IE 9]
+        %script{src: 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
+
+      link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'
+
     javascript:
       var CKEDITOR_BASEPATH = '/assets/ckeditor/'
-    
+
     = stylesheet_link_tag 'constructor_core/application'
     = javascript_include_tag 'constructor_core/application'
+
     = csrf_meta_tag
     = favicon_link_tag
     
@@ -21,73 +25,43 @@ html lang="ru"
     link rel='apple-touch-icon' sizes='114x114' href='images/apple-touch-icon-114x114.png'
   
   body
-    .navbar.navbar-constructor
-      .navbar-inner
-        .container-fluid          
-          = link_to t(:homepage), '/', class: 'brand'
-          a.btn.btn-navbar data-toggle='collapse' data-target='.nav-collapse'
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          .nav-collapse
-            ul.nav
-              /
-                %li
-                  = link_to '/admin/dashboard' do
-                    %i.icon-dashboard
-                    =t :dashboard
-              li
-                = link_to '/admin/pages' do
-                  i.icon-sitemap>
-                  =t :structure
-              li
-                = link_to '/admin/templates' do
-                  i.icon-film>
-                  =t :templates
-              /
-                %li
-                  = link_to '/admin/users' do
-                    %i.icon-group
-                    =t :users
-                %li
-                  = link_to '/admin/settings' do
-                    %i.icon-cogs
-                    =t :settings
+    .l-all.l-base
+      .l-sidebar.b-inline
+        = link_to 'Constructor', '/', class: 'b-logo'
+        ul.b-menu
+          li.b-menu__item
+            = menu_item('pages', 'sitemap')
+          li.b-menu__item
+            = menu_item('templates', 'film')
 
-            - if current_user
-              ul.nav.pull-right
-                li
-                  = link_to core.user_path(current_user.id) do
-                    = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24, class: 'avatar'
-                    span<= current_user.email
-                li
-                  = link_to 'http://ivanzotov.github.io/constructor/' do
-                    i.icon-question-sign>
-                    =t :help
-                li
-                  = link_to core.logout_path, method: :delete do
-                    i.icon-signout>
-                    =t :logout
+      .l-main.b-inline
+        .l-header
+          .b-inline
+            = link_to '/', class: 'l-header__link' do
+              =t :go_to_website
+              i.fa.fa-external-link.l-header__link-icon
 
-    .container-fluid
-      .page-header
-        .row-fluid
-          .span4
-            h3.muted= yield :page_title
-          .span4
-            - unless notice.nil?
-              .alert.fade.in
-                = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
-                = notice
-            - unless alert.nil?
-              .alert.alert-error.fade.in
-                = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
-                = alert                            
+          .b-inline.g-float_right
+            .b-inline.l-header__profile
+              = link_to core.user_path(current_user.id), class: 'l-header__email' do
+                = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24, class: 'l-header__avatar'
+                = current_user.email
 
-          = yield :actions
-      .content          
-        .row-fluid
-          = yield            
+              = link_to core.logout_path, method: :delete, class: 'l-header__logout' do
+                i.fa.fa-sign-out>
+                =t :logout
+
+
+
+        - unless notice.nil?
+          = link_to '×', '#', class: 'b-close', 'data-dismiss' => 'alert'
+          = notice
+        - unless alert.nil?
+          = link_to '×', '#', class: 'b-close', 'data-dismiss' => 'alert'
+          = alert
+
+        .l-content
+          = yield
         
   / [if lt IE 7 ]
     %script{src: '//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js'}

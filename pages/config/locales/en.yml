@@ -1,5 +1,5 @@
 en:
-  structure: Structure
+  pages: Pages
   templates: Templates
   settings: Settings
   new_field: New field
@@ -29,8 +29,6 @@ en:
 
   menu: Menu
   breadcrumbs: Breadcrumbs
-
-  are_you_sure?: Are you sure?
 
   page_not_found: Page not found
 

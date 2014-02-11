@@ -1,0 +1,8 @@
+ol.b-tree__nested-set
+  - @children.each do |child|
+    li.b-tree__li data-node-id="#{ child.id }"
+      .b-tree__item
+        i.fa.fa-bars.b-tree__handle
+        - unless child.leaf?
+          i.fa.fa-plus-square-o.b-tree__expand.b-tree__plus
+        = link_to child.name, edit_page_path(child), class: 'b-tree__link'

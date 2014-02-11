@@ -1,3 +1,4 @@
 #= require jquery
+#= require jquery.ui.all
 #= require jquery_ujs
-#= require constructor_core/jquery.cookie
+#= require ./expandable_tree/jquery.cookie

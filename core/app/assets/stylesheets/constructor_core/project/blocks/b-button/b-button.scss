@@ -1,0 +1,29 @@
+.b-button {
+  @include display-inline;
+  margin: 2px;
+  padding: 8px 15px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 14px;
+  text-decoration: none;
+  background: #dd4b39;
+  border: 1px solid #dd4b39;
+  @include gradient-vertical(#dd4b39, #d14836);
+  outline: none;
+
+  -webkit-appearance: none;
+  appearance: none;
+
+  @include border-radius(2px);
+
+  &:focus, &:active, &:hover {
+    cursor: pointer;
+    @include gradient-vertical(#d74937, #bf4231);
+  }
+
+  &:active {
+    @include box-shadow(inset 0 2px 3px rgba(0,0,0,0.2));
+  }
+}

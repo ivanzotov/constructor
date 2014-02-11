@@ -1,14 +1,14 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class TemplatesController < ApplicationController
-    include TreeviewHelper
+  class TemplatesController < ConstructorCore::ApplicationController
+    include TheSortableTreeController::Rebuild
+    include TheSortableTreeController::ExpandNode
 
-    movable :template
-
-    before_filter -> {@templates = Template.all}, only: [:index, :new, :edit, :update, :create]
+    before_filter -> {@templates = Template.all}, only: [:new, :edit, :update, :create]
 
     def index
+      @templates = Template.roots
       @templates_cache = Digest::MD5.hexdigest(@templates.map{|t| [t.id, t.name, t.lft]}.join)
     end
 
@@ -50,6 +50,10 @@ module ConstructorPages
       else
         redirect_to :back, alert: t(:template_error_delete_pages)
       end
+    end
+
+    def sortable_model
+      Template
     end
 
     private

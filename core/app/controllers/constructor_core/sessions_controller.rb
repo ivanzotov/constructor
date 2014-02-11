@@ -2,7 +2,7 @@
 
 module ConstructorCore
   class SessionsController < Devise::SessionsController
-    layout 'constructor_core/application_core'
+    layout 'constructor_core/login'
 
     def after_sign_in_path_for(resource)
       return '/admin/pages'

@@ -1,0 +1,13 @@
+.b-menu__item-link {
+  @include display-block;
+  padding: 15px 20px;
+  font-size: 14px;
+  color: #555;
+  text-decoration: none;
+
+  &:hover {
+    background: #f3f3f3;
+  }
+
+  @include transition(border-width .2s linear);
+}

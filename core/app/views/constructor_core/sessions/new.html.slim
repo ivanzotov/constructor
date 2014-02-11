@@ -1,22 +1,13 @@
-- content_for :page_title do
-  =t :login
+= form_for(resource, as: resource_name, url: '/login', html: {class: 'b-login'}) do |f|
+  = f.label :email, class: 'b-login__label'
+  = f.email_field :email, class: 'b-login__field'
 
-= form_for(resource, as: resource_name, url: '/login') do |f|
-  .form-horizontal
-    .control-group
-      = f.label :email, class: 'control-label'
-      .controls
-        = f.email_field :email
-    .control-group 
-      = f.label :password, class: 'control-label'
-      .controls
-        = f.password_field :password
+  = f.label :password, class: 'b-login__label'
+  = f.password_field :password, class: 'b-login__field'
 
-    - if devise_mapping.rememberable?
-      .control-group
-        .controls
-          label.checkbox.inline for='remember_me'
-            = f.check_box :remember_me
-            =t :remember_me
-      .controls
-        = f.submit t(:login), class: 'btn btn-primary'
+  - if devise_mapping.rememberable?
+    .b-login__remember
+      => f.check_box :remember_me
+      =t :remember_me
+
+  = f.submit t(:login), class: 'b-button'

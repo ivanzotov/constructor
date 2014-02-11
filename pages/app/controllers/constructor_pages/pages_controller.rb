@@ -1,15 +1,16 @@
 # encoding: utf-8
 
 module ConstructorPages
-  class PagesController < ApplicationController
-    layout 'constructor_core/application_core', except: [:show]
+  class PagesController < ConstructorCore::ApplicationController
+    include TheSortableTreeController::Rebuild
+    include TheSortableTreeController::ExpandNode
 
-    movable :page
+    layout 'constructor_core/application_core', except: [:show]
 
     before_filter -> {@pages = Page.all}, only: [:new, :edit]
 
     def index
-      @pages = Page.includes(:template).load
+      @pages = Page.nested_set.roots.includes(:template)
       @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.id, p.name, p.full_url, p.in_url, p.template.lft, p.lft, p.template_id]}.join)
       @template_exists = Template.count != 0
       flash[:notice] = 'Create at least one template' unless @template_exists
@@ -81,6 +82,10 @@ module ConstructorPages
       @page.touch_branch
       @page.destroy
       redirect_to pages_path, notice: t(:page_success_removed, name: @page.name)
+    end
+
+    def sortable_model
+      Page
     end
 
     private

@@ -1,0 +1,12 @@
+.b-form__field {
+  width: 300px;
+  padding: 3px;
+  font-size: 14px;
+  color: #444;
+  border: 1px solid #ddd;
+  outline: none;
+
+  &:focus, &:active, &:hover {
+    border-color: #aaa;
+  }
+}

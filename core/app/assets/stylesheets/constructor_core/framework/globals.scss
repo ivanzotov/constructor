@@ -1,0 +1,49 @@
+.g-out { overflow: visible !important}
+
+.g-line {
+  @include clearfix;
+}
+
+.g-align_left {
+  text-align: left !important;
+}
+
+.g-align_right {
+  text-align: right !important;
+}
+
+.g-align_center {
+  text-align: center !important;
+}
+
+.g-float_left {
+  float: left !important;
+}
+
+.g-float_right {
+  float: right !important;
+}
+
+.g-hidden, .g-hide {
+  display: none !important;
+}
+
+.g-uppercase {
+  text-transform: uppercase !important;
+}
+
+.g-spin {
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 2000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 2000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: spin;
+  -ms-animation-duration: 2000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+  -o-transition: rotate(3600deg);
+}
