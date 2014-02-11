@@ -1,0 +1,21 @@
+- content_for :page_title do
+  | Смена пароля
+  
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+  = f.hidden_field :reset_password_token
+  .clearfix
+    = f.label :password, 'Новый пароль'
+    .input
+      = f.password_field :password
+  .clearfix
+    = f.label :password_confirmation, 'Еще раз'
+    .input
+      = f.password_field :password_confirmation
+  .clearfix
+    .input
+      = f.submit 'Сменить пароль', class: 'btn primary'
+
+- content_for :sidebar do
+  = render partial: 'devise/shared/links'
+

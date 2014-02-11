@@ -1,5 +1,5 @@
 require 'awesome_nested_set'
-require 'haml-rails'
+require 'slim'
 require 'constructor_pages/engine'
 require 'rack/cache'
 require 'acts_as_list'

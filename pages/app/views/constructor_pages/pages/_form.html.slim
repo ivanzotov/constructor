@@ -24,11 +24,11 @@
       = f.label :url, class: 'control-label'
       .controls
         .full_url
-          %span.path>= @page.parent.full_url if @page.parent
-          \/
-          %span.address>= @page.url
+          span.path= @page.parent.full_url if @page.parent
+          | /
+          span.address= @page.url
         = f.text_field :url, class: 'span3'
-        %i.address_icon.icon-pencil
+        i.address_icon.icon-pencil<
 
     = render partial: 'field', collection: @page.fields
 
@@ -52,21 +52,21 @@
               .controls
                 = f.text_field :redirect, class: 'span9'
             .control-group
-              %label.control-label=t :display_in
+              label.control-label=t :display_in
               .controls
-                %label.checkbox.inline.span2{for: 'in_menu'}
+                label.checkbox.inline.span2 for='in_menu'
                   = f.check_box :in_menu
                   =t :menu
 
-                %label.checkbox.inline.span2{for: 'in_map'}
+                label.checkbox.inline.span2 for='in_map'
                   = f.check_box :in_map
                   =t :sitemap
 
-                %label.checkbox.inline.span2{for: 'in_nav'}
+                label.checkbox.inline.span2 for='in_nav'
                   = f.check_box :in_nav
                   =t :breadcrumbs
 
-                %label.checkbox.inline.span2{for: 'in_url'}
+                label.checkbox.inline.span2 for='in_url'
                   = f.check_box :in_url
                   =t :url
 

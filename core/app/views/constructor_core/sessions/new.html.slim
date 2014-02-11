@@ -15,7 +15,7 @@
     - if devise_mapping.rememberable?
       .control-group
         .controls
-          %label.checkbox.inline{for: 'remember_me'}
+          label.checkbox.inline for='remember_me'
             = f.check_box :remember_me
             =t :remember_me
       .controls

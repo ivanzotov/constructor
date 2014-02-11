@@ -1,14 +1,14 @@
-!!!
-%html{lang: 'ru'}
-  %head
-    %meta{charset: 'utf-8'}/
-    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge,chrome=1'}/
-    %title=t :dashboard
+doctype html
+html lang="ru"
+  head
+    meta charset="utf-8"
+    meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
+    title=t :dashboard
     
     / [if lt IE 9]
       %script{src: 'http://html5shim.googlecode.com/svn/trunk/html5.js'}
     
-    :javascript
+    javascript:
       var CKEDITOR_BASEPATH = '/assets/ckeditor/'
     
     = stylesheet_link_tag 'constructor_core/application'
@@ -16,33 +16,33 @@
     = csrf_meta_tag
     = favicon_link_tag
     
-    %link{rel: 'apple-touch-icon', href: 'images/apple-touch-icon.png'}
-    %link{rel: 'apple-touch-icon', sizes: '72x72', href: 'images/apple-touch-icon-72x72.png'}
-    %link{rel: 'apple-touch-icon', sizes: '114x114', href: 'images/apple-touch-icon-114x114.png'}
+    link rel='apple-touch-icon' href='images/apple-touch-icon.png'
+    link rel='apple-touch-icon' sizes='72x72' href='images/apple-touch-icon-72x72.png'
+    link rel='apple-touch-icon' sizes='114x114' href='images/apple-touch-icon-114x114.png'
   
-  %body
+  body
     .navbar.navbar-constructor
       .navbar-inner
         .container-fluid          
           = link_to t(:homepage), '/', class: 'brand'
-          %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
+          a.btn.btn-navbar data-toggle='collapse' data-target='.nav-collapse'
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
           .nav-collapse
-            %ul.nav
+            ul.nav
               /
                 %li
                   = link_to '/admin/dashboard' do
                     %i.icon-dashboard
                     =t :dashboard
-              %li
+              li
                 = link_to '/admin/pages' do
-                  %i.icon-sitemap
+                  i.icon-sitemap>
                   =t :structure
-              %li
+              li
                 = link_to '/admin/templates' do
-                  %i.icon-film
+                  i.icon-film>
                   =t :templates
               /
                 %li
@@ -55,25 +55,25 @@
                     =t :settings
 
             - if current_user
-              %ul.nav.pull-right
-                %li
+              ul.nav.pull-right
+                li
                   = link_to core.user_path(current_user.id) do
                     = image_tag gravatar_icon(current_user.email, 48), width: 24, height: 24, class: 'avatar'
-                    %span= current_user.email
-                %li
+                    span<= current_user.email
+                li
                   = link_to 'http://ivanzotov.github.io/constructor/' do
-                    %i.icon-question-sign
+                    i.icon-question-sign>
                     =t :help
-                %li
+                li
                   = link_to core.logout_path, method: :delete do
-                    %i.icon-signout
+                    i.icon-signout>
                     =t :logout
 
     .container-fluid
       .page-header
         .row-fluid
           .span4
-            %h3.muted= yield :page_title          
+            h3.muted= yield :page_title
           .span4
             - unless notice.nil?
               .alert.fade.in
