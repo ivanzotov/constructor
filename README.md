@@ -12,7 +12,7 @@ Constructor – an open source Ruby on Rails content management system for Rails
 
 ### Add to Gemfile
 
-    gem 'constructor-cms', '~> 0.9.1'
+    gem 'constructor-cms', '~> 1.0.0beta1'
 
 ### Install
 
@@ -30,7 +30,7 @@ Password: 123qweASD
 
 
 ## Screenshots
-![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_structure_0.5.3.png)
+![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_1.0.0beta1.png)
 
 ## Copyright
   Copyright © 2012—2013 Ivan Zotov. See [LICENSE][] for details.
