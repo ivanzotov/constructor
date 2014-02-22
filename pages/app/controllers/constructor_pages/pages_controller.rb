@@ -16,6 +16,7 @@ module ConstructorPages
 
     def new
       @page = Page.new
+      @templates = Template.all.map{|t| ["#{'--'*t.level} #{t.name}", t.id]}
     end
 
     def show
@@ -60,12 +61,7 @@ module ConstructorPages
     def update
       @page = Page.find params[:id]
 
-      _template_changed = @page.template.id != params[:page][:template_id].to_i
-
-      @page.remove_fields_values if _template_changed
-
       if @page.update page_params
-        @page.create_fields_values if _template_changed
         @page.update_fields_values params[:fields]
         @page.touch_branch
 

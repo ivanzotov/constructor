@@ -320,7 +320,7 @@ module ConstructorPages
             Template.delete_all
 
             page = Page.create
-            page.valid?.should_not be_true
+            page.valid?.should be_false
           end
         end
 
@@ -328,6 +328,15 @@ module ConstructorPages
           it 'should be first template' do
             page = Page.create
             page.template.should == Template.first
+          end
+        end
+
+        context 'if template changed' do
+          it 'should not be valid' do
+            another_template = Template.create name: 'Another template', code_name: 'another_template'
+            page = Page.create template: @template
+            page.template = another_template
+            page.valid?.should be_false
           end
         end
       end

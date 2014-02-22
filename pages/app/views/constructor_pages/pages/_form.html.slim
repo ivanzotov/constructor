@@ -29,9 +29,10 @@
 
   = render partial: 'field', collection: @page.fields
 
-  .b-form__row
-    = f.label :template_id, class: 'b-form__label'
-    = f.select :template_id,  options_for_select(templates, selected: @template_id)
+  - if @page.new_record?
+    .b-form__row
+      = f.label :template_id, class: 'b-form__label'
+      = f.select :template_id,  options_for_select(@templates, selected: @template_id)
 
   .b-form__row
     = f.label :redirect, class: 'b-form__label'

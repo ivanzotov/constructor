@@ -17,6 +17,7 @@ module ConstructorPages
     default_scope -> { order :lft }
 
     validate :templates_existing_check
+    validate :check_template_changing, on: :update
 
     before_save :friendly_url, :assign_template, :full_url_update
     after_update :descendants_update
@@ -210,6 +211,9 @@ module ConstructorPages
 
     # Page is not valid if there is no template
     def templates_existing_check; errors.add_on_empty(:template_id) if Template.count == 0 end
+
+    # Page should not change template
+    def check_template_changing; errors.add(:base, :can_not_change_template) if template_id_changed? end
 
     # If template_id is nil then get first template
     def assign_template; self.template_id = Template.first.id unless template_id end

@@ -135,6 +135,11 @@ module ConstructorPages
         page.should_not have_link 'Delete'
       end
 
+      it 'should has template select' do
+        visit pages.new_page_path
+        page.should have_select 'Template'
+      end
+
       it 'should has create button' do
         visit pages.new_page_path
         page.should have_button 'Create Page'
@@ -189,6 +194,11 @@ module ConstructorPages
         page.should have_link 'Delete'
       end
 
+      it 'should not has template select' do
+        visit pages.edit_page_path(@page)
+        page.should_not have_select 'Template'
+      end
+
       it 'should edit page' do
         visit pages.edit_page_path(@page)
         fill_in 'Name', with: 'Zanussi'
@@ -239,37 +249,6 @@ module ConstructorPages
         click_button 'Update Page'
 
         _page.short_description.should == 'This is short description'
-      end
-
-      it 'should change fields if template change' do
-        Field.create name: 'Price', code_name: 'price', template: @template, type_value: 'float'
-        _template = Template.create name: 'Brand', code_name: 'brand'
-        Field.create name: 'Amount', code_name: 'amount', template: _template, type_value: 'integer'
-
-        visit pages.new_page_path
-        fill_in 'Name', with: 'Simple page'
-        click_button 'Create Page'
-        _page = Page.first
-        visit pages.edit_page_path(_page)
-        page.should have_selector('#fields_price')
-        fill_in 'Price', with: '250.20'
-        click_button 'Update Page'
-        _page.reload
-        _page.price.should == 250.2
-        visit pages.edit_page_path(_page)
-        select 'Brand', from: 'Template'
-        click_button 'Update Page'
-        _page.reload
-        _page.template.should == _template
-        _page.price.should be_nil
-        _page.amount.should == 0
-        visit pages.edit_page_path(_page)
-        page.should_not have_selector('#fields_price')
-        page.should have_selector('#fields_amount')
-        fill_in 'Amount', with: 200
-        click_button 'Update Page'
-        _page.reload
-        _page.amount.should == 200
       end
     end
   end

@@ -7,8 +7,6 @@ module ConstructorPages
   # For example:
   #   template "Product" should has fields like "price", "description", "size" etc.
   class Template < ActiveRecord::Base
-    # Adding code_name_uniqueness method
-    include CodeNameUniq
     include TheSortableTree::Scopes
 
     validates_presence_of :name, :code_name
@@ -33,6 +31,11 @@ module ConstructorPages
     end
 
     private
+
+    # Check if code_name is not available
+    def code_name_uniqueness
+      errors.add(:base, :code_name_already_in_use) unless Page.check_code_name(code_name) and check_code_name(code_name)
+    end
 
     # Check if there is code_name in same branch
     def check_code_name(cname)

@@ -11,6 +11,7 @@ fr:
   delete: Supprimer
 
   code_name_already_in_use: Ce nom de code est déjà utilisé
+  can_not_change_template: Modèle de page ne peut pas être modifié
   field_success_added: Champ %{name} a ajouté avec succès
   field_success_updated: Champ %{name} mis à jour
   field_success_removed: Champ %{name} supprimé avec succès

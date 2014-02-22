@@ -4,9 +4,6 @@ module ConstructorPages
   # Field model. Fields allows to add custom fields for template.
   # Each field has type of value such as float, integer, string...
   class Field < ActiveRecord::Base
-    # Adding code_name_uniqueness method
-    include CodeNameUniq
-
     # Array of available field types
     TYPES = %w{string integer float boolean text date html image}.tap {|_t|
     _t.each {|t| class_eval %{has_many :#{t}_types, dependent: :destroy, class_name: 'Types::#{t.titleize}Type'}}}
@@ -46,6 +43,11 @@ module ConstructorPages
     def set_value_for(page, value); find_type_object(page).tap {|t| t || return; t.update value: value} end
 
     private
+
+    # Check if code_name is not available
+    def code_name_uniqueness
+      errors.add(:base, :code_name_already_in_use) unless Page.check_code_name(code_name) and check_code_name(code_name)
+    end
 
     # Check if there is code_name in template branch
     def check_code_name(code_name)
