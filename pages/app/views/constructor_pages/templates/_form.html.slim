@@ -12,10 +12,6 @@
     = f.label :code_name, class: 'b-form__label'
     = f.text_field :code_name, class: 'b-form__field'
 
-  .b-form__row
-    = f.label :parent_id, class: 'b-form__label'
-    = f.select :parent_id, options_for_select(for_select(@templates), selected: @template.parent_id), disabled: @template.self_and_descendants.map(&:id), include_blank: '--'
-
   - unless @template.new_record?
     .b-form__row
       .b-form__label

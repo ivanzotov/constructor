@@ -80,11 +80,6 @@ module ConstructorPages
         page.should have_field 'Code name'
       end
 
-      it 'should has parent select' do
-        visit pages.new_template_path
-        page.should have_select 'Parent'
-      end
-
       it 'should not has link new field' do
         visit pages.new_template_path
         page.should_not have_link 'New field'

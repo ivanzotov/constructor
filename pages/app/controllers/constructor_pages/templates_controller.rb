@@ -5,8 +5,6 @@ module ConstructorPages
     include TheSortableTreeController::Rebuild
     include TheSortableTreeController::ExpandNode
 
-    before_filter -> {@templates = Template.all}, only: [:new, :edit, :update, :create]
-
     def index
       @templates = Template.roots
       @templates_cache = Digest::MD5.hexdigest(@templates.map{|t| [t.id, t.name, t.lft]}.join)
@@ -62,7 +60,6 @@ module ConstructorPages
       params.require(:template).permit(
           :name,
           :code_name,
-          :parent_id,
           :child_id
       )
     end
