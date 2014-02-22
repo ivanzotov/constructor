@@ -22,4 +22,4 @@
   .b-form__actions
     = f.submit class: 'b-button'
     = link_to t(:cancel), edit_template_path(@template), class: 'b-button b-button_color_light'
-    = link_to t(:delete_field), [@template, @field], method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'btn btn-danger pull-right' unless @field.new_record?
+    = link_to t(:delete_field), [@template, @field], method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'b-button b-button_color_light g-float_right' unless @field.new_record?

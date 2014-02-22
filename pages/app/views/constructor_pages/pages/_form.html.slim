@@ -22,7 +22,7 @@
     .b-inline.b-full-url
       span.b-full-url__path
         = @page.parent.full_url if @page.parent
-        | /
+      | /
       span.b-full-url__url= @page.url
       = f.text_field :url, class: 'b-form__field'
       i.fa.fa-pencil.b-full-url__icon

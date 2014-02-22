@@ -19,7 +19,7 @@ $(document).ready ->
 
   $('#page_name').keyup -> $('.b-full-url__url').html(parameterize())
   $('#page_parent_id').change ->
-    parent_full_url = $('#page_parent_id option:selected').data('b-full-url')
+    parent_full_url = $('#page_parent_id option:selected').data('full_url')
     if parent_full_url
       $('.b-full-url__path').html(parent_full_url)
     else
