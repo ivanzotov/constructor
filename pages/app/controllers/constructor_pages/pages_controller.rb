@@ -7,8 +7,6 @@ module ConstructorPages
 
     layout 'constructor_core/application_core', except: [:show]
 
-    before_filter -> {@pages = Page.all}, only: [:new, :edit]
-
     def index
       @pages = Page.nested_set.roots.includes(:template)
       @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.id, p.name, p.full_url, p.in_url, p.template.lft, p.lft, p.template_id]}.join)
@@ -37,7 +35,7 @@ module ConstructorPages
 
     def edit
       @page = Page.find(params[:id])
-      @parent_id, @template_id = @page.parent.try(:id), @page.template.id
+      @template_id = @page.template.id
       _code_name = @page.template.code_name.pluralize
       render "#{_code_name}/edit" rescue render :edit
     end
@@ -99,7 +97,6 @@ module ConstructorPages
           :keywords,
           :description,
           :auto_url,
-          :parent_id,
           :template_id,
           :in_nav,
           :in_map,

@@ -30,10 +30,6 @@
   = render partial: 'field', collection: @page.fields
 
   .b-form__row
-    = f.label :parent_id, class: 'b-form__label'
-    = f.select :parent_id, options_for_select(for_select(@pages, true), selected: @parent_id), disabled: @page.self_and_descendants.map(&:id), include_blank: '--'
-
-  .b-form__row
     = f.label :template_id, class: 'b-form__label'
     = f.select :template_id,  options_for_select(templates, selected: @template_id)
 
