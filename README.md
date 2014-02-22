@@ -33,7 +33,7 @@ Password: 123qweASD
 ![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_1.0.0beta1.png)
 
 ## Copyright
-  Copyright © 2012—2013 Ivan Zotov. See [LICENSE][] for details.
+  Copyright © 2012—2014 Ivan Zotov. See [LICENSE][] for details.
   
   [license]: LICENSE.md
 
