@@ -7,7 +7,6 @@ module ConstructorPages
 
     def index
       @templates = Template.roots
-      @templates_cache = Digest::MD5.hexdigest(@templates.map{|t| [t.id, t.name, t.lft]}.join)
     end
 
     def new

@@ -291,19 +291,6 @@ module ConstructorPages
           page.redirect?.should be_true
         end
       end
-
-      describe '#touch_branch' do
-        it 'should touch all pages in same branch' do
-          page = Page.create name: 'Hello world'
-          second_page = Page.create name: 'Again', parent: page
-          page.reload
-
-          updated = second_page.updated_at
-          page.touch_branch
-          second_page.reload
-          second_page.updated_at.should_not == updated
-        end
-      end
     end
 
     context 'ATTRIBUTES' do

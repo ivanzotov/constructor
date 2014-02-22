@@ -9,7 +9,6 @@ module ConstructorPages
 
     def index
       @pages = Page.nested_set.roots.includes(:template)
-      @pages_cache = Digest::MD5.hexdigest(@pages.map{|p| [p.id, p.name, p.full_url, p.in_url, p.template.lft, p.lft, p.template_id]}.join)
       @template_exists = Template.count != 0
       flash[:notice] = 'Create at least one template' unless @template_exists
     end
@@ -45,7 +44,6 @@ module ConstructorPages
       @page = Page.new page_params
 
       if @page.save
-        @page.touch_branch
         redirect_to pages_path, notice: t(:page_success_added, name: @page.name)
       else
         if @page.template_id
@@ -63,7 +61,6 @@ module ConstructorPages
 
       if @page.update page_params
         @page.update_fields_values params[:fields]
-        @page.touch_branch
 
         redirect_to pages_path, notice: t(:page_success_updated, name: @page.name)
       else
@@ -73,7 +70,6 @@ module ConstructorPages
 
     def destroy
       @page = Page.find(params[:id])
-      @page.touch_branch
       @page.destroy
       redirect_to pages_path, notice: t(:page_success_removed, name: @page.name)
     end

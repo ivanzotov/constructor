@@ -185,11 +185,6 @@ module ConstructorPages
     # Check if link specified
     def redirect?; url != redirect && !redirect.empty? end
 
-    # Touch all pages in same branch
-    def touch_branch
-      [ancestors, descendants].each {|p| p.map(&:touch)}
-    end
-
     # When method missing it get/set field value or get page in branch
     #
     # Examples:
