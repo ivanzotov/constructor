@@ -1,5 +1,5 @@
 class CreateHtmlTypes < ActiveRecord::Migration
-  def self.up
+  def change
     create_table ConstructorPages::Types::HtmlType.table_name do |t|
       t.text :value
       t.references :field
@@ -7,9 +7,5 @@ class CreateHtmlTypes < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table ConstructorPages::Types::HtmlType.table_name
   end
 end

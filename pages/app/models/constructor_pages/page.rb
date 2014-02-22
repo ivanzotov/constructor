@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorPages
   # Page model. Pages are core for company websites, blogs etc.
   class Page < ActiveRecord::Base
@@ -14,6 +12,8 @@ module ConstructorPages
     has_many :fields, through: :template
     belongs_to :template
 
+    scope :published, -> { where(active: true) }
+
     default_scope -> { order :lft }
 
     validate :templates_existing_check
@@ -26,10 +26,10 @@ module ConstructorPages
     acts_as_nested_set
 
     class << self
-      # Used for find page by request. It return first page if no request given or request is home page
+      # Used for find page by request path. It return first page if no request given or request is home page
       # @param request for example <tt>'/conditioners/split-systems/zanussi'</tt>
-      def find_by_request_or_first(request = nil)
-        (request.nil? || request == '/') ? Page.first : Page.find_by(full_url: request)
+      def find_by_path(path)
+        path == '/' ? Page.published.first! : Page.published.find_by!(full_url: path)
       end
 
       # Generate full_url from parent id and url

@@ -1,11 +1,3 @@
-# DOC:
-# We use Helper Methods for tree building,
-# because it's faster than View Templates and Partials
-
-# SECURITY note
-# Prepare your data on server side for rendering
-# or use h.html_escape(node.content)
-# for escape potentially dangerous content
 module RenderExpandableTreeHelper
   module Render 
     class << self

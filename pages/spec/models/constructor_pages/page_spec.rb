@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'spec_helper'
 
 module ConstructorPages
@@ -26,20 +24,19 @@ module ConstructorPages
         end
       end
 
-      describe '.find_by_request_or_first' do
+      describe '.find_by_path' do
         before :each do
           @first_page = Page.create name: 'New page'
           @second_page = Page.create name: 'Second page'
         end
 
         it 'should return page by given request path' do
-          Page.find_by_request_or_first('/new-page').should == @first_page
-          Page.find_by_request_or_first('/second-page').should == @second_page
+          Page.find_by_path('/new-page').should == @first_page
+          Page.find_by_path('/second-page').should == @second_page
         end
 
-        it 'should return first page if no given request or request is home page' do
-          Page.find_by_request_or_first.should == @first_page
-          Page.find_by_request_or_first('/').should == @first_page
+        it 'should return first page if request is home page' do
+          Page.find_by_path('/').should == @first_page
         end
       end
 

@@ -1,4 +1,4 @@
-= form_for [@template, @field] do |f|
+= form_for [@field.template, @field] do |f|
   - if @field.errors.any?
     .b-error
       = link_to '×', '#', class: 'close', 'data-dismiss' => 'alert'
@@ -12,7 +12,7 @@
   .b-form__row
     = f.label :code_name, class: 'b-form__label'
     = f.text_field :code_name, class: 'b-form__field'
-    = f.hidden_field :template_id, value: @template.id
+    = f.hidden_field :template_id, value: @field.template.id
 
   - unless @field.type_value == 'image'
     .b-form__row
@@ -21,5 +21,5 @@
 
   .b-form__actions
     = f.submit class: 'b-button'
-    = link_to t(:cancel), edit_template_path(@template), class: 'b-button b-button_color_light'
-    = link_to t(:delete_field), [@template, @field], method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'b-button b-button_color_light g-float_right' unless @field.new_record?
+    = link_to t(:cancel), edit_template_path(@field.template), class: 'b-button b-button_color_light'
+    = link_to t(:delete_field), [@field.template, @field], method: :delete, data: {confirm: t(:are_you_sure?)}, class: 'b-button b-button_color_light g-float_right' unless @field.new_record?

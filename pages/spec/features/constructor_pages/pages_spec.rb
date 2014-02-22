@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'spec_helper'
 
 module ConstructorPages
@@ -19,6 +17,7 @@ module ConstructorPages
       end
 
       @template = Template.create name: 'Page', code_name: 'page'
+      @page = Page.create name: 'Page'
 
       login_as @user
     end
@@ -36,19 +35,6 @@ module ConstructorPages
           visit pages.pages_path
           current_path.should == '/'
         end
-      end
-
-      it 'should notice if no template exists' do
-        Template.delete_all
-        visit pages.pages_path
-        page.should_not have_link 'New page'
-        page.should have_content 'Create at least one template'
-      end
-
-      it 'should not notice if template exists' do
-        visit pages.pages_path
-        page.should have_link 'New page'
-        page.should_not have_text 'Create at least one template'
       end
 
       it 'should has pages list' do
@@ -86,6 +72,8 @@ module ConstructorPages
       it 'should redirect if redirect specified' do
         _page = Page.create name: 'First page', template: @template
         _template = Template.create name: 'Home page', code_name: 'home_page'
+        _second_page = Page.create name: 'Second page', template: _template
+        _third_page = Page.create name: 'Third page', template: _template
 
         visit _page.full_url
         current_path.should == '/first-page'
@@ -120,6 +108,13 @@ module ConstructorPages
         end
       end
 
+      it 'should redirect if no template exist' do
+        Template.delete_all
+        visit pages.new_page_path
+        current_path.should == pages.pages_path
+        page.should have_text 'You need create at least one template'
+      end
+
       it 'should has published checkbox' do
         visit pages.new_page_path
         page.should have_checked_field 'Active'
@@ -148,12 +143,13 @@ module ConstructorPages
       it 'should save new page' do
         visit pages.new_page_path
         fill_in 'Name', with: 'Hello world'
-        Page.count.should == 0
         click_button 'Create Page'
-        Page.count.should == 1
-        _page = Page.first
+        Page.count.should == 2
+
+        _page = Page.last
         _page.name.should == 'Hello world'
         _page.url.should == 'hello-world'
+
         current_path.should == pages.pages_path
         page.should have_text 'added successfully'
       end
@@ -175,18 +171,6 @@ module ConstructorPages
           visit pages.edit_page_path(@page)
           current_path.should == '/'
         end
-      end
-
-      it 'should edit with template view' do
-        visit pages.edit_page_path(@page)
-        page.should have_content 'This page show edit with template'
-      end
-
-      it 'should edit with page view if no view found' do
-        _template = Template.create name: 'Hello', code_name: 'hello'
-        _page = Page.create name: 'Hello', template: _template
-        visit pages.edit_page_path(_page)
-        page.should_not have_content 'This page show edit with template'
       end
 
       it 'should has delete link' do
@@ -221,9 +205,9 @@ module ConstructorPages
       it 'should delete from page' do
         _page = Page.create name: 'Page'
         visit pages.edit_page_path(_page)
-        Page.count.should == 1
+        Page.count.should == 2
         click_link 'Delete'
-        Page.count.should == 0
+        Page.count.should == 1
         page.should have_text 'removed successfully'
       end
     end

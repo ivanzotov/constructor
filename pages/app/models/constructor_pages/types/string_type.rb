@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorPages
   module Types
     # String type. Render large text field.

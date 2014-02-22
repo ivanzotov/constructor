@@ -1,67 +1,61 @@
-# encoding: utf-8
-
 module ConstructorPages
   class FieldsController < ConstructorCore::ApplicationController
     include TheSortableTreeController::Rebuild
     include TheSortableTreeController::ExpandNode
 
+    before_action :set_field, only: [:edit, :update, :destroy]
+
     def new
-      @field = Field.new.tap {|f| @template = f.template = Template.find(params[:template_id])}
+      @field = Field.new template_id: params[:template_id]
     end
 
     def edit
-      @field = Field.find(params[:id]).tap {|f| @template = f.template = Template.find(params[:template_id])}
     end
 
     def create
       @field = Field.new field_params
-      @template = @field.template
 
       if @field.save
-        redirect_to edit_template_path(@template), notice: t(:field_success_added, name: @field.name)
+        redirect_to edit_template_path(@field.template), notice: t(:field_success_added, name: @field.name)
       else
-        render action: :new
+        render :new
       end
     end
 
     def update
-      @field = Field.find params[:id]
-      @template = @field.template
-
       unless @field.type_value == params[:field][:type_value]
         @field.type_class.where(field_id: @field.id).each do |field|
-          "constructor_pages/types/#{params[:field][:type_value]}_type".classify.constantize.new(
-              field_id: @field.id, page_id: field.page_id).tap {|f|
-            f.value = field.value unless [@field.type_value, params[:field][:type_value]].include?('image') and
-                                  (@field.type_value == 'string' and field.value.strip == '')
-            f.save; field.destroy
-          }
+          _field = "constructor_pages/types/#{params[:field][:type_value]}_type".classify.constantize.new(field_id: @field.id, page_id: field.page_id)
+
+          unless [@field.type_value, params[:field][:type_value]].include?('image') && (@field.type_value == 'string' && field.value.strip == '')
+            _field.value = field.value
+          end
+
+          _field.save
+          field.destroy
         end
       end
 
       if @field.update field_params
-        redirect_to edit_template_path(@template.id), notice: t(:field_success_updated, name: @field.name)
+        redirect_to edit_template_path(@field.template.id), notice: t(:field_success_updated, name: @field.name)
       else
-        render action: :edit
+        render :edit
       end
     end
 
     def destroy
-      @field = Field.find(params[:id])
-      name, template = @field.name, @field.template.id
       @field.destroy
-      redirect_to edit_template_url(template), notice: t(:field_success_removed, name: name)
+      redirect_to edit_template_url(@field.template), notice: t(:field_success_removed, name: @field.name)
     end
 
-    def sortable_model
-      Field
-    end
-
-    def sortable_collection
-      ConstructorPages::Field
-    end
+    def sortable_model; Field end
+    def sortable_collection; ConstructorPages::Field end
 
     private
+
+    def set_field
+      @field = Field.find params[:id]
+    end
 
     def field_params
       params.require(:field).permit(

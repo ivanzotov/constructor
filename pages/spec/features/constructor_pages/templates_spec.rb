@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'spec_helper'
 
 module ConstructorPages
@@ -17,6 +15,9 @@ module ConstructorPages
       Field::TYPES.each do |t|
         "constructor_pages/types/#{t}_type".classify.constantize.delete_all
       end
+
+      @template = Template.create name: 'Page', code_name: 'page'
+      @page = Page.create name: 'Page'
 
       login_as @user
     end
@@ -42,16 +43,14 @@ module ConstructorPages
       end
 
       it 'should has list of templates' do
-        Template.create name: 'Page', code_name: 'page'
         visit pages.templates_path
         page.should have_selector 'ul li'
         page.should have_text 'Page'
       end
 
       it 'should has edit_template link' do
-        _template = Template.create name: 'Page', code_name: 'page'
         visit pages.templates_path
-        page.should have_link 'Page', pages.edit_template_path(_template)
+        page.should have_link 'Page', pages.edit_template_path(@template)
       end
     end
 
@@ -99,11 +98,11 @@ module ConstructorPages
         visit pages.new_template_path
         fill_in 'Name', with: 'Brand'
         fill_in 'Code name', with: 'brand'
-        Template.count.should == 0
+        Template.count.should == 1
         click_button 'Create Template'
         current_path.should == pages.templates_path
-        Template.count.should == 1
-        _template = Template.first
+        Template.count.should == 2
+        _template = Template.last
         _template.name.should == 'Brand'
         _template.code_name.should == 'brand'
         page.should have_text 'added successfully'
@@ -123,18 +122,14 @@ module ConstructorPages
         visit pages.new_template_path
         fill_in 'Name', with: 'Brand'
         fill_in 'Code name', with: 'get_field_value'
-        Template.count.should == 0
+        Template.count.should == 1
         click_button 'Create Template'
-        Template.count.should == 0
+        Template.count.should == 1
         page.should have_text 'Code name has already been taken'
       end
     end
 
     describe 'Edit template' do
-      before :each do
-        @template = Template.create name: 'Page', code_name: 'page'
-      end
-
       describe 'Access' do
         it 'should be accessed by edit_template_path if logged in' do
           visit pages.edit_template_path(@template)
@@ -177,22 +172,19 @@ module ConstructorPages
 
     describe 'Delete template' do
       it 'should delete from template' do
-        _template = Template.create name: 'Page', code_name: 'page'
-        visit pages.edit_template_path(_template)
+        visit pages.edit_template_path(@template)
+        Page.destroy_all
         Template.count.should == 1
         click_link 'Delete'
         Template.count.should == 0
         page.should have_text 'removed successfully'
       end
 
-      it 'should not delete if there are any pages' do
-        _template = Template.create name: 'Page', code_name: 'page'
-        Page.create name: 'Home page', template: _template
-        visit pages.edit_template_path(_template)
-        Template.count.should == 1
+      it 'should delete all pages with this template' do
+        page = Page.create name: 'Home page', template: @template
+        visit pages.edit_template_path(@template)
         click_link 'Delete'
-        Template.count.should == 1
-        page.should have_text 'Delete pages with this template before'
+        Page.where(id: page.id).any?.should be_false
       end
     end
   end

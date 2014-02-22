@@ -1,5 +1,5 @@
 class CreateFields < ActiveRecord::Migration
-  def self.up
+  def change
     create_table ConstructorPages::Field.table_name do |t|
       t.string :name
       t.string :code_name
@@ -9,9 +9,5 @@ class CreateFields < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table ConstructorPages::Field.table_name
   end
 end

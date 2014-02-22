@@ -1,5 +1,5 @@
 class CreateTemplates < ActiveRecord::Migration
-  def self.up
+  def change
     create_table ConstructorPages::Template.table_name do |t|
       t.string :name
       t.string :code_name
@@ -10,9 +10,5 @@ class CreateTemplates < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-  
-  def self.down
-    drop_table ConstructorPages::Template.table_name
   end
 end

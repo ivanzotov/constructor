@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorCore
   class UsersController < ConstructorCore::ApplicationController
     def profile

@@ -11,6 +11,7 @@ en:
   delete: Delete
   url: URL
 
+  create_template_first: You need create at least one template
   code_name_already_in_use: This code name is already in use.
   can_not_change_template: Template of page can not be changed
   field_success_added: Field «%{name}» added successfully.

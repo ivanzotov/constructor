@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorPages
   module Types
     # Date time. Render as three select lists (day, month, year).

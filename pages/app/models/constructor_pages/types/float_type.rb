@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorPages
   module Types
     # Float type. Render small text field.

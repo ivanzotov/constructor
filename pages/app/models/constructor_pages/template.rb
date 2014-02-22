@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorPages
   # Template model. Template allows assing different design for pages.
   #

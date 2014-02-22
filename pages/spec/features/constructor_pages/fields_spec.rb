@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'spec_helper'
 
 module ConstructorPages
@@ -19,6 +17,7 @@ module ConstructorPages
       end
 
       @template = Template.create name: 'Page', code_name: 'page'
+      @page = Page.create name: 'Page'
 
       login_as @user
     end
@@ -55,13 +54,13 @@ module ConstructorPages
       end
 
       context 'Access' do
-        it 'should be accessed by new_field_path if loggen in' do
+        it 'should be accessed by new_field_path if logged in' do
           visit pages.new_template_field_path(@template)
           current_path.should == pages.new_template_field_path(@template)
           status_code.should == 200
         end
 
-        it 'should not be accessed by new_field_path if not loggen in' do
+        it 'should not be accessed by new_field_path if not logged in' do
           logout
           visit pages.new_template_field_path(@template)
           current_path.should == '/'
@@ -156,13 +155,13 @@ module ConstructorPages
       end
 
       context 'Access' do
-        it 'should be accessed by edit_field_path if loggen in' do
+        it 'should be accessed by edit_field_path if logged in' do
           visit pages.edit_template_field_path(@template, @field_content)
           current_path.should == pages.edit_template_field_path(@template, @field_content)
           status_code.should == 200
         end
 
-        it 'should not be accessed by new_field_path if not loggen in' do
+        it 'should not be accessed by edit_field_path if not logged in' do
           logout
           visit pages.edit_template_field_path(@template, @field_content)
           current_path.should == '/'

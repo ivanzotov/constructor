@@ -1,7 +1,6 @@
 .l-pages
-  - if @template_exists
-    = link_to new_page_path, class: 'b-button' do
-      =t :new_page
+  = link_to new_page_path, class: 'b-button' do
+    =t :new_page
 
 
   ol.b-block.b-tree.g-out data-rebuild_url="#{rebuild_pages_path}" data-expand-node-url="#{expand_node_pages_path}" data-cookie-store='true'

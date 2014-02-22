@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorCore
   class SessionsController < Devise::SessionsController
     layout 'constructor_core/login'

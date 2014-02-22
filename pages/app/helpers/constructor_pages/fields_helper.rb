@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module ConstructorPages
   module FieldsHelper
     def types_value

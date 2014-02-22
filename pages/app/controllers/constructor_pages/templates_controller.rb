@@ -1,9 +1,9 @@
-# encoding: utf-8
-
 module ConstructorPages
   class TemplatesController < ConstructorCore::ApplicationController
     include TheSortableTreeController::Rebuild
     include TheSortableTreeController::ExpandNode
+
+    before_action :set_template, only: [:edit, :update, :destroy]
 
     def index
       @templates = Template.roots
@@ -14,7 +14,6 @@ module ConstructorPages
     end
 
     def edit
-      @template = Template.find(params[:id])
     end
 
     def create
@@ -28,8 +27,6 @@ module ConstructorPages
     end
 
     def update
-      @template = Template.find params[:id]
-
       if @template.update template_params
         redirect_to templates_url, notice: t(:template_success_updated, name: @template.name)
       else
@@ -38,22 +35,17 @@ module ConstructorPages
     end
 
     def destroy
-      @template = Template.find(params[:id])
-
-      if @template.pages.count == 0
-        name = @template.name
-        @template.destroy
-        redirect_to templates_url, notice: t(:template_success_removed, name: name)
-      else
-        redirect_to :back, alert: t(:template_error_delete_pages)
-      end
+      @template.destroy
+      redirect_to templates_url, notice: t(:template_success_removed, name: @template.name)
     end
 
-    def sortable_model
-      Template
-    end
+    def sortable_model; Template end
 
     private
+
+    def set_template
+      @template = Template.find params[:id]
+    end
 
     def template_params
       params.require(:template).permit(

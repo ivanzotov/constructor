@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103091824) do
+ActiveRecord::Schema.define(version: 20140222145029) do
 
   create_table "constructor_core_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20140103091824) do
   end
 
   create_table "constructor_pages_date_types", force: true do |t|
-    t.date     "value",      default: '2014-01-03'
+    t.date     "value",      default: '2014-02-22'
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20140103091824) do
   end
 
   create_table "constructor_pages_html_types", force: true do |t|
-    t.text     "value",      limit: 4294967295
+    t.text     "value"
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"
@@ -90,25 +90,25 @@ ActiveRecord::Schema.define(version: 20140103091824) do
   end
 
   create_table "constructor_pages_pages", force: true do |t|
-    t.boolean  "active",                         default: true
-    t.string   "name",                           default: ""
-    t.boolean  "auto_url",                       default: true
-    t.string   "full_url",                       default: ""
-    t.string   "url",                            default: ""
-    t.string   "redirect",                       default: ""
-    t.string   "title",                          default: ""
-    t.string   "keywords",                       default: ""
-    t.text     "description", limit: 4294967295
-    t.boolean  "in_menu",                        default: true
-    t.boolean  "in_nav",                         default: true
-    t.boolean  "in_map",                         default: true
+    t.boolean  "active",      default: true
+    t.string   "name",        default: ""
+    t.boolean  "auto_url",    default: true
+    t.string   "full_url",    default: ""
+    t.string   "url",         default: ""
+    t.string   "redirect",    default: ""
+    t.string   "title",       default: ""
+    t.string   "keywords",    default: ""
+    t.text     "description"
+    t.boolean  "in_menu",     default: true
+    t.boolean  "in_nav",      default: true
+    t.boolean  "in_map",      default: true
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "template_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "in_url",                         default: true
+    t.boolean  "in_url",      default: true
   end
 
   create_table "constructor_pages_string_types", force: true do |t|
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20140103091824) do
   end
 
   create_table "constructor_pages_text_types", force: true do |t|
-    t.text     "value",      limit: 4294967295
+    t.text     "value"
     t.integer  "field_id"
     t.integer  "page_id"
     t.datetime "created_at"

@@ -23,5 +23,5 @@ ConstructorPages::Engine.routes.draw do
 
   root to: 'pages#show'
 
-  get '*all(.:format)' => 'pages#show', format: /(html|json|xml)/
+  get '*path' => 'pages#show'
 end

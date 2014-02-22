@@ -1,12 +1,11 @@
-# encoding: utf-8
-
 module ConstructorPages
   # Field model. Fields allows to add custom fields for template.
   # Each field has type of value such as float, integer, string...
   class Field < ActiveRecord::Base
     # Array of available field types
-    TYPES = %w{string integer float boolean text date html image}.tap {|_t|
-    _t.each {|t| class_eval %{has_many :#{t}_types, dependent: :destroy, class_name: 'Types::#{t.titleize}Type'}}}
+    TYPES = %w{string integer float boolean text date html image}
+
+    TYPES.each {|t| class_eval %{has_many :#{t}_types, dependent: :destroy, class_name: 'Types::#{t.titleize}Type'} }
 
     validates_presence_of :name
     validates_uniqueness_of :code_name, scope: :template_id
