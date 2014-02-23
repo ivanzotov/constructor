@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'dragonfly', '1.0.3'
   s.add_dependency 'rack-cache'
+  s.add_dependency 'activerecord-import'
   s.add_dependency 'awesome_nested_set', '3.0.0.rc2'
   s.add_dependency 'acts_as_list'
 

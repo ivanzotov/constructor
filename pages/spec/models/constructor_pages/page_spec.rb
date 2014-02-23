@@ -201,17 +201,6 @@ module ConstructorPages
             @page.price.should == 1000
             @page.amount.should == 20
           end
-
-          it 'should reset boolean fields' do
-            Field.create name: 'Check', code_name: 'check', template: @template, type_value: 'boolean'
-
-            @page.check = true
-
-            @page.update_fields_values({price: 1000})
-
-            @page.price.should == 1000
-            @page.check.should be_false
-          end
         end
 
         describe '#remove_fields_values' do

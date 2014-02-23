@@ -5,7 +5,7 @@ module ConstructorPages
     # Array of available field types
     TYPES = %w{string integer float boolean text date html image}
 
-    TYPES.each {|t| class_eval %{has_many :#{t}_types, dependent: :destroy, class_name: 'Types::#{t.titleize}Type'} }
+    TYPES.each {|t| class_eval %{has_many :#{t}_types, class_name: 'Types::#{t.titleize}Type'} }
 
     validates_presence_of :name
     validates_uniqueness_of :code_name, scope: :template_id
@@ -56,8 +56,21 @@ module ConstructorPages
       true
     end
 
-    # Create and destroy page fields
-    %w{create destroy_all}.each {|m| class_eval %{
-      def #{m}_page_fields; template.pages.each {|page| type_class.#{m} page_id: page.id, field_id: id} end }}
+    def create_page_fields
+      template.page_ids.each_slice(500) do |batch|
+        _items = []
+        batch.each do |_id|
+          _items << type_class.new({page_id: _id, field_id: id})
+        end
+        type_class.import _items
+      end
+    end
+
+    def destroy_all_page_fields
+      template.page_ids.each_slice(1000) do |batch|
+        type_class.where(page_id: batch, field_id: id).delete_all
+        Page.update_all({updated_at: Time.now}, {id: batch})
+      end
+    end
   end
 end

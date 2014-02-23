@@ -222,7 +222,7 @@ module ConstructorPages
         click_button 'Create Page'
         page.should have_content 'added successfully'
 
-        _page = Page.first
+        _page = Page.last
         _page.short_description.should == ''
 
         visit pages.edit_page_path(_page)

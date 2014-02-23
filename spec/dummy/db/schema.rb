@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222145029) do
+ActiveRecord::Schema.define(version: 20140223161637) do
 
   create_table "constructor_core_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 20140222145029) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "constructor_pages_fields", ["type_value"], name: "index_constructor_pages_fields_on_type_value"
 
   create_table "constructor_pages_float_types", force: true do |t|
     t.float    "value",      default: 0.0
@@ -111,6 +113,10 @@ ActiveRecord::Schema.define(version: 20140222145029) do
     t.boolean  "in_url",      default: true
   end
 
+  add_index "constructor_pages_pages", ["lft"], name: "index_constructor_pages_pages_on_lft"
+  add_index "constructor_pages_pages", ["parent_id"], name: "index_constructor_pages_pages_on_parent_id"
+  add_index "constructor_pages_pages", ["rgt"], name: "index_constructor_pages_pages_on_rgt"
+
   create_table "constructor_pages_string_types", force: true do |t|
     t.string   "value",      default: ""
     t.integer  "field_id"
@@ -128,6 +134,10 @@ ActiveRecord::Schema.define(version: 20140222145029) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "constructor_pages_templates", ["lft"], name: "index_constructor_pages_templates_on_lft"
+  add_index "constructor_pages_templates", ["parent_id"], name: "index_constructor_pages_templates_on_parent_id"
+  add_index "constructor_pages_templates", ["rgt"], name: "index_constructor_pages_templates_on_rgt"
 
   create_table "constructor_pages_text_types", force: true do |t|
     t.text     "value"
