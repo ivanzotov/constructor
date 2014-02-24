@@ -9,8 +9,8 @@ spec/dummy/db/
 spec/dummy/public/system
 spec/dummy/tmp
 spec/dummy/app/views/templates/*
-!spec/dummy/app/views/templates/home_page.haml
-!spec/dummy/app/views/templates/page.haml
+!spec/dummy/app/views/templates/home_page.html.slim
+!spec/dummy/app/views/templates/page.html.slim
 doc/
 .yardoc/
 tmp/
