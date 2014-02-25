@@ -166,6 +166,7 @@
             }
 
             var newList = document.createElement(o.listType);
+            $(newList).addClass('b-tree__nested-set');
 
             this.beyondMaxLevels = 0;
 
