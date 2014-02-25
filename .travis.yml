@@ -2,18 +2,25 @@ language: ruby
 notifications:
   email:
     - ivanzotov@gmail.com
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
 before_script:
   - "rake app:railties:install:migrations"
+  - "rake app:db:create"
   - "rake app:db:migrate"
-script: bundle exec rake spec
+script: DB=$DB bundle exec rake spec
+rvm:
+  - 2.1.0
+  - 2.0.0
+  - 1.9.3
+  - rbx-2.2.5
+  - jruby-19mode
+  - ruby-head
+  - jruby-head
 
 matrix:
   allow_failures:
-    - rvm: rbx-19mode
-    - rvm: jruby-19mode
-
-rvm:
-  - 2.0.0
-  - 1.9.3
-  - rbx-19mode
-  - jruby-19mode
+    - rvm: ruby-head
+    - rvm: jruby-head

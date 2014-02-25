@@ -12,6 +12,8 @@ $(document).ready ->
   $('.auto_url').hide()
   $('#page_url').hide()
 
+  $('.js-sortable').sortable();
+
   auto_url = $('#page_auto_url').is(':checked')
 
   unless auto_url

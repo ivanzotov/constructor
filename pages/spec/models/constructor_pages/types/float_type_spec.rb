@@ -10,9 +10,6 @@ module ConstructorPages
         _page = Page.create name: 'TV', template: _template
         _float = FloatType.create value: 10.54, field: _field, page: _page
         _float.value.should == 10.54
-        _float.update value: '1000.543'
-        _float.reload
-        _float.value.should == 1000.543
       end
     end
   end
