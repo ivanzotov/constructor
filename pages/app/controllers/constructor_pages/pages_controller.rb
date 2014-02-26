@@ -25,7 +25,7 @@ module ConstructorPages
       redirect_to(@page.redirect) && return if @page.redirect?
 
       _code_name = @page.template.code_name
-      instance_variable_set('@'+_code_name, @page)
+      instance_variable_set('@'+_code_name, _code_name.classify.constantize.find(@page.id))
 
       render "templates/#{_code_name}", layout: 'application'
     end

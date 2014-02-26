@@ -13,6 +13,26 @@ module ConstructorPages
 
     default_scope -> { order :lft }
 
+    before_update {|t|
+      t.connection.execute("DROP VIEW IF EXISTS #{code_name_was.pluralize}")
+    }
+
+    after_save {|t|
+      t.connection.execute(
+        """
+          CREATE VIEW #{code_name.pluralize} AS
+          SELECT pages.id, pages.active, pages.url, pages.full_url, pages.name
+                 #{t.fields.map{|f| ',' + f.code_name + '.value AS ' + f.code_name }.join}
+          FROM constructor_pages_pages AS pages
+          #{t.fields.map{|f|
+            "LEFT OUTER JOIN constructor_pages_#{f.type_value}_types AS #{f.code_name}
+             ON #{f.code_name}.page_id = pages.id AND #{f.code_name}.field_id = #{f.id}"
+          }.join(' ')}
+          WHERE pages.template_id = #{t.id}
+        """
+      )
+    }
+
     has_many :pages, dependent: :destroy
     has_many :fields, dependent: :destroy
 
