@@ -57,6 +57,7 @@ module ConstructorPages
                  pages.active,
                  pages.url,
                  pages.full_url,
+                 pages.parent_id,
                  pages.name
                  #{_fields.join}
           FROM constructor_pages_pages AS pages
