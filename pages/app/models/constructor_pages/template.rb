@@ -13,25 +13,9 @@ module ConstructorPages
 
     default_scope -> { order :lft }
 
-    before_update {|t|
-      t.connection.execute("DROP VIEW IF EXISTS #{code_name_was.pluralize}")
-    }
-
-    after_save {|t|
-      t.connection.execute(
-        """
-          CREATE VIEW #{code_name.pluralize} AS
-          SELECT pages.id, pages.active, pages.url, pages.full_url, pages.name
-                 #{t.fields.map{|f| ',' + f.code_name + '.value AS ' + f.code_name }.join}
-          FROM constructor_pages_pages AS pages
-          #{t.fields.map{|f|
-            "LEFT OUTER JOIN constructor_pages_#{f.type_value}_types AS #{f.code_name}
-             ON #{f.code_name}.page_id = pages.id AND #{f.code_name}.field_id = #{f.id}"
-          }.join(' ')}
-          WHERE pages.template_id = #{t.id}
-        """
-      )
-    }
+    after_destroy :drop_view
+    before_update :drop_previous_view
+    after_save :create_view
 
     has_many :pages, dependent: :destroy
     has_many :fields, dependent: :destroy
@@ -48,7 +32,49 @@ module ConstructorPages
       self.name.mb_chars.downcase.to_s.accusative
     end
 
+    # Drop database view
+    def drop_previous_view
+      drop_view(code_name_was)
+    end
+
+    # Recreate database view
+    def create_view
+      drop_view
+
+      _fields = fields.map do |f|
+        if f.type_value == 'image'
+          ',' + f.code_name + '.value_uid AS '  + f.code_name + '_uid' +
+          ',' + f.code_name + '.value_name AS ' + f.code_name + '_name'
+        else
+          ',' + f.code_name + '.value AS ' + f.code_name
+        end
+      end
+
+      self.connection.execute(
+        """
+        CREATE VIEW #{code_name.pluralize} AS
+          SELECT pages.id,
+                 pages.active,
+                 pages.url,
+                 pages.full_url,
+                 pages.name
+                 #{_fields.join}
+          FROM constructor_pages_pages AS pages
+          #{fields.map{|f|
+            "LEFT OUTER JOIN constructor_pages_#{f.type_value}_types AS #{f.code_name}
+             ON #{f.code_name}.page_id = pages.id AND #{f.code_name}.field_id = #{f.id}"
+          }.join(' ')}
+          WHERE pages.template_id = #{id}
+        """
+      )
+    end
+
     private
+
+    def drop_view(code_name = nil)
+      code_name ||= self.code_name
+      self.connection.execute("DROP VIEW IF EXISTS #{code_name.pluralize}")
+    end
 
     # Check if code_name is not available
     def code_name_uniqueness
