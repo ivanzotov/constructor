@@ -1,6 +1,6 @@
 - image = field.get_value_for(page)
 
 - if image
-  = image_tag image.thumb('200x200').url
+  = image_tag image.encode('png').thumb('200x200').url
 
 = file_field_tag "fields[#{field.code_name}]", class: 'b-form__file'
