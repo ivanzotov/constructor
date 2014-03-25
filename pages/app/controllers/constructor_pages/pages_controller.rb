@@ -43,6 +43,11 @@ module ConstructorPages
       end
     end
 
+    def create_child
+      @page = Page.create parent_id: params[:id], template_id: params[:template_id]
+      render partial: 'pages/child', locals: {page: @page}
+    end
+
     def update
       if @page.update page_params
         @page.update_fields_values params[:fields]

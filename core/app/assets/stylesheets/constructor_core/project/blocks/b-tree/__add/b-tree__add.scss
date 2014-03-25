@@ -1,0 +1,14 @@
+.b-tree__add {
+  @include display-inline;
+  padding: 0 10px;
+  font-size: 13px;
+  line-height: 42px;
+  color: #333;
+  background: #ddd;
+  text-decoration: none;
+  z-index: 10000;
+
+  &:hover {
+    background: #fff;
+  }
+}
