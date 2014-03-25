@@ -8,15 +8,19 @@ li.b-tree__li data-node-id="#{ page.id }"
       span.b-tree__name
         = page.name
 
-      input type='field' class='b-tree__edit-name' value='#{page.name}' data-id='#{page.id}'
-      button.b-tree__edit-name-ok data-id='#{page.id}'
-        | Ok
-      button.b-button.b-button_size_small.b-tree__edit
-        i.fa.fa-pencil
-      span.b-tree__template= page.template.name
+      - if page.is_a? ConstructorPages::Page
+        input type='field' class='b-tree__edit-name' value='#{page.name}' data-id='#{page.id}'
 
-    - if page.is_a? ConstructorPages::Page
-      .b-tree__actions
-        - unless page.template.leaf?
-          = link_to "+ #{page.template.children.first.name}", '#', data: {id: page.id}, class: 'b-tree__add'
-        = link_to '×', '#', data: {id: page.id}, class: 'b-tree__remove'
+        button.b-tree__edit-name-ok data-id='#{page.id}'
+          | Ok
+
+        button.b-button.b-button_size_small.b-tree__edit
+          i.fa.fa-pencil
+
+        span.b-tree__template
+          = page.template.name
+
+    .b-tree__actions
+      - unless page.template.leaf?
+        = link_to "+ #{page.template.children.first.name}", '#', data: {id: page.id}, class: 'b-tree__add'
+      = link_to '×', '#', data: {id: page.id}, class: 'b-tree__remove'

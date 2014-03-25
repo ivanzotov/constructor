@@ -55,7 +55,7 @@ $(document).on 'click', '.b-tree__remove', (e) ->
   self = this
   if confirm('Вы уверены?')
     $.post '/admin/pages/'+$(this).data('id'), {'_method': 'delete'}, ->
-      $(self).parent().parent().remove()
+      $(self).parent().parent().hide()
 
 $(document).on 'click', '.b-tree__edit', (e) ->
   e.preventDefault()

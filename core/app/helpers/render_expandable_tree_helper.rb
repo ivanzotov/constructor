@@ -39,7 +39,13 @@ module RenderExpandableTreeHelper
         title_field = options[:title]
         edit_path = h.url_for(controller: options[:klass].pluralize, action: :edit, id: node)
 
-        "#{ h.link_to(edit_path, class: 'b-tree__link'){ node.send(title_field).html_safe+' <span class="b-tree__template">'.html_safe+node.template.name+'</span>'.html_safe } }"
+        "#{ h.link_to(edit_path, class: 'b-tree__link'){ node.send(title_field).html_safe + show_template } }"
+      end
+
+      def show_template
+        if options[:node].is_a? ConstructorPages::Page
+          '<span class="b-tree__template">'.html_safe+options[:node].template.name+'</span>'.html_safe
+        end
       end
 
       def children
