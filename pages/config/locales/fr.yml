@@ -27,6 +27,7 @@ fr:
   text: Texte
   html: HTML
   image: Image
+  file: File
 
   menu: Menu
   breadcrumbs: Chapelure

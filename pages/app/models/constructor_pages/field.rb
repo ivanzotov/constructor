@@ -3,7 +3,7 @@ module ConstructorPages
   # Each field has type of value such as float, integer, string...
   class Field < ActiveRecord::Base
     # Array of available field types
-    TYPES = %w{string integer float boolean text date html image}
+    TYPES = %w{string integer float boolean text date html image file}
 
     TYPES.each {|t| class_eval %{has_many :#{t}_types, class_name: 'Types::#{t.titleize}Type'} }
 
@@ -13,6 +13,7 @@ module ConstructorPages
 
     after_create :create_page_fields
     after_destroy :destroy_all_page_fields
+    after_save :update_template_view
 
     has_many :pages, through: :template
     belongs_to :template
@@ -42,6 +43,12 @@ module ConstructorPages
     def set_value_for(page, value); find_type_object(page).tap {|t| t || return; t.update value: value} end
 
     private
+
+    # Recreate template view
+    def update_template_view
+      self.template.drop_view
+      self.template.create_view
+    end
 
     # Check if code_name is not available
     def code_name_uniqueness

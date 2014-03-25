@@ -28,6 +28,7 @@ en:
   text: Text
   html: HTML
   image: Image
+  file: File
 
   menu: Menu
   breadcrumbs: Breadcrumbs

@@ -42,7 +42,7 @@ module ConstructorPages
       drop_view
 
       _fields = fields.map do |f|
-        if f.type_value == 'image'
+        if ['image', 'file'].include? f.type_value
           ',' + f.code_name + '.value_uid AS '  + f.code_name + '_uid' +
           ',' + f.code_name + '.value_name AS ' + f.code_name + '_name'
         else
@@ -70,12 +70,12 @@ module ConstructorPages
       )
     end
 
-    private
-
     def drop_view(code_name = nil)
       code_name ||= self.code_name
       self.connection.execute("DROP VIEW IF EXISTS #{code_name.pluralize}")
     end
+
+    private
 
     # Check if code_name is not available
     def code_name_uniqueness
