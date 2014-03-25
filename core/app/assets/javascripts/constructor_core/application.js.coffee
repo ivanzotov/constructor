@@ -14,6 +14,10 @@ $(document).ready ->
 
   $('.js-sortable').sortable();
 
+  $('.b-alert__close').click (e) ->
+    e.preventDefault()
+    $('.b-alert').slideUp()
+
   auto_url = $('#page_auto_url').is(':checked')
 
   unless auto_url
