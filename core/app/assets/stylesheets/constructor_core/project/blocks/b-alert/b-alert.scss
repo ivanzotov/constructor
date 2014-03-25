@@ -1,0 +1,9 @@
+.b-alert {
+  @include display-block;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+  color: #333;
+  text-align: center;
+  background: #fffbc6;
+}

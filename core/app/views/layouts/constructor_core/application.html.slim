@@ -54,11 +54,13 @@ html
 
 
         - unless notice.nil?
-          = link_to '×', '#', class: 'b-close', 'data-dismiss' => 'alert'
-          = notice
+          .b-alert.b-alert_notice
+            = link_to '×', '#', class: 'b-alert__close', 'data-dismiss' => 'alert'
+            = notice
         - unless alert.nil?
-          = link_to '×', '#', class: 'b-close', 'data-dismiss' => 'alert'
-          = alert
+          .b-alert.b-alert_error
+            = link_to '×', '#', class: 'b-alert__close', 'data-dismiss' => 'alert'
+            = alert
 
         .l-content
           = yield
