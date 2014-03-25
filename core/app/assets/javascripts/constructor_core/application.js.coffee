@@ -46,7 +46,7 @@ $(document).ready ->
 $(document).on 'click', '.b-tree__add', (e) ->
   e.preventDefault()
   self = this
-  $.post '/admin/pages/'+$(this).data('id')+'/create_child', {}, (data) ->
+  $.post '/admin/pages/'+$(this).data('id')+'/create_child', {template_id: $(this).data('template-id')}, (data) ->
     $(self).parent().parent().parent().find('ol').append(data)
     $(self).parent().parent().parent().find('ol').find('li:last-child').find('.b-tree__edit').click()
 

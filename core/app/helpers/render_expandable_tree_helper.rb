@@ -21,10 +21,23 @@ module RenderExpandableTreeHelper
       def show_actions
         if options[:node].is_a? ConstructorPages::Page
           "<div class='b-tree__actions'>" +
-              "#{h.link_to('+', '#', data: {id: options[:node].id}, class: 'b-tree__add') unless options[:node].template.leaf?}" +
+              "#{show_add}" +
               "#{h.link_to('×', '#', data: {id: options[:node].id}, class: 'b-tree__remove')}" +
           "</div>"
         end
+      end
+
+
+      def show_add
+        result = ""
+
+        unless options[:node].template.leaf?
+          options[:node].template.children.each do |tmplt|
+            result += "#{h.link_to('+ '+tmplt.name, '#', data: {id: options[:node].id, template_id: tmplt.id}, class: 'b-tree__add') }"
+          end
+        end
+
+        result
       end
 
       def show_plus

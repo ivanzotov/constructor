@@ -22,5 +22,6 @@ li.b-tree__li data-node-id="#{ page.id }"
 
     .b-tree__actions
       - unless page.template.leaf?
-        = link_to "+ #{page.template.children.first.name}", '#', data: {id: page.id}, class: 'b-tree__add'
+        - page.template.children.each do |tmplt|
+          = link_to "+ #{tmplt.name}", '#', data: {id: page.id, 'template-id' => tmplt.id}, class: 'b-tree__add'
       = link_to '×', '#', data: {id: page.id}, class: 'b-tree__remove'

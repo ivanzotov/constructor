@@ -44,7 +44,7 @@ module ConstructorPages
     end
 
     def create_child
-      @page = Page.create parent_id: params[:id], template_id: Page.find(params[:id]).template.children.first.id
+      @page = Page.create parent_id: params[:id], template_id: params[:template_id]
       render partial: 'pages/child', locals: {page: @page}
     end
 
