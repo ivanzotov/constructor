@@ -1,6 +1,8 @@
 ConstructorPages::Engine.routes.draw do
   scope '/admin' do
     resources :pages, except: [:show] do
+      post :create_child, on: :member
+
       collection do
         post :rebuild
         post :expand_node

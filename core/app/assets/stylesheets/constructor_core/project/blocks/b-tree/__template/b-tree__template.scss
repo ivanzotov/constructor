@@ -1,0 +1,12 @@
+.b-tree__template {
+  display: none;
+  float: right;
+  margin-right: 150px;
+  font-size: 13px;
+  font-style: italic;
+  color: #aaa;
+}
+
+.b-tree__item:hover .b-tree__template {
+  display: inline;
+}

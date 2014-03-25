@@ -12,9 +12,19 @@ module RenderExpandableTreeHelper
             "<i class='fa fa-bars b-tree__handle'></i>" +
             "#{ show_plus }" +
             "#{ show_link }" +
+            "#{ show_actions }"+
           "</div>" +
           "#{ children }" +
         "</li>"
+      end
+
+      def show_actions
+        if options[:node].is_a? ConstructorPages::Page
+          "<div class='b-tree__actions'>" +
+              "#{h.link_to('+', '#', data: {id: options[:node].id}, class: 'b-tree__add') unless options[:node].template.leaf?}" +
+              "#{h.link_to('×', '#', data: {id: options[:node].id}, class: 'b-tree__remove')}" +
+          "</div>"
+        end
       end
 
       def show_plus
@@ -29,7 +39,7 @@ module RenderExpandableTreeHelper
         title_field = options[:title]
         edit_path = h.url_for(controller: options[:klass].pluralize, action: :edit, id: node)
 
-        "#{ h.link_to(node.send(title_field), edit_path, class: 'b-tree__link') }"
+        "#{ h.link_to(edit_path, class: 'b-tree__link'){ node.send(title_field).html_safe+' <span class="b-tree__template">'.html_safe+node.template.name+'</span>'.html_safe } }"
       end
 
       def children
