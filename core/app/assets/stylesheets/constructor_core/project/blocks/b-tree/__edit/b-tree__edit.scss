@@ -1,0 +1,10 @@
+.b-tree__edit {
+  display: none !important;
+  margin-left: 14px;
+  font-size: 13px;
+  z-index: 20000;
+}
+
+.b-tree__item:hover .b-tree__edit {
+  display: inline-block !important;
+}

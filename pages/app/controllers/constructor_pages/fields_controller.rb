@@ -27,7 +27,8 @@ module ConstructorPages
         @field.type_class.where(field_id: @field.id).each do |field|
           _field = "constructor_pages/types/#{params[:field][:type_value]}_type".classify.constantize.new(field_id: @field.id, page_id: field.page_id)
 
-          unless [@field.type_value, params[:field][:type_value]].include?('image') && (@field.type_value == 'string' && field.value.strip == '')
+          unless ([@field.type_value, params[:field][:type_value]].include?('image') || [@field.type_value, params[:field][:type_value]].include?('file')) \
+            && (@field.type_value == 'string' && field.value.strip == '')
             _field.value = field.value
           end
 

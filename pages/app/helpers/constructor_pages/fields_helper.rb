@@ -9,7 +9,8 @@ module ConstructorPages
           [t(:date), "date"],
           [t(:text), "text"],
           [t(:html), "html"],
-          [t(:image), "image"]
+          [t(:image), "image"],
+          [t(:file), "file"]
       ]
     end
   end

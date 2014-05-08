@@ -1,0 +1,11 @@
+.b-tree__actions {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+}
+
+.b-tree__item:hover .b-tree__actions {
+  display: inline;
+}

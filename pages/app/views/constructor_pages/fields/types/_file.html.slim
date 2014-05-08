@@ -1,0 +1,6 @@
+- file = field.get_value_for(page)
+
+- if file && file.name
+  = link_to file.name, file.url
+
+= file_field_tag "fields[#{field.code_name}]", class: 'b-form__file'

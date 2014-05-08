@@ -25,7 +25,7 @@ module ConstructorPages
       redirect_to(@page.redirect) && return if @page.redirect?
 
       _code_name = @page.template.code_name
-      instance_variable_set('@'+_code_name, @page)
+      instance_variable_set('@'+_code_name, _code_name.classify.constantize.find(@page.id))
 
       render "templates/#{_code_name}", layout: 'application'
     end
@@ -43,10 +43,19 @@ module ConstructorPages
       end
     end
 
+    def create_child
+      @page = Page.create parent_id: params[:id], template_id: params[:template_id]
+      render partial: 'pages/child', locals: {page: @page}
+    end
+
     def update
       if @page.update page_params
         @page.update_fields_values params[:fields]
-
+        # if params[:delete_image]
+        #   f_id = ConstructorPages::Field.where(code_name: params[:delete_image_name]).where(template_id: @page.template_id).first.id
+        #   image_for_delete = ConstructorPages::Types::ImageType.where(page_id: @page.id).where(field_id: f_id)
+        #   image_for_delete.delete_all
+        # end
         redirect_to pages_path, notice: t(:page_success_updated, name: @page.name)
       else
         render :edit

@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'slim'
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'the_sortable_tree'
-  s.add_dependency 'font-awesome-sass'
+  s.add_dependency 'font-awesome-rails', '4.0.3.1'
   s.add_dependency 'cache_digests'
 end

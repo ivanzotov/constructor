@@ -12,7 +12,11 @@ $(document).ready ->
   $('.auto_url').hide()
   $('#page_url').hide()
 
-  $('.js-sortable').sortable();
+  $('.js-sortable').sortable()
+
+  $('.b-alert__close').click (e) ->
+    e.preventDefault()
+    $('.b-alert').slideUp()
 
   auto_url = $('#page_auto_url').is(':checked')
 
@@ -34,6 +38,60 @@ $(document).ready ->
     else
       $('.b-full-url__url').html(parameterize())
       auto_url_false()
+
+  $('html').click (e) ->
+    if !$(e.target).is('.b-tree__edit-name')
+      reset_edit_page()
+
+$(document).on 'click', '.b-tree__add', (e) ->
+  e.preventDefault()
+  self = this
+  $.post '/admin/pages/'+$(this).data('id')+'/create_child', {template_id: $(this).data('template-id')}, (data) ->
+    $(self).parent().parent().parent().find('ol').append(data)
+    $(self).parent().parent().parent().find('ol').find('li:last-child').find('.b-tree__edit').click()
+
+$(document).on 'click', '.b-tree__remove', (e) ->
+  e.preventDefault()
+  self = this
+  if confirm('Вы уверены?')
+    $.post '/admin/pages/'+$(this).data('id'), {'_method': 'delete'}, ->
+      $(self).parent().parent().hide()
+
+$(document).on 'click', '.b-tree__edit', (e) ->
+  e.preventDefault()
+
+  reset_edit_page()
+
+  $(this).css('opacity', '0')
+  $(this).siblings('.b-tree__edit-name-ok').show()
+  $(this).parent().find('.b-tree__edit-name').val($(this).parent().find('.b-tree__name').text())
+  $(this).parent().find('.b-tree__name').hide()
+  $(this).parent().find('.b-tree__edit-name').show().focus()
+
+$(document).on 'keypress', '.b-tree__edit-name', (e) ->
+  if e.which == 13
+    $(this).siblings('.b-tree__edit-name-ok').click()
+
+$(document).on 'click', '.b-tree__edit-name-ok', (e) ->
+  e.preventDefault()
+  e.stopPropagation()
+
+  _value = $(this).siblings('.b-tree__edit-name').val()
+  self = this
+
+  $.post '/admin/pages/'+$(this).data('id'), {'_method': 'put', page: {name: _value}}, ->
+    $(self).parent().find('.b-tree__name').text(_value)
+
+
+$(document).on 'click', '.b-tree__edit-name', (e) ->
+  e.stopPropagation()
+  e.preventDefault()
+
+reset_edit_page = ->
+  $('.b-tree__name').show()
+  $('.b-tree__edit-name').hide()
+  $('.b-tree__edit').css('opacity', '1')
+  $('.b-tree__edit-name-ok').hide()
 
 auto_url_true = ->
   $('#page_url').show()

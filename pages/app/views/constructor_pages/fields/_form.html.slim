@@ -14,7 +14,7 @@
     = f.text_field :code_name, class: 'b-form__field'
     = f.hidden_field :template_id, value: @field.template.id
 
-  - unless @field.type_value == 'image'
+  - unless ['image', 'file'].include? @field.type_value
     .b-form__row
       = f.label :type_value, class: 'b-form__label'
       = f.select :type_value, options_for_select(types_value, selected: @field.type_value), class: 'b-form__field'
