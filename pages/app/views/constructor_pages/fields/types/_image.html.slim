@@ -2,9 +2,8 @@
 
 - if image
   = image_tag image.encode('png').thumb('200x200').url
-  /.b-form__row
-  /  = label_tag :delete_image, 'Удалить', class: 'b-form__label'
-    /= check_box_tag :delete_image
-    /= hidden_field_tag :delete_image_name, field.code_name
+  .b-form__row
+    = label_tag :delete_image, 'Удалить', class: 'b-form__label'
+    = check_box_tag 'remove_image[%s]' % field.code_name
 
 = file_field_tag "fields[#{field.code_name}]", class: 'b-form__file'

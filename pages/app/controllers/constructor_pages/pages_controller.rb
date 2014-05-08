@@ -51,11 +51,14 @@ module ConstructorPages
     def update
       if @page.update page_params
         @page.update_fields_values params[:fields]
-        # if params[:delete_image]
-        #   f_id = ConstructorPages::Field.where(code_name: params[:delete_image_name]).where(template_id: @page.template_id).first.id
-        #   image_for_delete = ConstructorPages::Types::ImageType.where(page_id: @page.id).where(field_id: f_id)
-        #   image_for_delete.delete_all
-        # end
+        if params[:remove_image]
+          params[:remove_image].each do |name, trash|
+            f_id = ConstructorPages::Field.where(code_name: name).where(template_id: @page.template_id).first.id
+            image_for_delete = ConstructorPages::Types::ImageType.where(page_id: @page.id).where(field_id: f_id)
+            puts image_for_delete
+            image_for_delete.delete_all
+        end
+        end
         redirect_to pages_path, notice: t(:page_success_updated, name: @page.name)
       else
         render :edit
