@@ -12,13 +12,13 @@ Gem::Specification.new do |s|
   s.require_paths     = %w(lib)
   s.description       = 'Core for Constructor CMS'
   s.email             = 'ivanzotov@gmail.com'
-  
+
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
 
-  s.add_dependency 'rails', '~> 4.0.3'
-  s.add_dependency 'devise', '~> 3.0.0.rc'
+  s.add_dependency 'rails', '~> 4'
   s.add_dependency 'slim'
+  s.add_dependency 'devise', '~> 3.0.0.rc'
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'the_sortable_tree'
   s.add_dependency 'font-awesome-rails', '4.0.3.1'
