@@ -19,9 +19,9 @@ Constructor – an open source Ruby on Rails content management system for Rails
     bundle install
 
 ### Migrate
-    
+
     rake railties:install:migrations
-    
+
     rake db:migrate
 
 ### Login
@@ -33,8 +33,8 @@ Password: 123qweASD
 ![Screenshot structure](https://s3-eu-west-1.amazonaws.com/constructorcms/screenshot_1.0.0beta1.png)
 
 ## Copyright
-  Copyright © 2012—2014 Ivan Zotov. See [LICENSE][] for details.
-  
+  Copyright © 2012—2015 Ivan Zotov. See [LICENSE][] for details.
+
   [license]: LICENSE.md
 
 
