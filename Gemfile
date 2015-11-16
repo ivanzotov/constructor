@@ -4,6 +4,7 @@ gemspec
 
 group :test do
   gem 'coveralls', require: false
+  gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'guard-rspec'
 end

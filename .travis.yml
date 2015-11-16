@@ -10,7 +10,7 @@ before_script:
   - "rake app:railties:install:migrations"
   - "rake app:db:create"
   - "rake app:db:migrate"
-script: DB=$DB bundle exec rake spec
+script: CODECLIMATE_REPO_TOKEN=38e7fdce39a5db2d6cb08e5a7244b4aac1655407a82ac1d38e20cda242156364 DB=$DB bundle exec rake spec
 rvm:
   - 2.1.0
   - 2.0.0

@@ -3,6 +3,9 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'simplecov'
 require 'coveralls'
 require 'factory_girl_rails'
+require 'codeclimate-test-reporter'
+
+CodeClimate::TestReporter.start
 
 #FactoryGirl.definition_file_paths << File.expand_path("../../../pages/spec")
 
