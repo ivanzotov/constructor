@@ -2,11 +2,11 @@
 
 Constructor – an open source Ruby on Rails content management system for Rails 4.
 
-[![Gem Version](https://badge.fury.io/rb/constructor-cms.png)](https://rubygems.org/gems/constructor-cms)
-[![Build Status](https://travis-ci.org/ivanzotov/constructor.png?branch=master)](https://travis-ci.org/ivanzotov/constructor)
-[![Dependency Status](https://gemnasium.com/ivanzotov/constructor.png)](https://gemnasium.com/ivanzotov/constructor)
-[![Code Climate](https://codeclimate.com/github/ivanzotov/constructor.png)](https://codeclimate.com/github/ivanzotov/constructor)
-[![Coverage Status](https://coveralls.io/repos/ivanzotov/constructor/badge.png)](https://coveralls.io/r/ivanzotov/constructor)
+[![Gem Version](https://badge.fury.io/rb/constructor-cms.svg)](https://badge.fury.io/rb/constructor-cms)
+[![Build Status](https://travis-ci.org/ivanzotov/constructor.svg)](https://travis-ci.org/ivanzotov/constructor)
+[![Dependency Status](https://gemnasium.com/ivanzotov/constructor.svg)](https://gemnasium.com/ivanzotov/constructor)
+[![Code Climate](https://codeclimate.com/github/ivanzotov/constructor/badges/gpa.svg)](https://codeclimate.com/github/ivanzotov/constructor)
+[![Coverage Status](https://coveralls.io/repos/ivanzotov/constructor/badge.svg?branch=master&service=github)](https://coveralls.io/github/ivanzotov/constructor?branch=master)
 
 ## Installation
 
