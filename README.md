@@ -6,6 +6,7 @@ Constructor – an open source Ruby on Rails content management system for Rails
 [![Build Status](https://travis-ci.org/ivanzotov/constructor.svg)](https://travis-ci.org/ivanzotov/constructor)
 [![Dependency Status](https://gemnasium.com/ivanzotov/constructor.svg)](https://gemnasium.com/ivanzotov/constructor)
 [![Code Climate](https://codeclimate.com/github/ivanzotov/constructor/badges/gpa.svg)](https://codeclimate.com/github/ivanzotov/constructor)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ivanzotov/constructor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ivanzotov/constructor/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/ivanzotov/constructor/badge.svg?branch=master&service=github)](https://coveralls.io/github/ivanzotov/constructor?branch=master)
 
 ## Installation
